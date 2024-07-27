@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{9677AD57-A9A6-4ED6-B0B6-1FEF02C98FB0}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>KeyGUI</RootNamespace>
+        <AssemblyName>KeyGUI</AssemblyName>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="0Harmony">
+          <HintPath>..\Libraries\0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp">
+          <HintPath>..\Libraries\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="BepInEx">
+          <HintPath>..\Libraries\BepInEx.dll</HintPath>
+        </Reference>
+        <Reference Include="Microsoft.CodeAnalysis">
+          <HintPath>..\Libraries\Microsoft.CodeAnalysis.dll</HintPath>
+        </Reference>
+        <Reference Include="Microsoft.CodeAnalysis.CSharp">
+          <HintPath>..\Libraries\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="mscorlib" />
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\Libraries\Newtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Collections.Immutable">
+          <HintPath>..\Libraries\System.Collections.Immutable.dll</HintPath>
+        </Reference>
+        <Reference Include="System.ComponentModel.Composition" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.IO.Compression.FileSystem" />
+        <Reference Include="System.Memory">
+          <HintPath>..\Libraries\System.Memory.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Net.Http" />
+        <Reference Include="System.Numerics" />
+        <Reference Include="System.Numerics.Vectors">
+          <HintPath>..\Libraries\System.Numerics.Vectors.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Reflection.Metadata">
+          <HintPath>..\Libraries\System.Reflection.Metadata.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Runtime.CompilerServices.Unsafe">
+          <HintPath>..\Libraries\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Text.Encoding.CodePages">
+          <HintPath>..\Libraries\System.Text.Encoding.CodePages.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Threading.Tasks.Extensions">
+          <HintPath>..\Libraries\System.Threading.Tasks.Extensions.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Xml" />
+        <Reference Include="UnityEngine">
+          <HintPath>..\Libraries\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+          <HintPath>..\Libraries\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.IMGUIModule">
+          <HintPath>..\Libraries\UnityEngine.IMGUIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TextRenderingModule">
+          <HintPath>..\Libraries\UnityEngine.TextRenderingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UI">
+          <HintPath>..\Libraries\UnityEngine.UI.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Backend\KeyGuiCommandHandler.cs" />
+        <Compile Include="Backend\KeyGuiNetworking.cs" />
+        <Compile Include="KeyGuiConfig.cs" />
+        <Compile Include="KeyGuiInfoSelector.cs" />
+        <Compile Include="KeyGuiItem.cs" />
+        <Compile Include="KeyGuiMain.cs" />
+        <Compile Include="MenuArchitecture\InvalidMenuInvocationContextException.cs" />
+        <Compile Include="MenuArchitecture\KeyGuiMenu.cs" />
+        <Compile Include="MenuArchitecture\KeyGuiMenuManager.cs" />
+        <Compile Include="MenuArchitecture\KeyGuiMessage.cs" />
+        <Compile Include="Menus\Actors\ItemDropper\ItemCreator\KeyGuiActorsItemDropperItemCreator.cs" />
+        <Compile Include="Menus\Actors\ItemDropper\KeyGuiActorsItemDropper.cs" />
+        <Compile Include="Menus\Actors\KeyGuiActors.cs" />
+        <Compile Include="Menus\Actors\TraitRemovalSelection\KeyGuiActorsTraitRemovalSelection.cs" />
+        <Compile Include="Menus\Alliances\KeyGuiAlliances.cs" />
+        <Compile Include="Menus\Buildings\BuildingPlacementBuildingSelector\KeyGuiBuildingsBuildingPlacementBuildingSelector.cs" />
+        <Compile Include="Menus\Buildings\KeyGuiBuildings.cs" />
+        <Compile Include="Menus\Cities\KeyGuiCities.cs" />
+        <Compile Include="Menus\Cities\ResourceEditor\KeyGuiCitiesResourceEditor.cs" />
+        <Compile Include="Menus\Clans\KeyGuiClans.cs" />
+        <Compile Include="Menus\Clans\TraitSelection\KeyGuiClansTraitSelection.cs" />
+        <Compile Include="Menus\Cleansing\KeyGuiCleansing.cs" />
+        <Compile Include="Menus\Crabzilla\KeyGuiCrabzilla.cs" />
+        <Compile Include="Menus\Cultures\KeyGuiCultures.cs" />
+        <Compile Include="Menus\Debugging\KeyGuiDebug.cs" />
+        <Compile Include="Menus\Debugging\KeyGuiTesting.cs" />
+        <Compile Include="Menus\Destruction\KeyGuiDestruction.cs" />
+        <Compile Include="Menus\Disasters\KeyGuiDisasters.cs" />
+        <Compile Include="Menus\GameSettings\KeyGuiGameSettings.cs" />
+        <Compile Include="Menus\Items\KeyGuiItems.cs" />
+        <Compile Include="Menus\KeyGuiRootMenu.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Actors\ItemDropper\ItemCreator\KeyGuiActorsItemDropperItemCreator.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Actors\ItemDropper\KeyGuiActorsItemDropper.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Actors\KeyGuiActors.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Actors\TraitRemovalSelection\KeyGuiActorsTraitRemovalSelection.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Alliances\KeyGuiAlliances.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Buildings\BuildingPlacementBuildingSelector\KeyGuiBuildingsBuildingPlacementBuildingSelector.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Buildings\KeyGuiBuildings.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Cities\KeyGuiCities.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Cities\ResourceEditor\KeyGuiCitiesResourceEditor.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Clans\KeyGuiClans.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Clans\TraitSelection\KeyGuiClansTraitSelection.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Cleansing\KeyGuiCleansing.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Crabzilla\KeyGuiCrabzilla.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Cultures\KeyGuiCultures.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Destruction\KeyGuiDestruction.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Disasters\KeyGuiDisasters.cs" />
+        <Compile Include="Menus\Localizations\Declarations\GameSettings\KeyGuiGameSettings.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Items\KeyGuiItems.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Locales.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Localizations\KeyGuiLocales.cs" />
+        <Compile Include="Menus\Localizations\Declarations\ModConfig\KeyGuiModConfig.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Plots\KeyGuiPlots.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Plots\PeacePlotTargetSelection\KeyGuiPlotsPeacePlotTargetSelection.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Saves\KeyGuiSaves.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Stats\KeyGuiStats.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Stats\RaceModifier\KeyGuiStatsRaceModifier.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Stats\RaceModifier\StatSelection\KeyGuiStatsRaceModifierStatModifier.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Stats\StatBoundEditing\EditStat\KeyGuiStatsStatBoundEditingEditStat.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Stats\StatBoundEditing\KeyGuiStatsStatBoundEditing.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Traits\Instructions\KeyGuiTraitsInstructions.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Traits\KeyGuiTraits.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Zones\KeyGuiZones.cs" />
+        <Compile Include="Menus\Localizations\KeyGuiLocales.cs" />
+        <Compile Include="Menus\Localizations\LocaleDeclaration.cs" />
+        <Compile Include="Menus\Localizations\LocalesContainer.cs" />
+        <Compile Include="Menus\ModConfig\ConfigOptions\ConfigOption.cs" />
+        <Compile Include="Menus\ModConfig\ConfigOptions\GameSettings.cs" />
+        <Compile Include="Menus\ModConfig\ConfigOptions\General.cs" />
+        <Compile Include="Menus\ModConfig\ConfigOptions\Internal.cs" />
+        <Compile Include="Menus\ModConfig\ConfigOptions\Items.cs" />
+        <Compile Include="Menus\ModConfig\ConfigOptions\Traits.cs" />
+        <Compile Include="Menus\ModConfig\KeyGuiModConfig.cs" />
+        <Compile Include="Menus\Plots\KeyGuiPlots.cs" />
+        <Compile Include="Menus\Plots\PeacePlotTargetSelection\KeyGuiPlotsPeacePlotTargetSelection.cs" />
+        <Compile Include="Menus\Saves\KeyGuiSaves.cs" />
+        <Compile Include="Menus\Stats\KeyGuiStats.cs" />
+        <Compile Include="Menus\Stats\RaceModifier\KeyGuiStatsRaceModifier.cs" />
+        <Compile Include="Menus\Stats\RaceModifier\StatSelection\KeyGuiStatsRaceModifierStatModifier.cs" />
+        <Compile Include="Menus\Stats\StatBoundEditing\EditStat\KeyGuiStatsStatBoundEditingEditStat.cs" />
+        <Compile Include="Menus\Stats\StatBoundEditing\KeyGuiStatsStatBoundEditing.cs" />
+        <Compile Include="Menus\Traits\Instructions\KeyGuiTraitsInstructions.cs" />
+        <Compile Include="Menus\Traits\KeyGuiTraits.cs" />
+        <Compile Include="Menus\Zones\KeyGuiZones.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Utils\KeyGuiModManager.cs" />
+        <Compile Include="Utils\KeyGuiNetworkingResponseParsingHelper.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\BepInExModCompatibilityLayer\BepInExModCompatibilityLayer.csproj">
+        <Project>{0476621e-89cd-4844-b646-66e09ebf5dd7}</Project>
+        <Name>BepInExModCompatibilityLayer</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\KeyGeneralPurposeLibrary\KeyGeneralPurposeLibrary.csproj">
+        <Project>{b962f27e-55ab-4aef-9040-3bb59e5bb745}</Project>
+        <Name>KeyGeneralPurposeLibrary</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\NcmsModCompatibilityLayer\NcmsModCompatibilityLayer.csproj">
+        <Project>{74dd0eee-640c-47ff-ba78-0e9907108857}</Project>
+        <Name>NcmsModCompatibilityLayer</Name>
+      </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="assemble_mod_distributable.sh" />
+      <Content Include="BuildAssets\DefaultAssets\DefaultSprite.png" />
+      <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\Microsoft.CodeAnalysis.CSharp.dll" />
+      <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\Microsoft.CodeAnalysis.dll" />
+      <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\System.Collections.Immutable.dll" />
+      <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\System.Memory.dll" />
+      <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\System.Numerics.Vectors.dll" />
+      <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\System.Reflection.Metadata.dll" />
+      <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\System.Runtime.CompilerServices.Unsafe.dll" />
+      <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\System.Text.Encoding.CodePages.dll" />
+      <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\System.Threading.Tasks.Extensions.dll" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="sh ./assemble_mod_distributable.sh" Condition=" '$(OS)' == 'UNIX' " />
+    </Target>
+
+</Project>
