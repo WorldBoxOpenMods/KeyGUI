@@ -1,15 +1,16 @@
 namespace KeyGUI.Menus.Localizations {
   public class LocaleDeclaration {
     public LocalesContainer Parent { get; private set; }
-    public string Name { get; private set; }
+    public string LocaleId { get; private set; }
+    public string Value => Parent.GetLocale(this);
     internal LocaleDeclaration() { }
-    internal void Initialize(LocalesContainer parent, string name) {
+    internal void Initialize(LocalesContainer parent, string localeId) {
       Parent = parent;
-      Name = name;
+      LocaleId = localeId;
     }
 
     public override string ToString() {
-      return Parent.GetLocale(this); // this is a horrible bandaid soluation, please fix this
+      return Value;
     }
   }
 }

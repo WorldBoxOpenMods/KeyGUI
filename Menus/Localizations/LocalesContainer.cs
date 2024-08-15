@@ -29,7 +29,7 @@ namespace KeyGUI.Menus.Localizations {
     internal void LoadLocales(JObject data, string fullParentPath = "") {
       foreach (KeyValuePair<string, JToken> pair in data) {
         if (pair.Value.Type == JTokenType.String) {
-          LocaleDeclaration declaration = _locales.Keys.FirstOrDefault(d => d.Name == pair.Key);
+          LocaleDeclaration declaration = _locales.Keys.FirstOrDefault(d => d.LocaleId == pair.Key);
           if (declaration != null) {
             _locales[declaration] = pair.Value.Value<string>();
           } else {

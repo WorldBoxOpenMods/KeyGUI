@@ -59,7 +59,7 @@ namespace KeyGUI.MenuArchitecture {
       if (IsBenchmarkInitialized) {
         ToolBenchmark.bench(BenchmarkAsset.id, BenchmarkAsset.benchmark_group_id);
       }
-      MenuRect = GUILayout.Window(ModCompatibilityLayer.WindowIdSeparator.GetValidWindowId(WindowID, LoadGUI_Internal), MenuRect, LoadGUI_Internal, Title.Name, GUILayout.MaxWidth(MenuMaxWidth), GUILayout.MinWidth(MenuMinWidth), GUILayout.MinHeight(MenuMinHeight), GUILayout.MaxHeight(MenuMaxHeight));
+      MenuRect = GUILayout.Window(ModCompatibilityLayer.WindowIdSeparator.GetValidWindowId(WindowID, LoadGUI_Internal), MenuRect, LoadGUI_Internal, Title.Value, GUILayout.MaxWidth(MenuMaxWidth), GUILayout.MinWidth(MenuMinWidth), GUILayout.MinHeight(MenuMinHeight), GUILayout.MaxHeight(MenuMaxHeight));
       if (IsBenchmarkInitialized) {
         ToolBenchmark.benchEnd(BenchmarkAsset.id, BenchmarkAsset.benchmark_group_id);
       }
