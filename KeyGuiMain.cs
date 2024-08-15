@@ -197,7 +197,6 @@ namespace KeyGUI {
 
     public void Awake() {
       Instance = this;
-      _rootMenu.InitMenuInfo(Locales.KeyGui.ModName, 10000, null);
       Debug.Log("Initializing Config...");
       KeyGuiModConfig.Init(Config);
       KeyGuiModConfig.SetUpConfig();
@@ -246,6 +245,7 @@ namespace KeyGUI {
 
       Debug.Log("Loading KeyGUI...");
       KeyGuiLocales.EarlyInitialize();
+      _rootMenu.InitMenuInfo(Locales.KeyGui.ModName, 10000, null);
       _rootMenu.AddSubMenus();
       Debug.Log("Loaded KeyGUI!");
     }
