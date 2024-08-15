@@ -9,7 +9,7 @@ namespace KeyGUI.Menus.Localizations {
     }
 
     public override string ToString() {
-      return Name;
+      return Parent.GetLocale(this); // this is a horrible bandaid soluation, please fix this
     }
   }
 }
