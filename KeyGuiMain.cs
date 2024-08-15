@@ -11,6 +11,7 @@ using KeyGeneralPurposeLibrary.BehaviourManipulation;
 using KeyGUI.Backend;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus;
+using KeyGUI.Menus.Localizations;
 using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
 using KeyGUI.Menus.ModConfig.ConfigOptions;
@@ -244,6 +245,7 @@ namespace KeyGUI {
       Debug.Log("Finished loading patches!");
 
       Debug.Log("Loading KeyGUI...");
+      KeyGuiLocales.EarlyInitialize();
       _rootMenu.AddSubMenus();
       Debug.Log("Loaded KeyGUI!");
     }

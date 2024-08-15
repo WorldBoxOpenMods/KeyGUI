@@ -12,9 +12,8 @@ namespace KeyGUI.Menus.Localizations {
   public class KeyGuiLocales : KeyGuiMenu {
     public static bool SuccessfullyFinishedLoadingLocales { get; private set; }
     private static readonly string LocalesFolderPath = Assembly.GetExecutingAssembly().Location.Replace("KeyGUI.dll", "Locales");
-    private string[] _possibleLocaleLanguages;
-    internal override void Initialize() {
-      base.Initialize();
+    private static string[] _possibleLocaleLanguages;
+    internal static void EarlyInitialize() {
       Locales.KeyGui.Initialize();
       if (!Directory.Exists(LocalesFolderPath)) {
         foreach (KeyValuePair<LocaleDeclaration, string> locale in Locales.GetDefaultLocales()) {
@@ -53,7 +52,7 @@ namespace KeyGUI.Menus.Localizations {
       }
     }
     
-    public string[] GetPossibleLocaleLanguages() {
+    public static string[] GetPossibleLocaleLanguages() {
       return !Directory.Exists(LocalesFolderPath) ? Array.Empty<string>() : Directory.GetFiles(LocalesFolderPath, "*.json").Select(Path.GetFileNameWithoutExtension).ToArray();
     }
     
