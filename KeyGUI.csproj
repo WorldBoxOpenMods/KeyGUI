@@ -203,6 +203,7 @@
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>
+      <Content Include=".editorconfig" />
       <Content Include="assemble_mod_distributable.sh" />
       <Content Include="BuildAssets\DefaultAssets\DefaultSprite.png" />
       <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\Microsoft.CodeAnalysis.CSharp.dll" />
