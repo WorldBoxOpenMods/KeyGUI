@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace KeyGUI.Menus.Zones {
   public class KeyGuiZones : KeyGuiMenu {
-
     protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Zones.AddZoneToCityButton))) {
         GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.AddZoneToCityIndex];

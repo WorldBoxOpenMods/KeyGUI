@@ -8,7 +8,6 @@ using UnityEngine;
 
 namespace KeyGUI.Menus.Cities {
   public class KeyGuiCities : KeyGuiMenuManager {
-
     protected override void PreMenuToggleUi() {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cities.ForceCityAsCapitalCityButton))) {
         GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.ForceCityAsCapitalCityIndex];

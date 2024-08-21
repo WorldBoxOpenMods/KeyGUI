@@ -108,7 +108,6 @@ namespace KeyGUI {
                 throw new Exception("Unknown MemberInfo type: " + instruction.GetType());
             }
           }
-
         } catch (Exception e) {
           Debug.LogError("Something went wrong with the Select Info! Please report this to the mod author!");
           Debug.LogError(e);

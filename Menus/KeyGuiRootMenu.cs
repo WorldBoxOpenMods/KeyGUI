@@ -68,7 +68,7 @@ namespace KeyGUI.Menus {
       Load(Locales.KeyGui.ModConfigSubmenuText, KeyGuiModConfig.GetInstance());
       if (KeyGuiConfig.DebugIsLegal) {
         Load<KeyGuiDebug>(Locales.KeyGui.DebugSubmenuText, 10999_0);
-        Load(Locales.KeyGui.TestingSubmenuText, 10999_1, new []{ new KeyGuiTesting() }.Select(t => {t.InitMenuInfo(Locales.KeyGui.TestingSubmenuText, 10999_1, null, MenuRect.x + MenuRect.width * 2); return t;}).First());
+        Load(Locales.KeyGui.TestingSubmenuText, 10999_1, new []{ new KeyGuiTesting() }.Select(t => {t.InitMenuInfo(Locales.KeyGui.TestingSubmenuText, 10999_1, null, MenuRect.x + (MenuRect.width * 2)); return t;}).First());
       }
     }
 
