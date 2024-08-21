@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace KeyGUI.Utils {
   public static class KeyGuiNetworkingResponseParsingHelper {
-
     internal static (string, string)[] ParseModsResponse(JArray criticalMods) {
       List<(string name, string reason)> criticalModsList = new List<(string, string)>();
       foreach (JToken criticalModToken in criticalMods) {

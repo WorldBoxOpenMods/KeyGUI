@@ -6,10 +6,8 @@ namespace KeyGUI.Menus.Saves {
     protected override void LoadGUI(int windowID) {
       // TODO
       if (GUILayout.Button("Save World Uncompressed")) {
-        
       }
       if (GUILayout.Button("Load Uncompressed World")) {
-        
       }
     }
   }

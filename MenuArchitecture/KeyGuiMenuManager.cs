@@ -10,9 +10,9 @@ namespace KeyGUI.MenuArchitecture {
   public abstract class KeyGuiMenuManager : KeyGuiMenu {
     private readonly List<KeyGuiMenu> _menus = new List<KeyGuiMenu>();
     
-    internal void Load<T>(LocaleDeclaration title) where T : KeyGuiMenu, new() => Load<T>(title, WindowID * 10 + _menus.Count + 1);
+    internal void Load<T>(LocaleDeclaration title) where T : KeyGuiMenu, new() => Load<T>(title, (WindowID * 10) + _menus.Count + 1);
     internal void Load<T>(LocaleDeclaration title, int windowID) where T : KeyGuiMenu, new() => Load(title, windowID, new T());
-    internal void Load<T>(LocaleDeclaration title, T instance) where T : KeyGuiMenu => Load(title, WindowID * 10 + _menus.Count + 1, instance);
+    internal void Load<T>(LocaleDeclaration title, T instance) where T : KeyGuiMenu => Load(title, (WindowID * 10) + _menus.Count + 1, instance);
     internal void Load<T>(LocaleDeclaration title, int windowID, T instance) where T : KeyGuiMenu {
       Debug.Log("Loading " + Locales.Get(Title) + " " + Locales.Get(title) + "...");
       _menus.Add(instance);

@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace KeyGUI.Menus.Plots.PeacePlotTargetSelection {
   public class KeyGuiPlotsPeacePlotTargetSelection : KeyGuiMenu {
-
     protected override void LoadGUI(int windowID) {
       foreach (War war in World.world.wars.list.Where(t => GUILayout.Button(t.name))) {
         Actor initActor = war.main_defender?.king;
