@@ -397,7 +397,9 @@ namespace KeyGUI.Menus.Traits {
     }
 
     private static string ConvertToSnakeCase(string text) {
-      ArgumentNullException.ThrowIfNull(text);
+      if (text == null) {
+        throw new ArgumentNullException(nameof(text));
+      }
 
       if (text.Length < 2) {
         return text;
