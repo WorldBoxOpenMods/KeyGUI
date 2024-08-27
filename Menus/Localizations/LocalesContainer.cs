@@ -14,15 +14,20 @@ namespace KeyGUI.Menus.Localizations {
         LocaleDeclaration declaration = (LocaleDeclaration)f.GetValue(this);
         declaration.Initialize(this, f.Name);
         Locales.SyncDefaultLocale(declaration);
-        if (declaration.BelongsToGameLocalesSystem) {
-          LocalizedTextManager.instance.localizedText[declaration.LocaleId] = declaration.DefaultValue;
-        }
         _locales.Add(declaration, null);
       });
       GetType().GetFields(BindingFlags.Instance | BindingFlags.Public).Where(f => typeof(LocalesContainer).IsAssignableFrom(f.FieldType)).ToList().ForEach(f => {
         _containers.Add((LocalesContainer)f.GetValue(this));
       });
       _containers.ForEach(c => c.Initialize());
+    }
+    internal void Refresh() {
+      _locales.Keys.ToList().ForEach(d => {
+        if (d.BelongsToGameLocalesSystem) {
+          LocalizedTextManager.instance.localizedText[d.LocaleId] = _locales[d];
+        }
+      });
+      _containers.ForEach(c => c.Refresh());
     }
     internal void SetLocale(LocaleDeclaration declaration, string locale) {
       if (_locales.ContainsKey(declaration)) {

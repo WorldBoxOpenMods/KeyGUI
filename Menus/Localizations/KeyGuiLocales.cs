@@ -26,6 +26,14 @@ namespace KeyGUI.Menus.Localizations {
       SuccessfullyFinishedLoadingLocales = true;
     }
 
+    internal override void Initialize() {
+      base.Initialize();
+      if (!SuccessfullyFinishedLoadingLocales) {
+        return;
+      }
+      Locales.KeyGui.Refresh();
+    }
+
     protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Localizations.DumpLocalesButton))) {
         StoreCurrentLocalesInFile();
