@@ -2,8 +2,14 @@ namespace KeyGUI.Menus.Localizations {
   public class LocaleDeclaration {
     public LocalesContainer Parent { get; private set; }
     public string LocaleId { get; private set; }
+    internal string DefaultValue { get; set; }
+    internal bool BelongsToGameLocalesSystem { get; }
     public string Value => Parent.GetLocale(this);
-    internal LocaleDeclaration() { }
+    internal LocaleDeclaration(bool belongsToGameLocalesSystem, string defaultValue = null) : this(defaultValue, belongsToGameLocalesSystem) {}
+    internal LocaleDeclaration(string defaultValue = null, bool belongsToGameLocalesSystem = false) {
+      DefaultValue = defaultValue;
+      BelongsToGameLocalesSystem = belongsToGameLocalesSystem;
+    }
     internal void Initialize(LocalesContainer parent, string localeId) {
       Parent = parent;
       LocaleId = localeId;

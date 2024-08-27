@@ -310,6 +310,13 @@ namespace KeyGUI.Menus.Localizations.Declarations {
       {KeyGui.DismissCriticalModWarningButton, "Dismiss"},
       {KeyGui.DisableCriticalModWarningButton, "Don't disable it the next time"},
     };
+    internal static void SyncDefaultLocale(LocaleDeclaration declaration) {
+      if (DefaultLocales.TryGetValue(declaration, out string locale)) {
+        declaration.DefaultValue = locale;
+      } else {
+        DefaultLocales[declaration] = declaration.DefaultValue;
+      }
+    }
     internal static Dictionary<LocaleDeclaration, string> GetDefaultLocales() {
       return new Dictionary<LocaleDeclaration, string>(DefaultLocales);
     }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using KeyGUI.Menus.Localizations.Declarations;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -12,6 +13,10 @@ namespace KeyGUI.Menus.Localizations {
       GetType().GetFields().Where(f => f.FieldType == typeof(LocaleDeclaration)).ToList().ForEach(f => {
         LocaleDeclaration declaration = (LocaleDeclaration)f.GetValue(this);
         declaration.Initialize(this, f.Name);
+        Locales.SyncDefaultLocale(declaration);
+        if (declaration.BelongsToGameLocalesSystem) {
+          LocalizedTextManager.instance.localizedText[declaration.LocaleId] = declaration.DefaultValue;
+        }
         _locales.Add(declaration, null);
       });
       GetType().GetFields(BindingFlags.Instance | BindingFlags.Public).Where(f => typeof(LocalesContainer).IsAssignableFrom(f.FieldType)).ToList().ForEach(f => {
@@ -32,6 +37,9 @@ namespace KeyGUI.Menus.Localizations {
           LocaleDeclaration declaration = _locales.Keys.FirstOrDefault(d => d.LocaleId == pair.Key);
           if (declaration != null) {
             _locales[declaration] = pair.Value.Value<string>();
+            if (declaration.BelongsToGameLocalesSystem) {
+              LocalizedTextManager.instance.localizedText[declaration.LocaleId] = pair.Value.Value<string>();
+            }
           } else {
             Debug.LogWarning($"Unknown locale declaration: {pair.Key}");
           }
