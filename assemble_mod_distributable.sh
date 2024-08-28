@@ -23,6 +23,7 @@ mv "./NcmsModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI
 cd "$KEYGUI_BUILD_ASSETS_PATH" || exit
 cp -R "./KeyGUI-DLL-Dependencies" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/"
 cp -R "./DefaultAssets" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/"
+cp -R "./Locales" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/"
 
 # Compress distributable folder into zip file
 cd "$BEPINEX_PLUGINS_FOLDER_PATH" || exit

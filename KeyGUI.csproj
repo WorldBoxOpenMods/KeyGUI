@@ -216,6 +216,7 @@
       <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\System.Runtime.CompilerServices.Unsafe.dll" />
       <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\System.Text.Encoding.CodePages.dll" />
       <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\System.Threading.Tasks.Extensions.dll" />
+      <Content Include="BuildAssets\Locales\en.json" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
