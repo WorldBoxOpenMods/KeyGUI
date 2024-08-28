@@ -12,6 +12,7 @@ using KeyGUI.Menus.Localizations.Declarations.Destruction;
 using KeyGUI.Menus.Localizations.Declarations.Disasters;
 using KeyGUI.Menus.Localizations.Declarations.GameSettings;
 using KeyGUI.Menus.Localizations.Declarations.Items;
+using KeyGUI.Menus.Localizations.Declarations.KeyGeneralPurposeLibrary;
 using KeyGUI.Menus.Localizations.Declarations.ModConfig;
 using KeyGUI.Menus.Localizations.Declarations.Plots;
 using KeyGUI.Menus.Localizations.Declarations.Stats;
@@ -40,6 +41,7 @@ namespace KeyGUI.Menus.Localizations.Declarations {
     public readonly KeyGuiBuildings Buildings = new KeyGuiBuildings();
     public readonly KeyGuiModConfig ModConfig = new KeyGuiModConfig();
     public readonly KeyGuiLocalizations Localizations = new KeyGuiLocalizations();
+    public readonly KeyGeneralPurposeLibraryLocales KeyGeneralPurposeLibrary = new KeyGeneralPurposeLibraryLocales();
     public readonly LocaleDeclaration ModName = new LocaleDeclaration();
     public readonly LocaleDeclaration DisastersSubmenuText = new LocaleDeclaration();
     public readonly LocaleDeclaration StatsSubmenuText = new LocaleDeclaration();
