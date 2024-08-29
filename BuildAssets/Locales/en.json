@@ -293,6 +293,7 @@
   "ModConfig": {},
   "Localizations": {
     "DumpLocalesButton": "Dump Locales",
+    "CurrentLocaleText": "Current locale: ",
     "ChangeLocalesSectionHeader": "Change Locales"
   },
   "KeyGeneralPurposeLibrary": {
