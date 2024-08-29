@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
+using KeyGUI.Menus.ModConfig;
+using KeyGUI.Menus.ModConfig.ConfigOptions;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -15,13 +17,21 @@ namespace KeyGUI.Menus.Localizations {
     private static string[] _possibleLocaleLanguages;
     internal static void EarlyInitialize() {
       Locales.KeyGui.Initialize();
-      if (!Directory.Exists(LocalesFolderPath)) {
-        foreach (KeyValuePair<LocaleDeclaration, string> locale in Locales.GetDefaultLocales()) {
-          Locales.KeyGui.SetLocale(locale.Key, locale.Value);
-        }
-      } else {
+      if (Directory.Exists(LocalesFolderPath)) {
         _possibleLocaleLanguages = GetPossibleLocaleLanguages();
-        // TODO: load locales selected in config onto locales structure
+        string activeLocale = KeyGuiModConfig.Get(General.ActiveLocale);
+        if (!_possibleLocaleLanguages.Contains(activeLocale)) {
+          Debug.LogWarning($"No locale file found for current set locale \"{activeLocale}\". Defaulting to en.");
+          activeLocale = "en";
+        }
+        if (_possibleLocaleLanguages.Contains(activeLocale)) {
+          LoadLocales(activeLocale);
+          return;
+        }
+        Debug.LogError("No English locale file found, falling back to default locales.");
+      }
+      foreach (KeyValuePair<LocaleDeclaration, string> locale in Locales.GetDefaultLocales()) {
+        Locales.KeyGui.SetLocale(locale.Key, locale.Value);
       }
       SuccessfullyFinishedLoadingLocales = true;
     }
@@ -43,6 +53,7 @@ namespace KeyGUI.Menus.Localizations {
       }
       GUILayout.Label(Locales.Get(Locales.KeyGui.Localizations.ChangeLocalesSectionHeader));
       foreach (string language in _possibleLocaleLanguages.Where(language => GUILayout.Button(language))) {
+        KeyGuiModConfig.Set(General.ActiveLocale, language);
         LoadLocales(language);
       }
     }
@@ -51,7 +62,7 @@ namespace KeyGUI.Menus.Localizations {
       return Locales.Get(declaration);
     }
 
-    public void LoadLocales(string lang) {
+    public static void LoadLocales(string lang) {
       if (!Directory.Exists(LocalesFolderPath)) {
         return;
       }
