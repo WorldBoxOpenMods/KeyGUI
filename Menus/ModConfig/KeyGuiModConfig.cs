@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using BepInEx;
@@ -12,6 +13,7 @@ using UnityEngine;
 namespace KeyGUI.Menus.ModConfig {
   public class KeyGuiModConfig : KeyGuiMenu {
     private static ConfigFile _configFile;
+    private static readonly List<ConfigOption> ConfigOptions = new List<ConfigOption>();
     private static volatile KeyGuiModConfig _instance;
 
     private KeyGuiModConfig(ConfigFile configFile) {
@@ -25,9 +27,14 @@ namespace KeyGUI.Menus.ModConfig {
     internal static KeyGuiModConfig GetInstance() {
       return _instance;
     }
+    
+    private static void BindConfigOption(ConfigOption configOption) {
+      configOption.Bind(_configFile);
+      ConfigOptions.Add(configOption);
+    }
 
     public static void SetUpConfig() {
-      typeof(ConfigOption<>).Assembly.GetTypes().Where(t => typeof(ConfigOption).IsAssignableFrom(t)).Select(t => t.IsGenericType ? t.MakeGenericType(typeof(object)) : t).SelectMany(t => t.GetProperties()).Select(p => p.GetMethod).Where(m => typeof(ConfigOption).IsAssignableFrom(m.ReturnType)).Select(m => m.Invoke(null, null)).Where(o => o is ConfigOption).Cast<ConfigOption>().Do(configOption => configOption.Bind(_configFile));
+      typeof(ConfigOption<>).Assembly.GetTypes().Where(t => typeof(ConfigOption).IsAssignableFrom(t)).Select(t => t.IsGenericType ? t.MakeGenericType(typeof(object)) : t).SelectMany(t => t.GetProperties()).Select(p => p.GetMethod).Where(m => typeof(ConfigOption).IsAssignableFrom(m.ReturnType)).Select(m => m.Invoke(null, null)).Where(o => o is ConfigOption).Cast<ConfigOption>().Do(configOption => BindConfigOption(configOption));
       
       // Migration from old KeyGUI config
       if (File.Exists(Path.GetFullPath(Paths.ConfigPath + "/KeyGUI.cfg"))) {
@@ -44,12 +51,12 @@ namespace KeyGUI.Menus.ModConfig {
       _configFile.Save();
     }
 
-    internal static T Get<T>(string section, string field) {
+    private static T Get<T>(string section, string field) {
       if (typeof(T) == typeof(string)) return (T) Convert.ChangeType(_configFile[section, field].GetSerializedValue(), typeof(T));
       return JsonConvert.DeserializeObject<T>(_configFile[section, field].GetSerializedValue().Replace("\\", ""));
     }
-    
-    internal static void Set(string section, string field, object value) {
+
+    private static void Set(string section, string field, object value) {
       _configFile[section, field].SetSerializedValue(JsonConvert.SerializeObject(value));
       _configFile.Save();
     }
@@ -63,13 +70,21 @@ namespace KeyGUI.Menus.ModConfig {
     }
 
     protected override void LoadGUI(int windowID) {
-      foreach (ConfigDefinition cD in _configFile.Keys.Where(cD => cD.Section != "Internal")) {
-        ShowBoolOptionToggle(cD.Section, cD.Key);
+      foreach (ConfigOption configOption in ConfigOptions) {
+        ShowOptionToggle(configOption);
+      }
+    }
+
+    private void ShowOptionToggle(ConfigOption option) {
+      switch (option) {
+        case ConfigOption<bool> boolOption:
+          ShowBoolOptionToggle(boolOption);
+          break;
       }
     }
     
-    private void ShowBoolOptionToggle(string section, string field) {
-      if (GUILayout.Button(Get<bool>(section, field) ? BeautifyConfigOptionField(field) + ": ON" : BeautifyConfigOptionField(field) + ": OFF")) Set(section, field, !Get<bool>(section, field));
+    private void ShowBoolOptionToggle(ConfigOption<bool> option) {
+      if (GUILayout.Button(Get(option) ? BeautifyConfigOptionField(option.Field) + ": ON" : BeautifyConfigOptionField(option.Field) + ": OFF")) Set(option, !Get(option));
     }
 
     private static string BeautifyConfigOptionField(string field) {

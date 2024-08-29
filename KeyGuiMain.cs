@@ -295,31 +295,31 @@ namespace KeyGUI {
         KeyGuiModManager.RemoveMod(modName);
       }
     }
-    private void AutoLoad(string nameOfThingToLoad, Action loadMethod) {
-      if (KeyGuiModConfig.Get<bool>(nameOfThingToLoad, "Autoload" + nameOfThingToLoad)) {
-        Debug.Log("Automatically loading " + nameOfThingToLoad + " from KeyGUI...");
+    private void AutoLoad(ConfigOption<bool> autoloadOption, Action loadMethod) {
+      if (KeyGuiModConfig.Get(autoloadOption)) {
+        Debug.Log("Automatically loading " + autoloadOption.Section + " from KeyGUI...");
         try {
           loadMethod();
         } catch (Exception e) {
-          Debug.LogError("Error loading " + nameOfThingToLoad + " from KeyGUI!");
+          Debug.LogError("Error loading " + autoloadOption.Section + " from KeyGUI!");
           Debug.LogError(e);
         }
 
-        Debug.Log("Finished loading " + nameOfThingToLoad + " from KeyGUI!");
+        Debug.Log("Finished loading " + autoloadOption.Section + " from KeyGUI!");
       }
     }
     public void Update() {
       if (!_traitsLoaded) {
         if (global::Config.gameLoaded) {
           _traitsLoaded = true;
-          AutoLoad("Traits", () => KeyLib.Get<KeyGenLibCustomTraitManager>().LoadTraits("KeyGUI"));
+          AutoLoad(Traits.AutoloadTraits, () => KeyLib.Get<KeyGenLibCustomTraitManager>().LoadTraits("KeyGUI"));
         }
       }
 
       if (!_itemsLoaded) {
         if (global::Config.gameLoaded) {
           _itemsLoaded = true;
-          AutoLoad("Items", () => KeyLib.Get<KeyGenLibCustomItemManager>().LoadItems("KeyGUI"));
+          AutoLoad(Items.AutoloadItems, () => KeyLib.Get<KeyGenLibCustomItemManager>().LoadItems("KeyGUI"));
         }
       }
 
