@@ -42,7 +42,7 @@ namespace KeyGUI.Menus.Localizations {
           LocaleDeclaration declaration = _locales.Keys.FirstOrDefault(d => d.LocaleId == pair.Key);
           if (declaration != null) {
             _locales[declaration] = pair.Value.Value<string>();
-            if (declaration.BelongsToGameLocalesSystem) {
+            if (declaration.BelongsToGameLocalesSystem && Config.gameLoaded) {
               LocalizedTextManager.instance.localizedText[declaration.LocaleId] = pair.Value.Value<string>();
             }
           } else {

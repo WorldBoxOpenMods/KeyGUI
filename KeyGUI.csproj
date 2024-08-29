@@ -149,7 +149,7 @@
         <Compile Include="Menus\Localizations\Declarations\Disasters\KeyGuiDisasters.cs" />
         <Compile Include="Menus\Localizations\Declarations\GameSettings\KeyGuiGameSettings.cs" />
         <Compile Include="Menus\Localizations\Declarations\Items\KeyGuiItems.cs" />
-        <Compile Include="Menus\Localizations\Declarations\KeyGeneralPurposeLibrary\KeyGeneralPurposeLibraryLocales.cs" />
+        <Compile Include="Menus\Localizations\Declarations\KeyGeneralPurposeLibrary\KeyGuiKeyGeneralPurposeLibrary.cs" />
         <Compile Include="Menus\Localizations\Declarations\Locales.cs" />
         <Compile Include="Menus\Localizations\Declarations\Localizations\KeyGuiLocales.cs" />
         <Compile Include="Menus\Localizations\Declarations\ModConfig\KeyGuiModConfig.cs" />

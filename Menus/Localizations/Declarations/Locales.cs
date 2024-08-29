@@ -41,7 +41,7 @@ namespace KeyGUI.Menus.Localizations.Declarations {
     public readonly KeyGuiBuildings Buildings = new KeyGuiBuildings();
     public readonly KeyGuiModConfig ModConfig = new KeyGuiModConfig();
     public readonly KeyGuiLocalizations Localizations = new KeyGuiLocalizations();
-    public readonly KeyGeneralPurposeLibraryLocales KeyGeneralPurposeLibrary = new KeyGeneralPurposeLibraryLocales();
+    public readonly KeyGuiKeyGeneralPurposeLibrary KeyGuiKeyGeneralPurposeLibrary = new KeyGuiKeyGeneralPurposeLibrary();
     public readonly LocaleDeclaration ModName = new LocaleDeclaration();
     public readonly LocaleDeclaration DisastersSubmenuText = new LocaleDeclaration();
     public readonly LocaleDeclaration StatsSubmenuText = new LocaleDeclaration();
