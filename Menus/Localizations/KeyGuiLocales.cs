@@ -15,22 +15,24 @@ namespace KeyGUI.Menus.Localizations {
     public static bool SuccessfullyFinishedLoadingLocales { get; private set; }
     private static readonly string LocalesFolderPath = Assembly.GetExecutingAssembly().Location.Replace("KeyGUI.dll", "Locales");
     private static string[] _possibleLocaleLanguages;
+    private static string _activeLocale;
     internal static void EarlyInitialize() {
       Locales.KeyGui.Initialize();
       if (Directory.Exists(LocalesFolderPath)) {
         _possibleLocaleLanguages = GetPossibleLocaleLanguages();
-        string activeLocale = KeyGuiModConfig.Get(General.ActiveLocale);
-        if (!_possibleLocaleLanguages.Contains(activeLocale)) {
-          Debug.LogWarning($"No locale file found for current set locale \"{activeLocale}\". Defaulting to en.");
-          activeLocale = "en";
+        _activeLocale = KeyGuiModConfig.Get(General.ActiveLocale);
+        if (!_possibleLocaleLanguages.Contains(_activeLocale)) {
+          Debug.LogWarning($"No locale file found for current set locale \"{_activeLocale}\". Defaulting to en.");
+          _activeLocale = "en";
         }
-        if (_possibleLocaleLanguages.Contains(activeLocale)) {
+        if (_possibleLocaleLanguages.Contains(_activeLocale)) {
           SuccessfullyFinishedLoadingLocales = true;
-          LoadLocales(activeLocale);
+          LoadLocales(_activeLocale);
           return;
         }
         Debug.LogError("No English locale file found, falling back to default locales.");
       }
+      _activeLocale = "default";
       foreach (KeyValuePair<LocaleDeclaration, string> locale in Locales.GetDefaultLocales()) {
         Locales.KeyGui.SetLocale(locale.Key, locale.Value);
       }
@@ -52,6 +54,7 @@ namespace KeyGUI.Menus.Localizations {
       if (_possibleLocaleLanguages == null) {
         return;
       }
+      GUILayout.Label(Locales.Get(Locales.KeyGui.Localizations.CurrentLocaleText) + _activeLocale);
       GUILayout.Label(Locales.Get(Locales.KeyGui.Localizations.ChangeLocalesSectionHeader));
       foreach (string language in _possibleLocaleLanguages.Where(language => GUILayout.Button(language))) {
         KeyGuiModConfig.Set(General.ActiveLocale, language);
