@@ -25,6 +25,7 @@ namespace KeyGUI.Menus.Localizations {
           activeLocale = "en";
         }
         if (_possibleLocaleLanguages.Contains(activeLocale)) {
+          SuccessfullyFinishedLoadingLocales = true;
           LoadLocales(activeLocale);
           return;
         }
