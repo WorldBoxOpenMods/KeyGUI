@@ -58,6 +58,7 @@ namespace KeyGUI.Menus.Localizations {
       GUILayout.Label(Locales.Get(Locales.KeyGui.Localizations.ChangeLocalesSectionHeader));
       foreach (string language in _possibleLocaleLanguages.Where(language => GUILayout.Button(language))) {
         KeyGuiModConfig.Set(General.ActiveLocale, language);
+        _activeLocale = language;
         LoadLocales(language);
       }
     }
