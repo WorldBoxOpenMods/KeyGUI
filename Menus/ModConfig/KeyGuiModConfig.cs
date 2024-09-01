@@ -52,6 +52,7 @@ namespace KeyGUI.Menus.ModConfig {
     }
 
     private static T Get<T>(string section, string field) {
+      if (typeof(T) == typeof(string)) return (T) Convert.ChangeType(_configFile[section, field].GetSerializedValue().Replace("\\", ""), typeof(T));
       return JsonConvert.DeserializeObject<T>(_configFile[section, field].GetSerializedValue().Replace("\\", ""));
     }
 
