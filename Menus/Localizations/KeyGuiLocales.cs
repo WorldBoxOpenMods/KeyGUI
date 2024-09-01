@@ -16,11 +16,16 @@ namespace KeyGUI.Menus.Localizations {
     private static readonly string LocalesFolderPath = Assembly.GetExecutingAssembly().Location.Replace("KeyGUI.dll", "Locales");
     private static string[] _possibleLocaleLanguages;
     private static string _activeLocale;
+    private static bool _defaultLocaleSelected;
     internal static void EarlyInitialize() {
       Locales.KeyGui.Initialize();
       if (Directory.Exists(LocalesFolderPath)) {
         _possibleLocaleLanguages = GetPossibleLocaleLanguages();
         _activeLocale = KeyGuiModConfig.Get(General.ActiveLocale);
+        if (_activeLocale == "default") {
+          _activeLocale = "en";
+          _defaultLocaleSelected = true;
+        }
         if (!_possibleLocaleLanguages.Contains(_activeLocale)) {
           Debug.LogWarning($"No locale file found for current set locale \"{_activeLocale}\". Defaulting to en.");
           _activeLocale = "en";
@@ -33,6 +38,7 @@ namespace KeyGUI.Menus.Localizations {
         Debug.LogError("No English locale file found, falling back to default locales.");
       }
       _activeLocale = "default";
+      _defaultLocaleSelected = true;
       foreach (KeyValuePair<LocaleDeclaration, string> locale in Locales.GetDefaultLocales()) {
         Locales.KeyGui.SetLocale(locale.Key, locale.Value);
       }
@@ -43,6 +49,16 @@ namespace KeyGUI.Menus.Localizations {
       base.Initialize();
       if (!SuccessfullyFinishedLoadingLocales) {
         return;
+      }
+      if (_defaultLocaleSelected) {
+        string previousActiveLocale = _activeLocale;
+        _activeLocale = LocalizedTextManager.instance.language;
+        if (_possibleLocaleLanguages.Contains(_activeLocale)) {
+          KeyGuiModConfig.Set(General.ActiveLocale, _activeLocale);
+          LoadLocales(_activeLocale);
+        } else {
+          _activeLocale = previousActiveLocale;
+        }
       }
       Locales.KeyGui.Refresh();
     }
