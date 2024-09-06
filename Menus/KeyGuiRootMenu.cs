@@ -32,7 +32,9 @@ namespace KeyGUI.Menus {
     private (string, string)[] _criticalMods;
     internal override void Initialize() {
       base.Initialize();
-      DebugConfig.instance.debugButton.SetActive(!DebugConfig.instance.debugButton.activeSelf);
+      if (KeyGuiModConfig.Get(General.ShowDebugButton)) {
+        DebugConfig.instance.debugButton.SetActive(true);
+      }
       Config.MODDED = true;
     }
     internal void MarkModVersionAsOutdated() {

@@ -10,5 +10,6 @@ namespace KeyGUI.Menus.ModConfig.ConfigOptions {
     public static ConfigOption<bool> ForceOpenAllMenus => new General<bool>("ForceOpenAllMenus", false, "If true, KeyGUI will force all menus to be open.");
     public static ConfigOption<bool> InitializeAssetFoldersEveryStartup => new General<bool>("InitializeAssetFoldersEveryStartup", true, "If true, KeyGUI will create the most recent needed asset storage structure every startup. This is useful if you want to make sure that mod updates keep the folder up to date.");
     public static ConfigOption<string> ActiveLocale => new General<string>("ActiveLocale", "default", "The active locale to use for KeyGUI if available.");
+    public static ConfigOption<bool> ShowDebugButton => new General<bool>("ShowDebugButton", false, "If true, KeyGUI will show the games debug button on startup.");
   }
 }
