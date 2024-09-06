@@ -1,8 +1,8 @@
 namespace KeyGUI.Menus.ModConfig.ConfigOptions {
   public class General<T> : ConfigOption<T> {
     internal General(string field, T defaultValue, string description) : base(field, defaultValue, description) { }
-}
-  
+  }
+
   public abstract class General : General<object> {
     private General() : base(null, null, null) { }
     public static ConfigOption<bool> IgnoreCriticalMods => new General<bool>("IgnoreCriticalMods", false, "If true, KeyGUI won't do anything about mods that the server flags as critical.");
