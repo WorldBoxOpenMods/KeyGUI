@@ -111,11 +111,11 @@ namespace KeyGUI.Menus.Traits {
       GUILayout.Label("Opposite Traits");
       foreach (ActorTrait trait in AssetManager.traits.list) {
         if (_oppositeTraits.Contains(trait.id)) {
-          if (GUILayout.Button("Remove " + trait.id + " From Opposite Traits")) {
+          if (GUILayout.Button(string.Format("Remove {0} From Opposite Traits", trait.id))) {
             _oppositeTraits.Remove(trait.id);
           }
         } else {
-          if (GUILayout.Button("Add " + trait.id + " To Opposite Traits")) {
+          if (GUILayout.Button(string.Format("Add {0} To Opposite Traits", trait.id))) {
             _oppositeTraits.Add(trait.id);
           }
         }
@@ -123,11 +123,11 @@ namespace KeyGUI.Menus.Traits {
       GUILayout.Label("Partner Traits");
       foreach (ActorTrait trait in AssetManager.traits.list) {
         if (_partnerTraits.Contains(trait.id)) {
-          if (GUILayout.Button("Remove " + trait.id + " From Partner Traits")) {
+          if (GUILayout.Button(string.Format("Remove {0} From Partner Traits", trait.id))) {
             _partnerTraits.Remove(trait.id);
           }
         } else {
-          if (GUILayout.Button("Add " + trait.id + " To Partner Traits")) {
+          if (GUILayout.Button(string.Format("Add {0} To Partner Traits", trait.id))) {
             _partnerTraits.Add(trait.id);
           }
         }
@@ -170,7 +170,7 @@ namespace KeyGUI.Menus.Traits {
       GUILayout.Label("Current Sprite: " + _sprite);
       List<string> availableSprites;
       {
-        string[] availableSpritesArray = Directory.GetFiles(Path.GetFullPath(Application.dataPath + "/KeyLibraryModsData/" + KeyGuiConfig.PluginName + "/Sprites"));
+        string[] availableSpritesArray = Directory.GetFiles(Path.GetFullPath($"{Application.dataPath}/KeyLibraryModsData/{KeyGuiConfig.PluginName}/Sprites"));
         availableSprites = availableSpritesArray.ToList();
       }
       for (int i = 0; i < availableSprites.Count; ++i) {
@@ -182,7 +182,7 @@ namespace KeyGUI.Menus.Traits {
 
       for (int i = 0; i < availableSprites.Count; ++i) {
         availableSprites[i] = Path.GetFullPath(availableSprites[i]);
-        availableSprites[i] = availableSprites[i].Replace(Path.GetFullPath(Application.dataPath + "/KeyLibraryModsData/" + KeyGuiConfig.PluginName + "/Sprites"), "");
+        availableSprites[i] = availableSprites[i].Replace(Path.GetFullPath($"{Application.dataPath}/KeyLibraryModsData/{KeyGuiConfig.PluginName}/Sprites"), "");
         availableSprites[i] = availableSprites[i].Replace(".png", "");
         availableSprites[i] = availableSprites[i].Substring(1);
       }
@@ -192,7 +192,7 @@ namespace KeyGUI.Menus.Traits {
       }
 
       if (availableSprites.Count == 0) {
-        GUILayout.Button("No PNGs Found In\nworldbox_Data\n->\nKeyLibraryModsData\n->\n" + KeyGuiConfig.PluginName + "\n->\nSprites");
+        GUILayout.Button($"No PNGs Found In\nworldbox_Data\n->\nKeyLibraryModsData\n->\n{KeyGuiConfig.PluginName}\n->\nSprites");
       }
 
       GUILayout.Label("Create!");
@@ -301,7 +301,7 @@ namespace KeyGUI.Menus.Traits {
         _customTraits = KeyLib.Get<KeyGenLibCustomTraitManager>().LoadTraits(KeyGuiConfig.PluginName);
       }
 
-      if (GUILayout.Button("Turn Automatic Trait Loading " + (_autoTraitLoading ? "Off" : "On"))) {
+      if (GUILayout.Button(_autoTraitLoading ? "Turn Automatic Trait Loading Off" : "Turn Automatic Trait Loading On")) {
         _autoTraitLoading = !_autoTraitLoading;
         KeyGuiModConfig.Set(TraitsC.AutoloadTraits, _autoTraitLoading);
       }
