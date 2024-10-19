@@ -178,66 +178,11 @@ namespace KeyGUI.Menus.Items {
       }
 
       GUILayout.Label("Stats:");
-      GUILayout.Label("Diplomacy");
-      _itemStats["diplomacy"] = GUILayout.TextField(_itemStats["diplomacy"]);
-      GUILayout.Label("Personality Rationality");
-      _itemStats["personalityRationality"] = GUILayout.TextField(_itemStats["personalityRationality"]);
-      GUILayout.Label("Opinion");
-      _itemStats["opinion"] = GUILayout.TextField(_itemStats["opinion"]);
-      GUILayout.Label("Fertility");
-      _itemStats["fertility"] = GUILayout.TextField(_itemStats["fertility"]);
-      GUILayout.Label("Max Children");
-      _itemStats["maxChildren"] = GUILayout.TextField(_itemStats["maxChildren"]);
-      GUILayout.Label("Max Age");
-      _itemStats["maxAge"] = GUILayout.TextField(_itemStats["maxAge"]);
-      GUILayout.Label("Damage");
-      _itemStats["damage"] = GUILayout.TextField(_itemStats["damage"]);
-      GUILayout.Label("Speed");
-      _itemStats["speed"] = GUILayout.TextField(_itemStats["speed"]);
-      GUILayout.Label("Health");
-      _itemStats["health"] = GUILayout.TextField(_itemStats["health"]);
-      GUILayout.Label("Armor");
-      _itemStats["armor"] = GUILayout.TextField(_itemStats["armor"]);
-      GUILayout.Label("Intelligence");
-      _itemStats["intelligence"] = GUILayout.TextField(_itemStats["intelligence"]);
-      GUILayout.Label("Attack Speed");
-      _itemStats["attackSpeed"] = GUILayout.TextField(_itemStats["attackSpeed"]);
-      GUILayout.Label("Critical Chance");
-      _itemStats["criticalChance"] = GUILayout.TextField(_itemStats["criticalChance"]);
-      GUILayout.Label("Warfare");
-      _itemStats["warfare"] = GUILayout.TextField(_itemStats["warfare"]);
-      GUILayout.Label("Dodge");
-      _itemStats["dodge"] = GUILayout.TextField(_itemStats["dodge"]);
-      GUILayout.Label("Stewardship");
-      _itemStats["stewardship"] = GUILayout.TextField(_itemStats["stewardship"]);
-      GUILayout.Label("Loyalty");
-      _itemStats["loyaltyTraits"] = GUILayout.TextField(_itemStats["loyaltyTraits"]);
-      GUILayout.Label("Armor %");
-      _itemStats["modArmor"] = GUILayout.TextField(_itemStats["modArmor"]);
-      GUILayout.Label("Damage %");
-      _itemStats["modDamage"] = GUILayout.TextField(_itemStats["modDamage"]);
-      GUILayout.Label("Health %");
-      _itemStats["modHealth"] = GUILayout.TextField(_itemStats["modHealth"]);
-      GUILayout.Label("Speed %");
-      _itemStats["modSpeed"] = GUILayout.TextField(_itemStats["modSpeed"]);
-      GUILayout.Label("Diplomacy %");
-      _itemStats["modDiplomacy"] = GUILayout.TextField(_itemStats["modDiplomacy"]);
-      GUILayout.Label("Critical Chance %");
-      _itemStats["modCrit"] = GUILayout.TextField(_itemStats["modCrit"]);
-      GUILayout.Label("Attack Speed %");
-      _itemStats["modAttackSpeed"] = GUILayout.TextField(_itemStats["modAttackSpeed"]);
-      GUILayout.Label("Number Of Cities");
-      _itemStats["cities"] = GUILayout.TextField(_itemStats["cities"]);
-      GUILayout.Label("Supply Timer Modifier");
-      _itemStats["modSupplyTimer"] = GUILayout.TextField(_itemStats["modSupplyTimer"]);
-      GUILayout.Label("Accuracy");
-      _itemStats["accuracy"] = GUILayout.TextField(_itemStats["accuracy"]);
-      GUILayout.Label("Size");
-      _itemStats["scale"] = GUILayout.TextField(_itemStats["scale"]);
-      GUILayout.Label("Settlement Area");
-      _itemStats["zoneRange"] = GUILayout.TextField(_itemStats["zoneRange"]);
-      GUILayout.Label("Range");
-      _itemStats["range"] = GUILayout.TextField(_itemStats["range"]);
+      foreach (string stat in _itemStats.Keys.ToList()) {
+        GUILayout.Label(LocalizedTextManager.stringExists(stat) ? LocalizedTextManager.getText(stat) : stat);
+        _itemStats[stat] = GUILayout.TextField(_itemStats[stat]);
+      }
+      
       /*
       GUILayout.Label("Modifiers:");
       foreach (ItemAsset t in AssetManager.items_modifiers.list) {
