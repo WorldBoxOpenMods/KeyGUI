@@ -75,7 +75,7 @@ namespace KeyGUI.Menus.Items {
       GUILayout.Label("Current Sprite: " + _sprite);
       List<string> availableSprites;
       {
-        string[] availableSpritesArray = Directory.GetFiles(Path.GetFullPath(Application.dataPath + "/KeyLibraryModsData/" + KeyGuiConfig.PluginName + "/Sprites"));
+        string[] availableSpritesArray = Directory.GetFiles(Path.GetFullPath($"{Application.dataPath}/KeyLibraryModsData/{KeyGuiConfig.PluginName}/Sprites"));
         availableSprites = availableSpritesArray.ToList();
       }
       for (int i = 0; i < availableSprites.Count; ++i) {
@@ -87,7 +87,7 @@ namespace KeyGUI.Menus.Items {
 
       for (int i = 0; i < availableSprites.Count; ++i) {
         availableSprites[i] = Path.GetFullPath(availableSprites[i]);
-        availableSprites[i] = availableSprites[i].Replace(Path.GetFullPath(Application.dataPath + "/KeyLibraryModsData/" + KeyGuiConfig.PluginName + "/Sprites"), "");
+        availableSprites[i] = availableSprites[i].Replace(Path.GetFullPath($"{Application.dataPath}/KeyLibraryModsData/{KeyGuiConfig.PluginName}/Sprites"), "");
         availableSprites[i] = availableSprites[i].Replace(".png", "");
         availableSprites[i] = availableSprites[i].Substring(1);
       }
@@ -130,7 +130,6 @@ namespace KeyGUI.Menus.Items {
         _material = "leather";
       }
 
-      GUILayout.Label(!_metallic ? "Make metallic" : "Make non-metallic");
       if (GUILayout.Button(!_metallic ? "Make metallic" : "Make non-metallic")) {
         _metallic = !_metallic;
       }
@@ -269,7 +268,7 @@ namespace KeyGUI.Menus.Items {
         _customItems = KeyLib.Get<KeyGenLibCustomItemManager>().LoadItems(KeyGuiConfig.PluginName);
       }
       
-      if (GUILayout.Button("Turn Automatic Item Loading " + (_autoItemLoading ? "Off" : "On"))) {
+      if (GUILayout.Button(_autoItemLoading ? "Turn Automatic Item Loading Off" : "Turn Automatic Item Loading On")) {
         _autoItemLoading = !_autoItemLoading;
         KeyGuiModConfig.Set(ItemsC.AutoloadItems, _autoItemLoading);
       }
