@@ -5,17 +5,18 @@ using System.Reflection;
 using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.Assets;
 using KeyGeneralPurposeLibrary.Powers;
+using KeyGUI.Menus.Localizations;
 using UnityEngine;
 
 namespace KeyGUI {
   public class KeyGuiInfoSelector {
     private static int _godPowerIdIndex;
-    private List<string> _userSelectionInfo;
+    private List<LocaleDeclaration> _userSelectionInfo;
     private List<object> _userSelections;
     private List<Type> _userSelectionTypes;
     private List<MapMode> _userSelectionMapModes;
     private List<List<MemberInfo>> _userSelectionObtainWantedValueInstructions;
-    private readonly List<string> _initialUserSelectionInfo;
+    private readonly List<LocaleDeclaration> _initialUserSelectionInfo;
     private readonly List<object> _initialUserSelections;
     private readonly List<Type> _initialUserSelectionTypes;
     private readonly List<MapMode> _initialUserSelectionMapModes;
@@ -27,7 +28,7 @@ namespace KeyGUI {
     private readonly GodPower _power;
     private readonly PowerButton _button;
     
-    public KeyGuiInfoSelector(List<string> pUserSelectionInfo, List<object> pUserSelections, List<Type> pUserSelectionTypes, List<MapMode> pUserSelectionMapModes, List<List<MemberInfo>> pUserSelectionObtainWantedValueInstructions, MethodInfo pUserSelectionMethod, object pMethodInvocationInstance) {
+    public KeyGuiInfoSelector(List<LocaleDeclaration> pUserSelectionInfo, List<object> pUserSelections, List<Type> pUserSelectionTypes, List<MapMode> pUserSelectionMapModes, List<List<MemberInfo>> pUserSelectionObtainWantedValueInstructions, MethodInfo pUserSelectionMethod, object pMethodInvocationInstance) {
       _initialUserSelectionInfo = pUserSelectionInfo;
       _initialUserSelections = pUserSelections;
       _initialUserSelectionTypes = pUserSelectionTypes;
@@ -71,7 +72,7 @@ namespace KeyGUI {
     }
 
     private void DisplayNextSelectionInfo() {
-      WorldTip.showNow("Select the " + _userSelectionInfo[0], false, "top");
+      WorldTip.showNow(_userSelectionInfo[0], false, "top");
       _power.force_map_text = _userSelectionMapModes[0];
     }
 
