@@ -329,7 +329,10 @@ namespace KeyGUI.Menus.Localizations.Declarations {
       if (result == null) {
         result = DefaultLocales[declaration];
         if (KeyGuiLocales.SuccessfullyFinishedLoadingLocales && !DetectedMissingLocales.Contains(declaration)) {
-          Debug.LogWarning($"Missing locale declaration: {declaration}");
+          Debug.LogWarning($"Missing locale declaration from loaded JSON: {declaration.LocaleId}");
+          if (result == null) {
+            Debug.LogError($"Missing default locale declaration: {declaration.LocaleId}");
+          }
           DetectedMissingLocales.Add(declaration);
         }
       }

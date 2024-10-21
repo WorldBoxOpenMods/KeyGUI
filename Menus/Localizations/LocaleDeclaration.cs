@@ -1,3 +1,4 @@
+using KeyGUI.Menus.Localizations.Declarations;
 namespace KeyGUI.Menus.Localizations {
   public class LocaleDeclaration {
     public LocalesContainer Parent { get; private set; }
@@ -16,7 +17,11 @@ namespace KeyGUI.Menus.Localizations {
     }
 
     public override string ToString() {
-      return Value;
+      return Locales.Get(this);
+    }
+
+    public static implicit operator string(LocaleDeclaration localeDeclaration) {
+      return localeDeclaration.ToString();
     }
   }
 }
