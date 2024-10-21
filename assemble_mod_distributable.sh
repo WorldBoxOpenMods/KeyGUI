@@ -28,3 +28,10 @@ cp -R "./Locales" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/"
 # Compress distributable folder into zip file
 cd "$BEPINEX_PLUGINS_FOLDER_PATH" || exit
 zip -r "./KeyGUI.zip" "./KeyGUI"
+
+# Copy PDB files into distributable folder
+cd "$KEYGUI_BIN_PATH" || exit
+mv "./KeyGUI.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI.pdb"
+mv "./KeyGeneralPurposeLibrary.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI-Plugin-Dependencies/KeyGeneralPurposeLibrary.pdb"
+mv "./BepInExModCompatibilityLayer.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI-Plugin-Dependencies/BepInExModCompatibilityLayer.pdb"
+mv "./NcmsModCompatibilityLayer.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI-Plugin-Dependencies/NcmsModCompatibilityLayer.pdb"
