@@ -1,3 +1,4 @@
+using System;
 using ItemsC = KeyGUI.Menus.ModConfig.ConfigOptions.Items;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +7,7 @@ using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.Assets;
 using KeyGeneralPurposeLibrary.Classes;
 using KeyGUI.MenuArchitecture;
+using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
 using KeyGUI.Menus.ModConfig.ConfigOptions;
 using UnityEngine;
@@ -66,13 +68,13 @@ namespace KeyGUI.Menus.Items {
 
     protected override void LoadGUI(int windowID) {
       _scrollPosition = GUILayout.BeginScrollView(_scrollPosition);
-      GUILayout.Label("Create Item:");
+      GUILayout.Label(Locales.KeyGui.Items.CreateItemSection);
 
-      GUILayout.Label("General Info:");
-      GUILayout.Label("Item Name");
+      GUILayout.Label(Locales.KeyGui.Items.GeneralInfoLabel);
+      GUILayout.Label(Locales.KeyGui.Items.ItemNameLabel);
       _itemID = GUILayout.TextField(_itemID);
-      GUILayout.Label("Sprite");
-      GUILayout.Label("Current Sprite: " + _sprite);
+      GUILayout.Label(Locales.KeyGui.Items.SpriteLabel);
+      GUILayout.Label(string.Format(Locales.KeyGui.Items.CurrentSpriteLabel, _sprite));
       List<string> availableSprites;
       {
         string[] availableSpritesArray = Directory.GetFiles(Path.GetFullPath($"{Application.dataPath}/KeyLibraryModsData/{KeyGuiConfig.PluginName}/Sprites"));
@@ -96,127 +98,117 @@ namespace KeyGUI.Menus.Items {
         _sprite = t;
       }
 
-      GUILayout.Label("Material:");
-      GUILayout.Label("Current Material: " + _material);
-      if (GUILayout.Button("Adamantine")) {
-        _material = "adamantine";
-      }
-
-      if (GUILayout.Button("Mythril")) {
-        _material = "mythril";
-      }
-
-      if (GUILayout.Button("Steel")) {
-        _material = "steel";
-      }
-
-      if (GUILayout.Button("Iron")) {
-        _material = "iron";
-      }
-
-      if (GUILayout.Button("Silver")) {
-        _material = "silver";
-      }
-
-      if (GUILayout.Button("Bronze")) {
-        _material = "bronze";
-      }
-
-      if (GUILayout.Button("Copper")) {
-        _material = "copper";
-      }
-
-      if (GUILayout.Button("Leather")) {
-        _material = "leather";
-      }
-
-      if (GUILayout.Button(!_metallic ? "Make metallic" : "Make non-metallic")) {
-        _metallic = !_metallic;
-      }
-
       // TODO: Make more item types than just weapons possible
-      GUILayout.Label("Equipment Type:");
-      GUILayout.Label("Current Equipment Type: " + _equipmentType);
-      if (GUILayout.Button("Weapon")) {
+      GUILayout.Label(Locales.KeyGui.Items.EquipmentTypeLabel);
+      GUILayout.Label(string.Format(Locales.KeyGui.Items.CurrentEquipmentTypeLabel, _equipmentType));
+      if (GUILayout.Button(Locales.KeyGui.Items.WeaponButton)) {
         _equipmentType = EquipmentType.Weapon;
       }
 
       if (KeyGuiConfig.DebugIsLegal) {
-        if (GUILayout.Button("Amulet")) {
+        if (GUILayout.Button(Locales.KeyGui.Items.AmuletButton)) {
           _equipmentType = EquipmentType.Amulet;
         }
 
-        if (GUILayout.Button("Helmet")) {
+        if (GUILayout.Button(Locales.KeyGui.Items.HelmetButton)) {
           _equipmentType = EquipmentType.Helmet;
         }
 
-        if (GUILayout.Button("Armor")) {
+        if (GUILayout.Button(Locales.KeyGui.Items.ArmorButton)) {
           _equipmentType = EquipmentType.Armor;
         }
 
-        if (GUILayout.Button("Boots")) {
+        if (GUILayout.Button(Locales.KeyGui.Items.BootsButton)) {
           _equipmentType = EquipmentType.Boots;
         }
 
-        if (GUILayout.Button("Ring")) {
+        if (GUILayout.Button(Locales.KeyGui.Items.RingButton)) {
           _equipmentType = EquipmentType.Ring;
         }
       }
-
-      if (_equipmentType == EquipmentType.Weapon) {
-        GUILayout.Label("Weapon Type");
-        GUILayout.Label("Current Weapon Type: " + _weaponType);
-        if (GUILayout.Button("Melee")) {
-          _weaponType = WeaponType.Melee;
-        }
-        /*
-        if (GUILayout.Button("Ranged")) {
-          _weaponType = WeaponType.Range;
-        }
-        */
+      
+      GUILayout.Label(Locales.KeyGui.Items.MaterialLabel);
+      GUILayout.Label(string.Format(Locales.KeyGui.Items.CurrentMaterialLabel, LocalizedTextManager.getText(_material)));
+      List<ItemAsset> materials;
+      switch (_equipmentType) {
+        case EquipmentType.Weapon:
+          materials = AssetManager.items_material_weapon.list;
+          break;
+        case EquipmentType.Helmet:
+        case EquipmentType.Armor:
+        case EquipmentType.Boots:
+          materials = AssetManager.items_material_armor.list;
+          break;
+        case EquipmentType.Amulet:
+        case EquipmentType.Ring:
+          materials = AssetManager.items_material_accessory.list;
+          break;
+        default:
+          throw new ArgumentOutOfRangeException();
+      }
+      
+      foreach (ItemAsset material in materials.Where(material => GUILayout.Button(LocalizedTextManager.getText(material.id)))) {
+        _material = material.id;
       }
 
-      GUILayout.Label("Stats:");
+      if (GUILayout.Button(!_metallic ? Locales.KeyGui.Items.MetallicButton : Locales.KeyGui.Items.NonMetallicButton)) {
+        _metallic = !_metallic;
+      }
+
+      if (_equipmentType == EquipmentType.Weapon) {
+        GUILayout.Label(Locales.KeyGui.Items.WeaponTypeLabel);
+        GUILayout.Label(string.Format(Locales.KeyGui.Items.CurrentWeaponTypeLabel, _weaponType));
+        if (GUILayout.Button(Locales.KeyGui.Items.MeleeButton)) {
+          _weaponType = WeaponType.Melee;
+        }
+        if (KeyGuiConfig.DebugIsLegal) {
+          if (GUILayout.Button(Locales.KeyGui.Items.RangedButton)) {
+            _weaponType = WeaponType.Range;
+          }
+        }
+      }
+
+      GUILayout.Label(Locales.KeyGui.Items.StatsLabel);
       foreach (string stat in _itemStats.Keys.ToList()) {
         GUILayout.Label(LocalizedTextManager.stringExists(stat) ? LocalizedTextManager.getText(stat) : stat);
         _itemStats[stat] = GUILayout.TextField(_itemStats[stat]);
       }
-      
-      /*
-      GUILayout.Label("Modifiers:");
-      foreach (ItemAsset t in AssetManager.items_modifiers.list) {
-          if (_itemModifiers.Contains(t.id)) {
-              if (GUILayout.Button("Remove " + t.id)) {
-                  _itemModifiers.Remove(t.id);
-              }
-          } else {
-              if (GUILayout.Button("Add " + t.id)) {
-                  _itemModifiers.Add(t.id);
-              }
-          }
-      }
-      */
 
-      GUILayout.Label("Create!");
+      if (KeyGuiConfig.DebugIsLegal) {
+        GUILayout.Label(Locales.KeyGui.Items.ModifiersLabel);
+        foreach (ItemAsset t in AssetManager.items_modifiers.list) {
+          if (_itemModifiers.Contains(t.id)) {
+            if (GUILayout.Button(string.Format(Locales.KeyGui.Items.RemoveModifierButton, t.id))) {
+              _itemModifiers.Remove(t.id);
+            }
+          } else {
+            if (GUILayout.Button(string.Format(Locales.KeyGui.Items.AddModifierButton, t.id))) {
+              _itemModifiers.Add(t.id);
+            }
+          }
+        }
+      }
+
+      GUILayout.Label(Locales.KeyGui.Items.CreateButtonLabel);
       GUILayout.Label(_createStatus);
-      if (GUILayout.Button("Create Item")) {
+      if (GUILayout.Button(Locales.KeyGui.Items.CreateItemButton)) {
         if (!string.IsNullOrEmpty(_itemID)) {
           bool statsAreValid = true;
           foreach (string stat in _itemStats.Keys.Where(stat => !float.TryParse(_itemStats[stat].Replace("%", ""), out _))) {
             statsAreValid = false;
-            _createStatus = "The stat value entered for " + stat + " is invalid!";
+            _createStatus = string.Format(Locales.KeyGui.Items.CreateItemInvalidStatError, stat);
             break;
           }
           if (statsAreValid) {
-            _createStatus = "Item Created!";
+            _createStatus = Locales.KeyGui.Items.CreateItemSuccess;
             CreateItem();
           }
         } else {
-          _createStatus = "Please enter an item name!";
+          _createStatus = Locales.KeyGui.Items.CreateItemNoNameError;
         }
       }
 
-      GUILayout.Label("Delete items");
+      GUILayout.Label(Locales.KeyGui.Items.DeleteItemsLabel);
       for (int i = 0; i < AssetManager.items.list.Count; ++i) {
         if (AssetManager.items.list[i] is CustomItemAsset customItem) {
           if (customItem.Author == "KeyGUI" && GUILayout.Button(customItem.id)) {
@@ -259,16 +251,16 @@ namespace KeyGUI.Menus.Items {
         }
       }
 
-      GUILayout.Label("Data Control");
-      if (GUILayout.Button("Save")) {
+      GUILayout.Label(Locales.KeyGui.Items.DataControlLabel);
+      if (GUILayout.Button(Locales.KeyGui.Items.SaveButton)) {
         KeyLib.Get<KeyGenLibCustomItemManager>().SaveItemsLocally(KeyGuiConfig.PluginName, _customItems);
       }
 
-      if (GUILayout.Button("Load")) {
+      if (GUILayout.Button(Locales.KeyGui.Items.LoadButton)) {
         _customItems = KeyLib.Get<KeyGenLibCustomItemManager>().LoadItems(KeyGuiConfig.PluginName);
       }
       
-      if (GUILayout.Button(_autoItemLoading ? "Turn Automatic Item Loading Off" : "Turn Automatic Item Loading On")) {
+      if (GUILayout.Button(_autoItemLoading ? Locales.KeyGui.Items.DisableAutoItemLoadButton : Locales.KeyGui.Items.EnableAutoItemLoadButton)) {
         _autoItemLoading = !_autoItemLoading;
         KeyGuiModConfig.Set(ItemsC.AutoloadItems, _autoItemLoading);
       }
