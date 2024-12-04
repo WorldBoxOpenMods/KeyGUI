@@ -123,7 +123,7 @@ namespace KeyGUI.Utils {
         }
       }
 
-      return (nonNcmsMods.ToArray(), ncmsMods);
+      return (nonNcmsMods.Distinct().ToArray(), ncmsMods);
     }
 
     internal static void RemoveMod(string modToRemove) {
