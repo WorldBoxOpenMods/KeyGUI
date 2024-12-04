@@ -73,7 +73,7 @@ namespace KeyGUI.Menus.Localizations {
     internal JContainer SerializeAllLocales() {
       JObject result = new JObject();
       GetType().GetFields().Where(f => f.FieldType == typeof(LocaleDeclaration)).ToList().ForEach(f => {
-        result.Add(f.Name, _locales[(LocaleDeclaration)f.GetValue(this)]);
+        result.Add(f.Name, Locales.Get((LocaleDeclaration)f.GetValue(this)));
       });
       GetType().GetFields(BindingFlags.Instance | BindingFlags.Public).Where(f => typeof(LocalesContainer).IsAssignableFrom(f.FieldType)).ToList().ForEach(f => {
         result.Add(f.Name, ((LocalesContainer)f.GetValue(this)).SerializeAllLocales());
