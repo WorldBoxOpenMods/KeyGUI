@@ -85,7 +85,6 @@ namespace KeyGUI.Utils {
             try {
               System.IO.Compression.ZipFile.ExtractToDirectory(path, newPath);
             } catch (IOException) {
-              Debug.Log("Failed to extract " + path + " to " + newPath + "!");
               continue;
             }
 
@@ -113,7 +112,7 @@ namespace KeyGUI.Utils {
       
       string workshopFolderPath = Paths.PluginPath + "/../../../../workshop/content/1206560";
       if (Directory.Exists(workshopFolderPath)) {
-        foreach (string mod in Directory.GetDirectories(workshopFolderPath).Where(mod => Directory.Exists(mod))) {
+        foreach (string mod in Directory.GetDirectories(workshopFolderPath).Where(Directory.Exists)) {
           FileInfo file;
           if ((file = new DirectoryInfo(mod).GetFiles().FirstOrDefault(f => f.Name == "mod.json")) != null) {
             ncmsMods.Add(JObject.Parse(File.ReadAllText(file.FullName)));
@@ -124,7 +123,6 @@ namespace KeyGUI.Utils {
         }
       }
 
-      Debug.Log("Mods: " + string.Join(", ", nonNcmsMods));
       return (nonNcmsMods.ToArray(), ncmsMods);
     }
 

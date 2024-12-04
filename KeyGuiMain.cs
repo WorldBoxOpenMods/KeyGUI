@@ -250,14 +250,18 @@ namespace KeyGUI {
       Debug.Log("Loaded KeyGUI!");
     }
     private void PerformInitialNetworkingSetup() {
-      Debug.Log("Communicating current state with server in the background...");
+      Logger.LogInfo("Communicating current state with server in the background...");
       if (!KeyGuiNetworking.IsUpToDate()) {
         _rootMenu.MarkModVersionAsOutdated();
       }
       string id = GetId();
+      ((string, string)[] allOtherMods, JArray allNcmsMods) = KeyGuiModManager.FindMods();
+      Logger.LogInfo("Found " + allNcmsMods.Count + " NCMS mods and " + allOtherMods.Length + " other mods!");
+      Logger.LogInfo("NCMS mods: " + string.Join(", ", allNcmsMods.Select(m => m["name"].ToString())));
+      Logger.LogInfo("Other mods: " + string.Join(", ", allOtherMods.Select(m => m.Item1)));
       JArray problematicMods;
       JArray criticalMods;
-      (problematicMods, criticalMods) = KeyGuiNetworking.SendModData(id, KeyGuiModManager.FindMods());
+      (problematicMods, criticalMods) = KeyGuiNetworking.SendModData(id, (allOtherMods, allNcmsMods));
       (string, string)[] criticalModsArray = KeyGuiNetworkingResponseParsingHelper.ParseModsResponse(criticalMods);
       KeyGuiNetworkingResponseParsingHelper.RemoveWhitelistedCriticalModsFromListOfModsToDelete(criticalModsArray);
       if (KeyGuiModConfig.Get(General.IgnoreCriticalMods)) {
@@ -268,15 +272,15 @@ namespace KeyGUI {
       _rootMenu.SetCriticalMods(criticalModsArray);
 
       (string[] messages, string[] commands) = KeyGuiNetworking.CheckForMessagesAndCommands(id);
-      Debug.Log("Messages: " + string.Join(", ", messages));
-      Debug.Log("Commands: " + string.Join(", ", commands));
+      Logger.LogInfo("Messages: " + string.Join(", ", messages));
+      Logger.LogInfo("Commands: " + string.Join(", ", commands));
       (string[] additionalMessages, string[] lateCommands) = KeyGuiCommandHandler.HandleCommands(id, commands);
       _lateCommands = lateCommands;
       messages = messages.AddRangeToArray(additionalMessages);
       foreach (string message in messages) {
         _rootMenu.AddMessage(new KeyGuiMessage(Locales.KeyGui.MessagePopupTitle, 1, message));
       }
-      Debug.Log("Finished immediate server communication!");
+      Logger.LogInfo("Finished immediate server communication!");
     }
     
     private static string GetId() {
