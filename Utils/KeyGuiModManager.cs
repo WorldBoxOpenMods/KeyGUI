@@ -23,7 +23,15 @@ namespace KeyGUI.Utils {
     }
 
     internal static void TryToRemoveModFromModsFolder(string modToRemove) {
-      string modsFolderPath = Paths.PluginPath + "/../../Mods";
+      string modsFolderPath;
+      switch (Application.platform) {
+        case RuntimePlatform.LinuxPlayer:
+          modsFolderPath = Paths.PluginPath + "/../../../Mods";
+          break;
+        default:
+          modsFolderPath = Paths.PluginPath + "/../../Mods";
+          break;
+      }
       string parentFolderPath = Paths.PluginPath + "/../..";
       foreach (string modPath in Directory.GetFiles(modsFolderPath)) {
         string mod = Path.GetFileName(modPath);
@@ -45,7 +53,15 @@ namespace KeyGUI.Utils {
     internal static ((string, string)[] nonNcmsMods, JArray ncmsMods) FindMods() {
       JArray ncmsMods = new JArray();
       List<(string, string)> nonNcmsMods = new List<(string, string)>();
-      string ncmsModsFolderPath = Paths.PluginPath + "/../../Mods";
+      string ncmsModsFolderPath;
+      switch (Application.platform) {
+        case RuntimePlatform.LinuxPlayer:
+          ncmsModsFolderPath = Paths.PluginPath + "/../../../Mods";
+          break;
+        default:
+          ncmsModsFolderPath = Paths.PluginPath + "/../../Mods";
+          break;
+      }
       if (Directory.Exists(ncmsModsFolderPath)) {
         foreach (string mod in Directory.GetDirectories(ncmsModsFolderPath)) {
           if (Directory.Exists(mod)) {
@@ -90,9 +106,9 @@ namespace KeyGUI.Utils {
         nonNcmsMods.AddRange(Directory.GetFiles(bepInExModsFolderPath).Select(mod => Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next)).Select((modName, i) => (modName, Directory.GetFiles(bepInExModsFolderPath)[i])));
       }
 
-      string nativeModsFolderPath = Application.streamingAssetsPath + "/mods";
+      string nativeModsFolderPath = Application.streamingAssetsPath + "/Mods";
       if (Directory.Exists(nativeModsFolderPath)) {
-        nonNcmsMods.AddRange(Directory.GetFiles(nativeModsFolderPath).Where(mod => !Path.GetFileName(mod).Contains(".json")).Select(mod => Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next)).Select((modName, i) => (modName, Directory.GetFiles(nativeModsFolderPath)[i])));
+        nonNcmsMods.AddRange(Directory.GetFiles(nativeModsFolderPath).Where(mod => Path.GetFileName(mod).Contains(".dll")).Select(mod => Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next)).Select((modName, i) => (modName, Directory.GetFiles(nativeModsFolderPath)[i])));
       }
 
       Debug.Log("Mods: " + string.Join(", ", nonNcmsMods));
