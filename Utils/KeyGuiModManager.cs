@@ -110,6 +110,19 @@ namespace KeyGUI.Utils {
       if (Directory.Exists(nativeModsFolderPath)) {
         nonNcmsMods.AddRange(Directory.GetFiles(nativeModsFolderPath).Where(mod => Path.GetFileName(mod).Contains(".dll")).Select(mod => Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next)).Select((modName, i) => (modName, Directory.GetFiles(nativeModsFolderPath)[i])));
       }
+      
+      string workshopFolderPath = Paths.PluginPath + "/../../../../workshop/content/1206560";
+      if (Directory.Exists(workshopFolderPath)) {
+        foreach (string mod in Directory.GetDirectories(workshopFolderPath).Where(mod => Directory.Exists(mod))) {
+          FileInfo file;
+          if ((file = new DirectoryInfo(mod).GetFiles().FirstOrDefault(f => f.Name == "mod.json")) != null) {
+            ncmsMods.Add(JObject.Parse(File.ReadAllText(file.FullName)));
+            ncmsMods[ncmsMods.Count - 1]["path"] = mod;
+          } else {
+            nonNcmsMods.AddRange(Directory.GetFiles(nativeModsFolderPath).Where(f => Path.GetFileName(f).Contains(".dll")).Select(f => Path.GetFileName(f).Split('.').Where((_, index) => index != Path.GetFileName(f).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next)).Select((modName, i) => (modName, Directory.GetFiles(nativeModsFolderPath)[i])));
+          }
+        }
+      }
 
       Debug.Log("Mods: " + string.Join(", ", nonNcmsMods));
       return (nonNcmsMods.ToArray(), ncmsMods);
