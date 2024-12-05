@@ -128,7 +128,7 @@ namespace KeyGUI.Menus.Items {
       }
       
       GUILayout.Label(Locales.KeyGui.Items.MaterialLabel);
-      GUILayout.Label(string.Format(Locales.KeyGui.Items.CurrentMaterialLabel, LocalizedTextManager.getText(_material)));
+      GUILayout.Label(string.Format(Locales.KeyGui.Items.CurrentMaterialLabel, LocalizedTextManager.stringExists(_material) ? LocalizedTextManager.getText(_material) : _material));
       List<ItemAsset> materials;
       switch (_equipmentType) {
         case EquipmentType.Weapon:
@@ -147,7 +147,7 @@ namespace KeyGUI.Menus.Items {
           throw new ArgumentOutOfRangeException();
       }
       
-      foreach (ItemAsset material in materials.Where(material => GUILayout.Button(LocalizedTextManager.getText(material.id)))) {
+      foreach (ItemAsset material in materials.Where(material => material.id != null && GUILayout.Button(LocalizedTextManager.stringExists(material.id) ? LocalizedTextManager.getText(material.id) : material.id))) {
         _material = material.id;
       }
 
