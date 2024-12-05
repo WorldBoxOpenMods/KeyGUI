@@ -105,94 +105,98 @@ namespace KeyGUI.Menus {
         );
       }
 
-      List<string> modsThatUserIsFineWithUsing = new List<string>();
-      foreach ((string mod, string reason) modAndReason in _problematicMods) {
-        GUILayout.Label(
-          string.Format(Locales.Get(Locales.KeyGui.ProblematicModWarning), modAndReason.mod, modAndReason.reason),
-          new GUIStyle {
-            alignment = TextAnchor.MiddleCenter,
-            normal = new GUIStyleState {
-              textColor = Color.red
+      if (_problematicMods != null) {
+        List<string> modsThatUserIsFineWithUsing = new List<string>();
+        foreach ((string mod, string reason) modAndReason in _problematicMods) {
+          GUILayout.Label(
+            string.Format(Locales.Get(Locales.KeyGui.ProblematicModWarning), modAndReason.mod, modAndReason.reason),
+            new GUIStyle {
+              alignment = TextAnchor.MiddleCenter,
+              normal = new GUIStyleState {
+                textColor = Color.red
+              }
+            }
+          );
+          if (GUILayout.Button(Locales.Get(Locales.KeyGui.DismissProblematicModWarningButton))) {
+            modsThatUserIsFineWithUsing.Add(modAndReason.mod);
+            MenuRect.height = 0;
+            MenuRect.width = 0;
+          }
+        }
+
+        foreach (string mod in modsThatUserIsFineWithUsing) {
+          _problematicMods = _problematicMods.Where(val => val.Item1 != mod).ToArray();
+        }
+
+        if (_problematicMods.Length > 0) {
+          GUILayout.Label("----------------------------------------------------------------------",
+            new GUIStyle {
+              alignment = TextAnchor.MiddleCenter,
+              normal = new GUIStyleState {
+                textColor = Color.white
+              }
+            }
+          );
+        }
+      }
+
+      if (_criticalMods != null) {
+        List<string> modsThatUserIsFineWithUsing = new List<string>();
+        List<string> criticalModWarningsToDismiss = new List<string>();
+        foreach ((string mod, string reason) modAndReason in _criticalMods) {
+          GUILayout.Label(
+            string.Format(Locales.Get(Locales.KeyGui.CriticalModWarning), modAndReason.mod, modAndReason.reason),
+            new GUIStyle {
+              alignment = TextAnchor.MiddleCenter,
+              normal = new GUIStyleState {
+                textColor = Color.red
+              }
+            }
+          );
+          GUILayout.BeginHorizontal();
+          if (GUILayout.Button(Locales.Get(Locales.KeyGui.DismissCriticalModWarningButton))) {
+            criticalModWarningsToDismiss.Add(modAndReason.mod);
+            MenuRect.height = 0;
+            MenuRect.width = 0;
+          }
+
+          if (GUILayout.Button(Locales.Get(Locales.KeyGui.DisableCriticalModWarningButton))) {
+            modsThatUserIsFineWithUsing.Add(modAndReason.mod);
+            MenuRect.height = 0;
+            MenuRect.width = 0;
+          }
+
+          GUILayout.EndHorizontal();
+        }
+
+        foreach (string mod in modsThatUserIsFineWithUsing) {
+          for (int i = 0; i < _criticalMods.Length; i++) {
+            if (_criticalMods[i].Item1 == mod) {
+              _criticalMods = _criticalMods.Where((val, idx) => idx != i).ToArray();
             }
           }
-        );
-        if (GUILayout.Button(Locales.Get(Locales.KeyGui.DismissProblematicModWarningButton))) {
-          modsThatUserIsFineWithUsing.Add(modAndReason.mod);
-          MenuRect.height = 0;
-          MenuRect.width = 0;
+
+          KeyGuiModConfig.Set(Internal.WhitelistedMods, KeyGuiModConfig.Get(Internal.WhitelistedMods).AddItem(mod).ToArray());
         }
-      }
 
-      foreach (string mod in modsThatUserIsFineWithUsing) {
-        _problematicMods = _problematicMods.Where(val => val.Item1 != mod).ToArray();
-      }
-
-      if (_problematicMods.Length > 0) {
-        GUILayout.Label("----------------------------------------------------------------------",
-          new GUIStyle {
-            alignment = TextAnchor.MiddleCenter,
-            normal = new GUIStyleState {
-              textColor = Color.white
+        foreach (string mod in criticalModWarningsToDismiss) {
+          for (int i = 0; i < _criticalMods.Length; i++) {
+            if (_criticalMods[i].Item1 == mod) {
+              _criticalMods = _criticalMods.Where((val, idx) => idx != i).ToArray();
             }
           }
-        );
-      }
+        }
 
-      modsThatUserIsFineWithUsing = new List<string>();
-      List<string> criticalModWarningsToDismiss = new List<string>();
-      foreach ((string mod, string reason) modAndReason in _criticalMods) {
-        GUILayout.Label(
-          string.Format(Locales.Get(Locales.KeyGui.CriticalModWarning), modAndReason.mod, modAndReason.reason),
-          new GUIStyle {
-            alignment = TextAnchor.MiddleCenter,
-            normal = new GUIStyleState {
-              textColor = Color.red
+        if (_criticalMods.Length > 0) {
+          GUILayout.Label("----------------------------------------------------------------------",
+            new GUIStyle {
+              alignment = TextAnchor.MiddleCenter,
+              normal = new GUIStyleState {
+                textColor = Color.white
+              }
             }
-          }
-        );
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button(Locales.Get(Locales.KeyGui.DismissCriticalModWarningButton))) {
-          criticalModWarningsToDismiss.Add(modAndReason.mod);
-          MenuRect.height = 0;
-          MenuRect.width = 0;
+          );
         }
-
-        if (GUILayout.Button(Locales.Get(Locales.KeyGui.DisableCriticalModWarningButton))) {
-          modsThatUserIsFineWithUsing.Add(modAndReason.mod);
-          MenuRect.height = 0;
-          MenuRect.width = 0;
-        }
-
-        GUILayout.EndHorizontal();
-      }
-
-      foreach (string mod in modsThatUserIsFineWithUsing) {
-        for (int i = 0; i < _criticalMods.Length; i++) {
-          if (_criticalMods[i].Item1 == mod) {
-            _criticalMods = _criticalMods.Where((val, idx) => idx != i).ToArray();
-          }
-        }
-
-        KeyGuiModConfig.Set(Internal.WhitelistedMods, KeyGuiModConfig.Get(Internal.WhitelistedMods).AddItem(mod).ToArray());
-      }
-
-      foreach (string mod in criticalModWarningsToDismiss) {
-        for (int i = 0; i < _criticalMods.Length; i++) {
-          if (_criticalMods[i].Item1 == mod) {
-            _criticalMods = _criticalMods.Where((val, idx) => idx != i).ToArray();
-          }
-        }
-      }
-
-      if (_criticalMods.Length > 0) {
-        GUILayout.Label("----------------------------------------------------------------------",
-          new GUIStyle {
-            alignment = TextAnchor.MiddleCenter,
-            normal = new GUIStyleState {
-              textColor = Color.white
-            }
-          }
-        );
       }
     }
   }
