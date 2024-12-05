@@ -57,7 +57,7 @@ namespace KeyGUI.Menus.Items {
     private string _createStatus = "";
     private string _itemID;
     private string _sprite;
-    private string _material;
+    private string _material = "base";
     private bool _metallic;
     private EquipmentType _equipmentType;
     private WeaponType _weaponType;
