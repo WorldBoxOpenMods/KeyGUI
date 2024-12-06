@@ -47,20 +47,16 @@ namespace KeyGUI.MenuArchitecture {
     }
 
     protected override void LoadGUI(int windowID) {
-      PreMenuToggleUi();
-      LoadSubMenuToggles();
-      PostMenuToggleUi();
+      LoadGUI();
     }
-    
+    protected virtual void LoadGUI() { }
+
     protected void LoadSubMenuToggles() {
       foreach (KeyGuiMenu menu in _menus.Where(menu => menu.OfferVisibilityToggle).Where(menu => GUILayout.Button(Locales.Get(menu.Title)))) {
         if (KeyGuiModConfig.Get(General.OnlyAllowOneOpenSubmenu)) DisableAllWindows(menu);
         menu.Enabled = !menu.Enabled;
       }
     }
-    
-    protected virtual void PreMenuToggleUi() {}
-    protected virtual void PostMenuToggleUi() {}
     
     internal override void Initialize() {
       base.Initialize();

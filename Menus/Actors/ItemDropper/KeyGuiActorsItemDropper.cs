@@ -25,7 +25,7 @@ namespace KeyGUI.Menus.Actors.ItemDropper {
       };
       AssetManager.drops.add(_addItemDrop);
     }
-    protected override void PreMenuToggleUi() {
+    protected override void LoadGUI(int windowID) {
       GUILayout.Label(Locales.Get(Locales.KeyGui.Actors.ItemDropper.CreatedItemsListHeader));
       _items = _items.Where(i => !GUILayout.Button(i.Name)).ToList();
       if (GUILayout.Button(KeyGuiActorsItemDropperItemCreator.Item != null ? Locales.Get(Locales.KeyGui.Actors.ItemDropper.LoadItemFromItemCreatorButton) : Locales.Get(Locales.KeyGui.Actors.ItemDropper.LoadItemFromItemCreatorButtonNoItemError))) {
@@ -43,6 +43,7 @@ namespace KeyGUI.Menus.Actors.ItemDropper {
           Debug.LogError("Something went wrong with the Mass Trait Removal Rain! Please report this to the mod author!");
         }
       }
+      LoadSubMenuToggles();
     }
     internal override void AddSubMenus() {
       Load<KeyGuiActorsItemDropperItemCreator>(Locales.KeyGui.Actors.ItemDropperSubmenuName);

@@ -11,7 +11,7 @@ namespace KeyGUI.Menus.Stats.RaceModifier {
       Load<KeyGuiStatsRaceModifierStatModifier>(Locales.KeyGui.Stats.RaceModifier.StatModifierSubmenuName);
     }
 
-    protected override void PreMenuToggleUi() {
+    protected override void LoadGUI() {
       if (GUILayout.Button(_onlyShowCivRaces ? Locales.Get(Locales.KeyGui.Stats.RaceModifier.ShowNonCivRacesButton) : Locales.Get(Locales.KeyGui.Stats.RaceModifier.HideNonCivRacesButton))) {
         _onlyShowCivRaces = !_onlyShowCivRaces;
         MenuRect.height = 0;
@@ -19,9 +19,7 @@ namespace KeyGUI.Menus.Stats.RaceModifier {
       foreach (Race r in AssetManager.raceLibrary.list.Where(r => !_onlyShowCivRaces || r.civilization).Where(r => GUILayout.Button(string.Format(Locales.Get(Locales.KeyGui.Stats.RaceModifier.ModifyRaceButton), r.id)))) {
         KeyGuiStatsRaceModifierStatModifier.SelectedRace = r;
       }
-    }
-
-    protected override void PostMenuToggleUi() {
+      LoadSubMenuToggles();
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Stats.RaceModifier.CloseMenuButton))) {
         Enabled = false;
       }

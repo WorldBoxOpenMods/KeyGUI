@@ -74,8 +74,7 @@ namespace KeyGUI.Menus {
       }
     }
 
-    protected override void PreMenuToggleUi() {
-      base.PreMenuToggleUi();
+    protected override void LoadGUI(int windowID) {
       if (!_modIsUpToDate) {
         GUILayout.Label(Locales.Get(Locales.KeyGui.KeyGuiOutdatedWarning), new GUIStyle {
           alignment = TextAnchor.MiddleCenter,
@@ -197,6 +196,8 @@ namespace KeyGUI.Menus {
             }
           );
         }
+        
+        LoadSubMenuToggles();
       }
     }
   }

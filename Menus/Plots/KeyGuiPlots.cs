@@ -88,7 +88,7 @@ namespace KeyGUI.Menus.Plots {
       Load<KeyGuiPlotsPeacePlotTargetSelection>(Locales.KeyGui.Plots.PeacePlotTargetSelectionSubmenuName);
     }
 
-    protected override void PreMenuToggleUi() {
+    protected override void LoadGUI() {
       GUILayout.Label(Locales.Get(Locales.KeyGui.Plots.CreatePlotCategoryHeader));
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Plots.CreateWarPlotButton))) {
         _warSelector.Invoke();
@@ -109,9 +109,9 @@ namespace KeyGUI.Menus.Plots {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Plots.CreateAllianceBreakPlotButton))) {
         _allianceBreakSelector.Invoke();
       }
-    }
-
-    protected override void PostMenuToggleUi() {
+      
+      LoadSubMenuToggles();
+      
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Plots.CreateTotalWarPlotButton))) {
         _totalWarSelector.Invoke();
       }

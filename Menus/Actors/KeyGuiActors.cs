@@ -39,8 +39,8 @@ namespace KeyGUI.Menus.Actors {
         }
       }
     }
-    protected override void PostMenuToggleUi() {
-      base.PostMenuToggleUi();
+    protected override void LoadGUI(int windowID) {
+      LoadSubMenuToggles();
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Actors.TraitRemovalRainDropButton))) {
         PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.MassTraitRemovalRainButtonIndex];
         if (button != null) {

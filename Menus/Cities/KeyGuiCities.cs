@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace KeyGUI.Menus.Cities {
   public class KeyGuiCities : KeyGuiMenuManager {
-    protected override void PreMenuToggleUi() {
+    protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cities.ForceCityAsCapitalCityButton))) {
         GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.ForceCityAsCapitalCityIndex];
         PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.ForceCityAsCapitalCityButtonIndex];
@@ -35,6 +35,7 @@ namespace KeyGUI.Menus.Cities {
       foreach (City city in World.world.cities.list.Where(city => GUILayout.Button(city.name))) {
         KeyGuiCitiesResourceEditor.SelectedCity = city;
       }
+      LoadSubMenuToggles();
     }
     internal override void AddSubMenus() {
       Load<KeyGuiCitiesResourceEditor>(Locales.KeyGui.Cities.ResourceEditorSubmenuName);

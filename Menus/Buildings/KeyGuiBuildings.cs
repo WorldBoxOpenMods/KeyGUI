@@ -11,7 +11,8 @@ namespace KeyGUI.Menus.Buildings {
       Load<KeyGuiBuildingsBuildingPlacementBuildingSelector>(Locales.KeyGui.Buildings.BuildingPlacementBuildingSelectorSubmenuName);
     }
 
-    protected override void PostMenuToggleUi() {
+    protected override void LoadGUI(int windowID) {
+      LoadSubMenuToggles();
       if (KeyGuiBuildingsBuildingPlacementBuildingSelector.SelectedBuilding != null) {
         if (GUILayout.Button(Locales.Get(Locales.KeyGui.Buildings.BuildingPlacementPlaceSelectedBuildingButton))) {
           GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.PlaceBuildingIndex];

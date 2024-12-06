@@ -10,13 +10,14 @@ namespace KeyGUI.Menus.Clans {
     protected override float MenuMinHeight => 300;
     private Vector2 _scrollPos;
 
-    protected override void PreMenuToggleUi() {
+    protected override void LoadGUI(int windowID) {
       _scrollPos = GUILayout.BeginScrollView(_scrollPos);
       GUILayout.Label(Locales.Get(Locales.KeyGui.Clans.SelectClanListHeader));
       foreach (Clan clan in World.world.clans.list.Where(clan => GUILayout.Button(clan.name))) {
         KeyGuiClansTraitSelection.SelectedClan = clan;
       }
       GUILayout.EndScrollView();
+      LoadSubMenuToggles();
     }
     internal override void AddSubMenus() {
       Load<KeyGuiClansTraitSelection>(Locales.KeyGui.Clans.TraitSelectionSubmenuName);
