@@ -73,7 +73,7 @@ using Random = UnityEngine.Random;
  * ok NCMS tab separator option (aka NcmsModCompatibilityLayer) :troll: (done)
  *
  * me & dej
- * Oh well Ig time to take all of the QoL from CollectionMod: https://canary.discord.com/channels/@me/1103382883609092197/1140547458078883861 :3
+ * Oh well Ig time to take all of the QoL from CollectionMod: https://canary.discord.com/channels/@me/1103382883609092197/1140547458078883861 :3 (done)
  *
  * me
  * simple messaging system for contacting everyone or individual users, also with some commands for doing special stuff (done)
@@ -88,7 +88,7 @@ using Random = UnityEngine.Random;
  * overhaul mods info sent to server to include mod.json info if the mod is NCMS, and change dateAdded to be dateFound, and add dateCreated and dateEdited based on the values from the operating system (done)
  *
  * me
- * make KeyGUI/KeyGeneralPurposeLibrary/BepinexModCompatibilityLayer easier to translate (BTW DON'T LOSE TRACK OF "daybreak1929" (originally known as "daybreak#1929"))
+ * make KeyGUI/KeyGeneralPurposeLibrary/BepinexModCompatibilityLayer easier to translate (BTW DON'T LOSE TRACK OF "daybreak1929" (originally known as "daybreak#1929")) (done)
  *
  * me
  * I never tested ranged weapons ._. (done)
@@ -104,9 +104,6 @@ using Random = UnityEngine.Random;
  *
  * me
  * mass trait remover (done)
- *
- * me
- * TODO: make NCMS mod compiling multi threaded
  *
  * me
  * TODO: make GUIs relative to screen size maybe
