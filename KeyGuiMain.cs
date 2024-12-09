@@ -154,7 +154,7 @@ using Random = UnityEngine.Random;
  * TODO: make the city resource editor text boxes instead of sliders (note: maybe just make the slider better instead)
  *
  * me
- * TODO: fix the bug in _cultureForceSelectCulture (god power at KeyGUI Cultures Locales.KeyGui.Cultures.ForceExistingCultureUponSpecificCityButton)
+ * fix the bug in _cultureForceSelectCulture (god power at KeyGUI Cultures Locales.KeyGui.Cultures.ForceExistingCultureUponSpecificCityButton)
  *
  * professorcubs
  * TODO: https://canary.discord.com/channels/522561390330904585/1232422556301000764/1232424931682156546
