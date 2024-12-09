@@ -22,10 +22,6 @@ namespace KeyGUI.MenuArchitecture {
 
     internal bool Enabled;
     internal bool IsInitialized { get; private set; }
-    private bool IsBenchmarkInitialized { get; set; }
-    // ReSharper disable once UnusedAutoPropertyAccessor.Local
-    private ToolBenchmarkData BenchmarkData { get; set; }
-    private DebugToolAsset BenchmarkAsset { get; set; }
     private bool IsMenuInfoInitialized { get; set; }
     private byte RepeatedErrorCount { get; set; }
     private bool ShownUpdateError { get; set; }
@@ -39,14 +35,14 @@ namespace KeyGUI.MenuArchitecture {
       }
       if (RepeatedErrorCount > 2) {
         IsInitialized = true;
-        Debug.LogError("Repeated error count exceeded for " + FullName + ", menu will not be initialized!");
+        Debug.LogError($"Repeated error count exceeded for {FullName} ({PrettyWindowID}), menu will not be initialized!");
         return;
       }
       try {
         InitializeMenu();
         RepeatedErrorCount = 0;
       } catch (Exception e) {
-        Debug.LogError("Error initializing " + FullName + "!");
+        Debug.LogError($"Error initializing {FullName} ({PrettyWindowID})!");
         Debug.LogException(e);
         RepeatedErrorCount++;
       }
@@ -57,26 +53,11 @@ namespace KeyGUI.MenuArchitecture {
       if (!WindowFocusManager.Initialized) {
         WindowFocusManager.Initialize();
       }
-      if (!IsBenchmarkInitialized) {
-        IsBenchmarkInitialized = true;
-        DebugToolAsset newBenchmark = new DebugToolAsset {
-          id = PrettyWindowID + ": " + FullName,
-          benchmark_total = PrettyWindowID + ": " + FullName,
-          benchmark_group_id = ParentMenu?.FullName ?? "KeyGUI",
-          benchmark_total_group = ParentMenu?.FullName ?? "KeyGUI",
-          action_start = AssetManager.debug_tool_library.setBenchmarksDefaultValue,
-          action_1 = AssetManager.debug_tool_library.showGroupBenchmarkTop,
-          action_2 = AssetManager.debug_tool_library.showGroupBenchmarkBottom
-        };
-        AssetManager.debug_tool_library.add(newBenchmark);
-        BenchmarkAsset = newBenchmark;
-        BenchmarkData = ToolBenchmark.get(BenchmarkAsset.id, BenchmarkAsset.benchmark_group_id);
-      }
     }
     internal void Update() {
       if (RepeatedErrorCount > 2) {
         if (!ShownUpdateError) {
-          Debug.LogError("Repeated error count exceeded for " + FullName + ", menu will not be updated!");
+          Debug.LogError($"Repeated error count exceeded for {FullName} ({PrettyWindowID}), menu will not be updated!");
           ShownUpdateError = true;
         }
         return;
@@ -85,7 +66,7 @@ namespace KeyGUI.MenuArchitecture {
         UpdateMenu();
         RepeatedErrorCount = 0;
       } catch (Exception e) {
-        Debug.LogError("Error updating " + FullName + "!");
+        Debug.LogError($"Error updating {FullName} ({PrettyWindowID})!");
         Debug.LogException(e);
         RepeatedErrorCount++;
       }
@@ -95,13 +76,7 @@ namespace KeyGUI.MenuArchitecture {
       if (!IsMenuInfoInitialized) {
         throw new InvalidMenuInvocationContextException("MenuInfo not initialized!");
       }
-      if (IsBenchmarkInitialized) {
-        ToolBenchmark.bench(BenchmarkAsset.id, BenchmarkAsset.benchmark_group_id);
-      }
       MenuRect = GUILayout.Window(ModCompatibilityLayer.WindowIdSeparator.GetValidWindowId(WindowID, LoadGUI_Internal), MenuRect, LoadGUI_Internal, Title.Value, GUILayout.MaxWidth(MenuMaxWidth), GUILayout.MinWidth(MenuMinWidth), GUILayout.MinHeight(MenuMinHeight), GUILayout.MaxHeight(MenuMaxHeight));
-      if (IsBenchmarkInitialized) {
-        ToolBenchmark.benchEnd(BenchmarkAsset.id, BenchmarkAsset.benchmark_group_id);
-      }
     }
     internal virtual void ForceLoadMenu() {
       LoadMenu();
@@ -115,7 +90,7 @@ namespace KeyGUI.MenuArchitecture {
         WindowFocusManager.WindowInUse = -1;
       }
       if (RepeatedErrorCount > 2) {
-          GUILayout.Label("Repeated error count exceeded for " + FullName + ", menu contents will not be loaded unless overriden!");
+          GUILayout.Label($"Repeated error count exceeded for {FullName} ({PrettyWindowID}), menu contents will not be loaded unless overriden!");
           if (GUILayout.Button("Override")) {
             RepeatedErrorCount = 0;
           }
@@ -124,7 +99,7 @@ namespace KeyGUI.MenuArchitecture {
           LoadGUI(windowID);
           RepeatedErrorCount = 0;
         } catch (Exception e) {
-          Debug.LogError("Error loading GUI for " + FullName + "!");
+          Debug.LogError($"Error loading GUI for {FullName} ({PrettyWindowID})!");
           Debug.LogException(e);
           RepeatedErrorCount++;
         }
