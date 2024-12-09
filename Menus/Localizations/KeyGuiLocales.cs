@@ -45,8 +45,8 @@ namespace KeyGUI.Menus.Localizations {
       SuccessfullyFinishedLoadingLocales = true;
     }
 
-    internal override void Initialize() {
-      base.Initialize();
+    protected override void InitializeMenu() {
+      base.InitializeMenu();
       if (!SuccessfullyFinishedLoadingLocales) {
         return;
       }

@@ -20,8 +20,8 @@ namespace KeyGUI.Menus.Crabzilla {
     private string _explosionStrength = "1";
     private string _explosionRadius = "4";
 
-    internal override void Initialize() {
-      base.Initialize();
+    protected override void InitializeMenu() {
+      base.InitializeMenu();
       _crabzillaAsset = AssetManager.actor_library.get(SA.crabzilla);
     }
     

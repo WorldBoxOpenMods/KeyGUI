@@ -58,17 +58,17 @@ namespace KeyGUI.MenuArchitecture {
       }
     }
     
-    internal override void Initialize() {
-      base.Initialize();
+    protected override void InitializeMenu() {
+      base.InitializeMenu();
       foreach (KeyGuiMenu menu in _menus.Where(menu => !menu.IsInitialized)) {
-        Debug.Log("Initializing " + Locales.Get(Title) + " " + Locales.Get(menu.Title) + "...");
+        Debug.Log($"Initializing {FullName}...");
         menu.Initialize();
-        Debug.Log("Finished initializing " + Locales.Get(Title) + " " + Locales.Get(menu.Title) + "!");
+        Debug.Log($"Initialized {FullName}!");
       }
     }
     
-    internal override void Update() {
-      base.Update();
+    protected override void UpdateMenu() {
+      base.UpdateMenu();
       foreach (KeyGuiMenu menu in _menus) {
         menu.Update();
       }

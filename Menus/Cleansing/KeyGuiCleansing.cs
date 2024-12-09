@@ -11,8 +11,8 @@ namespace KeyGUI.Menus.Cleansing {
   public class KeyGuiCleansing : KeyGuiMenu {
     private static readonly List<(BiomeAsset biome, bool enabled)> BiomeTypes = new List<(BiomeAsset biome, bool enabled)>();
 
-    internal override void Initialize() {
-      base.Initialize();
+    protected override void InitializeMenu() {
+      base.InitializeMenu();
       if (Config.gameLoaded && BiomeTypes.Count == 0) {
         foreach (BiomeAsset biome in AssetManager.biome_library.list) {
           BiomeTypes.Add((biome, true));

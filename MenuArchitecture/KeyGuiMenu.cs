@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using BepinexModCompatibilityLayer;
@@ -16,7 +17,7 @@ namespace KeyGUI.MenuArchitecture {
     protected virtual float MenuMaxHeight => 500;
     
     internal LocaleDeclaration Title { get; private set; }
-    private string FullName => (ParentMenu?.FullName == null ? "" : ParentMenu.FullName + " ") + Title;
+    protected string FullName => (ParentMenu?.FullName == null ? "" : ParentMenu.FullName + " ") + Title;
     private string PrettyWindowID => WindowID.ToString().Length >= 6 ? WindowID.ToString().Substring(0, 6) + (WindowID.ToString().Length > 6 ? "_" : "") + WindowID.ToString().Substring(6).Join(delimiter: "_") : WindowID + "0";
 
     internal bool Enabled;
@@ -26,11 +27,32 @@ namespace KeyGUI.MenuArchitecture {
     private ToolBenchmarkData BenchmarkData { get; set; }
     private DebugToolAsset BenchmarkAsset { get; set; }
     private bool IsMenuInfoInitialized { get; set; }
+    private byte RepeatedErrorCount { get; set; }
+    private bool ShownUpdateError { get; set; }
     [CanBeNull] private KeyGuiMenu ParentMenu { get; set; }
     internal bool OfferVisibilityToggle = true;
     protected int WindowID { get; private set; }
+    
+    internal void Initialize() {
+      if (IsInitialized) {
+        return;
+      }
+      if (RepeatedErrorCount > 2) {
+        IsInitialized = true;
+        Debug.LogError("Repeated error count exceeded for " + FullName + ", menu will not be initialized!");
+        return;
+      }
+      try {
+        InitializeMenu();
+        RepeatedErrorCount = 0;
+      } catch (Exception e) {
+        Debug.LogError("Error initializing " + FullName + "!");
+        Debug.LogException(e);
+        RepeatedErrorCount++;
+      }
+    }
 
-    internal virtual void Initialize() {
+    protected virtual void InitializeMenu() {
       IsInitialized = true;
       if (!WindowFocusManager.Initialized) {
         WindowFocusManager.Initialize();
@@ -51,8 +73,25 @@ namespace KeyGUI.MenuArchitecture {
         BenchmarkData = ToolBenchmark.get(BenchmarkAsset.id, BenchmarkAsset.benchmark_group_id);
       }
     }
-    internal virtual void Update() {}
-    public virtual void LoadMenu() {
+    internal void Update() {
+      if (RepeatedErrorCount > 2) {
+        if (!ShownUpdateError) {
+          Debug.LogError("Repeated error count exceeded for " + FullName + ", menu will not be updated!");
+          ShownUpdateError = true;
+        }
+        return;
+      }
+      try {
+        UpdateMenu();
+        RepeatedErrorCount = 0;
+      } catch (Exception e) {
+        Debug.LogError("Error updating " + FullName + "!");
+        Debug.LogException(e);
+        RepeatedErrorCount++;
+      }
+    }
+    protected virtual void UpdateMenu() {}
+    public void LoadMenu() {
       if (!IsMenuInfoInitialized) {
         throw new InvalidMenuInvocationContextException("MenuInfo not initialized!");
       }
@@ -75,7 +114,21 @@ namespace KeyGUI.MenuArchitecture {
       } else {
         WindowFocusManager.WindowInUse = -1;
       }
-      LoadGUI(windowID);
+      if (RepeatedErrorCount > 2) {
+          GUILayout.Label("Repeated error count exceeded for " + FullName + ", menu contents will not be loaded unless overriden!");
+          if (GUILayout.Button("Override")) {
+            RepeatedErrorCount = 0;
+          }
+      } else {
+        try {
+          LoadGUI(windowID);
+          RepeatedErrorCount = 0;
+        } catch (Exception e) {
+          Debug.LogError("Error loading GUI for " + FullName + "!");
+          Debug.LogException(e);
+          RepeatedErrorCount++;
+        }
+      }
       GUI.DragWindow();
     }
     protected abstract void LoadGUI(int windowID);

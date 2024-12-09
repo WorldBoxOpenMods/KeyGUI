@@ -30,8 +30,8 @@ namespace KeyGUI.Menus {
     private bool _modIsUpToDate = true;
     private (string, string)[] _problematicMods;
     private (string, string)[] _criticalMods;
-    internal override void Initialize() {
-      base.Initialize();
+    protected override void InitializeMenu() {
+      base.InitializeMenu();
       if (KeyGuiModConfig.Get(General.ShowDebugButton)) {
         DebugConfig.instance.debugButton.SetActive(true);
       }

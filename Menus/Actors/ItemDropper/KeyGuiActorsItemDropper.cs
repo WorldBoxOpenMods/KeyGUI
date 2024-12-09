@@ -12,8 +12,8 @@ namespace KeyGUI.Menus.Actors.ItemDropper {
   public class KeyGuiActorsItemDropper : KeyGuiMenuManager {
     private List<KeyGuiItem> _items = new List<KeyGuiItem>();
     private DropAsset _addItemDrop;
-    internal override void Initialize() {
-      base.Initialize();
+    protected override void InitializeMenu() {
+      base.InitializeMenu();
       _addItemDrop = new DropAsset() {
         id = "item_mass_addition_rain_keygui",
         path_texture = "drops/drop_gamma_rain",

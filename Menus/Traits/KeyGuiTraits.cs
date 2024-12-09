@@ -80,8 +80,8 @@ namespace KeyGUI.Menus.Traits {
     private readonly List<string> _oppositeTraits = new List<string>();
     private readonly List<string> _partnerTraits = new List<string>();
 
-    internal override void Initialize() {
-      base.Initialize();
+    protected override void InitializeMenu() {
+      base.InitializeMenu();
       foreach (ActorTrait trait in AssetManager.traits.list) {
         if (trait is CustomTrait customTrait) {
           _customTraits.Add(customTrait);

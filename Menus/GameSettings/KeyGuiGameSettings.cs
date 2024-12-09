@@ -17,8 +17,8 @@ namespace KeyGUI.Menus.GameSettings {
     private string _mapSeed = "0";
     private string _worldTime = "0";
 
-    internal override void Initialize() {
-      base.Initialize();
+    protected override void InitializeMenu() {
+      base.InitializeMenu();
       AutoSaveManager.lowMemory = KeyGuiModConfig.Get(GameSettingsC.DisableAutosaves);
       if (KeyGuiModConfig.Get(GameSettingsC.DisableBoatsBreakingIce)) {
         if (!KeyGenLibHarmonyPatchCollection.DisableBoatMovementOnIce) KeyLib.Get<KeyGenLibHarmonyPatchCollection>().ToggleBoatIceMovement();

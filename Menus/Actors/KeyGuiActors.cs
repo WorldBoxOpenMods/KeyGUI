@@ -11,8 +11,8 @@ using UnityEngine;
 namespace KeyGUI.Menus.Actors {
   public class KeyGuiActors : KeyGuiMenuManager {
     private CustomDropAsset _traitMassRemovalRain;
-    internal override void Initialize() {
-      base.Initialize();
+    protected override void InitializeMenu() {
+      base.InitializeMenu();
       _traitMassRemovalRain = new CustomDropAsset() {
         id = "trait_mass_removal_rain_keygui",
         path_texture = "drops/drop_gamma_rain",

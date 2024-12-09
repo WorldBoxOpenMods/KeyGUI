@@ -22,8 +22,8 @@ namespace KeyGUI.Menus.Plots {
 
     private readonly List<string> _bannedPlots = new List<string>();
 
-    internal override void Initialize() {
-      base.Initialize();
+    protected override void InitializeMenu() {
+      base.InitializeMenu();
       _warSelector = new KeyGuiInfoSelector(
         new List<LocaleDeclaration> { Locales.KeyGui.Plots.WarSelectorInitiatorKingdomLabel, Locales.KeyGui.Plots.WarSelectorTargetKingdomLabel },
         new List<object> { KeyLib.Get<KeyGenLibCustomPlotLibrary>()[KeyGenLibCustomPlotLibrary.GenericWarPlotIndex] },
@@ -80,8 +80,8 @@ namespace KeyGUI.Menus.Plots {
       );
     }
 
-    internal override void Update() {
-      base.Update();
+    protected override void UpdateMenu() {
+      base.UpdateMenu();
       foreach (Plot plot in from plotType in _bannedPlots from plot in World.world.plots.list where plot.data.plot_type_id == plotType select plot) plot.setState(PlotState.Cancelled);
     }
     internal override void AddSubMenus() {
