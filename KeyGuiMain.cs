@@ -148,7 +148,7 @@ using Random = UnityEngine.Random;
  * TODO: make it possible to automatically report errors to the server
  *
  * me
- * TODO: rework mod config menu to use setting classes + reflection for automatic config setup with Intellisense for accessing options
+ * rework mod config menu to use setting classes + reflection for automatic config setup with Intellisense for accessing options (done)
  *
  * some Steam Workshop person
  * TODO: make the city resource editor text boxes instead of sliders (note: maybe just make the slider better instead)
