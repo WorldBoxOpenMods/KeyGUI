@@ -5,12 +5,15 @@ using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.BehaviourManipulation;
 using KeyGeneralPurposeLibrary.Powers;
 using KeyGUI.MenuArchitecture;
+using KeyGUI.Menus.Cultures.TraitSelection;
 using KeyGUI.Menus.Localizations.Declarations;
 using UnityEngine;
 
 namespace KeyGUI.Menus.Cultures {
-  public class KeyGuiCultures : KeyGuiMenu {
+  public class KeyGuiCultures : KeyGuiMenuManager {
     private string _knowledgeModifierString = "1";
+    private Vector2 _scrollPos;
+
 
     protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.DeleteOneCultureButton))) {
@@ -135,6 +138,18 @@ namespace KeyGUI.Menus.Cultures {
           Debug.LogError("Something went wrong with the Culture Creation! Please report this to the mod author!");
         }
       }
+      
+      _scrollPos = GUILayout.BeginScrollView(_scrollPos);
+      GUILayout.Label(Locales.Get(Locales.KeyGui.Cultures.SelectCultureListHeader));
+      foreach (Culture culture in World.world.cultures.list.Where(culture => GUILayout.Button(culture.name))) {
+        KeyGuiCulturesTraitSelection.SelectedCulture = culture;
+      }
+      GUILayout.EndScrollView();
+      LoadSubMenuToggles();
+    }
+    
+    internal override void AddSubMenus() {
+      Load<KeyGuiCulturesTraitSelection>(Locales.KeyGui.Cultures.TraitSelectionSubmenuName);
     }
   }
 }

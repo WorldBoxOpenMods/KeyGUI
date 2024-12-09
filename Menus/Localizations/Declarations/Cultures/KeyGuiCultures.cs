@@ -1,5 +1,8 @@
+using KeyGUI.Menus.Localizations.Declarations.Cultures.TraitSelection;
 namespace KeyGUI.Menus.Localizations.Declarations.Cultures {
   public class KeyGuiCultures : LocalesContainer {
+    public readonly KeyGuiCulturesTraitSelection TraitSelection = new KeyGuiCulturesTraitSelection();
+    public readonly LocaleDeclaration TraitSelectionSubmenuName = new LocaleDeclaration("Culture Trait Selection");
     public readonly LocaleDeclaration DeleteOneCultureButton = new LocaleDeclaration();
     public readonly LocaleDeclaration DeleteEveryCultureButton = new LocaleDeclaration();
     public readonly LocaleDeclaration ResetOneCultureButton = new LocaleDeclaration();
@@ -14,6 +17,7 @@ namespace KeyGUI.Menus.Localizations.Declarations.Cultures {
     public readonly LocaleDeclaration DecreaseKnowledgeGainOfEveryCultureButton = new LocaleDeclaration();
     public readonly LocaleDeclaration ForceExistingCultureUponSpecificCityButton = new LocaleDeclaration();
     public readonly LocaleDeclaration CreateNewCultureAtSpecificCityButton = new LocaleDeclaration();
+    public readonly LocaleDeclaration SelectCultureListHeader = new LocaleDeclaration("Select Culture:");
     internal KeyGuiCultures() { }
   }
 }

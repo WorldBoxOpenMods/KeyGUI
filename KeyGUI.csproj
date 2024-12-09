@@ -124,6 +124,7 @@
         <Compile Include="Menus\Cleansing\KeyGuiCleansing.cs" />
         <Compile Include="Menus\Crabzilla\KeyGuiCrabzilla.cs" />
         <Compile Include="Menus\Cultures\KeyGuiCultures.cs" />
+        <Compile Include="Menus\Cultures\TraitSelection\KeyGuiCulturesTraitSelection.cs" />
         <Compile Include="Menus\Debugging\KeyGuiDebug.cs" />
         <Compile Include="Menus\Debugging\KeyGuiTesting.cs" />
         <Compile Include="Menus\Destruction\KeyGuiDestruction.cs" />
@@ -145,6 +146,7 @@
         <Compile Include="Menus\Localizations\Declarations\Cleansing\KeyGuiCleansing.cs" />
         <Compile Include="Menus\Localizations\Declarations\Crabzilla\KeyGuiCrabzilla.cs" />
         <Compile Include="Menus\Localizations\Declarations\Cultures\KeyGuiCultures.cs" />
+        <Compile Include="Menus\Localizations\Declarations\Cultures\TraitSelection\KeyGuiCulturesTraitSelection.cs" />
         <Compile Include="Menus\Localizations\Declarations\Destruction\KeyGuiDestruction.cs" />
         <Compile Include="Menus\Localizations\Declarations\Disasters\KeyGuiDisasters.cs" />
         <Compile Include="Menus\Localizations\Declarations\GameSettings\KeyGuiGameSettings.cs" />
