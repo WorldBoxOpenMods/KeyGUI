@@ -23,7 +23,8 @@ namespace KeyGUI.MenuArchitecture {
     internal bool Enabled;
     internal bool IsInitialized { get; private set; }
     private bool IsMenuInfoInitialized { get; set; }
-    private byte RepeatedErrorCount { get; set; }
+    private byte RepeatedLogicErrorCount { get; set; }
+    private byte RepeatedUiErrorCount { get; set; }
     private bool ShownUpdateError { get; set; }
     [CanBeNull] private KeyGuiMenu ParentMenu { get; set; }
     internal bool OfferVisibilityToggle = true;
@@ -33,18 +34,18 @@ namespace KeyGUI.MenuArchitecture {
       if (IsInitialized) {
         return;
       }
-      if (RepeatedErrorCount > 2) {
+      if (RepeatedLogicErrorCount > 2) {
         IsInitialized = true;
         Debug.LogError($"Repeated error count exceeded for {FullName} ({PrettyWindowID}), menu will not be initialized!");
         return;
       }
       try {
         InitializeMenu();
-        RepeatedErrorCount = 0;
+        RepeatedLogicErrorCount = 0;
       } catch (Exception e) {
         Debug.LogError($"Error initializing {FullName} ({PrettyWindowID})!");
         Debug.LogException(e);
-        RepeatedErrorCount++;
+        RepeatedLogicErrorCount++;
       }
     }
 
@@ -55,7 +56,7 @@ namespace KeyGUI.MenuArchitecture {
       }
     }
     internal void Update() {
-      if (RepeatedErrorCount > 2) {
+      if (RepeatedLogicErrorCount > 2) {
         if (!ShownUpdateError) {
           Debug.LogError($"Repeated error count exceeded for {FullName} ({PrettyWindowID}), menu will not be updated!");
           ShownUpdateError = true;
@@ -64,11 +65,11 @@ namespace KeyGUI.MenuArchitecture {
       }
       try {
         UpdateMenu();
-        RepeatedErrorCount = 0;
+        RepeatedLogicErrorCount = 0;
       } catch (Exception e) {
         Debug.LogError($"Error updating {FullName} ({PrettyWindowID})!");
         Debug.LogException(e);
-        RepeatedErrorCount++;
+        RepeatedLogicErrorCount++;
       }
     }
     protected virtual void UpdateMenu() {}
@@ -89,19 +90,19 @@ namespace KeyGUI.MenuArchitecture {
       } else {
         WindowFocusManager.WindowInUse = -1;
       }
-      if (RepeatedErrorCount > 2) {
+      if (RepeatedUiErrorCount > 2) {
           GUILayout.Label($"Repeated error count exceeded for {FullName} ({PrettyWindowID}), menu contents will not be loaded unless overriden!");
           if (GUILayout.Button("Override")) {
-            RepeatedErrorCount = 0;
+            RepeatedUiErrorCount = 0;
           }
       } else {
         try {
           LoadGUI(windowID);
-          RepeatedErrorCount = 0;
+          RepeatedUiErrorCount = 0;
         } catch (Exception e) {
           Debug.LogError($"Error loading GUI for {FullName} ({PrettyWindowID})!");
           Debug.LogException(e);
-          RepeatedErrorCount++;
+          RepeatedUiErrorCount++;
         }
       }
       GUI.DragWindow();
