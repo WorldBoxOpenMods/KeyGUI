@@ -1,4 +1,4 @@
-using System;
+using System.Linq;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
 using UnityEngine;
@@ -17,7 +17,7 @@ namespace KeyGUI.Menus.Cities.ResourceEditor {
       _scrollPos = GUILayout.BeginScrollView(_scrollPos);
       foreach (ResourceAsset rs in AssetManager.resources.list) {
         GUILayout.Label(rs.id + ": " + SelectedCity.data.storage.get(rs.id));
-        SelectedCity.data.storage.set(rs.id, (int) Math.Round(GUILayout.HorizontalSlider(SelectedCity.data.storage.get(rs.id), 0f, SelectedCity.data.storage.get(rs.id) + 1)));
+        SelectedCity.data.storage.set(rs.id, int.Parse(GUILayout.TextField(SelectedCity.data.storage.get(rs.id).ToString()).Where(char.IsDigit).Aggregate("", (current, c) => current + c)));
       }
       GUILayout.EndScrollView();
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cities.ResourceEditor.CloseMenuButton))) {

@@ -151,7 +151,7 @@ using Random = UnityEngine.Random;
  * rework mod config menu to use setting classes + reflection for automatic config setup with Intellisense for accessing options (done)
  *
  * some Steam Workshop person
- * TODO: make the city resource editor text boxes instead of sliders (note: maybe just make the slider better instead)
+ * make the city resource editor text boxes instead of sliders (note: maybe just make the slider better instead) (done)
  *
  * me
  * fix the bug in _cultureForceSelectCulture (god power at KeyGUI Cultures Locales.KeyGui.Cultures.ForceExistingCultureUponSpecificCityButton) (done)
