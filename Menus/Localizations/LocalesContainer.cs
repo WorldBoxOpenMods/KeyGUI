@@ -24,7 +24,7 @@ namespace KeyGUI.Menus.Localizations {
     internal void Refresh() {
       _locales.Keys.ToList().ForEach(d => {
         if (d.BelongsToGameLocalesSystem) {
-          LocalizedTextManager.instance.localizedText[d.LocaleId] = _locales[d];
+          LocalizedTextManager.instance.localizedText[d.LocaleId] = d;
         }
       });
       _containers.ForEach(c => c.Refresh());
