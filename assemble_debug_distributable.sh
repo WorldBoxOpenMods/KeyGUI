@@ -18,9 +18,9 @@ mkdir "./KeyGUI_Debug/KeyGUI-Plugin-Dependencies"
 # Copy built files into distributable folder
 cd "$KEYGUI_BIN_PATH" || exit
 mv "./KeyGUI.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI_Debug/KeyGUI.dll"
-mv "./KeyGeneralPurposeLibrary.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI-Plugin-Dependencies/KeyGeneralPurposeLibrary.dll"
-mv "./BepInExModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI-Plugin-Dependencies/BepInExModCompatibilityLayer.dll"
-mv "./NcmsModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI-Plugin-Dependencies/NcmsModCompatibilityLayer.dll"
+mv "./KeyGeneralPurposeLibrary.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI_Debug/KeyGUI-Plugin-Dependencies/KeyGeneralPurposeLibrary.dll"
+mv "./BepInExModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI_Debug/KeyGUI-Plugin-Dependencies/BepInExModCompatibilityLayer.dll"
+mv "./NcmsModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI_Debug/KeyGUI-Plugin-Dependencies/NcmsModCompatibilityLayer.dll"
 
 # Copy build assets into distributable folder
 cd "$KEYGUI_BUILD_ASSETS_PATH" || exit
