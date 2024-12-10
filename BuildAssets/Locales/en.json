@@ -122,6 +122,7 @@
     "BiomeRandomizationDisableBiomeButton": "Disable {0} Biome"
   },
   "Cultures": {
+    "TraitSelectionSubmenuName": "Culture Trait Selection",
     "DeleteOneCultureButton": "Delete One Culture",
     "DeleteEveryCultureButton": "Delete Every Culture",
     "ResetOneCultureButton": "Reset One Culture",
@@ -135,7 +136,15 @@
     "DecreaseKnowledgeGainOfOneCultureButton": "Decrease Knowledge Gain Of One Culture",
     "DecreaseKnowledgeGainOfEveryCultureButton": "Decrease Knowledge Gain Of Every Culture",
     "ForceExistingCultureUponSpecificCityButton": "Force Existing Culture Upon Specific City",
-    "CreateNewCultureAtSpecificCityButton": "Create New Culture At Specific City"
+    "CreateNewCultureAtSpecificCityButton": "Create New Culture At Specific City",
+    "SelectCultureListHeader": "Select Culture:",
+    "TraitSelection": {
+      "NoCultureSelectedError": "No culture selected!",
+      "CloseMenuButton": "Close",
+      "SelectTraitsForCultureHeader": "Select Traits for {0}",
+      "RemoveTraitFromCultureButton": "Remove {0} from {1}",
+      "AddTraitToCultureButton": "Add {0} to {1}"
+    }
   },
   "Plots": {
     "PeacePlotTargetSelectionSubmenuName": "Stop War",
@@ -362,7 +371,8 @@
   "Localizations": {
     "DumpLocalesButton": "Dump Locales",
     "CurrentLocaleText": "Current locale: ",
-    "ChangeLocalesSectionHeader": "Change Locales"
+    "ChangeLocalesSectionHeader": "Change Locales",
+    "LoadAndStoreAllLocalesButton": "Load and store all locales"
   },
   "KeyGuiKeyGeneralPurposeLibrary": {
     "KGPLL_AllianceCreation_SelectFirstKingdom": "Select the first kingdom to create an alliance with.",
