@@ -138,14 +138,16 @@ namespace KeyGUI.Menus.Cultures {
           Debug.LogError("Something went wrong with the Culture Creation! Please report this to the mod author!");
         }
       }
-      
-      _scrollPos = GUILayout.BeginScrollView(_scrollPos);
-      GUILayout.Label(Locales.Get(Locales.KeyGui.Cultures.SelectCultureListHeader));
-      foreach (Culture culture in World.world.cultures.list.Where(culture => GUILayout.Button(culture.name))) {
-        KeyGuiCulturesTraitSelection.SelectedCulture = culture;
+
+      if (World.world.cultures.list.Count > 0) {
+        _scrollPos = GUILayout.BeginScrollView(_scrollPos);
+        GUILayout.Label(Locales.Get(Locales.KeyGui.Cultures.SelectCultureListHeader));
+        foreach (Culture culture in World.world.cultures.list.Where(culture => GUILayout.Button(culture.name))) {
+          KeyGuiCulturesTraitSelection.SelectedCulture = culture;
+        }
+        GUILayout.EndScrollView();
+        LoadSubMenuToggles();
       }
-      GUILayout.EndScrollView();
-      LoadSubMenuToggles();
     }
     
     internal override void AddSubMenus() {
