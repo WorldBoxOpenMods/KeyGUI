@@ -6,6 +6,9 @@ BEPINEX_PLUGINS_FOLDER_PATH=~/Library/Application\ Support/Steam/steamapps/commo
 
 # Init KeyGUI distributable folder structure
 cd "$BEPINEX_PLUGINS_FOLDER_PATH" || exit
+rm -rf "./KeyGUI_Debug"
+rm -rf "./KeyGUI_Debug.old"
+rm "./KeyGUI_Debug.zip"
 rm -rf "./KeyGUI.old"
 rm "./KeyGUI.zip"
 mv "./KeyGUI" "./KeyGUI.old"

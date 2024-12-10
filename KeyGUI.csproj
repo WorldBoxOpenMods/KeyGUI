@@ -207,6 +207,7 @@
     </ItemGroup>
     <ItemGroup>
       <Content Include=".editorconfig" />
+      <Content Include="assemble_debug_distributable.sh" />
       <Content Include="assemble_mod_distributable.sh" />
       <Content Include="BuildAssets\DefaultAssets\DefaultSprite.png" />
       <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\Microsoft.CodeAnalysis.CSharp.dll" />
@@ -230,8 +231,9 @@
     <Target Name="AfterBuild">
     </Target>
     -->
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-        <Exec Command="sh ./assemble_mod_distributable.sh" Condition=" '$(OS)' == 'UNIX' " />
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)' == 'UNIX' ">
+        <Exec Command="sh ./assemble_mod_distributable.sh" Condition=" '$(Configuration)' == 'Release' " />
+        <Exec Command="sh ./assemble_debug_distributable.sh" Condition=" '$(Configuration)' == 'Debug' " />
     </Target>
 
 </Project>
