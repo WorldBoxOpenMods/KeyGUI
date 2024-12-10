@@ -70,6 +70,14 @@ namespace KeyGUI.Menus.Localizations {
       if (_possibleLocaleLanguages == null) {
         return;
       }
+      if (KeyGuiConfig.DebugIsLegal) {
+        if (GUILayout.Button(Locales.Get(Locales.KeyGui.Localizations.LoadAndStoreAllLocalesButton))) {
+          foreach (string language in _possibleLocaleLanguages) {
+            LoadLocales(language);
+            StoreCurrentLocalesInFile(language);
+          }
+        }
+      }
       GUILayout.Label(Locales.Get(Locales.KeyGui.Localizations.CurrentLocaleText) + _activeLocale);
       GUILayout.Label(Locales.Get(Locales.KeyGui.Localizations.ChangeLocalesSectionHeader));
       foreach (string language in _possibleLocaleLanguages.Where(language => GUILayout.Button(language))) {
@@ -105,13 +113,13 @@ namespace KeyGUI.Menus.Localizations {
       }
     }
 
-    public void StoreCurrentLocalesInFile() {
+    public void StoreCurrentLocalesInFile(string name = "current-locales-dump") {
       JObject data = new JObject();
       DumpLocalesInto(data);
       if (!Directory.Exists(LocalesFolderPath)) {
         Directory.CreateDirectory(LocalesFolderPath);
       }
-      File.WriteAllText(Path.Combine(LocalesFolderPath, "current-locales-dump.json"), data.ToString());
+      File.WriteAllText(Path.Combine(LocalesFolderPath, $"{name}.json"), data.ToString());
     }
   }
 }
