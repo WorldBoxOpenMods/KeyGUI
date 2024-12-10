@@ -160,7 +160,7 @@ using Random = UnityEngine.Random;
  * TODO: https://canary.discord.com/channels/522561390330904585/1232422556301000764/1232424931682156546
  *
  * g.a.s.t.i.o.n
- * TODO: https://canary.discord.com/channels/522561390330904585/1232422556301000764/1233182700878434385
+ * https://canary.discord.com/channels/522561390330904585/1232422556301000764/1233182700878434385 (done)
  *
  * professorcubs
  * TODO: https://canary.discord.com/channels/522561390330904585/1232422556301000764/1234377359671558177
