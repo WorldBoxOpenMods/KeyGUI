@@ -288,7 +288,7 @@ namespace KeyGUI {
       }
       Logger.LogInfo("Finished immediate server communication!");
     }
-    
+
     private static string GetId() {
       string id = KeyGuiModConfig.Get(Internal.Id);
       if (id == "UNABLE_TO_DETERMINE") {
@@ -335,23 +335,23 @@ namespace KeyGUI {
 
       if (!_gameConfigDataSent && !_networkingThread.IsAlive && _counter++ == 0) {
         if (global::Config.gameLoaded) {
-            if (_attempts++ > 30) _gameConfigDataSent = true;
-            if (_attempts == 1) Debug.Log("Sending game version to server...");
-            string id = GetId();
-            _networkingThread = new Thread(() => {
-              try {
-                _gameConfigDataSent = id == "-1" || KeyGuiNetworking.SendGameVersionData(id);
-                if (_gameConfigDataSent) {
-                  Debug.Log("Finished sending game version to server!");
-                }
-              } catch (Exception e) {
-                Debug.LogError("Error sending game version to server, trying again soon!");
-                Debug.LogError(e);
+          if (_attempts++ > 30) _gameConfigDataSent = true;
+          if (_attempts == 1) Debug.Log("Sending game version to server...");
+          string id = GetId();
+          _networkingThread = new Thread(() => {
+            try {
+              _gameConfigDataSent = id == "-1" || KeyGuiNetworking.SendGameVersionData(id);
+              if (_gameConfigDataSent) {
+                Debug.Log("Finished sending game version to server!");
               }
-            }) {
-              IsBackground = true
-            };
-            _networkingThread.Start();
+            } catch (Exception e) {
+              Debug.LogError("Error sending game version to server, trying again soon!");
+              Debug.LogError(e);
+            }
+          }) {
+            IsBackground = true
+          };
+          _networkingThread.Start();
         }
       }
 
