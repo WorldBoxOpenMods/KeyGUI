@@ -314,7 +314,6 @@ namespace KeyGUI {
           Debug.LogError("Error loading " + autoloadOption.Section + " from KeyGUI!");
           Debug.LogError(e);
         }
-
         Debug.Log("Finished loading " + autoloadOption.Section + " from KeyGUI!");
       }
     }
