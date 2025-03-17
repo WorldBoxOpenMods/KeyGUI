@@ -96,6 +96,7 @@ namespace KeyGUI.Menus.ModConfig {
       GUILayout.Label(BeautifyConfigOptionField(option.Field));
       Set(option,Mathf.Round(GUILayout.HorizontalSlider(Get(option), option.Minimum, option.Maximum) * 100f) / 100f);
       GUILayout.Label(Get(option).ToString(CultureInfo.InvariantCulture));
+      if (GUILayout.Button("Reset")) Set(option, option.DefaultValue);
       GUILayout.EndHorizontal();
     }
 
