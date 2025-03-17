@@ -106,7 +106,7 @@ using Random = UnityEngine.Random;
  * mass trait remover (done)
  *
  * me
- * TODO: make GUIs relative to screen size maybe
+ * make GUIs relative to screen size maybe (kinda done in the form of UI scaling)
  *
  * me
  * rework certain old powers to use god powers (done)
