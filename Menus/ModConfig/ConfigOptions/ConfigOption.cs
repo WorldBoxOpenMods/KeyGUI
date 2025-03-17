@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 namespace KeyGUI.Menus.ModConfig.ConfigOptions {
   public abstract class ConfigOption<T> : ConfigOption {
     public new T DefaultValue => (T)base.DefaultValue;
+    public T Minimum = default;
+    public T Maximum = default;
     internal ConfigOption(string field, T defaultValue, string description) : base(field, defaultValue, description) { }
   }
 

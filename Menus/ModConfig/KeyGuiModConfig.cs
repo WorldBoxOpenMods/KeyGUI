@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using BepInEx;
@@ -70,7 +71,7 @@ namespace KeyGUI.Menus.ModConfig {
     }
 
     protected override void LoadGUI(int windowID) {
-      foreach (ConfigOption configOption in ConfigOptions) {
+      foreach (ConfigOption configOption in ConfigOptions.Where(configOption => KeyGuiConfig.DebugIsLegal || !(configOption is Internal))) {
         ShowOptionToggle(configOption);
       }
     }
@@ -80,11 +81,22 @@ namespace KeyGUI.Menus.ModConfig {
         case ConfigOption<bool> boolOption:
           ShowBoolOptionToggle(boolOption);
           break;
+        case ConfigOption<float> floatOption:
+          ShowFloatOptionSlider(floatOption);
+          break;
       }
     }
     
     private void ShowBoolOptionToggle(ConfigOption<bool> option) {
       if (GUILayout.Button(Get(option) ? BeautifyConfigOptionField(option.Field) + ": ON" : BeautifyConfigOptionField(option.Field) + ": OFF")) Set(option, !Get(option));
+    }
+    
+    private void ShowFloatOptionSlider(ConfigOption<float> option) {
+      GUILayout.BeginHorizontal();
+      GUILayout.Label(BeautifyConfigOptionField(option.Field));
+      Set(option,Mathf.Round(GUILayout.HorizontalSlider(Get(option), option.Minimum, option.Maximum) * 100f) / 100f);
+      GUILayout.Label(Get(option).ToString(CultureInfo.InvariantCulture));
+      GUILayout.EndHorizontal();
     }
 
     private static string BeautifyConfigOptionField(string field) {

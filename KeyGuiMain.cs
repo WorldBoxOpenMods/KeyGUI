@@ -382,7 +382,7 @@ namespace KeyGUI {
         _rootMenu.Enabled = !_rootMenu.Enabled;
       }
       if (!global::Config.gameLoaded) return;
-      GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(1, 1, 1));
+      GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(KeyGuiModConfig.Get(General.GuiScale), KeyGuiModConfig.Get(General.GuiScale), 1));
       if (KeyGuiModConfig.Get(General.ForceOpenAllMenus)) {
         _initialForcedMenuLoadPerformed = true;
         _rootMenu.ForceLoadMenu();
