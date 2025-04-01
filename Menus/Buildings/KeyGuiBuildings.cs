@@ -19,7 +19,7 @@ namespace KeyGUI.Menus.Buildings {
           PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.PlaceBuildingButtonIndex];
           if (button != null) {
             power.select_button_action(power.id);
-            power.dropID = KeyGuiBuildingsBuildingPlacementBuildingSelector.SelectedBuilding.id;
+            power.drop_id = KeyGuiBuildingsBuildingPlacementBuildingSelector.SelectedBuilding.id;
             PowerButtonSelector.instance.unselectAll();
             PowerButtonSelector.instance.setPower(button);
           } else {

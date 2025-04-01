@@ -78,7 +78,7 @@ namespace KeyGUI.Menus.Cultures {
       } else {
         if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.IncreaseKnowledgeGainOfOneCultureButton))) {
           GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CultureKnowledgeGainModificationIndex];
-          power.dropID = modifier.ToString();
+          power.drop_id = modifier.ToString();
           PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.CultureKnowledgeGainIncreaseButtonIndex];
           if (button != null) {
             power.select_button_action(power.id);
@@ -97,7 +97,7 @@ namespace KeyGUI.Menus.Cultures {
 
         if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.DecreaseKnowledgeGainOfOneCultureButton))) {
           GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CultureKnowledgeGainModificationIndex];
-          power.dropID = (-modifier).ToString();
+          power.drop_id = (-modifier).ToString();
           PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.CultureKnowledgeGainIncreaseButtonIndex];
           if (button != null) {
             power.select_button_action(power.id);

@@ -24,7 +24,7 @@ namespace KeyGUI.Menus.Localizations {
     internal void Refresh() {
       _locales.Keys.ToList().ForEach(d => {
         if (d.BelongsToGameLocalesSystem) {
-          LocalizedTextManager.instance.localizedText[d.LocaleId] = d;
+          LocalizedTextManager.instance._localized_text[d.LocaleId] = d;
         }
       });
       _containers.ForEach(c => c.Refresh());
@@ -43,7 +43,7 @@ namespace KeyGUI.Menus.Localizations {
           if (declaration != null) {
             _locales[declaration] = pair.Value.Value<string>();
             if (declaration.BelongsToGameLocalesSystem && Config.gameLoaded) {
-              LocalizedTextManager.instance.localizedText[declaration.LocaleId] = pair.Value.Value<string>();
+              LocalizedTextManager.instance._localized_text[declaration.LocaleId] = pair.Value.Value<string>();
             }
           } else {
             Debug.LogWarning($"Unknown locale declaration: {pair.Key}");

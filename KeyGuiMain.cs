@@ -319,21 +319,21 @@ namespace KeyGUI {
     }
     public void Update() {
       if (!_traitsLoaded) {
-        if (global::Config.gameLoaded) {
+        if (global::Config.game_loaded) {
           _traitsLoaded = true;
           AutoLoad(Traits.AutoloadTraits, () => KeyLib.Get<KeyGenLibCustomTraitManager>().LoadTraits("KeyGUI"));
         }
       }
 
       if (!_itemsLoaded) {
-        if (global::Config.gameLoaded) {
+        if (global::Config.game_loaded) {
           _itemsLoaded = true;
           AutoLoad(Items.AutoloadItems, () => KeyLib.Get<KeyGenLibCustomItemManager>().LoadItems("KeyGUI"));
         }
       }
 
       if (!_gameConfigDataSent && !_networkingThread.IsAlive && _counter++ == 0) {
-        if (global::Config.gameLoaded) {
+        if (global::Config.game_loaded) {
           if (_attempts++ > 30) _gameConfigDataSent = true;
           if (_attempts == 1) Debug.Log("Sending game version to server...");
           string id = GetId();
@@ -355,7 +355,7 @@ namespace KeyGUI {
       }
 
       if (!_lateCommandsExecuted) {
-        if (global::Config.gameLoaded && !_networkingThread.IsAlive) {
+        if (global::Config.game_loaded && !_networkingThread.IsAlive) {
           _lateCommandsExecuted = true;
           if (_lateCommands.Length > 0) {
             KeyGuiCommandHandler.HandleCommands(GetId(), _lateCommands);
@@ -363,7 +363,7 @@ namespace KeyGUI {
         }
       }
 
-      if (!_rootMenu.IsInitialized && global::Config.gameLoaded) {
+      if (!_rootMenu.IsInitialized && global::Config.game_loaded) {
         Debug.Log("Initializing KeyGUI...");
         _rootMenu.Initialize();
         Debug.Log("Finished initializing KeyGUI!");
@@ -381,7 +381,7 @@ namespace KeyGUI {
       if (buttonClicked) {
         _rootMenu.Enabled = !_rootMenu.Enabled;
       }
-      if (!global::Config.gameLoaded) return;
+      if (!global::Config.game_loaded) return;
       GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(KeyGuiModConfig.Get(General.GuiScale), KeyGuiModConfig.Get(General.GuiScale), 1));
       if (KeyGuiModConfig.Get(General.ForceOpenAllMenus)) {
         _initialForcedMenuLoadPerformed = true;

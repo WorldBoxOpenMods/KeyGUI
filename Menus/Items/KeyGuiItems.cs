@@ -244,7 +244,7 @@ namespace KeyGUI.Menus.Items {
 
             AssetManager.items.list.Remove(customItem);
             AssetManager.items.dict.Remove(customItem.id);
-            LocalizedTextManager.instance.localizedText.Remove("item_" + customItem.id);
+            LocalizedTextManager.instance._localized_text.Remove("item_" + customItem.id);
             _customItems.Remove(customItem);
             --i;
           }

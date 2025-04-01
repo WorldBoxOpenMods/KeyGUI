@@ -331,8 +331,8 @@ namespace KeyGUI.Menus.Traits {
 
       AssetManager.traits.dict.Remove(trait.id);
       AssetManager.traits.list.Remove(trait);
-      LocalizedTextManager.instance.localizedText.Remove("trait_" + trait.id);
-      LocalizedTextManager.instance.localizedText.Remove("trait_" + trait.id + "_info");
+      LocalizedTextManager.instance._localized_text.Remove("trait_" + trait.id);
+      LocalizedTextManager.instance._localized_text.Remove("trait_" + trait.id + "_info");
       _customTraits.Remove(trait);
     }
 
