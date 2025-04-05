@@ -103,7 +103,6 @@
         <Compile Include="Backend\KeyGuiCommandHandler.cs" />
         <Compile Include="Backend\KeyGuiNetworking.cs" />
         <Compile Include="KeyGuiConfig.cs" />
-        <Compile Include="KeyGuiInfoSelector.cs" />
         <Compile Include="KeyGuiItem.cs" />
         <Compile Include="KeyGuiMain.cs" />
         <Compile Include="MenuArchitecture\InvalidMenuInvocationContextException.cs" />
@@ -173,7 +172,6 @@
         <Compile Include="Menus\ModConfig\ConfigOptions\Traits.cs" />
         <Compile Include="Menus\ModConfig\KeyGuiModConfig.cs" />
         <Compile Include="Menus\Plots\KeyGuiPlots.cs" />
-        <Compile Include="Menus\Plots\PeacePlotTargetSelection\KeyGuiPlotsPeacePlotTargetSelection.cs" />
         <Compile Include="Menus\Saves\KeyGuiSaves.cs" />
         <Compile Include="Menus\Stats\KeyGuiStats.cs" />
         <Compile Include="Menus\Stats\StatBoundEditing\EditStat\KeyGuiStatsStatBoundEditingEditStat.cs" />

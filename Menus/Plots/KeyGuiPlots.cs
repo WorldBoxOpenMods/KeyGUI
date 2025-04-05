@@ -1,84 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using KeyGeneralPurposeLibrary;
-using KeyGeneralPurposeLibrary.Assets;
-using KeyGeneralPurposeLibrary.Utils;
 using KeyGUI.MenuArchitecture;
-using KeyGUI.Menus.Localizations;
 using KeyGUI.Menus.Localizations.Declarations;
-using KeyGUI.Menus.Plots.PeacePlotTargetSelection;
 using UnityEngine;
 
 namespace KeyGUI.Menus.Plots {
-  public class KeyGuiPlots : KeyGuiMenuManager {
-    private KeyGuiInfoSelector _warSelector;
-    private KeyGuiInfoSelector _rebellionSelector;
-    private KeyGuiInfoSelector _allianceCreationSelector;
-    private KeyGuiInfoSelector _allianceJoinSelector;
-    private KeyGuiInfoSelector _allianceBreakSelector;
-    private KeyGuiInfoSelector _totalWarSelector;
+  public class KeyGuiPlots : KeyGuiMenu {
 
     private readonly List<string> _bannedPlots = new List<string>();
-
-    protected override void InitializeMenu() {
-      base.InitializeMenu();
-      _warSelector = new KeyGuiInfoSelector(
-        new List<LocaleDeclaration> { Locales.KeyGui.Plots.WarSelectorInitiatorKingdomLabel, Locales.KeyGui.Plots.WarSelectorTargetKingdomLabel },
-        new List<object> { KeyLib.Get<KeyGenLibCustomPlotLibrary>()[KeyGenLibCustomPlotLibrary.GenericWarPlotIndex] },
-        new List<Type> { typeof(Actor), typeof(Kingdom) },
-        new List<MetaType> { MetaType.Kingdom, MetaType.Kingdom },
-        new List<List<MemberInfo>> { new List<MemberInfo> { typeof(WorldTile).GetInstance<FieldInfo>(nameof(WorldTile.zone)), typeof(TileZone).GetInstance<FieldInfo>(nameof(TileZone.city)), typeof(City).GetInstance<FieldInfo>(nameof(City.kingdom)), typeof(Kingdom).GetInstance<FieldInfo>(nameof(Kingdom.king)) }, new List<MemberInfo> { typeof(WorldTile).GetInstance<FieldInfo>(nameof(WorldTile.zone)), typeof(TileZone).GetInstance<FieldInfo>(nameof(TileZone.city)), typeof(City).GetInstance<FieldInfo>(nameof(City.kingdom)) } },
-        KeyLib.Get<KeyGenLibCustomPlotCreator>().GetType().GetMethod(nameof(KeyGenLibCustomPlotCreator.CreateWarPlot)),
-        KeyLib.Get<KeyGenLibCustomPlotCreator>()
-      );
-      _rebellionSelector = new KeyGuiInfoSelector(
-        new List<LocaleDeclaration> { Locales.KeyGui.Plots.RebellionSelectorInitiatorCityLabel },
-        new List<object> { KeyLib.Get<KeyGenLibCustomPlotLibrary>()[KeyGenLibCustomPlotLibrary.RebellionPlotIndex] },
-        new List<Type> { typeof(Actor) },
-        new List<MetaType> { MetaType.City },
-        new List<List<MemberInfo>> { new List<MemberInfo> { typeof(WorldTile).GetInstance<FieldInfo>(nameof(WorldTile.zone)), typeof(TileZone).GetInstance<FieldInfo>(nameof(TileZone.city)), typeof(City).GetInstance<FieldInfo>(nameof(City.leader)) } },
-        KeyLib.Get<KeyGenLibCustomPlotCreator>().GetType().GetMethod(nameof(KeyGenLibCustomPlotCreator.CreateRebellionPlot)),
-        KeyLib.Get<KeyGenLibCustomPlotCreator>()
-      );
-      _allianceCreationSelector = new KeyGuiInfoSelector(
-        new List<LocaleDeclaration> { Locales.KeyGui.Plots.AllianceCreationSelectorInitiatorKingdomLabel, Locales.KeyGui.Plots.AllianceCreationSelectorTargetKingdomLabel },
-        new List<object> { KeyLib.Get<KeyGenLibCustomPlotLibrary>()[KeyGenLibCustomPlotLibrary.AllianceCreationPlotIndex] },
-        new List<Type> { typeof(Actor), typeof(Kingdom) },
-        new List<MetaType> { MetaType.Kingdom, MetaType.Kingdom },
-        new List<List<MemberInfo>> { new List<MemberInfo> { typeof(WorldTile).GetInstance<FieldInfo>(nameof(WorldTile.zone)), typeof(TileZone).GetInstance<FieldInfo>(nameof(TileZone.city)), typeof(City).GetInstance<FieldInfo>(nameof(City.kingdom)), typeof(Kingdom).GetInstance<FieldInfo>(nameof(Kingdom.king)) }, new List<MemberInfo> { typeof(WorldTile).GetInstance<FieldInfo>(nameof(WorldTile.zone)), typeof(TileZone).GetInstance<FieldInfo>(nameof(TileZone.city)), typeof(City).GetInstance<FieldInfo>(nameof(City.kingdom)) } },
-        KeyLib.Get<KeyGenLibCustomPlotCreator>().GetType().GetMethod(nameof(KeyGenLibCustomPlotCreator.AllianceCreationPlot)),
-        KeyLib.Get<KeyGenLibCustomPlotCreator>()
-      );
-      _allianceJoinSelector = new KeyGuiInfoSelector(
-        new List<LocaleDeclaration> { Locales.KeyGui.Plots.AllianceJoinSelectorInitiatorKingdomLabel, Locales.KeyGui.Plots.AllianceJoinSelectorTargetAllianceLabel },
-        new List<object> { KeyLib.Get<KeyGenLibCustomPlotLibrary>()[KeyGenLibCustomPlotLibrary.AllianceJoinPlotIndex] },
-        new List<Type> { typeof(Actor), typeof(Alliance) },
-        new List<MetaType> { MetaType.Kingdom, MetaType.Alliance },
-        new List<List<MemberInfo>> { new List<MemberInfo> { typeof(WorldTile).GetInstance<FieldInfo>(nameof(WorldTile.zone)), typeof(TileZone).GetInstance<FieldInfo>(nameof(TileZone.city)), typeof(City).GetInstance<FieldInfo>(nameof(City.kingdom)), typeof(Kingdom).GetInstance<FieldInfo>(nameof(Kingdom.king)) }, new List<MemberInfo> { typeof(WorldTile).GetInstance<FieldInfo>(nameof(WorldTile.zone)), typeof(TileZone).GetInstance<FieldInfo>(nameof(TileZone.city)), typeof(City).GetInstance<FieldInfo>(nameof(City.kingdom)), typeof(Kingdom).GetInstance<MethodInfo>(nameof(Kingdom.getAlliance)) } },
-        KeyLib.Get<KeyGenLibCustomPlotCreator>().GetType().GetMethod(nameof(KeyGenLibCustomPlotCreator.JoinAlliancePlot)),
-        KeyLib.Get<KeyGenLibCustomPlotCreator>()
-      );
-      _allianceBreakSelector = new KeyGuiInfoSelector(
-        new List<LocaleDeclaration> { Locales.KeyGui.Plots.AllianceBreakSelectorInitiatorKingdomLabel, Locales.KeyGui.Plots.AllianceBreakSelectorTargetAllianceLabel },
-        new List<object> { KeyLib.Get<KeyGenLibCustomPlotLibrary>()[KeyGenLibCustomPlotLibrary.AllianceDisbandPlotIndex] },
-        new List<Type> { typeof(Actor) },
-        new List<MetaType> { MetaType.Alliance },
-        new List<List<MemberInfo>> { new List<MemberInfo> { typeof(WorldTile).GetInstance<FieldInfo>(nameof(WorldTile.zone)), typeof(TileZone).GetInstance<FieldInfo>(nameof(TileZone.city)), typeof(City).GetInstance<FieldInfo>(nameof(City.kingdom)), typeof(Kingdom).GetInstance<FieldInfo>(nameof(Kingdom.king)) } },
-        KeyLib.Get<KeyGenLibCustomPlotCreator>().GetType().GetMethod(nameof(KeyGenLibCustomPlotCreator.DisbandAlliancePlot)),
-        KeyLib.Get<KeyGenLibCustomPlotCreator>()
-      );
-      _totalWarSelector = new KeyGuiInfoSelector(
-        new List<LocaleDeclaration> { Locales.KeyGui.Plots.TotalWarSelectorInitiatorKingdomLabel },
-        new List<object> { KeyLib.Get<KeyGenLibCustomPlotLibrary>()[KeyGenLibCustomPlotLibrary.WorldWarPlotIndex] },
-        new List<Type> { typeof(Actor) },
-        new List<MetaType> { MetaType.Kingdom },
-        new List<List<MemberInfo>> { new List<MemberInfo> { typeof(WorldTile).GetInstance<FieldInfo>(nameof(WorldTile.zone)), typeof(TileZone).GetInstance<FieldInfo>(nameof(TileZone.city)), typeof(City).GetInstance<FieldInfo>(nameof(City.kingdom)), typeof(Kingdom).GetInstance<FieldInfo>(nameof(Kingdom.king)) } },
-        KeyLib.Get<KeyGenLibCustomPlotCreator>().GetType().GetMethod(nameof(KeyGenLibCustomPlotCreator.CreateTotalWarPlot)),
-        KeyLib.Get<KeyGenLibCustomPlotCreator>()
-      );
-    }
 
     protected override void UpdateMenu() {
       base.UpdateMenu();
@@ -87,38 +16,8 @@ namespace KeyGUI.Menus.Plots {
         plot.setAlive(false);
       }
     }
-    internal override void AddSubMenus() {
-      Load<KeyGuiPlotsPeacePlotTargetSelection>(Locales.KeyGui.Plots.PeacePlotTargetSelectionSubmenuName);
-    }
 
-    protected override void LoadGUI() {
-      GUILayout.Label(Locales.Get(Locales.KeyGui.Plots.CreatePlotCategoryHeader));
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Plots.CreateWarPlotButton))) {
-        _warSelector.Invoke();
-      }
-
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Plots.CreateRebellionPlotButton))) {
-        _rebellionSelector.Invoke();
-      }
-
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Plots.CreateAllianceCreationPlotButton))) {
-        _allianceCreationSelector.Invoke();
-      }
-
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Plots.CreateAllianceJoinPlotButton))) {
-        _allianceJoinSelector.Invoke();
-      }
-
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Plots.CreateAllianceBreakPlotButton))) {
-        _allianceBreakSelector.Invoke();
-      }
-      
-      LoadSubMenuToggles();
-      
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Plots.CreateTotalWarPlotButton))) {
-        _totalWarSelector.Invoke();
-      }
-
+    protected override void LoadGUI(int windowID) {
       GUILayout.Label(Locales.Get(Locales.KeyGui.Plots.CancelPlotCategoryHeader));
       foreach (Plot t in World.world.plots.list.Where(t => GUILayout.Button(t.name))) {
         Debug.Log(t.data.plot_type_id);
