@@ -125,7 +125,6 @@
         <Compile Include="Menus\Destruction\KeyGuiDestruction.cs" />
         <Compile Include="Menus\Disasters\KeyGuiDisasters.cs" />
         <Compile Include="Menus\GameSettings\KeyGuiGameSettings.cs" />
-        <Compile Include="Menus\Items\KeyGuiItems.cs" />
         <Compile Include="Menus\KeyGuiRootMenu.cs" />
         <Compile Include="Menus\Localizations\Declarations\Actors\ItemDropper\ItemCreator\KeyGuiActorsItemDropperItemCreator.cs" />
         <Compile Include="Menus\Localizations\Declarations\Actors\ItemDropper\KeyGuiActorsItemDropper.cs" />

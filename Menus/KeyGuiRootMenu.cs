@@ -56,7 +56,6 @@ namespace KeyGUI.Menus {
       Load<KeyGuiCultures>(Locales.KeyGui.CulturesSubmenuText);
       Load<KeyGuiPlots>(Locales.KeyGui.PlotsSubmenuText);
       Load<KeyGuiTraits>(Locales.KeyGui.TraitsSubmenuText);
-      Load<KeyGuiItems>(Locales.KeyGui.ItemsSubmenuText);
       Load<KeyGuiCrabzilla>(Locales.KeyGui.CrabzillaSubmenuText);
       Load<KeyGuiClans>(Locales.KeyGui.ClansSubmenuText);
       Load<KeyGuiAlliances>(Locales.KeyGui.AlliancesSubmenuText);
