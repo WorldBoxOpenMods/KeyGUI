@@ -14,12 +14,12 @@ namespace KeyGUI {
     private List<LocaleDeclaration> _userSelectionInfo;
     private List<object> _userSelections;
     private List<Type> _userSelectionTypes;
-    private List<MapMode> _userSelectionMapModes;
+    private List<MetaType> _userSelectionMetaTypes;
     private List<List<MemberInfo>> _userSelectionObtainWantedValueInstructions;
     private readonly List<LocaleDeclaration> _initialUserSelectionInfo;
     private readonly List<object> _initialUserSelections;
     private readonly List<Type> _initialUserSelectionTypes;
-    private readonly List<MapMode> _initialUserSelectionMapModes;
+    private readonly List<MetaType> _initialUserSelectionMetaTypes;
     private readonly List<List<MemberInfo>> _initialUserSelectionObtainWantedValueInstructions;
 
     private readonly object _methodInvocationInstance;
@@ -28,16 +28,16 @@ namespace KeyGUI {
     private readonly GodPower _power;
     private readonly PowerButton _button;
     
-    public KeyGuiInfoSelector(List<LocaleDeclaration> pUserSelectionInfo, List<object> pUserSelections, List<Type> pUserSelectionTypes, List<MapMode> pUserSelectionMapModes, List<List<MemberInfo>> pUserSelectionObtainWantedValueInstructions, MethodInfo pUserSelectionMethod, object pMethodInvocationInstance) {
+    public KeyGuiInfoSelector(List<LocaleDeclaration> pUserSelectionInfo, List<object> pUserSelections, List<Type> pUserSelectionTypes, List<MetaType> pUserSelectionMetaTypes, List<List<MemberInfo>> pUserSelectionObtainWantedValueInstructions, MethodInfo pUserSelectionMethod, object pMethodInvocationInstance) {
       _initialUserSelectionInfo = pUserSelectionInfo;
       _initialUserSelections = pUserSelections;
       _initialUserSelectionTypes = pUserSelectionTypes;
-      _initialUserSelectionMapModes = pUserSelectionMapModes;
+      _initialUserSelectionMetaTypes = pUserSelectionMetaTypes;
       _initialUserSelectionObtainWantedValueInstructions = pUserSelectionObtainWantedValueInstructions;
       _userSelectionInfo = _initialUserSelectionInfo.ToList();
       _userSelections = _initialUserSelections.ToList();
       _userSelectionTypes = _initialUserSelectionTypes.ToList();
-      _userSelectionMapModes = _initialUserSelectionMapModes.ToList();
+      _userSelectionMetaTypes = _initialUserSelectionMetaTypes.ToList();
       _userSelectionObtainWantedValueInstructions = _initialUserSelectionObtainWantedValueInstructions.ToList();
       
       _userSelectionMethod = pUserSelectionMethod;
@@ -45,7 +45,7 @@ namespace KeyGUI {
       _power = new GodPower {
         id = "select_info_keygui_" + _godPowerIdIndex++,
         name = "Select Info",
-        force_map_text = MapMode.None,
+        force_map_mode = MetaType.None,
         select_button_action = SelectInfoPowerButtonPress,
         click_action = ClickWithSelectInfo
       };
@@ -61,7 +61,7 @@ namespace KeyGUI {
       _userSelectionInfo = _initialUserSelectionInfo.ToList();
       _userSelections = _initialUserSelections.ToList();
       _userSelectionTypes = _initialUserSelectionTypes.ToList();
-      _userSelectionMapModes = _initialUserSelectionMapModes.ToList();
+      _userSelectionMetaTypes = _initialUserSelectionMetaTypes.ToList();
       _userSelectionObtainWantedValueInstructions = _initialUserSelectionObtainWantedValueInstructions.ToList();
     }
     
@@ -73,7 +73,7 @@ namespace KeyGUI {
 
     private void DisplayNextSelectionInfo() {
       WorldTip.showNow(_userSelectionInfo[0], false, "top");
-      _power.force_map_text = _userSelectionMapModes[0];
+      _power.force_map_mode = _userSelectionMetaTypes[0];
     }
 
     public void Invoke() {
@@ -124,7 +124,7 @@ namespace KeyGUI {
         _userSelections.Add(value);
         _userSelectionInfo.RemoveAt(0);
         _userSelectionTypes.RemoveAt(0);
-        _userSelectionMapModes.RemoveAt(0);
+        _userSelectionMetaTypes.RemoveAt(0);
         _userSelectionObtainWantedValueInstructions.RemoveAt(0);
         if (_userSelectionInfo.Count == 0) {
           _userSelectionMethod.Invoke(_methodInvocationInstance, _userSelections.ToArray());
