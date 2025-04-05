@@ -22,35 +22,76 @@ namespace KeyGUI.Menus.Cleansing {
 
     protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.GetRidOfMushSporesButton))) {
-        KeyLib.Get<KeyGenLibWorldCleansingMethodCollection>().RemoveMushSpores();
+        foreach (Actor unit in World.world.units) {
+          if (unit.hasTrait(S_Trait.mush_spores)) {
+            unit.removeTrait(S_Trait.mush_spores);
+          }
+          if (unit.asset.id == SA.mush_unit || unit.asset.id == SA.mush_animal) {
+            unit.die();
+          }
+        }
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.CureThePlagueButton))) {
-        KeyLib.Get<KeyGenLibWorldCleansingMethodCollection>().RemoveThePlague();
+        foreach (Actor unit in World.world.units.Where(unit => unit.hasTrait(S_Trait.plague))) {
+          unit.removeTrait(S_Trait.plague);
+        }
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.KillEveryTumorButton))) {
-        KeyLib.Get<KeyGenLibWorldCleansingMethodCollection>().RemoveTumors();
+        foreach (Actor unit in World.world.units) {
+          if (unit.hasTrait(S_Trait.tumor_infection)) {
+            unit.removeTrait(S_Trait.tumor_infection);
+          }
+          if (unit.asset.id == SA.tumor_monster_unit || unit.asset.id == SA.tumor_monster_animal) {
+            unit.die();
+          }
+        }
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.ExterminateZombiesButton))) {
-        KeyLib.Get<KeyGenLibWorldCleansingMethodCollection>().RemoveZombies();
+        foreach (Actor unit in World.world.units) {
+          if (unit.hasTrait(S_Trait.infected)) {
+            unit.removeTrait(S_Trait.infected);
+          }
+          if (unit.hasTrait(S_Trait.zombie)) {
+            unit.die();
+          } else if (unit.asset.id == SA.zombie || unit.asset.id == SA.zombie_animal || unit.asset.id == SA.zombie_dragon) {
+            unit.die();
+          }
+        }
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.DeleteAllRoadsButton))) {
-        KeyLib.Get<KeyGenLibWorldCleansingMethodCollection>().RemoveRoads();
+        foreach (WorldTile tile in World.world.tiles_list.Where(tile => tile.Type.road)) {
+          tile.setTopTileType(TopTileLibrary.grass_high);
+          MapAction.removeGreens(tile);
+        }
+        World.world.roads_calculator.clear();
       }
       
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.LowerAllMountainsButton))) {
-        KeyLib.Get<KeyGenLibWorldCleansingMethodCollection>().LowerMountains();
+        foreach (WorldTile tile in World.world.tiles_list.Where(tile => tile.Type.mountains)) {
+          tile.setTileType(TileLibrary.hills);
+          tile.unfreeze();
+        }
       }
       
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.LowerAllHillsButton))) {
-        KeyLib.Get<KeyGenLibWorldCleansingMethodCollection>().LowerHills();
+        foreach (WorldTile tile in World.world.tiles_list) {
+          if (tile.top_type == TopTileLibrary.snow_hills) {
+            tile.setTopTileType(TopTileLibrary.grass_high);
+          }
+          if (tile.Type == TileLibrary.hills) {
+            tile.setTileType(TileLibrary.soil_high);
+          }
+        }
       }
       
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.DestroyAllBrokenBuildingsButton))) {
-        KeyLib.Get<KeyGenLibWorldCleansingMethodCollection>().RemoveBrokenBuildings();
+        foreach (Building building in World.world.buildings.Where(building => building.data.state == BuildingState.Ruins || building.data.state == BuildingState.CivAbandoned)) {
+          building.startRemove();
+        }
       }
 
       GUILayout.Label(Locales.Get(Locales.KeyGui.Cleansing.BiomesCategoryHeader));
