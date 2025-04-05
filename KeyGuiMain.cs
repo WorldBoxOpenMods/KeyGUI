@@ -211,9 +211,6 @@ namespace KeyGUI {
       _networkingThread.Start();
 
       Debug.Log("Started loading patches...");
-      Debug.Log("Loading custom trait button creation prefix...");
-      KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchCheckTraitButtonCreation();
-      Debug.Log("Loaded custom trait button creation prefix!");
       Debug.Log("Loading custom trait partner trait patches...");
       KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchPartnerTraitAdditions();
       Debug.Log("Loaded custom trait partner trait patches!");
@@ -226,9 +223,6 @@ namespace KeyGUI {
       Debug.Log("Loading mouse camera drag prefix...");
       KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchUpdateMouseDrag();
       Debug.Log("Loaded mouse camera drag prefix!");
-      Debug.Log("Loading world generation patches...");
-      KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchMapGeneration();
-      Debug.Log("Loaded world generation patches!");
       Debug.Log("Loading boat patches...");
       KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchIsGoodForBoat();
       Debug.Log("Loaded boat patches!");
