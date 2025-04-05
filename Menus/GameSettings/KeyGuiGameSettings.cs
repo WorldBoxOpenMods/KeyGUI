@@ -92,15 +92,7 @@ namespace KeyGUI.Menus.GameSettings {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.GameSettings.ToggleMouseDragButton))) {
         KeyLib.Get<KeyGenLibHarmonyPatchCollection>().ToggleMouseDrag();
       }
-
-      GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.MapGenerationLabel));
-      _mapSeed = GUILayout.TextField(_mapSeed);
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.GameSettings.SetMapSeedButton))) {
-        KeyLib.Get<KeyGenLibWorldGenerationManipulationMethodCollection>().SetWorldSeed(int.Parse(_mapSeed));
-      }
-
-      // if (GUILayout.Button(KeyGeneralPurposeLibraryHarmonyPatchCollection.UseFixedRandomSeed ? "Disable seeded world generation" : "Enable seeded world Generation")) { }
-
+      
       GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.BoatsLabel));
       if (GUILayout.Button(KeyGenLibHarmonyPatchCollection.DisableBoatMovementOnIce ? Locales.Get(Locales.KeyGui.GameSettings.EnableBoatsBreakingIceButton) : Locales.Get(Locales.KeyGui.GameSettings.DisableBoatsBreakingIceButton))) {
         KeyGuiModConfig.Set(GameSettingsC.DisableBoatsBreakingIce, !KeyGenLibHarmonyPatchCollection.DisableBoatMovementOnIce);
