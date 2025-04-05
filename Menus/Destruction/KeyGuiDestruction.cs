@@ -10,30 +10,21 @@ namespace KeyGUI.Menus.Destruction {
   public class KeyGuiDestruction : KeyGuiMenu {
     protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Destruction.MakeEverythingGoMadButton))) {
-        for (int i = 0; i < World.world.mapStats.id_unit; ++i) {
-          Actor unit = World.world.units.get("u_" + i);
-          if (unit != null) {
-            unit.applyMadness(unit);
-          }
+        foreach (Actor unit in World.world.units) {
+          unit.addTrait(S_Trait.madness, true);
         }
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Destruction.CauseAMassBombingButton))) {
-        for (int i = 0; i < World.world.mapStats.id_unit; ++i) {
-          Actor unit = World.world.units.get("u_" + i);
-          if (unit != null) {
-            ActionLibrary.deathNuke(unit, unit.currentTile);
-            ActionLibrary.deathMark(unit, unit.currentTile);
-          }
+        foreach (Actor unit in World.world.units) {
+          ActionLibrary.deathNuke(unit, unit.current_tile);
+          ActionLibrary.deathMark(unit, unit.current_tile);
         }
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Destruction.MassInfectEverythingWithMushSporesButton))) {
-        for (int i = 0; i < World.world.mapStats.id_unit; ++i) {
-          Actor unit = World.world.units.get("u_" + i);
-          if (unit != null) {
-            unit.addTrait("mushSpores", true);
-          }
+        foreach (Actor unit in World.world.units) {
+          unit.addTrait(S_Trait.mush_spores, true);
         }
       }
 
@@ -59,21 +50,17 @@ namespace KeyGUI.Menus.Destruction {
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Destruction.CauseAWorldWarButton))) {
         foreach (Actor actor in World.world.clans.list.Select(t => t.getChief())) {
-          if (actor.getInfluence() < 101) {
-            actor.data.set(S.influence, 101);
-          }
-
           PlotAsset plotAsset = KeyLib.Get<KeyGenLibCustomPlotLibrary>()[KeyGenLibCustomPlotLibrary.WorldWarPlotIndex];
           KeyLib.Get<KeyGenLibCustomPlotCreator>().CreateTotalWarPlot(plotAsset, actor);
         }
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Destruction.ChangeEveryBiomeToTheSwampBiomeButton))) {
-        KeyLib.Get<KeyGenLibWorldTileManipulationMethodCollection>().ChangeEveryWorldTile(DropsLibrary.action_seeds_swamp);
+        KeyLib.Get<KeyGenLibWorldTileManipulationMethodCollection>().ChangeEveryWorldTile((wt, _) => DropsLibrary.action_drop_seeds(wt, S_Drop.seeds_swamp));
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Destruction.ChangeEveryBiomeToTheCorruptedBiomeButton))) {
-        KeyLib.Get<KeyGenLibWorldTileManipulationMethodCollection>().ChangeEveryWorldTile(DropsLibrary.action_seeds_corrupted);
+        KeyLib.Get<KeyGenLibWorldTileManipulationMethodCollection>().ChangeEveryWorldTile((wt, _) => DropsLibrary.action_drop_seeds(wt, S_Drop.seeds_corrupted));
       }
     }
   }
