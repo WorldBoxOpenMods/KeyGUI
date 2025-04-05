@@ -29,28 +29,6 @@ namespace KeyGUI.Menus.Zones {
           Debug.LogError("Something went wrong with the Remove Zone From City! Please report this to the mod author!");
         }
       }
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Zones.AddZoneToCultureButton))) {
-        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.AddZoneToCultureIndex];
-        PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.AddZoneToCultureButtonIndex];
-        if (button != null) {
-          power.select_button_action(power.id);
-          PowerButtonSelector.instance.unselectAll();
-          PowerButtonSelector.instance.setPower(button);
-        } else {
-          Debug.LogError("Something went wrong with the Add Zone To Culture! Please report this to the mod author!");
-        }
-      }
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Zones.RemoveZoneFromCultureButton))) {
-        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.RemoveZoneFromCultureIndex];
-        PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.RemoveZoneFromCultureButtonIndex];
-        if (button != null) {
-          power.select_button_action(power.id);
-          PowerButtonSelector.instance.unselectAll();
-          PowerButtonSelector.instance.setPower(button);
-        } else {
-          Debug.LogError("Something went wrong with the Remove Zone From Culture! Please report this to the mod author!");
-        }
-      }
     }
   }
 }

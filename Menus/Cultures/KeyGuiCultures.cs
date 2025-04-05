@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.BehaviourManipulation;
@@ -11,7 +10,6 @@ using UnityEngine;
 
 namespace KeyGUI.Menus.Cultures {
   public class KeyGuiCultures : KeyGuiMenuManager {
-    private string _knowledgeModifierString = "1";
     private Vector2 _scrollPos;
 
 
@@ -53,65 +51,9 @@ namespace KeyGUI.Menus.Cultures {
         }
       }
 
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.ResetTechOfOneCultureButton))) {
-        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CultureTechResetIndex];
-        PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.CultureTechResetButtonIndex];
-        if (button != null) {
-          power.select_button_action(power.id);
-          PowerButtonSelector.instance.unselectAll();
-          PowerButtonSelector.instance.setPower(button);
-        } else {
-          Debug.LogError("Something went wrong with the Culture Tech Reset! Please report this to the mod author!");
-        }
-      }
-
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.ResetTechOfEveryCultureButton))) {
         foreach (Culture t in World.world.cultures.list) {
           KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ResetCultureTech(t);
-        }
-      }
-
-      GUILayout.Label(Locales.Get(Locales.KeyGui.Cultures.KnowledgeGainIncreaseDecreaseAmountLabel));
-      _knowledgeModifierString = GUILayout.TextField(_knowledgeModifierString);
-      if (string.IsNullOrEmpty(_knowledgeModifierString) || !int.TryParse(_knowledgeModifierString, NumberStyles.Integer, CultureInfo.InvariantCulture, out int modifier) || modifier == 0) {
-        GUILayout.Label(Locales.Get(Locales.KeyGui.Cultures.InvalidKnowledgeGainIncreaseDecreaseAmountEnteredError));
-      } else {
-        if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.IncreaseKnowledgeGainOfOneCultureButton))) {
-          GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CultureKnowledgeGainModificationIndex];
-          power.drop_id = modifier.ToString();
-          PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.CultureKnowledgeGainIncreaseButtonIndex];
-          if (button != null) {
-            power.select_button_action(power.id);
-            PowerButtonSelector.instance.unselectAll();
-            PowerButtonSelector.instance.setPower(button);
-          } else {
-            Debug.LogError("Something went wrong with the Culture Knowledge Gain Increase! Please report this to the mod author!");
-          }
-        }
-
-        if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.IncreaseKnowledgeGainOfEveryCultureButton))) {
-          foreach (Culture t in World.world.cultures.list) {
-            KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ModifyKnowledgeGain(t, modifier);
-          }
-        }
-
-        if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.DecreaseKnowledgeGainOfOneCultureButton))) {
-          GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CultureKnowledgeGainModificationIndex];
-          power.drop_id = (-modifier).ToString();
-          PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.CultureKnowledgeGainIncreaseButtonIndex];
-          if (button != null) {
-            power.select_button_action(power.id);
-            PowerButtonSelector.instance.unselectAll();
-            PowerButtonSelector.instance.setPower(button);
-          } else {
-            Debug.LogError("Something went wrong with the Culture Knowledge Gain Decrease! Please report this to the mod author!");
-          }
-        }
-
-        if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.DecreaseKnowledgeGainOfEveryCultureButton))) {
-          foreach (Culture t in World.world.cultures.list) {
-            KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ModifyKnowledgeGain(t, -modifier);
-          }
         }
       }
 
