@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using KeyGUI.MenuArchitecture;
-using KeyGUI.Menus.Actors;
 using KeyGUI.Menus.Alliances;
 using KeyGUI.Menus.Buildings;
 using KeyGUI.Menus.Cities;
@@ -61,7 +60,6 @@ namespace KeyGUI.Menus {
       Load<KeyGuiCrabzilla>(Locales.KeyGui.CrabzillaSubmenuText);
       Load<KeyGuiClans>(Locales.KeyGui.ClansSubmenuText);
       Load<KeyGuiAlliances>(Locales.KeyGui.AlliancesSubmenuText);
-      Load<KeyGuiActors>(Locales.KeyGui.ActorsSubmenuText);
       Load<KeyGuiGameSettings>(Locales.KeyGui.GameSettingsSubmenuText);
       Load<KeyGuiZones>(Locales.KeyGui.ZonesSubmenuText);
       Load<KeyGuiCities>(Locales.KeyGui.CitiesSubmenuText);
