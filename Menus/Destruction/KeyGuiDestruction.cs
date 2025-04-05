@@ -48,13 +48,6 @@ namespace KeyGUI.Menus.Destruction {
         KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnGreg();
       }
 
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Destruction.CauseAWorldWarButton))) {
-        foreach (Actor actor in World.world.clans.list.Select(t => t.getChief())) {
-          PlotAsset plotAsset = KeyLib.Get<KeyGenLibCustomPlotLibrary>()[KeyGenLibCustomPlotLibrary.WorldWarPlotIndex];
-          KeyLib.Get<KeyGenLibCustomPlotCreator>().CreateTotalWarPlot(plotAsset, actor);
-        }
-      }
-
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Destruction.ChangeEveryBiomeToTheSwampBiomeButton))) {
         KeyLib.Get<KeyGenLibWorldTileManipulationMethodCollection>().ChangeEveryWorldTile((wt, _) => DropsLibrary.action_drop_seeds(wt, S_Drop.seeds_swamp));
       }
