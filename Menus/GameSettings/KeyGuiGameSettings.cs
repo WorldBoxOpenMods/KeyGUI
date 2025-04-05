@@ -14,7 +14,6 @@ namespace KeyGUI.Menus.GameSettings {
     private string _gameSpeed = "100";
     private bool _fpsPatchApplied;
     private bool _unitySpeedPatchApplied;
-    private string _mapSeed = "0";
     private string _worldTime = "0";
 
     protected override void InitializeMenu() {

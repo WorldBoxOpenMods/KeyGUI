@@ -186,7 +186,6 @@ namespace KeyGUI {
     private readonly KeyGuiRootMenu _rootMenu = new KeyGuiRootMenu();
 
     private bool _traitsLoaded;
-    private bool _itemsLoaded;
     private bool _gameConfigDataSent;
     private bool _lateCommandsExecuted;
     private bool _initialForcedMenuLoadPerformed;
@@ -316,13 +315,6 @@ namespace KeyGUI {
         if (global::Config.game_loaded) {
           _traitsLoaded = true;
           AutoLoad(Traits.AutoloadTraits, () => KeyLib.Get<KeyGenLibCustomTraitManager>().LoadTraits("KeyGUI"));
-        }
-      }
-
-      if (!_itemsLoaded) {
-        if (global::Config.game_loaded) {
-          _itemsLoaded = true;
-          AutoLoad(Items.AutoloadItems, () => KeyLib.Get<KeyGenLibCustomItemManager>().LoadItems("KeyGUI"));
         }
       }
 
