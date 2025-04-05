@@ -176,8 +176,6 @@
         <Compile Include="Menus\Plots\PeacePlotTargetSelection\KeyGuiPlotsPeacePlotTargetSelection.cs" />
         <Compile Include="Menus\Saves\KeyGuiSaves.cs" />
         <Compile Include="Menus\Stats\KeyGuiStats.cs" />
-        <Compile Include="Menus\Stats\RaceModifier\KeyGuiStatsRaceModifier.cs" />
-        <Compile Include="Menus\Stats\RaceModifier\StatSelection\KeyGuiStatsRaceModifierStatModifier.cs" />
         <Compile Include="Menus\Stats\StatBoundEditing\EditStat\KeyGuiStatsStatBoundEditingEditStat.cs" />
         <Compile Include="Menus\Stats\StatBoundEditing\KeyGuiStatsStatBoundEditing.cs" />
         <Compile Include="Menus\Traits\Instructions\KeyGuiTraitsInstructions.cs" />
