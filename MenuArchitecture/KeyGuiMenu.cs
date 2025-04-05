@@ -138,7 +138,7 @@ namespace KeyGUI.MenuArchitecture {
         }
         Initialized = true;
         Harmony harmony = new Harmony(KeyGuiConfig.PluginGuid);
-        MethodInfo original = AccessTools.Method(typeof(MapBox), nameof(MapBox.updateControls));
+        MethodInfo original = AccessTools.Method(typeof(PlayerControl), nameof(PlayerControl.updateControls));
         MethodInfo patch = AccessTools.Method(typeof(WindowFocusManager), nameof(updateControls_Prefix));
         harmony.Patch(original, new HarmonyMethod(patch));
 
@@ -146,7 +146,7 @@ namespace KeyGUI.MenuArchitecture {
         patch = AccessTools.Method(typeof(WindowFocusManager), nameof(isActionHappening_Postfix));
         harmony.Patch(original, null, new HarmonyMethod(patch));
         
-        original = AccessTools.Method(typeof(MapBox), nameof(MapBox.checkEmptyClick));
+        original = AccessTools.Method(typeof(PlayerControl), nameof(PlayerControl.checkEmptyClick));
         patch = AccessTools.Method(typeof(WindowFocusManager), nameof(checkEmptyClick_Prefix));
         harmony.Patch(original, new HarmonyMethod(patch));
         

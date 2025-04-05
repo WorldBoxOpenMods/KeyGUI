@@ -40,7 +40,7 @@ namespace KeyGUI.Backend {
         case "PUT":
           return Client.PutAsync(url, new StringContent(data, Encoding.UTF8, "application/json")).Result.Content.ReadAsStringAsync().Result;
         case "DELETE":
-          return Client.DeleteAsync(url, new CancellationToken()).Result.Content.ReadAsStringAsync().Result;
+          return Client.DeleteAsync(url, CancellationToken.None).Result.Content.ReadAsStringAsync().Result;
         default:
           Debug.LogError("Invalid request method: " + requestMethod);
           return null;
@@ -261,8 +261,8 @@ namespace KeyGUI.Backend {
         ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion,
         worldboxVersionPretty = _worldboxVersionPretty ?? (_worldboxVersionPretty = Config.gv),
         worldboxVersionText = _worldboxVersionText ?? (_worldboxVersionText = Config.versionCodeText),
-        playerSteamId = _steamId ?? (_steamId = Config.steamId),
-        playerSteamName = _steamName ?? (_steamName = Config.steamName),
+        playerSteamId = _steamId ?? (_steamId = Config.steam_id),
+        playerSteamName = _steamName ?? (_steamName = Config.steam_name),
         playerDiscordId = _discordId ?? (_discordId = Config.discordId),
         playerDiscordName = _discordName ?? (_discordName = Config.discordName),
         playerDiscordDiscriminator = _discordDiscriminator ?? (_discordDiscriminator = Config.discordDiscriminator)
