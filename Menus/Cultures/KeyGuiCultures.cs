@@ -51,12 +51,6 @@ namespace KeyGUI.Menus.Cultures {
         }
       }
 
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.ResetTechOfEveryCultureButton))) {
-        foreach (Culture t in World.world.cultures.list) {
-          KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ResetCultureTech(t);
-        }
-      }
-
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.ForceExistingCultureUponSpecificCityButton))) {
         GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CultureForceSelectCultureIndex];
         PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.CultureForceSelectCultureButtonIndex];
