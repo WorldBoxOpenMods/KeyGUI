@@ -73,7 +73,7 @@ namespace KeyGUI.Menus.Traits {
     private string _traitID;
     private string _traitDescription;
     private string _sprite;
-    private string _traitGroup;
+    private ActorTraitGroupAsset _traitGroup;
     private string _traitBirth = "0";
     private string _traitInherit = "0";
     private readonly Dictionary<string, string> _traitStats = new Dictionary<string, string>();
@@ -134,36 +134,9 @@ namespace KeyGUI.Menus.Traits {
       }
       GUILayout.Label(Locales.KeyGui.Traits.CreateTraitTraitGroup.ToString());
       GUILayout.Label(string.Format(Locales.KeyGui.Traits.CreateTraitCurrentTraitGroup.ToString(), _traitGroup));
-      if (GUILayout.Button(TraitGroup.acquired)) {
-        _traitGroup = TraitGroup.acquired;
-      }
 
-      if (GUILayout.Button(TraitGroup.body)) {
-        _traitGroup = TraitGroup.body;
-      }
-
-      if (GUILayout.Button(TraitGroup.fun)) {
-        _traitGroup = TraitGroup.fun;
-      }
-
-      if (GUILayout.Button(TraitGroup.mind)) {
-        _traitGroup = TraitGroup.mind;
-      }
-
-      if (KeyGuiConfig.DebugIsLegal && GUILayout.Button(TraitGroup.personality)) {
-        _traitGroup = TraitGroup.personality;
-      }
-
-      if (GUILayout.Button(TraitGroup.miscellaneous)) {
-        _traitGroup = TraitGroup.miscellaneous;
-      }
-
-      if (GUILayout.Button(TraitGroup.special)) {
-        _traitGroup = TraitGroup.special;
-      }
-
-      if (GUILayout.Button(TraitGroup.spirit)) {
-        _traitGroup = TraitGroup.spirit;
+      foreach (ActorTraitGroupAsset traitGroup in AssetManager.trait_groups.list.Where(traitGroup => GUILayout.Button(traitGroup.id))) {
+        _traitGroup = traitGroup;
       }
 
       GUILayout.Label(Locales.KeyGui.Traits.CreateTraitSprite.ToString());
@@ -206,7 +179,7 @@ namespace KeyGUI.Menus.Traits {
 
       if (GUILayout.Button(Locales.KeyGui.Traits.CreateTraitButton.ToString())) {
         if (!string.IsNullOrEmpty(_traitID)) {
-          if (!string.IsNullOrEmpty(_traitGroup)) {
+          if (_traitGroup != null) {
             bool statsAreValid = true;
             if (float.TryParse(_traitBirth, out _) == false) {
               statsAreValid = false;
@@ -241,7 +214,7 @@ namespace KeyGUI.Menus.Traits {
                 CreateTrait();
                 _traitID = "";
                 _traitDescription = "";
-                _traitGroup = "";
+                _traitGroup = null;
                 _traitInherit = "0";
                 _traitBirth = "0";
                 _traitStats.Clear();
@@ -270,10 +243,10 @@ namespace KeyGUI.Menus.Traits {
               _traitStats[stat] = trait.base_stats[ConvertToSnakeCase(stat)].ToString(CultureInfo.InvariantCulture);
             }
 
-            _traitGroup = trait.group_id;
+            _traitGroup = AssetManager.trait_groups.get(trait.group_id);
             _sprite = trait.Sprite;
-            _traitBirth = trait.birth.ToString(CultureInfo.InvariantCulture);
-            _traitInherit = trait.inherit.ToString(CultureInfo.InvariantCulture);
+            _traitBirth = trait.rate_birth.ToString(CultureInfo.InvariantCulture);
+            _traitInherit = trait.rate_inherit.ToString(CultureInfo.InvariantCulture);
             _oppositeTraits.Clear();
             _oppositeTraits.AddRange(trait.OppositeTraits);
             _partnerTraits.Clear();
@@ -312,7 +285,7 @@ namespace KeyGUI.Menus.Traits {
     private void CreateTrait() {
       Dictionary<string, float> traitStats = KeyLib.Get<KeyGenLibCustomTraitManager>().ConvertTraitStats(_traitStats);
       CustomTrait newTrait = new CustomTrait();
-      newTrait.LoadVersionOnePointTwoTrait(_traitID, "KeyGUI", _traitDescription, _sprite, _traitGroup, float.Parse(_traitBirth, CultureInfo.InvariantCulture), float.Parse(_traitInherit, CultureInfo.InvariantCulture), traitStats, _oppositeTraits, _partnerTraits);
+      newTrait.LoadVersionOnePointTwoTrait(_traitID, "KeyGUI", _traitDescription, _sprite, _traitGroup.id, int.Parse(_traitBirth, CultureInfo.InvariantCulture), int.Parse(_traitInherit, CultureInfo.InvariantCulture), traitStats, _oppositeTraits, _partnerTraits);
       _customTraits.Add(newTrait);
     }
 
