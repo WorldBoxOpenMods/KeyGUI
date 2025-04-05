@@ -82,7 +82,10 @@ namespace KeyGUI.Menus.GameSettings {
           gameSpeed = 1;
         }
 
-        Config.timeScale = gameSpeed;
+        Config.time_scale_asset = new WorldTimeScaleAsset {
+          sonic = true,
+          multiplier = gameSpeed
+        };
       }
 
       GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.CameraMovementLabel));
@@ -153,13 +156,7 @@ namespace KeyGUI.Menus.GameSettings {
     }
 
     private static void SetWorldTime(double time) {
-      World.world.mapStats.worldTime = time;
-      int currentYear = World.world.mapStats.getCurrentYear();
-      int currentMonth = World.world.mapStats.getCurrentMonth();
-      if (World.world.mapStats._last_year != currentYear)
-        World.world.mapStats._last_month = -1;
-      World.world.mapStats._last_year = currentYear;
-      World.world.mapStats._last_month = currentMonth;
+      World.world.map_stats.world_time = time;
     }
   }
 }
