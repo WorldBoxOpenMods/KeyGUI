@@ -110,10 +110,6 @@
         <Compile Include="MenuArchitecture\KeyGuiMenu.cs" />
         <Compile Include="MenuArchitecture\KeyGuiMenuManager.cs" />
         <Compile Include="MenuArchitecture\KeyGuiMessage.cs" />
-        <Compile Include="Menus\Actors\ItemDropper\ItemCreator\KeyGuiActorsItemDropperItemCreator.cs" />
-        <Compile Include="Menus\Actors\ItemDropper\KeyGuiActorsItemDropper.cs" />
-        <Compile Include="Menus\Actors\KeyGuiActors.cs" />
-        <Compile Include="Menus\Actors\TraitRemovalSelection\KeyGuiActorsTraitRemovalSelection.cs" />
         <Compile Include="Menus\Alliances\KeyGuiAlliances.cs" />
         <Compile Include="Menus\Buildings\BuildingPlacementBuildingSelector\KeyGuiBuildingsBuildingPlacementBuildingSelector.cs" />
         <Compile Include="Menus\Buildings\KeyGuiBuildings.cs" />

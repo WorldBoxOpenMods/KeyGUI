@@ -13,7 +13,7 @@ namespace KeyGUI.Menus.Cleansing {
 
     protected override void InitializeMenu() {
       base.InitializeMenu();
-      if (Config.gameLoaded && BiomeTypes.Count == 0) {
+      if (Config.game_loaded && BiomeTypes.Count == 0) {
         foreach (BiomeAsset biome in AssetManager.biome_library.list) {
           BiomeTypes.Add((biome, true));
         }
@@ -76,19 +76,8 @@ namespace KeyGUI.Menus.Cleansing {
           List<Action<WorldTile, string>> actions = new List<Action<WorldTile, string>>();
           for (int j = 0; j < BiomeTypes.Count; ++j) {
             if (BiomeTypes[j].enabled) {
-              if (BiomeTypes[j].biome.id == ST.biome_grass) actions.Add(DropsLibrary.action_seeds_grass);
-              else if (BiomeTypes[j].biome.id == ST.biome_savanna) actions.Add(DropsLibrary.action_seeds_savanna);
-              else if (BiomeTypes[j].biome.id == ST.biome_mushroom) actions.Add(DropsLibrary.action_seeds_mushroom);
-              else if (BiomeTypes[j].biome.id == ST.biome_enchanted) actions.Add(DropsLibrary.action_seeds_enchanted);
-              else if (BiomeTypes[j].biome.id == ST.biome_corrupted) actions.Add(DropsLibrary.action_seeds_corrupted);
-              else if (BiomeTypes[j].biome.id == ST.biome_swamp) actions.Add(DropsLibrary.action_seeds_swamp);
-              else if (BiomeTypes[j].biome.id == ST.biome_infernal) actions.Add(DropsLibrary.action_seeds_infernal);
-              else if (BiomeTypes[j].biome.id == ST.biome_jungle) actions.Add(DropsLibrary.action_seeds_jungle);
-              else if (BiomeTypes[j].biome.id == ST.biome_candy) actions.Add(DropsLibrary.action_seeds_candy);
-              else if (BiomeTypes[j].biome.id == ST.biome_desert) actions.Add(DropsLibrary.action_seeds_desert);
-              else if (BiomeTypes[j].biome.id == ST.biome_crystal) actions.Add(DropsLibrary.action_seeds_crystal);
-              else if (BiomeTypes[j].biome.id == ST.biome_lemon) actions.Add(DropsLibrary.action_seeds_lemon);
-              else if (BiomeTypes[j].biome.id == ST.biome_permafrost) actions.Add(DropsLibrary.action_seeds_permafrost);
+              string biomeId = BiomeTypes[j].biome.id;
+              actions.Add((wt, _) => DropsLibrary.action_drop_seeds(wt, biomeId.Replace("biome_", "seeds_")));
             }
           }
 

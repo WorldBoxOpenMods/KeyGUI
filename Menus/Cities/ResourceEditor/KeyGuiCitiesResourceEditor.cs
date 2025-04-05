@@ -16,8 +16,9 @@ namespace KeyGUI.Menus.Cities.ResourceEditor {
       }
       _scrollPos = GUILayout.BeginScrollView(_scrollPos);
       foreach (ResourceAsset rs in AssetManager.resources.list) {
-        GUILayout.Label(rs.id + ": " + SelectedCity.data.storage.get(rs.id));
-        SelectedCity.data.storage.set(rs.id, int.Parse(GUILayout.TextField(SelectedCity.data.storage.get(rs.id).ToString()).Where(char.IsDigit).Aggregate("", (current, c) => current + c)));
+        Debug.LogError("TODO: fix this after fixing the PowerBox equivalent");
+        //GUILayout.Label(rs.id + ": " + SelectedCity.data.storage.get(rs.id));
+        //SelectedCity.data.storage.set(rs.id, int.Parse(GUILayout.TextField(SelectedCity.data.storage.get(rs.id).ToString()).Where(char.IsDigit).Aggregate("", (current, c) => current + c)));
       }
       GUILayout.EndScrollView();
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cities.ResourceEditor.CloseMenuButton))) {
