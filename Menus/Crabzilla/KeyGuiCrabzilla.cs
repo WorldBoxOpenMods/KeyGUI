@@ -38,13 +38,13 @@ namespace KeyGUI.Menus.Crabzilla {
           GUILayout.Label(Locales.Get(Locales.KeyGui.Crabzilla.LiveCrabzillaChangesSectionTitle));
           if (GUILayout.Button(Locales.Get(Locales.KeyGui.Crabzilla.InspectCrabzillaButton))) {
             foreach (Actor crabzilla in World.world.units.Where(crabzilla => crabzilla.asset.id == SA.crabzilla)) {
-              Config.selectedUnit = crabzilla;
-              bool currentCanCrabzillaBeInspected = crabzilla.asset.canBeInspected;
-              crabzilla.asset.canBeInspected = true;
+              SelectedUnit.select(crabzilla);
+              bool currentCanCrabzillaBeInspected = crabzilla.asset.can_be_inspected;
+              crabzilla.asset.can_be_inspected = true;
               KeyLib.Get<KeyGenLibHarmonyPatchCollection>().StopCrabzillaFromDying();
               KeyLib.Get<KeyGenLibHarmonyPatchCollection>().StopCrabzillaSpriteIssues();
               ScrollWindow.showWindow("inspect_unit");
-              crabzilla.asset.canBeInspected = currentCanCrabzillaBeInspected;
+              crabzilla.asset.can_be_inspected = currentCanCrabzillaBeInspected;
               KeyLib.Get<KeyGenLibHarmonyPatchCollection>().LetCrabzillaDieAgain();
               KeyLib.Get<KeyGenLibHarmonyPatchCollection>().LetCrabzillaHaveSpriteIssuesAgain();
             }
