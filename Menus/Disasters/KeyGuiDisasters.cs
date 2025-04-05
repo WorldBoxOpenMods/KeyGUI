@@ -1,5 +1,5 @@
-﻿using KeyGeneralPurposeLibrary;
-using KeyGeneralPurposeLibrary.Assets;
+﻿using System.Collections.Generic;
+using System.Linq;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
 using UnityEngine;
@@ -7,87 +7,103 @@ using UnityEngine;
 namespace KeyGUI.Menus.Disasters {
   public class KeyGuiDisasters : KeyGuiMenu {
     protected override void LoadGUI(int windowID) {
+      DisasterAsset disaster = null;
+      
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.BoilTogetherHeatwaveButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnHeatwave();
+        disaster = AssetManager.disasters.get(S_Disaster.heatwave);
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.TriggerEarthquakeButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnEarthquake();
+        disaster = AssetManager.disasters.get(S_Disaster.small_earthquake);
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.CauseTornadoButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnTornado();
+        disaster = AssetManager.disasters.get(S_Disaster.tornado);
       }
 
-      if (!KeyLib.Get<KeyGenLibDisasterGenerator>().CheckForVillage()) {
+      if (!(World.world.cities.list.Count > 0)) {
         GUILayout.Label(Locales.Get(Locales.KeyGui.Disasters.ImplantModThoughtNoVillageFoundError));
       } else if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.ImplantMadThoughtButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnMadThought();
+        disaster = AssetManager.disasters.get(S_Disaster.mad_thoughts);
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.GenerateMeteoriteButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnMeteorite();
+        disaster = AssetManager.disasters.get(S_Disaster.small_meteorite);
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.BringForthEvilMageButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnEvilMage();
+        disaster = AssetManager.disasters.get(S_Disaster.wild_mage);
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.BuildSomeSnowmenButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnSnowmen();
+        disaster = AssetManager.disasters.get(S_Disaster.sudden_snowman);
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.StealDemonsFromHellButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnDemons();
+        disaster = AssetManager.disasters.get(S_Disaster.hellspawn);
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.InvadeWorldWithBanditsButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnBandits();
+        disaster = AssetManager.disasters.get(S_Disaster.ash_bandits);
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.GrabFrozenOnesFromNorthPoleButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnFrozenOnes();
+        disaster = AssetManager.disasters.get(S_Disaster.ice_ones_awoken);
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.UnleashNecromancerButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnNecromancer();
+        disaster = AssetManager.disasters.get(S_Disaster.underground_necromancer);
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.AwakenDragonButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnDragon();
+        disaster = AssetManager.disasters.get(S_Disaster.dragon_from_farlands);
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.UncoverAliensButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnAliens();
+        disaster = AssetManager.disasters.get(S_Disaster.alien_invasion);
       }
 
-      if (!KeyLib.Get<KeyGenLibDisasterGenerator>().CheckForVillage()) {
+      if (!(World.world.cities.list.Count > 0)) {
         GUILayout.Label(Locales.Get(Locales.KeyGui.Disasters.DigUpBiomassNoVillageFoundError));
       } else if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.DigUpBiomassButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnBiomass();
+        disaster = AssetManager.disasters.get(S_Disaster.biomass);
       }
 
-      if (!KeyLib.Get<KeyGenLibDisasterGenerator>().CheckForVillage()) {
+      if (!(World.world.cities.list.Count > 0)) {
         GUILayout.Label(Locales.Get(Locales.KeyGui.Disasters.GiveBirthToTumorNoVillageFoundError));
       } else if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.GiveBirthToTumorButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnTumor();
+        disaster = AssetManager.disasters.get(S_Disaster.tumor);
       }
 
-      if (!KeyLib.Get<KeyGenLibDisasterGenerator>().CheckForVillage()) {
+      if (!(World.world.cities.list.Count > 0)) {
         GUILayout.Label(Locales.Get(Locales.KeyGui.Disasters.GrowGardenSurpriseNoVillageFoundError));
-      } else if (!KeyLib.Get<KeyGenLibDisasterGenerator>().CheckForWindmill()) {
+      } else if (!World.world.cities.list.Any(c => c.buildings_dict_type.TryGetValue(S_BuildingType.type_windmill, out List<Building> _))) {
         GUILayout.Label(Locales.Get(Locales.KeyGui.Disasters.GrowGardenSurpriseNoWindmillFoundError));
       } else if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.GrowGardenSurpriseButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnGardenSurprise();
+        disaster = AssetManager.disasters.get(S_Disaster.garden_surprise);
       }
 
-      if (!KeyLib.Get<KeyGenLibDisasterGenerator>().CheckForVillage()) {
+      if (!(World.world.cities.list.Count > 0)) {
         GUILayout.Label(Locales.Get(Locales.KeyGui.Disasters.SummonGregNoVillageFoundError));
-      } else if (!KeyLib.Get<KeyGenLibDisasterGenerator>().CheckForMine()) {
+      } else if (!World.world.cities.list.Any(c => c.buildings_dict_type.TryGetValue(S_BuildingType.type_mine, out List<Building> _))) {
         GUILayout.Label(Locales.Get(Locales.KeyGui.Disasters.SummonGregNoMineFoundError));
       } else if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.SummonGregButton))) {
-        KeyLib.Get<KeyGenLibDisasterGenerator>().SpawnGreg();
+        disaster = AssetManager.disasters.get(S_Disaster.greg_abominations);
       }
+
+      if (World.world.world_laws.dict.TryGetValue(WorldLawLibrary.world_law_disasters_nature.id, out PlayerOptionData naturalDisasters)) {
+        if (naturalDisasters.boolVal) naturalDisasters = null;
+      }
+      if (World.world.world_laws.dict.TryGetValue(WorldLawLibrary.world_law_disasters_other.id, out PlayerOptionData otherDisasters)) {
+        if (otherDisasters.boolVal) otherDisasters = null;
+      }
+      if (naturalDisasters != null) naturalDisasters.boolVal = true;
+      if (otherDisasters != null) otherDisasters.boolVal = true;
+
+      disaster?.action(disaster);
+
+      if (naturalDisasters != null) naturalDisasters.boolVal = false;
+      if (otherDisasters != null) otherDisasters.boolVal = false;
     }
   }
 }
