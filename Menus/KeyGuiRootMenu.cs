@@ -13,7 +13,6 @@ using KeyGUI.Menus.Debugging;
 using KeyGUI.Menus.Destruction;
 using KeyGUI.Menus.Disasters;
 using KeyGUI.Menus.GameSettings;
-using KeyGUI.Menus.Items;
 using KeyGUI.Menus.Localizations;
 using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
