@@ -255,8 +255,8 @@ namespace KeyGUI {
       }
       string id = GetId();
       ((string, string)[] allOtherMods, JArray allNcmsMods) = KeyGuiModManager.FindMods();
-      Logger.LogInfo("Found " + allNcmsMods.Count + " NCMS mods and " + allOtherMods.Length + " other mods!");
-      Logger.LogInfo("NCMS mods: " + string.Join(", ", allNcmsMods.Select(m => m["name"].ToString())));
+      Logger.LogInfo("Found " + allNcmsMods.Count + " NCMS/NML mods and " + allOtherMods.Length + " other mods!");
+      Logger.LogInfo("NCMS/NML mods: " + string.Join(", ", allNcmsMods.Select(m => m["name"].ToString())));
       Logger.LogInfo("Other mods: " + string.Join(", ", allOtherMods.Select(m => m.Item1)));
       JArray problematicMods;
       JArray criticalMods;
