@@ -1,5 +1,4 @@
-﻿using KeyGeneralPurposeLibrary;
-using KeyGeneralPurposeLibrary.BehaviourManipulation;
+﻿using System.Linq;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
 using UnityEngine;
@@ -27,11 +26,15 @@ namespace KeyGUI.Menus.Destruction {
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Destruction.ChangeEveryBiomeToTheSwampBiomeButton))) {
-        KeyLib.Get<KeyGenLibWorldTileManipulationMethodCollection>().ChangeEveryWorldTile((wt, _) => DropsLibrary.action_drop_seeds(wt, S_Drop.seeds_swamp));
+        foreach (WorldTile tile in World.world.tiles_list.Where(tile => tile != null)) {
+          DropsLibrary.action_drop_seeds(tile, S_Drop.seeds_swamp);
+        }
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Destruction.ChangeEveryBiomeToTheCorruptedBiomeButton))) {
-        KeyLib.Get<KeyGenLibWorldTileManipulationMethodCollection>().ChangeEveryWorldTile((wt, _) => DropsLibrary.action_drop_seeds(wt, S_Drop.seeds_corrupted));
+        foreach (WorldTile tile in World.world.tiles_list.Where(tile => tile != null)) {
+          DropsLibrary.action_drop_seeds(tile, S_Drop.seeds_corrupted);
+        }
       }
     }
   }

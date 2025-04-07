@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using KeyGeneralPurposeLibrary;
-using KeyGeneralPurposeLibrary.BehaviourManipulation;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
 using UnityEngine;
@@ -98,14 +96,18 @@ namespace KeyGUI.Menus.Cleansing {
 
       GUILayout.Label(Locales.Get(Locales.KeyGui.Cleansing.BiomeDeletionListHeader));
       if (GUILayout.Button(string.Format(Locales.Get(Locales.KeyGui.Cleansing.GetRidOfBiomeButton), "Grass"))) {
-        KeyLib.Get<KeyGenLibWorldTileManipulationMethodCollection>().ChangeSpecificWorldTiles(MapAction.removeGreens, tile => tile.cur_tile_type.biome_asset.id == ST.biome_grass);
+        foreach (WorldTile tile in World.world.tiles_list.Where(tile => tile != null && tile.cur_tile_type.biome_asset.id == ST.biome_grass)) {
+          MapAction.removeGreens(tile);
+        }
       }
 
       for (int i = 0; i < BiomeTypes.Count; ++i) {
         if (BiomeTypes[i].enabled) {
           BiomeAsset biome = BiomeTypes[i].biome;
           if (GUILayout.Button(string.Format(Locales.Get(Locales.KeyGui.Cleansing.GetRidOfBiomeButton), $"{char.ToUpper(biome.id[0])}{biome.id.Substring(1)}"))) {
-            KeyLib.Get<KeyGenLibWorldTileManipulationMethodCollection>().ChangeSpecificWorldTiles(MapAction.removeGreens, tile => tile.cur_tile_type.biome_asset == biome);
+            foreach (WorldTile tile in World.world.tiles_list.Where(tile => tile != null && tile.cur_tile_type.biome_asset == biome)) {
+              MapAction.removeGreens(tile);
+            }
           }
         }
       }
@@ -123,7 +125,9 @@ namespace KeyGUI.Menus.Cleansing {
           }
 
           BiomeAsset[] enabledBiomes = BiomeTypes.Where(((tuple, _) => tuple.enabled)).Select(((tuple, _) => tuple.biome)).ToArray();
-          KeyLib.Get<KeyGenLibWorldTileManipulationMethodCollection>().ChangeSpecificWorldTiles(actions[UnityEngine.Random.Range(0, actions.Count - 1)], tile => tile.cur_tile_type.biome_asset == enabledBiomes[UnityEngine.Random.Range(0, enabledBiomes.Length - 1)]);
+          foreach (WorldTile tile1 in World.world.tiles_list.Where(tile => tile != null && tile.cur_tile_type.biome_asset == enabledBiomes[UnityEngine.Random.Range(0, enabledBiomes.Length - 1)])) {
+            actions[UnityEngine.Random.Range(0, actions.Count - 1)](tile1, null);
+          }
         }
       }
 
