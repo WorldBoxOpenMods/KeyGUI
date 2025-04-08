@@ -1,5 +1,6 @@
 using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.PowersLib;
+using KeyGeneralPurposeLibrary.PowersLib.Powers;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Buildings.BuildingPlacementBuildingSelector;
 using KeyGUI.Menus.Localizations.Declarations;
@@ -15,8 +16,7 @@ namespace KeyGUI.Menus.Buildings {
       LoadSubMenuToggles();
       if (KeyGuiBuildingsBuildingPlacementBuildingSelector.SelectedBuilding != null) {
         if (GUILayout.Button(Locales.Get(Locales.KeyGui.Buildings.BuildingPlacementPlaceSelectedBuildingButton))) {
-          GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.PlaceBuildingIndex];
-          PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.PlaceBuildingButtonIndex];
+          (GodPower power, PowerButton button) = KeyLib.Get<KeyGenLibGodPowerLibrary>().GetPower<PlaceBuilding>();
           if (button != null) {
             power.select_button_action(power.id);
             power.drop_id = KeyGuiBuildingsBuildingPlacementBuildingSelector.SelectedBuilding.id;

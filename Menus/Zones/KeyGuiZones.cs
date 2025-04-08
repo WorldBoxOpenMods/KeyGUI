@@ -1,5 +1,6 @@
 using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.PowersLib;
+using KeyGeneralPurposeLibrary.PowersLib.Powers;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
 using UnityEngine;
@@ -8,8 +9,7 @@ namespace KeyGUI.Menus.Zones {
   public class KeyGuiZones : KeyGuiMenu {
     protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Zones.AddZoneToCityButton))) {
-        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.AddZoneToCityIndex];
-        PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.AddZoneToCityButtonIndex];
+        (GodPower power, PowerButton button) = KeyLib.Get<KeyGenLibGodPowerLibrary>().GetPower<AddZoneToCity>();
         if (button != null) {
           power.select_button_action(power.id);
           PowerButtonSelector.instance.unselectAll();
@@ -19,8 +19,7 @@ namespace KeyGUI.Menus.Zones {
         }
       }
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Zones.RemoveZoneFromCityButton))) {
-        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.RemoveZoneFromCityIndex];
-        PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.RemoveZoneFromCityButtonIndex];
+        (GodPower power, PowerButton button) = KeyLib.Get<KeyGenLibGodPowerLibrary>().GetPower<RemoveZoneFromCity>();
         if (button != null) {
           power.select_button_action(power.id);
           PowerButtonSelector.instance.unselectAll();

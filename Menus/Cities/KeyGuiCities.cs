@@ -1,6 +1,7 @@
 using System.Linq;
 using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.PowersLib;
+using KeyGeneralPurposeLibrary.PowersLib.Powers;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Cities.ResourceEditor;
 using KeyGUI.Menus.Localizations.Declarations;
@@ -10,8 +11,7 @@ namespace KeyGUI.Menus.Cities {
   public class KeyGuiCities : KeyGuiMenuManager {
     protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cities.ForceCityAsCapitalCityButton))) {
-        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.ForceCityAsCapitalCityIndex];
-        PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.ForceCityAsCapitalCityButtonIndex];
+        (GodPower power, PowerButton button) = KeyLib.Get<KeyGenLibGodPowerLibrary>().GetPower<ForceCityAsCapitalCity>();
         if (button != null) {
           power.select_button_action(power.id);
           PowerButtonSelector.instance.unselectAll();
@@ -21,8 +21,7 @@ namespace KeyGUI.Menus.Cities {
         }
       }
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cities.ForceCityIntoOtherKingdomButton))) {
-        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.ForceCityIntoOtherKingdomIndex];
-        PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.ForceCityIntoOtherKingdomButtonIndex];
+        (GodPower power, PowerButton button) = KeyLib.Get<KeyGenLibGodPowerLibrary>().GetPower<ForceCityIntoOtherKingdom>();
         if (button != null) {
           power.select_button_action(power.id);
           PowerButtonSelector.instance.unselectAll();

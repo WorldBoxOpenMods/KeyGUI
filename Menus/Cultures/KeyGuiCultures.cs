@@ -3,6 +3,7 @@ using System.Linq;
 using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.BehaviourManipulation;
 using KeyGeneralPurposeLibrary.PowersLib;
+using KeyGeneralPurposeLibrary.PowersLib.Powers;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Cultures.TraitSelection;
 using KeyGUI.Menus.Localizations.Declarations;
@@ -15,8 +16,7 @@ namespace KeyGUI.Menus.Cultures {
 
     protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.DeleteOneCultureButton))) {
-        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CultureDeletionIndex];
-        PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.CultureDeletionButtonIndex];
+        (GodPower power, PowerButton button) = KeyLib.Get<KeyGenLibGodPowerLibrary>().GetPower<CultureDeletion>();
         if (button != null) {
           power.select_button_action(power.id);
           PowerButtonSelector.instance.unselectAll();
@@ -33,8 +33,7 @@ namespace KeyGUI.Menus.Cultures {
         }
       }
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.ResetOneCultureButton))) {
-        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CultureResetIndex];
-        PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.CultureResetButtonIndex];
+        (GodPower power, PowerButton button) = KeyLib.Get<KeyGenLibGodPowerLibrary>().GetPower<CultureReset>();
         if (button != null) {
           power.select_button_action(power.id);
           PowerButtonSelector.instance.unselectAll();
@@ -52,8 +51,7 @@ namespace KeyGUI.Menus.Cultures {
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.ForceExistingCultureUponSpecificCityButton))) {
-        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CultureForceSelectCultureIndex];
-        PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.CultureForceSelectCultureButtonIndex];
+        (GodPower power, PowerButton button) = KeyLib.Get<KeyGenLibGodPowerLibrary>().GetPower<CultureForceSelectCulture>();
         if (button != null) {
           power.select_button_action(power.id);
           PowerButtonSelector.instance.unselectAll();
@@ -64,8 +62,7 @@ namespace KeyGUI.Menus.Cultures {
       }
 
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.CreateNewCultureAtSpecificCityButton))) {
-        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CreateNewCultureIndex];
-        PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.CreateNewCultureButtonIndex];
+        (GodPower power, PowerButton button) = KeyLib.Get<KeyGenLibGodPowerLibrary>().GetPower<CreateNewCulture>();
         if (button != null) {
           power.select_button_action(power.id);
           PowerButtonSelector.instance.unselectAll();
