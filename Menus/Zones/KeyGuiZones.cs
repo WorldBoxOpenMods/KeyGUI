@@ -1,5 +1,5 @@
 using KeyGeneralPurposeLibrary;
-using KeyGeneralPurposeLibrary.Powers;
+using KeyGeneralPurposeLibrary.PowersLib;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
 using UnityEngine;

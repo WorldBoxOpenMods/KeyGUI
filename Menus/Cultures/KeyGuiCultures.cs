@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.BehaviourManipulation;
-using KeyGeneralPurposeLibrary.Powers;
+using KeyGeneralPurposeLibrary.PowersLib;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Cultures.TraitSelection;
 using KeyGUI.Menus.Localizations.Declarations;

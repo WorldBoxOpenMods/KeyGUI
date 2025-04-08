@@ -1,6 +1,6 @@
 using System.Linq;
 using KeyGeneralPurposeLibrary;
-using KeyGeneralPurposeLibrary.Powers;
+using KeyGeneralPurposeLibrary.PowersLib;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Cities.ResourceEditor;
 using KeyGUI.Menus.Localizations.Declarations;
