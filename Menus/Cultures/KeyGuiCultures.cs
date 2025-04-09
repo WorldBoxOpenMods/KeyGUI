@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using KeyGeneralPurposeLibrary;
-using KeyGeneralPurposeLibrary.BehaviourManipulation;
 using KeyGeneralPurposeLibrary.PowersLib;
 using KeyGeneralPurposeLibrary.PowersLib.Powers;
 using KeyGUI.MenuArchitecture;
@@ -29,7 +28,7 @@ namespace KeyGUI.Menus.Cultures {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.DeleteEveryCultureButton))) {
         List<Culture> cultures = World.world.cultures.list.ToList();
         foreach (Culture t in cultures) {
-          KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().DeleteCulture(t);
+          KeyLib.Get<KeyGenLibGodPowerLibrary>().Get<CultureDeletion>().DeleteCulture(t);
         }
       }
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.ResetOneCultureButton))) {
@@ -46,7 +45,7 @@ namespace KeyGUI.Menus.Cultures {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.ResetEveryCultureButton))) {
         List<Culture> cultures = World.world.cultures.list.ToList();
         foreach (Culture t in cultures) {
-          KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ResetCulture(t);
+          KeyLib.Get<KeyGenLibGodPowerLibrary>().Get<CultureReset>().ResetCulture(t);
         }
       }
 
