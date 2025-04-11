@@ -4,6 +4,7 @@ using KeyGUI.Menus.Localizations.Declarations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+
 namespace KeyGUI.Menus.Cultures.TraitSelection {
   public class KeyGuiCulturesTraitSelection : KeyGuiMenu {
     protected override float MenuMaxHeight => 1500;
@@ -29,7 +30,7 @@ namespace KeyGUI.Menus.Cultures.TraitSelection {
         if (clanTraitsArray != null) {
           if (clanTraitsArray.Select(token => token.Value<string>()).Contains(trait.id)) {
             if (GUILayout.Button(string.Format(Locales.Get(Locales.KeyGui.Cultures.TraitSelection.RemoveTraitFromCultureButton), trait.id, SelectedCulture.name))) {
-              clanTraitsArray = new JArray(clanTraitsArray.Where(token => token.Value<string>() != trait.id).Select(token => (object) token).ToArray());
+              clanTraitsArray = new JArray(clanTraitsArray.Where(token => token.Value<string>() != trait.id).Select(token => (object)token).ToArray());
               if (clanTraitsArray.Count == 0) {
                 SelectedCulture.data.custom_data_string.Remove("CultureTraits");
               } else {

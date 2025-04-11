@@ -3,10 +3,11 @@ using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
 using UnityEngine;
+
 namespace KeyGUI.Menus.Traits.Instructions {
   public class KeyGuiTraitsInstructions : KeyGuiMenu {
     protected override float MenuMaxWidth => 300;
-    
+
     public KeyGuiTraitsInstructions() {
       OfferVisibilityToggle = false;
       Enabled = KeyGuiModConfig.Get(TraitsC.ShowTraitsTutorial);

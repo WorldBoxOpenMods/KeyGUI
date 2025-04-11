@@ -19,7 +19,7 @@ namespace KeyGUI.Menus.Localizations.Declarations.ModConfig {
 
     public static void SetUpConfig() {
       typeof(ConfigOption<>).Assembly.GetTypes().Where(t => typeof(ConfigOption).IsAssignableFrom(t)).Select(t => t.IsGenericType ? t.MakeGenericType(typeof(object)) : t).SelectMany(t => t.GetProperties()).Select(p => p.GetMethod).Where(m => typeof(ConfigOption).IsAssignableFrom(m.ReturnType)).Select(m => m.Invoke(null, null)).Where(o => o is ConfigOption).Cast<ConfigOption>().Do(configOption => configOption.Bind(_configFile));
-      
+
       // Migration from old KeyGUI config
       if (File.Exists(Path.GetFullPath(Paths.ConfigPath + "/KeyGUI.cfg"))) {
         ConfigFile oldConfig = new ConfigFile(Path.GetFullPath(Paths.ConfigPath + "/KeyGUI.cfg"), true);
@@ -39,7 +39,7 @@ namespace KeyGUI.Menus.Localizations.Declarations.ModConfig {
       if (typeof(T) == typeof(string)) return (T) Convert.ChangeType(_configFile[section, field].GetSerializedValue(), typeof(T));
       return JsonConvert.DeserializeObject<T>(_configFile[section, field].GetSerializedValue().Replace("\\", ""));
     }
-    
+
     internal static void Set(string section, string field, object value) {
       _configFile[section, field].SetSerializedValue(JsonConvert.SerializeObject(value));
       _configFile.Save();
@@ -48,7 +48,7 @@ namespace KeyGUI.Menus.Localizations.Declarations.ModConfig {
     internal static T Get<T>(ConfigOption<T> configOption) {
       return Get<T>(configOption.Section, configOption.Field);
     }
-    
+
     internal static void Set<T>(ConfigOption<T> configOption, T value) {
       Set(configOption.Section, configOption.Field, value);
     }
@@ -58,7 +58,7 @@ namespace KeyGUI.Menus.Localizations.Declarations.ModConfig {
         ShowBoolOptionToggle(cD.Section, cD.Key);
       }
     }
-    
+
     private void ShowBoolOptionToggle(string section, string field) {
       if (GUILayout.Button(Get<bool>(section, field) ? BeautifyConfigOptionField(field) + ": ON" : BeautifyConfigOptionField(field) + ": OFF")) Set(section, field, !Get<bool>(section, field));
     }

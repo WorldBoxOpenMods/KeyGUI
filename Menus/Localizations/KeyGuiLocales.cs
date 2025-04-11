@@ -86,7 +86,7 @@ namespace KeyGUI.Menus.Localizations {
         LoadLocales(language);
       }
     }
-    
+
     public string GetLocale(LocaleDeclaration declaration) {
       return Locales.Get(declaration);
     }
@@ -99,11 +99,11 @@ namespace KeyGUI.Menus.Localizations {
         Locales.KeyGui.LoadLocales(data, "KeyGui");
       }
     }
-    
+
     public static string[] GetPossibleLocaleLanguages() {
       return !Directory.Exists(LocalesFolderPath) ? Array.Empty<string>() : Directory.GetFiles(LocalesFolderPath, "*.json").Select(Path.GetFileNameWithoutExtension).ToArray();
     }
-    
+
     public void DumpLocalesInto(JObject data) {
       JContainer locales = Locales.KeyGui.SerializeAllLocales();
       if (locales is JObject localesObject) {

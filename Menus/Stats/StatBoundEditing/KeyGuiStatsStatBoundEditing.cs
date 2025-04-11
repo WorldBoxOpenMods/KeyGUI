@@ -15,9 +15,9 @@ namespace KeyGUI.Menus.Stats.StatBoundEditing {
         KeyGuiStatsStatBoundEditingEditStat.SelectedStat = s;
       }
       GUILayout.EndScrollView();
-      
+
       LoadSubMenuToggles();
-      
+
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Stats.StatBoundEditing.CloseMenuButton))) {
         Enabled = false;
       }

@@ -21,8 +21,8 @@ namespace KeyGUI.MenuArchitecture {
 
       if (_firstWindowDisplay) {
         _firstWindowDisplay = false;
-        MenuRect.x = (Screen.width / 2f) - (MenuRect.width / 2f);
-        MenuRect.y = (Screen.height / 2f) - (MenuRect.height / 2f);
+        MenuRect.x = Screen.width / 2f - MenuRect.width / 2f;
+        MenuRect.y = Screen.height / 2f - MenuRect.height / 2f;
       }
     }
   }

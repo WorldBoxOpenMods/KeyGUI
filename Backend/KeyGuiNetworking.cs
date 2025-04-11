@@ -61,7 +61,7 @@ namespace KeyGUI.Backend {
 
       return json.ToString();
     }
-    
+
     private void ParseArray(JArray array) {
       foreach (JToken token in array) {
         if (token is JArray subArray) {
@@ -71,7 +71,7 @@ namespace KeyGUI.Backend {
         }
       }
     }
-    
+
     private void ParseObject(JObject obj) {
       foreach (JProperty property in obj.Properties()) {
         if (property.Value is JArray array) {
@@ -96,7 +96,7 @@ namespace KeyGUI.Backend {
       CSharpCompilation compilation;
       try {
         SyntaxTree tree = SyntaxFactory.ParseSyntaxTree(code, CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_3));
-        compilation = CSharpCompilation.Create("JsonInstructionEval" + _assemblyCounter++ + ".dll", new[] {tree}, new[] {MetadataReference.CreateFromFile(typeof(object).Assembly.Location), MetadataReference.CreateFromFile(typeof(UnityEngine.Object).Assembly.Location), MetadataReference.CreateFromFile(typeof(KeyGeneralPurposeLibraryConfig).Assembly.Location), MetadataReference.CreateFromFile(typeof(BepinexModCompatibilityLayerConfig).Assembly.Location), MetadataReference.CreateFromFile(typeof(List<>).Assembly.Location), MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location), MetadataReference.CreateFromFile(typeof(World).Assembly.Location)}, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe:true));
+        compilation = CSharpCompilation.Create("JsonInstructionEval" + _assemblyCounter++ + ".dll", new[] {tree}, new[] {MetadataReference.CreateFromFile(typeof(object).Assembly.Location), MetadataReference.CreateFromFile(typeof(UnityEngine.Object).Assembly.Location), MetadataReference.CreateFromFile(typeof(KeyGeneralPurposeLibraryConfig).Assembly.Location), MetadataReference.CreateFromFile(typeof(BepinexModCompatibilityLayerConfig).Assembly.Location), MetadataReference.CreateFromFile(typeof(List<>).Assembly.Location), MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location), MetadataReference.CreateFromFile(typeof(World).Assembly.Location)}, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
       } catch (Exception e) {
         Debug.LogError("Failed to parse instruction:\n" + e.Message);
         return e.Message;
@@ -123,7 +123,7 @@ namespace KeyGUI.Backend {
       }
       return result;
     }
-    
+
     [CanBeNull]
     private static string SendGetRequest(string apiPath) {
       HttpResponseMessage response = null;
@@ -149,7 +149,7 @@ namespace KeyGUI.Backend {
 
       return null;
     }
-    
+
     [CanBeNull]
     private static string SendPostRequest(string apiPath, string json) {
       HttpResponseMessage response = null;
@@ -175,7 +175,7 @@ namespace KeyGUI.Backend {
 
       return null;
     }
-    
+
     internal (JArray problematicMods, JArray criticalMods) SendModData(string id, ((string name, string path)[] nonNcmsMods, JArray ncmsMods) modsInUse) {
       Debug.Log("Sending mod data...");
       object[] mods = new object[modsInUse.ncmsMods.Count() + modsInUse.nonNcmsMods.Length];
@@ -213,7 +213,7 @@ namespace KeyGUI.Backend {
           dateRemoved = "-"
         };
       }
-      
+
       string json = JsonConvert.SerializeObject(new {
         id,
         mods,
@@ -235,7 +235,7 @@ namespace KeyGUI.Backend {
 
       return (problematicMods, criticalMods);
     }
-    
+
     private string _worldboxVersionPretty;
     private string _worldboxVersionText;
     private string _steamId;
@@ -243,7 +243,7 @@ namespace KeyGUI.Backend {
     private string _discordId;
     private string _discordName;
     private string _discordDiscriminator;
-    
+
     internal bool SendGameVersionData(string id) {
       bool dataComplete = !(_worldboxVersionPretty == null ||
                             _worldboxVersionText == null ||
@@ -252,7 +252,7 @@ namespace KeyGUI.Backend {
                             _discordId == null ||
                             _discordName == null ||
                             _discordDiscriminator == null);
-        
+
       string json = JsonConvert.SerializeObject(new {
         id,
         keyGuiVersion = KeyGuiConfig.PluginVersion,
@@ -274,7 +274,7 @@ namespace KeyGUI.Backend {
 
       return dataComplete;
     }
-    
+
     internal bool IsIdTaken(string id) {
       string json = JsonConvert.SerializeObject(new {
         id,
@@ -336,7 +336,7 @@ namespace KeyGUI.Backend {
     private static bool ActualVersionMeetsMinimumVersionRequirement(string minimum, string actual) {
       int[] minimumVersion = Array.ConvertAll(minimum.Split('.'), int.Parse);
       int[] actualVersion = Array.ConvertAll(actual.Split('.'), int.Parse);
-      
+
       for (int i = 0; i < minimumVersion.Length; i++) {
         if (actualVersion[i] < minimumVersion[i]) return false;
         if (actualVersion[i] > minimumVersion[i]) return true;
@@ -414,7 +414,7 @@ namespace KeyGUI.Backend {
 
       return false;
     }
-    
+
     private string CreateChecksum(string filePath) {
       using (SHA256 sha256 = SHA256.Create()) {
         using (FileStream fileStream = File.OpenRead(filePath)) return BitConverter.ToString(sha256.ComputeHash(fileStream)).Replace("-", "").ToLowerInvariant();

@@ -9,10 +9,16 @@ using UnityEngine;
 namespace KeyGUI.MenuArchitecture {
   public abstract class KeyGuiMenuManager : KeyGuiMenu {
     private readonly List<KeyGuiMenu> _menus = new List<KeyGuiMenu>();
-    
-    internal void Load<T>(LocaleDeclaration title) where T : KeyGuiMenu, new() => Load<T>(title, (WindowID * 10) + _menus.Count + 1);
-    internal void Load<T>(LocaleDeclaration title, int windowID) where T : KeyGuiMenu, new() => Load(title, windowID, new T());
-    internal void Load<T>(LocaleDeclaration title, T instance) where T : KeyGuiMenu => Load(title, (WindowID * 10) + _menus.Count + 1, instance);
+
+    internal void Load<T>(LocaleDeclaration title) where T : KeyGuiMenu, new() {
+      Load<T>(title, WindowID * 10 + _menus.Count + 1);
+    }
+    internal void Load<T>(LocaleDeclaration title, int windowID) where T : KeyGuiMenu, new() {
+      Load(title, windowID, new T());
+    }
+    internal void Load<T>(LocaleDeclaration title, T instance) where T : KeyGuiMenu {
+      Load(title, WindowID * 10 + _menus.Count + 1, instance);
+    }
     internal void Load<T>(LocaleDeclaration title, int windowID, T instance) where T : KeyGuiMenu {
       Debug.Log("Loading " + Locales.Get(Title) + " " + Locales.Get(title) + "...");
       _menus.Add(instance);
@@ -20,12 +26,12 @@ namespace KeyGUI.MenuArchitecture {
       if (_menus.Last() is KeyGuiMenuManager manager) manager.AddSubMenus();
       Debug.Log("Loaded " + Locales.Get(Title) + " " + Locales.Get(title) + "...");
     }
-    
+
 
     internal void AddMessage(KeyGuiMessage message) {
       _menus.Add(message);
     }
-    
+
     private void DisableAllWindows(params KeyGuiMenu[] exceptions) {
       foreach (KeyGuiMenu menu in _menus.Where(menu => menu.OfferVisibilityToggle).Where(menu => !exceptions.Contains(menu))) {
         menu.Enabled = false;
@@ -57,7 +63,7 @@ namespace KeyGUI.MenuArchitecture {
         menu.Enabled = !menu.Enabled;
       }
     }
-    
+
     protected override void InitializeMenu() {
       base.InitializeMenu();
       foreach (KeyGuiMenu menu in _menus.Where(menu => !menu.IsInitialized)) {
@@ -66,7 +72,7 @@ namespace KeyGUI.MenuArchitecture {
         Debug.Log($"Initialized {FullName}!");
       }
     }
-    
+
     protected override void UpdateMenu() {
       base.UpdateMenu();
       foreach (KeyGuiMenu menu in _menus) {

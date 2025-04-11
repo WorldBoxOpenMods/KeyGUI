@@ -62,6 +62,6 @@ namespace KeyGUI.Menus.Localizations.Declarations.KeyGeneralPurposeLibrary {
     public readonly LocaleDeclaration KGPLL_PlaceBuilding_Success = new LocaleDeclaration(true, "Building placed!");
     public readonly LocaleDeclaration KGPLL_PlaceBuilding_NoBuildingSelected = new LocaleDeclaration(true, "No building to place selected, try again!");
   }
-}/*
+} /*
     public readonly LocaleDeclaration KGPLL_ = new LocaleDeclaration(true, );
 */

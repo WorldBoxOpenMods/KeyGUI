@@ -4,7 +4,7 @@
     public const string PluginName = "KeyGUI";
     public const string PluginVersion = "1.1.0";
 
-    internal static bool DebugIsLegal = 
+    internal static bool DebugIsLegal =
 #if DEBUG
       true;
 #else

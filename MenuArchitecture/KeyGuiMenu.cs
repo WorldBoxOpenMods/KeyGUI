@@ -15,7 +15,7 @@ namespace KeyGUI.MenuArchitecture {
     protected virtual float MenuMinWidth => 300;
     protected virtual float MenuMinHeight => 50;
     protected virtual float MenuMaxHeight => 500;
-    
+
     internal LocaleDeclaration Title { get; private set; }
     protected string FullName => (ParentMenu?.FullName == null ? "" : ParentMenu.FullName + " ") + Title;
     private string PrettyWindowID => WindowID.ToString().Length >= 6 ? WindowID.ToString().Substring(0, 6) + (WindowID.ToString().Length > 6 ? "_" : "") + WindowID.ToString().Substring(6).Join(delimiter: "_") : WindowID + "0";
@@ -29,7 +29,7 @@ namespace KeyGUI.MenuArchitecture {
     [CanBeNull] private KeyGuiMenu ParentMenu { get; set; }
     internal bool OfferVisibilityToggle = true;
     protected int WindowID { get; private set; }
-    
+
     internal void Initialize() {
       if (IsInitialized) {
         return;
@@ -72,7 +72,7 @@ namespace KeyGUI.MenuArchitecture {
         RepeatedLogicErrorCount++;
       }
     }
-    protected virtual void UpdateMenu() {}
+    protected virtual void UpdateMenu() { }
     public void LoadMenu() {
       if (!IsMenuInfoInitialized) {
         throw new InvalidMenuInvocationContextException("MenuInfo not initialized!");
@@ -85,16 +85,16 @@ namespace KeyGUI.MenuArchitecture {
     private void LoadGUI_Internal(int windowID) {
       Event current = Event.current;
       bool inUse = current.type == EventType.MouseDown || current.type == EventType.MouseUp || current.type == EventType.MouseDrag || current.type == EventType.MouseMove;
-      if(inUse) {
+      if (inUse) {
         WindowFocusManager.WindowInUse = windowID;
       } else {
         WindowFocusManager.WindowInUse = -1;
       }
       if (RepeatedUiErrorCount > 2) {
-          GUILayout.Label($"Repeated error count exceeded for {FullName} ({PrettyWindowID}), menu contents will not be loaded unless overriden!");
-          if (GUILayout.Button("Override")) {
-            RepeatedUiErrorCount = 0;
-          }
+        GUILayout.Label($"Repeated error count exceeded for {FullName} ({PrettyWindowID}), menu contents will not be loaded unless overriden!");
+        if (GUILayout.Button("Override")) {
+          RepeatedUiErrorCount = 0;
+        }
       } else {
         try {
           LoadGUI(windowID);
@@ -145,11 +145,11 @@ namespace KeyGUI.MenuArchitecture {
         original = AccessTools.Method(typeof(MapBox), nameof(MapBox.isActionHappening));
         patch = AccessTools.Method(typeof(WindowFocusManager), nameof(isActionHappening_Postfix));
         harmony.Patch(original, null, new HarmonyMethod(patch));
-        
+
         original = AccessTools.Method(typeof(PlayerControl), nameof(PlayerControl.checkEmptyClick));
         patch = AccessTools.Method(typeof(WindowFocusManager), nameof(checkEmptyClick_Prefix));
         harmony.Patch(original, new HarmonyMethod(patch));
-        
+
         original = AccessTools.Method(typeof(MoveCamera), nameof(MoveCamera.updateMouseCameraDrag));
         patch = AccessTools.Method(typeof(WindowFocusManager), nameof(updateMouseCameraDrag_Prefix));
         harmony.Patch(original, new HarmonyMethod(patch));
@@ -157,32 +157,28 @@ namespace KeyGUI.MenuArchitecture {
 
       // click-through fix
       // code mostly copied from SimpleGUI, thanks for that cody <3
-      public static void isActionHappening_Postfix(ref bool __result)
-      {
+      public static void isActionHappening_Postfix(ref bool __result) {
         if (WindowInUse != -1) {
           __result = true; // "menu in use" is the action happening
         }
       }
 
-      public static bool updateControls_Prefix()
-      {
+      public static bool updateControls_Prefix() {
         if (WindowInUse != -1) {
           return false; // cancel all control input if a KeyGuiMenu is in use
         }
         return true;
       }
 
-      public static bool checkEmptyClick_Prefix()
-      {
+      public static bool checkEmptyClick_Prefix() {
         if (WindowInUse != -1) {
           return false; // cancel empty click usage when a KeyGuiMenu is in use
         }
         return true;
       }
-      
-      public static bool updateMouseCameraDrag_Prefix()
-      {
-        if(WindowInUse != -1) {
+
+      public static bool updateMouseCameraDrag_Prefix() {
+        if (WindowInUse != -1) {
           return false; // cancel camera drag when a KeyGuiMenu is in use
         }
 
@@ -199,7 +195,7 @@ namespace KeyGUI.MenuArchitecture {
         RegisteredWindows.Add(windowId, menu);
         return windowId;
       }
-      
+
       public static KeyGuiMenu GetMenuFromWindowId(int windowId) {
         return RegisteredWindows.TryGetValue(windowId, out KeyGuiMenu window) ? window : null;
       }

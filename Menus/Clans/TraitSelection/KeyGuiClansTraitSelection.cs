@@ -30,7 +30,7 @@ namespace KeyGUI.Menus.Clans.TraitSelection {
         if (clanTraitsArray != null) {
           if (clanTraitsArray.Select(token => token.Value<string>()).Contains(trait.id)) {
             if (GUILayout.Button(string.Format(Locales.Get(Locales.KeyGui.Clans.TraitSelection.RemoveTraitFromClanButton), trait.id, SelectedClan.name))) {
-              clanTraitsArray = new JArray(clanTraitsArray.Where(token => token.Value<string>() != trait.id).Select(token => (object) token).ToArray());
+              clanTraitsArray = new JArray(clanTraitsArray.Where(token => token.Value<string>() != trait.id).Select(token => (object)token).ToArray());
               if (clanTraitsArray.Count == 0) {
                 SelectedClan.data.custom_data_string.Remove("ClanTraits");
               } else {

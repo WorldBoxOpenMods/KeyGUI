@@ -8,7 +8,7 @@ namespace KeyGUI.Menus.Disasters {
   public class KeyGuiDisasters : KeyGuiMenu {
     protected override void LoadGUI(int windowID) {
       DisasterAsset disaster = null;
-      
+
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Disasters.BoilTogetherHeatwaveButton))) {
         disaster = AssetManager.disasters.get(S_Disaster.heatwave);
       }

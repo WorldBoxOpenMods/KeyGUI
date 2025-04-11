@@ -13,7 +13,7 @@ namespace KeyGUI {
     public List<string> Modifiers { get; private set; }
     public EquipmentType? Slot { get; private set; }
     public bool NullItem => (Name == null || Asset == null || Material == null) && Slot != null;
-    
+
     public void SetName(string name, object caller) {
       if (caller == _owner) Name = name;
     }

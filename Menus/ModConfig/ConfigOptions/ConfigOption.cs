@@ -16,19 +16,19 @@ namespace KeyGUI.Menus.ModConfig.ConfigOptions {
     public string Field { get; }
     protected object DefaultValue { get; }
     private string Description { get; }
-    
+
     protected ConfigOption(string field, object defaultValue, string description) {
       Section = GetType().Name.Split('`')[0];
       Field = field;
       DefaultValue = defaultValue;
       Description = description;
     }
-    
-        
+
+
     public void Bind(ConfigFile configFile) {
-      typeof(ConfigOption).GetMethod(nameof(Bind), BindingFlags.NonPublic | BindingFlags.Instance)?.MakeGenericMethod(DefaultValue.GetType()).Invoke(this, new[] { configFile, DefaultValue });
+      typeof(ConfigOption).GetMethod(nameof(Bind), BindingFlags.NonPublic | BindingFlags.Instance)?.MakeGenericMethod(DefaultValue.GetType()).Invoke(this, new[] {configFile, DefaultValue});
     }
-    
+
     internal void Bind<T>(ConfigFile configFile, T value) {
       try {
         configFile.Bind(Section, Field, value, Description);

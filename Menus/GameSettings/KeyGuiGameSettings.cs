@@ -8,7 +8,7 @@ using KeyGUI.Menus.ModConfig;
 using UnityEngine;
 
 namespace KeyGUI.Menus.GameSettings {
-  public class KeyGuiGameSettings : KeyGuiMenu { 
+  public class KeyGuiGameSettings : KeyGuiMenu {
     private string _fps = "60";
     private string _unitySpeed = "100";
     private string _gameSpeed = "100";
@@ -31,7 +31,7 @@ namespace KeyGUI.Menus.GameSettings {
       if (GUILayout.Button(AutoSaveManager.lowMemory ? Locales.Get(Locales.KeyGui.GameSettings.EnableAutosavesButton) : Locales.Get(Locales.KeyGui.GameSettings.DisableAutosavesButton))) {
         KeyGuiModConfig.Set(GameSettingsC.DisableAutosaves, AutoSaveManager.lowMemory = !AutoSaveManager.lowMemory);
       }
-      
+
       GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.UnityFpsLabel));
       _fps = GUILayout.TextField(_fps);
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.GameSettings.SetUnityFpsButton))) {
@@ -91,7 +91,7 @@ namespace KeyGUI.Menus.GameSettings {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.GameSettings.ToggleMouseDragButton))) {
         KeyLib.Get<KeyGenLibHarmonyPatchCollection>().ToggleMouseDrag();
       }
-      
+
       GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.BoatsLabel));
       if (GUILayout.Button(KeyGenLibHarmonyPatchCollection.DisableBoatMovementOnIce ? Locales.Get(Locales.KeyGui.GameSettings.EnableBoatsBreakingIceButton) : Locales.Get(Locales.KeyGui.GameSettings.DisableBoatsBreakingIceButton))) {
         KeyGuiModConfig.Set(GameSettingsC.DisableBoatsBreakingIce, !KeyGenLibHarmonyPatchCollection.DisableBoatMovementOnIce);
@@ -101,7 +101,7 @@ namespace KeyGUI.Menus.GameSettings {
           if (KeyGenLibHarmonyPatchCollection.DisableBoatMovementOnIce) KeyLib.Get<KeyGenLibHarmonyPatchCollection>().ToggleBoatIceMovement();
         }
       }
-      
+
       GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.WorldPropertiesLabel));
       _worldTime = GUILayout.TextField(_worldTime);
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.GameSettings.SetWorldTimeButton))) {

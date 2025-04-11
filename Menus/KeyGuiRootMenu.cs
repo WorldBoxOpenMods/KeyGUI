@@ -42,7 +42,7 @@ namespace KeyGUI.Menus {
     internal void SetProblematicMods((string, string)[] problematicMods) {
       _problematicMods = problematicMods;
     }
-      
+
     internal void SetCriticalMods((string, string)[] criticalMods) {
       _criticalMods = criticalMods;
     }
@@ -192,7 +192,7 @@ namespace KeyGUI.Menus {
             }
           );
         }
-        
+
         LoadSubMenuToggles();
       }
     }

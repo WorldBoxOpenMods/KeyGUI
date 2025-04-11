@@ -310,7 +310,7 @@ namespace KeyGUI.Menus.Localizations.Declarations {
       {KeyGui.DismissProblematicModWarningButton, "Dismiss"},
       {KeyGui.CriticalModWarning, "WARNING: The mod {0} has automatically been disabled by KeyGUI because {1}!"},
       {KeyGui.DismissCriticalModWarningButton, "Dismiss"},
-      {KeyGui.DisableCriticalModWarningButton, "Don't disable it the next time"},
+      {KeyGui.DisableCriticalModWarningButton, "Don't disable it the next time"}
     };
     internal static void SyncDefaultLocale(LocaleDeclaration declaration) {
       if (DefaultLocales.TryGetValue(declaration, out string locale)) {

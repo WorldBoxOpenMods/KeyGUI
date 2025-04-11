@@ -1,4 +1,5 @@
 using KeyGUI.Menus.Localizations.Declarations.Cultures.TraitSelection;
+
 namespace KeyGUI.Menus.Localizations.Declarations.Cultures {
   public class KeyGuiCultures : LocalesContainer {
     public readonly KeyGuiCulturesTraitSelection TraitSelection = new KeyGuiCulturesTraitSelection();

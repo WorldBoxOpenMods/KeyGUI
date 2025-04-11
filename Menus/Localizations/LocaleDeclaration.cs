@@ -1,4 +1,5 @@
 using KeyGUI.Menus.Localizations.Declarations;
+
 namespace KeyGUI.Menus.Localizations {
   public class LocaleDeclaration {
     public LocalesContainer Parent { get; private set; }
@@ -6,7 +7,7 @@ namespace KeyGUI.Menus.Localizations {
     internal string DefaultValue { get; set; }
     internal bool BelongsToGameLocalesSystem { get; }
     public string Value => Parent.GetLocale(this);
-    internal LocaleDeclaration(bool belongsToGameLocalesSystem, string defaultValue = null) : this(defaultValue, belongsToGameLocalesSystem) {}
+    internal LocaleDeclaration(bool belongsToGameLocalesSystem, string defaultValue = null) : this(defaultValue, belongsToGameLocalesSystem) { }
     internal LocaleDeclaration(string defaultValue = null, bool belongsToGameLocalesSystem = false) {
       DefaultValue = defaultValue;
       BelongsToGameLocalesSystem = belongsToGameLocalesSystem;

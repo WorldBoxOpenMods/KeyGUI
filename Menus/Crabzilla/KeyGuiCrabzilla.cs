@@ -24,7 +24,7 @@ namespace KeyGUI.Menus.Crabzilla {
       base.InitializeMenu();
       _crabzillaAsset = AssetManager.actor_library.get(SA.crabzilla);
     }
-    
+
     protected override void LoadGUI(int windowID) {
       if (_crabzillaAsset != null) {
         if (_crabzillaIsSpawned != KeyGenLibHarmonyPatchCollection.CrabzillaIsSpawned) {
@@ -77,7 +77,7 @@ namespace KeyGUI.Menus.Crabzilla {
         _boolFlagSubmenuScrollPosition = GUILayout.BeginScrollView(_boolFlagSubmenuScrollPosition);
         foreach (FieldInfo crabzillaField in _crabzillaAsset.GetType().GetFields()) {
           if (crabzillaField.FieldType == typeof(bool)) {
-            bool currentCrabzillaBoolFlag = (bool) crabzillaField.GetValue(_crabzillaAsset);
+            bool currentCrabzillaBoolFlag = (bool)crabzillaField.GetValue(_crabzillaAsset);
             if (GUILayout.Button(string.Format(Locales.Get(Locales.KeyGui.Crabzilla.SetTheFlagToBoolButton), crabzillaField.Name, !currentCrabzillaBoolFlag))) {
               crabzillaField.SetValue(_crabzillaAsset, !currentCrabzillaBoolFlag);
             }

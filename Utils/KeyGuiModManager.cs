@@ -109,7 +109,7 @@ namespace KeyGUI.Utils {
       if (Directory.Exists(nativeModsFolderPath)) {
         nonNcmsMods.AddRange(Directory.GetFiles(nativeModsFolderPath).Where(mod => Path.GetFileName(mod).Contains(".dll")).Select(mod => Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next)).Select((modName, i) => (modName, Directory.GetFiles(nativeModsFolderPath)[i])));
       }
-      
+
       string workshopFolderPath = Paths.PluginPath + "/../../../../workshop/content/1206560";
       if (Directory.Exists(workshopFolderPath)) {
         foreach (string mod in Directory.GetDirectories(workshopFolderPath).Where(Directory.Exists)) {

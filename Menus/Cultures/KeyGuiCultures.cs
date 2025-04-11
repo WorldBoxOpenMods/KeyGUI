@@ -81,7 +81,7 @@ namespace KeyGUI.Menus.Cultures {
         LoadSubMenuToggles();
       }
     }
-    
+
     internal override void AddSubMenus() {
       Load<KeyGuiCulturesTraitSelection>(Locales.KeyGui.Cultures.TraitSelectionSubmenuName);
     }

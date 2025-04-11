@@ -67,14 +67,14 @@ namespace KeyGUI.Menus.Cleansing {
         }
         World.world.roads_calculator.clear();
       }
-      
+
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.LowerAllMountainsButton))) {
         foreach (WorldTile tile in World.world.tiles_list.Where(tile => tile.Type.mountains)) {
           tile.setTileType(TileLibrary.hills);
           tile.unfreeze();
         }
       }
-      
+
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.LowerAllHillsButton))) {
         foreach (WorldTile tile in World.world.tiles_list) {
           if (tile.top_type == TopTileLibrary.snow_hills) {
@@ -85,7 +85,7 @@ namespace KeyGUI.Menus.Cleansing {
           }
         }
       }
-      
+
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.DestroyAllBrokenBuildingsButton))) {
         foreach (Building building in World.world.buildings.Where(building => building.data.state == BuildingState.Ruins || building.data.state == BuildingState.CivAbandoned)) {
           building.startRemove();
@@ -124,7 +124,7 @@ namespace KeyGUI.Menus.Cleansing {
             }
           }
 
-          BiomeAsset[] enabledBiomes = BiomeTypes.Where(((tuple, _) => tuple.enabled)).Select(((tuple, _) => tuple.biome)).ToArray();
+          BiomeAsset[] enabledBiomes = BiomeTypes.Where((tuple, _) => tuple.enabled).Select((tuple, _) => tuple.biome).ToArray();
           foreach (WorldTile tile1 in World.world.tiles_list.Where(tile => tile != null && tile.cur_tile_type.biome_asset == enabledBiomes[UnityEngine.Random.Range(0, enabledBiomes.Length - 1)])) {
             actions[UnityEngine.Random.Range(0, actions.Count - 1)](tile1, null);
           }

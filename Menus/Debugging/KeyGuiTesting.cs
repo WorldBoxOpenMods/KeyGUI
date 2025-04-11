@@ -4,12 +4,12 @@ using UnityEngine;
 namespace KeyGUI.Menus.Debugging {
   internal class KeyGuiTesting : KeyGuiMenu {
     // ReSharper disable Unity.PerformanceAnalysis
-    protected override void LoadGUI(int windowID) { 
-        /*
-      if (GUILayout.Button("Reduce Orc Health")) {
-        KeyLib.Get<KeyGenLibRaceManipulationMethodCollection>().ModifySpecificRaceStat(S.health, SK.orc, -5);
-      }
-      */
+    protected override void LoadGUI(int windowID) {
+      /*
+    if (GUILayout.Button("Reduce Orc Health")) {
+      KeyLib.Get<KeyGenLibRaceManipulationMethodCollection>().ModifySpecificRaceStat(S.health, SK.orc, -5);
+    }
+    */
 
       if (GUILayout.Button("Ok so how big are the trait sprites?")) {
         Debug.Log(AssetManager.traits.list[4].getSprite().texture.width);
