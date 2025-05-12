@@ -91,19 +91,21 @@ namespace KeyGUI.Menus.Disasters {
         disaster = AssetManager.disasters.get(S_Disaster.greg_abominations);
       }
 
-      if (World.world.world_laws.dict.TryGetValue(WorldLawLibrary.world_law_disasters_nature.id, out PlayerOptionData naturalDisasters)) {
-        if (naturalDisasters.boolVal) naturalDisasters = null;
-      }
-      if (World.world.world_laws.dict.TryGetValue(WorldLawLibrary.world_law_disasters_other.id, out PlayerOptionData otherDisasters)) {
-        if (otherDisasters.boolVal) otherDisasters = null;
-      }
-      if (naturalDisasters != null) naturalDisasters.boolVal = true;
-      if (otherDisasters != null) otherDisasters.boolVal = true;
+      if (disaster != null) {
+        if (World.world.world_laws.dict.TryGetValue(WorldLawLibrary.world_law_disasters_nature.id, out PlayerOptionData naturalDisasters)) {
+          if (naturalDisasters.boolVal) naturalDisasters = null;
+        }
+        if (World.world.world_laws.dict.TryGetValue(WorldLawLibrary.world_law_disasters_other.id, out PlayerOptionData otherDisasters)) {
+          if (otherDisasters.boolVal) otherDisasters = null;
+        }
+        if (naturalDisasters != null) naturalDisasters.boolVal = true;
+        if (otherDisasters != null) otherDisasters.boolVal = true;
 
-      disaster?.action(disaster);
+        disaster.action(disaster);
 
-      if (naturalDisasters != null) naturalDisasters.boolVal = false;
-      if (otherDisasters != null) otherDisasters.boolVal = false;
+        if (naturalDisasters != null) naturalDisasters.boolVal = false;
+        if (otherDisasters != null) otherDisasters.boolVal = false;
+      }
     }
   }
 }
