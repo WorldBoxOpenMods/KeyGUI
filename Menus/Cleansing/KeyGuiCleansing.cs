@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
+using strings;
 using UnityEngine;
 
 namespace KeyGUI.Menus.Cleansing {

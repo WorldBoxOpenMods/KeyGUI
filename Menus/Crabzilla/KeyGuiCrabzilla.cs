@@ -4,6 +4,7 @@ using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.BehaviourManipulation;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
+using strings;
 using UnityEngine;
 
 namespace KeyGUI.Menus.Crabzilla {

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using KeyGUI.MenuArchitecture;
+using strings;
 using UnityEngine;
 
 namespace KeyGUI.Menus.Debugging {

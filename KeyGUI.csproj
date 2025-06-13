@@ -54,6 +54,9 @@
         <Reference Include="Newtonsoft.Json">
             <HintPath>..\Libraries\Newtonsoft.Json.dll</HintPath>
         </Reference>
+        <Reference Include="strings">
+          <HintPath>..\Libraries\strings.dll</HintPath>
+        </Reference>
         <Reference Include="System"/>
         <Reference Include="System.Collections.Immutable">
             <HintPath>..\Libraries\System.Collections.Immutable.dll</HintPath>
