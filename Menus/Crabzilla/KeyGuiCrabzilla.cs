@@ -42,11 +42,9 @@ namespace KeyGUI.Menus.Crabzilla {
               bool currentCanCrabzillaBeInspected = crabzilla.asset.can_be_inspected;
               crabzilla.asset.can_be_inspected = true;
               KeyLib.Get<KeyGenLibHarmonyPatchCollection>().StopCrabzillaFromDying();
-              KeyLib.Get<KeyGenLibHarmonyPatchCollection>().StopCrabzillaSpriteIssues();
               ScrollWindow.showWindow("inspect_unit");
               crabzilla.asset.can_be_inspected = currentCanCrabzillaBeInspected;
               KeyLib.Get<KeyGenLibHarmonyPatchCollection>().LetCrabzillaDieAgain();
-              KeyLib.Get<KeyGenLibHarmonyPatchCollection>().LetCrabzillaHaveSpriteIssuesAgain();
             }
           }
 
