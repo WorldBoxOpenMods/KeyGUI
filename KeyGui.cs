@@ -251,14 +251,24 @@ namespace KeyGUI {
       Debug.Log("Registering patch: " + typeof(T).Name);
       try {
         KeyGuiPatch patch = new T();
-        Harmony.Patch(
-          patch.TargetMethod,
-          prefix: new HarmonyMethod(patch.Prefix),
-          postfix: new HarmonyMethod(patch.Postfix),
-          transpiler: new HarmonyMethod(patch.Transpiler),
-          finalizer: new HarmonyMethod(patch.Finalizer),
-          ilmanipulator: new HarmonyMethod(patch.IlManipulator)
-        );
+        foreach (var (method, (prefix, postfix, transpiler, finalizer, ilManipulator)) in patch.Patches.ToList().Select(kvp => (kvp.Key, kvp.Value))) {
+          if (method == null) {
+            Debug.LogError("Patch method is null for " + typeof(T).Name + "!");
+            continue;
+          }
+          if (prefix == null && postfix == null && transpiler == null && finalizer == null && ilManipulator == null) {
+            Debug.LogError("No Harmony methods defined for " + typeof(T).Name + "!");
+            continue;
+          }
+          Harmony.Patch(
+            method,
+            prefix,
+            postfix,
+            transpiler,
+            finalizer,
+            ilManipulator
+          );
+        }
         _patches.Add(patch);
         Debug.Log("Successfully registered patch: " + typeof(T).Name);
       } catch (Exception e) {
