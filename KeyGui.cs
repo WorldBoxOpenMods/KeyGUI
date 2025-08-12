@@ -7,7 +7,6 @@ using BepinexModCompatibilityLayer;
 using HarmonyLib;
 using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.Assets;
-using KeyGeneralPurposeLibrary.BehaviourManipulation;
 using KeyGUI.Backend;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus;
