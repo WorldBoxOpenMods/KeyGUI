@@ -211,12 +211,6 @@ namespace KeyGUI {
       };
       _networkingThread.Start();
 
-      Debug.Log("Started loading patches...");
-      Debug.Log("Loading custom trait partner trait patches...");
-      KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchPartnerTraitAdditions();
-      Debug.Log("Loaded custom trait partner trait patches!");
-      Debug.Log("Finished loading patches!");
-
       Debug.Log("Loading KeyGUI...");
       KeyGuiLocales.EarlyInitialize();
       _rootMenu.InitMenuInfo(Locales.KeyGui.ModName, 10000, null);

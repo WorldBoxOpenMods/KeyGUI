@@ -32,7 +32,7 @@ namespace KeyGUI.Menus.Traits {
     }
     
     internal override void RegisterPatches() {
-      KeyGui.Instance.RegisterPatch<CustomTraitsSpriteOverwrite>();
+      KeyGui.Instance.RegisterPatch<CustomTraitsManager>();
     }
 
     private void SetDefaultStatValues() {
