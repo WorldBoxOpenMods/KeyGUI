@@ -13,6 +13,7 @@ using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
 using KeyGUI.Menus.ModConfig.ConfigOptions;
 using KeyGUI.Menus.Traits.Instructions;
+using KeyGUI.Patches;
 using UnityEngine;
 
 namespace KeyGUI.Menus.Traits {
@@ -28,6 +29,10 @@ namespace KeyGUI.Menus.Traits {
       }
       SetDefaultStatValues();
       _autoTraitLoading = KeyGuiModConfig.Get(TraitsC.AutoloadTraits);
+    }
+    
+    internal override void RegisterPatches() {
+      KeyGui.Instance.RegisterPatch<CustomTraitsSpriteOverwrite>();
     }
 
     private void SetDefaultStatValues() {
