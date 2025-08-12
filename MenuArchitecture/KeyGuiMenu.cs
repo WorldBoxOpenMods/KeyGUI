@@ -29,6 +29,8 @@ namespace KeyGUI.MenuArchitecture {
     [CanBeNull] private KeyGuiMenu ParentMenu { get; set; }
     internal bool OfferVisibilityToggle = true;
     protected int WindowID { get; private set; }
+    
+    internal virtual void RegisterPatches() {}
 
     internal void Initialize() {
       if (IsInitialized) {
@@ -137,7 +139,7 @@ namespace KeyGUI.MenuArchitecture {
           return;
         }
         Initialized = true;
-        Harmony harmony = new Harmony(KeyGuiConfig.PluginGuid);
+        Harmony harmony = KeyGuiMain.Harmony;
         MethodInfo original = AccessTools.Method(typeof(PlayerControl), nameof(PlayerControl.updateControls));
         MethodInfo patch = AccessTools.Method(typeof(WindowFocusManager), nameof(updateControls_Prefix));
         harmony.Patch(original, new HarmonyMethod(patch));
@@ -155,8 +157,8 @@ namespace KeyGUI.MenuArchitecture {
         harmony.Patch(original, new HarmonyMethod(patch));
       }
 
-      // click-through fix
-      // code mostly copied from SimpleGUI, thanks for that cody <3
+      // click-through fix code mostly copied from SimpleGUI, thanks for that cody <3
+      #region click-through fix
       public static void isActionHappening_Postfix(ref bool __result) {
         if (WindowInUse != -1) {
           __result = true; // "menu in use" is the action happening
@@ -184,6 +186,7 @@ namespace KeyGUI.MenuArchitecture {
 
         return true;
       }
+      #endregion
     }
 
     private static class WindowIdSeparator {

@@ -179,11 +179,13 @@ namespace KeyGUI {
   [BepInDependency(NcmsModCompatibilityLayerConfig.PluginGuid, NcmsModCompatibilityLayerConfig.PluginVersion)]
   public class KeyGuiMain : BaseUnityPlugin {
     public static KeyGuiMain Instance;
+    internal static readonly Harmony Harmony = new Harmony(KeyGuiConfig.PluginGuid);
     internal static readonly KeyGuiNetworking KeyGuiNetworking = new KeyGuiNetworking();
     private static readonly KeyGuiCommandHandler KeyGuiCommandHandler = new KeyGuiCommandHandler();
     private static string[] _lateCommands = Array.Empty<string>();
 
     private readonly KeyGuiRootMenu _rootMenu = new KeyGuiRootMenu();
+    private readonly List<KeyGuiPatch> _patches = new List<KeyGuiPatch>();
 
     private bool _traitsLoaded;
     private bool _gameConfigDataSent;
@@ -248,6 +250,37 @@ namespace KeyGUI {
       _rootMenu.AddSubMenus();
       Debug.Log("Loaded KeyGUI!");
     }
+    public void RegisterPatch<T>() where T : KeyGuiPatch, new() {
+      if (_patches.OfType<T>().Any()) {
+        return;
+      }
+      Debug.Log("Registering patch: " + typeof(T).Name);
+      try {
+        KeyGuiPatch patch = new T();
+        Harmony.Patch(
+          patch.TargetMethod,
+          prefix: new HarmonyMethod(patch.Prefix),
+          postfix: new HarmonyMethod(patch.Postfix),
+          transpiler: new HarmonyMethod(patch.Transpiler),
+          finalizer: new HarmonyMethod(patch.Finalizer),
+          ilmanipulator: new HarmonyMethod(patch.IlManipulator)
+        );
+        _patches.Add(patch);
+        Debug.Log("Successfully registered patch: " + typeof(T).Name);
+      } catch (Exception e) {
+        Debug.LogError("Error registering patch: " + typeof(T).Name);
+        Debug.LogError(e);
+      }
+    }
+    protected bool TryGetPatch<T>(out T patch) where T : KeyGuiPatch {
+      patch = _patches.OfType<T>().FirstOrDefault();
+      if (patch == null) {
+        Debug.LogError("Patch of type " + typeof(T).Name + " not found!");
+        return false;
+      }
+      return true;
+    }
+    
     private void PerformInitialNetworkingSetup() {
       Logger.LogInfo("Communicating current state with server in the background...");
       if (!KeyGuiNetworking.IsUpToDate()) {

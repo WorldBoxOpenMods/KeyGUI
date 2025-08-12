@@ -22,6 +22,7 @@ namespace KeyGUI.MenuArchitecture {
     internal void Load<T>(LocaleDeclaration title, int windowID, T instance) where T : KeyGuiMenu {
       Debug.Log("Loading " + Locales.Get(Title) + " " + Locales.Get(title) + "...");
       _menus.Add(instance);
+      _menus.Last().RegisterPatches();
       _menus.Last().InitMenuInfo(title, windowID, this, MenuRect.x + MenuRect.width);
       if (_menus.Last() is KeyGuiMenuManager manager) manager.AddSubMenus();
       Debug.Log("Loaded " + Locales.Get(Title) + " " + Locales.Get(title) + "...");

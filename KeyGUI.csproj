@@ -112,6 +112,7 @@
         <Compile Include="MenuArchitecture\KeyGuiMenu.cs"/>
         <Compile Include="MenuArchitecture\KeyGuiMenuManager.cs"/>
         <Compile Include="MenuArchitecture\KeyGuiMessage.cs"/>
+        <Compile Include="MenuArchitecture\KeyGuiPatch.cs" />
         <Compile Include="Menus\Alliances\KeyGuiAlliances.cs"/>
         <Compile Include="Menus\Buildings\BuildingPlacementBuildingSelector\KeyGuiBuildingsBuildingPlacementBuildingSelector.cs"/>
         <Compile Include="Menus\Buildings\KeyGuiBuildings.cs"/>
@@ -181,6 +182,7 @@
         <Compile Include="Menus\Traits\Instructions\KeyGuiTraitsInstructions.cs"/>
         <Compile Include="Menus\Traits\KeyGuiTraits.cs"/>
         <Compile Include="Menus\Zones\KeyGuiZones.cs"/>
+        <Compile Include="Patches\TargetFramerateEditor.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Utils\KeyGuiModManager.cs"/>
         <Compile Include="Utils\KeyGuiNetworkingResponseParsingHelper.cs"/>
