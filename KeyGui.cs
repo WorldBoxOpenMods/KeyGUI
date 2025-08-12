@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using BepInEx;
 using BepinexModCompatibilityLayer;
@@ -223,7 +224,7 @@ namespace KeyGUI {
       Debug.Log("Registering patch: " + typeof(T).Name);
       try {
         KeyGuiPatch patch = new T();
-        foreach (var (method, (prefix, postfix, transpiler, finalizer, ilManipulator)) in patch.Patches.ToList().Select(kvp => (kvp.Key, kvp.Value))) {
+        foreach ((MethodInfo method, (HarmonyMethod prefix, HarmonyMethod postfix, HarmonyMethod transpiler, HarmonyMethod finalizer, HarmonyMethod ilManipulator)) in patch.Patches.ToList().Select(kvp => (kvp.Key, kvp.Value))) {
           if (method == null) {
             Debug.LogError("Patch method is null for " + typeof(T).Name + "!");
             continue;
