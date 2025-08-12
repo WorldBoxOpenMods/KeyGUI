@@ -182,7 +182,9 @@
         <Compile Include="Menus\Traits\Instructions\KeyGuiTraitsInstructions.cs"/>
         <Compile Include="Menus\Traits\KeyGuiTraits.cs"/>
         <Compile Include="Menus\Zones\KeyGuiZones.cs"/>
+        <Compile Include="Patches\ClanBirthTraitsManagement.cs" />
         <Compile Include="Patches\CrabzillaManagement.cs" />
+        <Compile Include="Patches\CultureBirthTraitsManagement.cs" />
         <Compile Include="Patches\IceBoatMovementToggler.cs" />
         <Compile Include="Patches\MouseDragToggler.cs" />
         <Compile Include="Patches\TargetFramerateEditor.cs" />

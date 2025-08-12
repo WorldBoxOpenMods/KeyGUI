@@ -6,12 +6,16 @@ using KeyGeneralPurposeLibrary.PowersLib.Powers;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Cultures.TraitSelection;
 using KeyGUI.Menus.Localizations.Declarations;
+using KeyGUI.Patches;
 using UnityEngine;
 
 namespace KeyGUI.Menus.Cultures {
   public class KeyGuiCultures : KeyGuiMenuManager {
     private Vector2 _scrollPos;
 
+    internal override void RegisterPatches() {
+      KeyGui.Instance.RegisterPatch<CultureBirthTraitsManagement>();
+    }
 
     protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.DeleteOneCultureButton))) {

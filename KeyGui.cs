@@ -221,12 +221,6 @@ namespace KeyGUI {
       Debug.Log("Loading custom item sprite loading prefix...");
       KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchGetSprite_Item();
       Debug.Log("Loaded custom item sprite loading prefix!");
-      Debug.Log("Loading clan trait patches...");
-      KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchClanTraitAdditions();
-      Debug.Log("Loaded clan trait patches!");
-      Debug.Log("Loading culture trait patches...");
-      KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchCultureTraitAdditions();
-      Debug.Log("Loaded culture trait patches!");
       Debug.Log("Finished loading patches!");
 
       Debug.Log("Loading KeyGUI...");

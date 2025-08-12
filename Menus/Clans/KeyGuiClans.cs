@@ -2,6 +2,7 @@ using System.Linq;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Clans.TraitSelection;
 using KeyGUI.Menus.Localizations.Declarations;
+using KeyGUI.Patches;
 using UnityEngine;
 
 namespace KeyGUI.Menus.Clans {
@@ -9,6 +10,10 @@ namespace KeyGUI.Menus.Clans {
     protected override float MenuMaxHeight => 700;
     protected override float MenuMinHeight => 300;
     private Vector2 _scrollPos;
+
+    internal override void RegisterPatches() {
+      KeyGui.Instance.RegisterPatch<ClanBirthTraitsManagement>();
+    }
 
     protected override void LoadGUI(int windowID) {
       _scrollPos = GUILayout.BeginScrollView(_scrollPos);
