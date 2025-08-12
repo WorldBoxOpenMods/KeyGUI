@@ -1,9 +1,8 @@
 using System.Linq;
 using System.Reflection;
-using KeyGeneralPurposeLibrary;
-using KeyGeneralPurposeLibrary.BehaviourManipulation;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
+using KeyGUI.Patches;
 using strings;
 using UnityEngine;
 
@@ -21,18 +20,26 @@ namespace KeyGUI.Menus.Crabzilla {
     private string _explosionStrength = "1";
     private string _explosionRadius = "4";
 
+    internal override void RegisterPatches() {
+      KeyGui.Instance.RegisterPatch<CrabzillaManagement>();
+    }
+
     protected override void InitializeMenu() {
       base.InitializeMenu();
       _crabzillaAsset = AssetManager.actor_library.get(SA.crabzilla);
     }
 
+    protected override void UpdateMenu() {
+      CrabzillaManagement.CrabzillaIsSpawned = false;
+    }
+
     protected override void LoadGUI(int windowID) {
       if (_crabzillaAsset != null) {
-        if (_crabzillaIsSpawned != KeyGenLibHarmonyPatchCollection.CrabzillaIsSpawned) {
-          _crabzillaIsSpawned = KeyGenLibHarmonyPatchCollection.CrabzillaIsSpawned;
+        if (_crabzillaIsSpawned != CrabzillaManagement.CrabzillaIsSpawned) {
+          _crabzillaIsSpawned = CrabzillaManagement.CrabzillaIsSpawned;
           MenuRect.height = 0;
         }
-        if (KeyGenLibHarmonyPatchCollection.CrabzillaIsSpawned == false) {
+        if (CrabzillaManagement.CrabzillaIsSpawned == false) {
           GUILayout.Label(Locales.Get(Locales.KeyGui.Crabzilla.CrabzillaNotSpawnedError));
         }
         if (_crabzillaIsSpawned) {
@@ -42,10 +49,10 @@ namespace KeyGUI.Menus.Crabzilla {
               SelectedUnit.select(crabzilla);
               bool currentCanCrabzillaBeInspected = crabzilla.asset.can_be_inspected;
               crabzilla.asset.can_be_inspected = true;
-              KeyLib.Get<KeyGenLibHarmonyPatchCollection>().StopCrabzillaFromDying();
+              CrabzillaManagement.IsCrabzillaKillable = false;
               ScrollWindow.showWindow("inspect_unit");
               crabzilla.asset.can_be_inspected = currentCanCrabzillaBeInspected;
-              KeyLib.Get<KeyGenLibHarmonyPatchCollection>().LetCrabzillaDieAgain();
+              CrabzillaManagement.IsCrabzillaKillable = true;
             }
           }
 
@@ -69,7 +76,7 @@ namespace KeyGUI.Menus.Crabzilla {
         GUILayout.Label(Locales.Get(Locales.KeyGui.Crabzilla.ExplosionRadiusStatLabel));
         _explosionRadius = GUILayout.TextField(_explosionRadius);
         if (GUILayout.Button(Locales.Get(Locales.KeyGui.Crabzilla.SetExplosionRadiusButton))) {
-          KeyGenLibHarmonyPatchCollection.CrabzillaArmExplosionRadius = int.Parse(_explosionRadius);
+          CrabzillaManagement.CrabzillaArmExplosionRadius = int.Parse(_explosionRadius);
         }
 
         GUILayout.Label(Locales.Get(Locales.KeyGui.Crabzilla.CrabzillaBoolFlagChangesSectionTitle));

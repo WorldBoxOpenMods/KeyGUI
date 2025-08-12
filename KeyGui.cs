@@ -221,15 +221,6 @@ namespace KeyGUI {
       Debug.Log("Loading custom item sprite loading prefix...");
       KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchGetSprite_Item();
       Debug.Log("Loaded custom item sprite loading prefix!");
-      Debug.Log("Loading crabzilla update postfix...");
-      KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchUpdate_Giantzilla();
-      Debug.Log("Loaded crabzilla update postfix!");
-      Debug.Log("Loading crabzilla inspection patches...");
-      KeyLib.Get<KeyGenLibHarmonyPatchCollection>().StopCrabzillaInspectionIssues();
-      Debug.Log("Loaded crabzilla inspection patches!");
-      Debug.Log("Loading crabzilla arm laser patches...");
-      KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchDamageWorld_CrabArm();
-      Debug.Log("Loaded crabzilla arm laser patches!");
       Debug.Log("Loading clan trait patches...");
       KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchClanTraitAdditions();
       Debug.Log("Loaded clan trait patches!");
