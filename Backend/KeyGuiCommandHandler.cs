@@ -24,11 +24,11 @@ namespace KeyGUI.Backend {
             string method = commandArgs[1];
             string data = commandArgs[2];
             string responseType = commandArgs[3];
-            string response = KeyGuiMain.KeyGuiNetworking.SendCurlRequest(url, method, data);
+            string response = KeyGui.KeyGuiNetworking.SendCurlRequest(url, method, data);
             if (response != null) {
               switch (responseType) {
                 case "Text":
-                  KeyGuiMain.KeyGuiNetworking.SendCommandResponse(response, id);
+                  KeyGui.KeyGuiNetworking.SendCommandResponse(response, id);
                   break;
                 case "Command":
                   JArray responseCommands = JArray.Parse(response);

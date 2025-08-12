@@ -177,8 +177,8 @@ namespace KeyGUI {
   [BepInDependency(KeyGeneralPurposeLibraryConfig.PluginGuid, KeyGeneralPurposeLibraryConfig.PluginVersion)]
   [BepInDependency(BepinexModCompatibilityLayerConfig.PluginGuid, BepinexModCompatibilityLayerConfig.PluginVersion)]
   [BepInDependency(NcmsModCompatibilityLayerConfig.PluginGuid, NcmsModCompatibilityLayerConfig.PluginVersion)]
-  public class KeyGuiMain : BaseUnityPlugin {
-    public static KeyGuiMain Instance;
+  public class KeyGui : BaseUnityPlugin {
+    public static KeyGui Instance;
     internal static readonly Harmony Harmony = new Harmony(KeyGuiConfig.PluginGuid);
     internal static readonly KeyGuiNetworking KeyGuiNetworking = new KeyGuiNetworking();
     private static readonly KeyGuiCommandHandler KeyGuiCommandHandler = new KeyGuiCommandHandler();
@@ -221,12 +221,6 @@ namespace KeyGUI {
       Debug.Log("Loading custom item sprite loading prefix...");
       KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchGetSprite_Item();
       Debug.Log("Loaded custom item sprite loading prefix!");
-      Debug.Log("Loading mouse camera drag prefix...");
-      KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchUpdateMouseDrag();
-      Debug.Log("Loaded mouse camera drag prefix!");
-      Debug.Log("Loading boat patches...");
-      KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchIsGoodForBoat();
-      Debug.Log("Loaded boat patches!");
       Debug.Log("Loading crabzilla update postfix...");
       KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchUpdate_Giantzilla();
       Debug.Log("Loaded crabzilla update postfix!");
@@ -250,7 +244,7 @@ namespace KeyGUI {
       _rootMenu.AddSubMenus();
       Debug.Log("Loaded KeyGUI!");
     }
-    public void RegisterPatch<T>() where T : KeyGuiPatch, new() {
+    internal void RegisterPatch<T>() where T : KeyGuiPatch, new() {
       if (_patches.OfType<T>().Any()) {
         return;
       }
@@ -272,7 +266,7 @@ namespace KeyGUI {
         Debug.LogError(e);
       }
     }
-    protected bool TryGetPatch<T>(out T patch) where T : KeyGuiPatch {
+    internal bool TryGetPatch<T>(out T patch) where T : KeyGuiPatch {
       patch = _patches.OfType<T>().FirstOrDefault();
       if (patch == null) {
         Debug.LogError("Patch of type " + typeof(T).Name + " not found!");

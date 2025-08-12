@@ -139,7 +139,7 @@ namespace KeyGUI.MenuArchitecture {
           return;
         }
         Initialized = true;
-        Harmony harmony = KeyGuiMain.Harmony;
+        Harmony harmony = KeyGui.Harmony;
         MethodInfo original = AccessTools.Method(typeof(PlayerControl), nameof(PlayerControl.updateControls));
         MethodInfo patch = AccessTools.Method(typeof(WindowFocusManager), nameof(updateControls_Prefix));
         harmony.Patch(original, new HarmonyMethod(patch));

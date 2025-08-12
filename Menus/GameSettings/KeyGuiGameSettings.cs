@@ -1,10 +1,9 @@
 using GameSettingsC = KeyGUI.Menus.ModConfig.ConfigOptions.GameSettings;
 using System;
-using KeyGeneralPurposeLibrary;
-using KeyGeneralPurposeLibrary.BehaviourManipulation;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
+using KeyGUI.Patches;
 using UnityEngine;
 
 namespace KeyGUI.Menus.GameSettings {
@@ -12,18 +11,19 @@ namespace KeyGUI.Menus.GameSettings {
     private string _fps = "60";
     private string _unitySpeed = "100";
     private string _gameSpeed = "100";
-    private bool _fpsPatchApplied;
-    private bool _unitySpeedPatchApplied;
     private string _worldTime = "0";
+
+    internal override void RegisterPatches() {
+      KeyGui.Instance.RegisterPatch<TargetFramerateEditor>();
+      KeyGui.Instance.RegisterPatch<UnitySpeedEditor>();
+      KeyGui.Instance.RegisterPatch<MouseDragToggler>();
+      KeyGui.Instance.RegisterPatch<IceBoatMovementToggler>();
+    }
 
     protected override void InitializeMenu() {
       base.InitializeMenu();
       AutoSaveManager.lowMemory = KeyGuiModConfig.Get(GameSettingsC.DisableAutosaves);
-      if (KeyGuiModConfig.Get(GameSettingsC.DisableBoatsBreakingIce)) {
-        if (!KeyGenLibHarmonyPatchCollection.DisableBoatMovementOnIce) KeyLib.Get<KeyGenLibHarmonyPatchCollection>().ToggleBoatIceMovement();
-      } else {
-        if (KeyGenLibHarmonyPatchCollection.DisableBoatMovementOnIce) KeyLib.Get<KeyGenLibHarmonyPatchCollection>().ToggleBoatIceMovement();
-      }
+      IceBoatMovementToggler.DisableBoatMovementOnIce = KeyGuiModConfig.Get(GameSettingsC.DisableBoatsBreakingIce);
     }
 
     protected override void LoadGUI(int windowID) {
@@ -42,13 +42,7 @@ namespace KeyGUI.Menus.GameSettings {
           _fps = "60";
           fps = 60;
         }
-
-        if (_fpsPatchApplied == false) {
-          _fpsPatchApplied = true;
-          KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchTargetFramerateSetter();
-        }
-
-        KeyLib.Get<KeyGenLibHarmonyPatchCollection>().SetTargetFramerate(fps);
+        TargetFramerateEditor.TargetFramerate = fps;
       }
 
       GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.UnitySpeedModifierLabel));
@@ -61,13 +55,7 @@ namespace KeyGUI.Menus.GameSettings {
           _unitySpeed = "100";
           gameSpeed = 1;
         }
-
-        if (_unitySpeedPatchApplied == false) {
-          _unitySpeedPatchApplied = true;
-          KeyLib.Get<KeyGenLibHarmonyPatchCollection>().PatchDeltaTimeGetter();
-        }
-
-        KeyLib.Get<KeyGenLibHarmonyPatchCollection>().SetDeltaTime(gameSpeed);
+        UnitySpeedEditor.DeltaTime = gameSpeed;
       }
 
       GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.GameSpeedModifierLabel));
@@ -89,17 +77,13 @@ namespace KeyGUI.Menus.GameSettings {
 
       GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.CameraMovementLabel));
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.GameSettings.ToggleMouseDragButton))) {
-        KeyLib.Get<KeyGenLibHarmonyPatchCollection>().ToggleMouseDrag();
+        MouseDragToggler.AllowMouseDrag = !MouseDragToggler.AllowMouseDrag;
       }
 
       GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.BoatsLabel));
-      if (GUILayout.Button(KeyGenLibHarmonyPatchCollection.DisableBoatMovementOnIce ? Locales.Get(Locales.KeyGui.GameSettings.EnableBoatsBreakingIceButton) : Locales.Get(Locales.KeyGui.GameSettings.DisableBoatsBreakingIceButton))) {
-        KeyGuiModConfig.Set(GameSettingsC.DisableBoatsBreakingIce, !KeyGenLibHarmonyPatchCollection.DisableBoatMovementOnIce);
-        if (KeyGuiModConfig.Get(GameSettingsC.DisableBoatsBreakingIce)) {
-          if (!KeyGenLibHarmonyPatchCollection.DisableBoatMovementOnIce) KeyLib.Get<KeyGenLibHarmonyPatchCollection>().ToggleBoatIceMovement();
-        } else {
-          if (KeyGenLibHarmonyPatchCollection.DisableBoatMovementOnIce) KeyLib.Get<KeyGenLibHarmonyPatchCollection>().ToggleBoatIceMovement();
-        }
+      if (GUILayout.Button(IceBoatMovementToggler.DisableBoatMovementOnIce ? Locales.Get(Locales.KeyGui.GameSettings.EnableBoatsBreakingIceButton) : Locales.Get(Locales.KeyGui.GameSettings.DisableBoatsBreakingIceButton))) {
+        KeyGuiModConfig.Set(GameSettingsC.DisableBoatsBreakingIce, !IceBoatMovementToggler.DisableBoatMovementOnIce);
+        IceBoatMovementToggler.DisableBoatMovementOnIce = KeyGuiModConfig.Get(GameSettingsC.DisableBoatsBreakingIce);
       }
 
       GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.WorldPropertiesLabel));
