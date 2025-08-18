@@ -22,18 +22,18 @@ rm -rf "./KeyGUI.old"
 rm "./KeyGUI.zip"
 mv "./KeyGUI" "./KeyGUI.old"
 mkdir "./KeyGUI"
-mkdir "./KeyGUI/KeyGUI-Plugin-Dependencies"
+mkdir "./KeyGUI/Plugin-Dependencies"
 
 # Copy built files into distributable folder
 cd "$KEYGUI_BIN_PATH" || exit
 mv "./KeyGUI.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI.dll"
-mv "./KeyGeneralPurposeLibrary.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI-Plugin-Dependencies/KeyGeneralPurposeLibrary.dll"
-mv "./BepInExModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI-Plugin-Dependencies/BepInExModCompatibilityLayer.dll"
-mv "./NcmsModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI-Plugin-Dependencies/NcmsModCompatibilityLayer.dll"
+mv "./KeyGeneralPurposeLibrary.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/Plugin-Dependencies/KeyGeneralPurposeLibrary.dll"
+mv "./BepInExModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/Plugin-Dependencies/BepInExModCompatibilityLayer.dll"
+mv "./NcmsModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/Plugin-Dependencies/NcmsModCompatibilityLayer.dll"
 
 # Copy build assets into distributable folder
 cd "$KEYGUI_BUILD_ASSETS_PATH" || exit
-cp -R "./KeyGUI-DLL-Dependencies" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/"
+cp -R "./DLL-Dependencies" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/"
 cp -R "./DefaultAssets" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/"
 cp -R "./Locales" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/"
 
@@ -44,6 +44,6 @@ zip -r "./KeyGUI.zip" "./KeyGUI"
 # Copy PDB files into distributable folder
 cd "$KEYGUI_BIN_PATH" || exit
 mv "./KeyGUI.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI.pdb"
-mv "./KeyGeneralPurposeLibrary.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI-Plugin-Dependencies/KeyGeneralPurposeLibrary.pdb"
-mv "./BepInExModCompatibilityLayer.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI-Plugin-Dependencies/BepInExModCompatibilityLayer.pdb"
-mv "./NcmsModCompatibilityLayer.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI-Plugin-Dependencies/NcmsModCompatibilityLayer.pdb"
+mv "./KeyGeneralPurposeLibrary.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/Plugin-Dependencies/KeyGeneralPurposeLibrary.pdb"
+mv "./BepInExModCompatibilityLayer.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/Plugin-Dependencies/BepInExModCompatibilityLayer.pdb"
+mv "./NcmsModCompatibilityLayer.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/Plugin-Dependencies/NcmsModCompatibilityLayer.pdb"

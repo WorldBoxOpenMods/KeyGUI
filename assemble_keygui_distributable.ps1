@@ -64,16 +64,16 @@ if (Test-Path "$MOD_NAME") {
     Rename-Item "$MOD_NAME" "$MOD_NAME.old"
 }
 New-Item -ItemType Directory -Path "$MOD_NAME" | Out-Null
-New-Item -ItemType Directory -Path "$MOD_NAME\KeyGUI-Plugin-Dependencies" | Out-Null
+New-Item -ItemType Directory -Path "$MOD_NAME\Plugin-Dependencies" | Out-Null
 
 # Copy built files into distributable folder
 Copy-Item "$KEYGUI_BIN_PATH\KeyGUI.dll" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\KeyGUI.dll"
-Copy-Item "$KEYGUI_BIN_PATH\KeyGeneralPurposeLibrary.dll" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\KeyGUI-Plugin-Dependencies\KeyGeneralPurposeLibrary.dll"
-Copy-Item "$KEYGUI_BIN_PATH\BepInExModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\KeyGUI-Plugin-Dependencies\BepInExModCompatibilityLayer.dll"
-Copy-Item "$KEYGUI_BIN_PATH\NcmsModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\KeyGUI-Plugin-Dependencies\NcmsModCompatibilityLayer.dll"
+Copy-Item "$KEYGUI_BIN_PATH\KeyGeneralPurposeLibrary.dll" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\Plugin-Dependencies\KeyGeneralPurposeLibrary.dll"
+Copy-Item "$KEYGUI_BIN_PATH\BepInExModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\Plugin-Dependencies\BepInExModCompatibilityLayer.dll"
+Copy-Item "$KEYGUI_BIN_PATH\NcmsModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\Plugin-Dependencies\NcmsModCompatibilityLayer.dll"
 
 # Copy build assets into distributable folder
-Copy-Item "$KEYGUI_BUILD_ASSETS_PATH\KeyGUI-DLL-Dependencies" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\" -Recurse
+Copy-Item "$KEYGUI_BUILD_ASSETS_PATH\DLL-Dependencies" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\" -Recurse
 Copy-Item "$KEYGUI_BUILD_ASSETS_PATH\DefaultAssets" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\" -Recurse
 Copy-Item "$KEYGUI_BUILD_ASSETS_PATH\Locales" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\" -Recurse
 
@@ -86,6 +86,6 @@ Write-Host "Archive created at $DISTRIBUTABLE_ARCHIVE_PATH"
 
 # Copy PDB files into distributable folder
 Copy-Item "$KEYGUI_BIN_PATH\KeyGUI.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\KeyGUI.pdb"
-Copy-Item "$KEYGUI_BIN_PATH\KeyGeneralPurposeLibrary.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\KeyGUI-Plugin-Dependencies\KeyGeneralPurposeLibrary.pdb"
-Copy-Item "$KEYGUI_BIN_PATH\BepInExModCompatibilityLayer.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\KeyGUI-Plugin-Dependencies\BepInExModCompatibilityLayer.pdb"
-Copy-Item "$KEYGUI_BIN_PATH\NcmsModCompatibilityLayer.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\KeyGUI-Plugin-Dependencies\NcmsModCompatibilityLayer.pdb"
+Copy-Item "$KEYGUI_BIN_PATH\KeyGeneralPurposeLibrary.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\Plugin-Dependencies\KeyGeneralPurposeLibrary.pdb"
+Copy-Item "$KEYGUI_BIN_PATH\BepInExModCompatibilityLayer.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\Plugin-Dependencies\BepInExModCompatibilityLayer.pdb"
+Copy-Item "$KEYGUI_BIN_PATH\NcmsModCompatibilityLayer.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\Plugin-Dependencies\NcmsModCompatibilityLayer.pdb"
