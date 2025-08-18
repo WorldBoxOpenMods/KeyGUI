@@ -210,8 +210,8 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include=".editorconfig"/>
-        <Content Include="assemble_debug_distributable.sh"/>
-        <Content Include="assemble_mod_distributable.sh"/>
+        <Content Include="assemble_keygui_distributable.ps1" />
+        <Content Include="assemble_keygui_distributable.sh" />
         <Content Include="BuildAssets\DefaultAssets\DefaultSprite.png"/>
         <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\Microsoft.CodeAnalysis.CSharp.dll"/>
         <Content Include="BuildAssets\KeyGUI-DLL-Dependencies\Microsoft.CodeAnalysis.dll"/>
@@ -234,9 +234,19 @@
     <Target Name="AfterBuild">
     </Target>
     -->
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)' == 'UNIX' ">
-        <Exec Command="sh ./assemble_mod_distributable.sh" Condition=" '$(Configuration)' == 'Release' "/>
-        <Exec Command="sh ./assemble_debug_distributable.sh" Condition=" '$(Configuration)' == 'Debug' "/>
+    <PropertyGroup Condition=" '$(OS)' == 'UNIX' ">
+        <KEYGUI_BIN_PATH Condition=" '$(KEYGUI_BIN_PATH)' == '' ">$(MSBuildProjectDirectory)/$(OutDir)</KEYGUI_BIN_PATH>
+        <KEYGUI_BUILD_ASSETS_PATH Condition=" '$(KEYGUI_BUILD_ASSETS_PATH)' == '' ">$(MSBuildProjectDirectory)/BuildAssets</KEYGUI_BUILD_ASSETS_PATH>
+        <BEPINEX_PLUGINS_FOLDER_PATH Condition=" '$(BEPINEX_PLUGINS_FOLDER_PATH)' == '' ">$(HOME)/Library/Application Support/Steam/steamapps/common/worldbox/BepInEx/plugins</BEPINEX_PLUGINS_FOLDER_PATH>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(OS)' == 'WINDOWS_NT' ">
+        <KEYGUI_BIN_PATH Condition=" '$(KEYGUI_BIN_PATH)' == '' ">$(MSBuildProjectDirectory)\$(OutDir.TrimEnd('\'))</KEYGUI_BIN_PATH>
+        <KEYGUI_BUILD_ASSETS_PATH Condition=" '$(KEYGUI_BUILD_ASSETS_PATH)' == '' ">$(MSBuildProjectDirectory)\BuildAssets</KEYGUI_BUILD_ASSETS_PATH>
+        <BEPINEX_PLUGINS_FOLDER_PATH Condition=" '$(BEPINEX_PLUGINS_FOLDER_PATH)' == '' ">C:\Program Files (x86)\Steam\steamapps\common\worldbox\BepInEx/plugins</BEPINEX_PLUGINS_FOLDER_PATH>
+    </PropertyGroup>
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="sh ./assemble_keygui_distributable.sh &quot;$(KEYGUI_BIN_PATH)&quot; &quot;$(KEYGUI_BUILD_ASSETS_PATH)&quot; &quot;$(BEPINEX_PLUGINS_FOLDER_PATH)&quot;" Condition=" '$(OS)' == 'UNIX' " />
+        <Exec Command="powershell -ExecutionPolicy Bypass -File ./assemble_keygui_distributable.ps1 -KeyGuiBinPath &quot;$(KEYGUI_BIN_PATH)&quot; -KeyGuiBuildAssetsPath &quot;$(KEYGUI_BUILD_ASSETS_PATH)&quot; -BepInExPluginsFolderPath &quot;$(BEPINEX_PLUGINS_FOLDER_PATH)&quot;" Condition=" '$(OS)' == 'WINDOWS_NT' " />
     </Target>
 
 </Project>

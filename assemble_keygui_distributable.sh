@@ -1,14 +1,23 @@
 #!/bin/sh
 # Init KeyGUI related path variables
-KEYGUI_BIN_PATH=~/RiderProjects/Modding/KeyMods/KeyGUI/bin/Release
-KEYGUI_BUILD_ASSETS_PATH=~/RiderProjects/Modding/KeyMods/KeyGUI/BuildAssets
-BEPINEX_PLUGINS_FOLDER_PATH=~/Library/Application\ Support/Steam/steamapps/common/worldbox/BepInEx/plugins
+if test $# -eq 0; then
+  KEYGUI_BIN_PATH=~/RiderProjects/Modding/KeyMods/KeyGUI/bin/Release
+  KEYGUI_BUILD_ASSETS_PATH=~/RiderProjects/Modding/KeyMods/KeyGUI/BuildAssets
+  BEPINEX_PLUGINS_FOLDER_PATH=~/Library/Application\ Support/Steam/steamapps/common/worldbox/BepInEx/plugins
+else
+  if test "$1" = "-h" || test "$1" = "--help"; then
+    echo "Usage: ./assemble_mod_distributable.sh [KeyGUIBinPath] [KeyGUIBuildAssetsPath] [BepInExPluginsFolderPath]"
+    echo "If no arguments are supplied, default paths will be used."
+    exit 0
+  else
+    KEYGUI_BIN_PATH=$1
+    KEYGUI_BUILD_ASSETS_PATH=$2
+    BEPINEX_PLUGINS_FOLDER_PATH=$3
+  fi
+fi
 
 # Init KeyGUI distributable folder structure
 cd "$BEPINEX_PLUGINS_FOLDER_PATH" || exit
-rm -rf "./KeyGUI_Debug"
-rm -rf "./KeyGUI_Debug.old"
-rm "./KeyGUI_Debug.zip"
 rm -rf "./KeyGUI.old"
 rm "./KeyGUI.zip"
 mv "./KeyGUI" "./KeyGUI.old"
