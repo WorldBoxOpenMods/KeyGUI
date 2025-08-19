@@ -106,7 +106,6 @@
         <Compile Include="Backend\KeyGuiCommandHandler.cs"/>
         <Compile Include="Backend\KeyGuiNetworking.cs"/>
         <Compile Include="KeyGuiConfig.cs"/>
-        <Compile Include="KeyGuiItem.cs"/>
         <Compile Include="KeyGui.cs" />
         <Compile Include="MenuArchitecture\InvalidMenuInvocationContextException.cs"/>
         <Compile Include="MenuArchitecture\KeyGuiPower.cs" />
