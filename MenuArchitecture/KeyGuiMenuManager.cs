@@ -23,7 +23,6 @@ namespace KeyGUI.MenuArchitecture {
       Debug.Log("Loading " + Locales.Get(Title) + " " + Locales.Get(title) + "...");
       _menus.Add(instance);
       _menus.Last().RegisterPatches();
-      _menus.Last().RegisterPowers();
       _menus.Last().InitMenuInfo(title, windowID, this, MenuRect.x + MenuRect.width);
       if (_menus.Last() is KeyGuiMenuManager manager) manager.AddSubMenus();
       Debug.Log("Loaded " + Locales.Get(Title) + " " + Locales.Get(title) + "...");
@@ -70,6 +69,7 @@ namespace KeyGUI.MenuArchitecture {
       base.InitializeMenu();
       foreach (KeyGuiMenu menu in _menus.Where(menu => !menu.IsInitialized)) {
         Debug.Log($"Initializing {FullName}...");
+        menu.RegisterPowers();
         menu.Initialize();
         Debug.Log($"Initialized {FullName}!");
       }
