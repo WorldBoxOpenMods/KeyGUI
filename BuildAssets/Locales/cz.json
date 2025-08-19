@@ -374,66 +374,71 @@
     "ChangeLocalesSectionHeader": "更换语言",
     "LoadAndStoreAllLocalesButton": "Load and store all locales"
   },
-  "KeyGuiKeyGeneralPurposeLibrary": {
-    "KGPLL_AllianceCreation_SelectFirstKingdom": "Select the first kingdom to create an alliance with.",
-    "KGPLL_AllianceCreation_SelectSecondKingdom": "Select the second kingdom to create an alliance with.",
-    "KGPLL_AllianceCreation_SameKingdomTwiceError": "Selected the same kingdom twice, try again.",
-    "KGPLL_AllianceCreation_KingdomsAlreadyAlliedError": "The selected kingdoms are already allied, try again.",
-    "KGPLL_AllianceCreation_CreationSuccess": "The kingdom {0} has successfully entered an alliance with kingdom {1}.",
-    "KGPLL_CultureDeletion_SelectCulture": "Select the culture to delete.",
-    "KGPLL_CultureDeletion_Success": "Culture deleted!",
-    "KGPLL_CultureDeletion_NoCultureSelectedError": "No culture to delete here, try again!",
-    "KGPLL_CultureFullReset_SelectCulture": "Select the culture to reset.",
-    "KGPLL_CultureFullReset_Success": "Culture reset!",
-    "KGPLL_CultureFullReset_NoCultureSelectedError": "No culture to reset here, try again!",
-    "KGPLL_CultureTechReset_SelectCulture": "Select the culture to reset the tech of.",
-    "KGPLL_CultureTechReset_Success": "Culture tech reset!",
-    "KGPLL_CultureTechReset_NoCultureSelectedError": "No culture to reset the tech of here, try again!",
-    "KGPLL_CultureKnowledgeGainModification_SelectIncreaseCulture": "Select the culture to increase the knowledge gain of.",
-    "KGPLL_CultureKnowledgeGainModification_SelectDecreaseCulture": "Select the culture to decrease the knowledge gain of.",
-    "KGPLL_CultureKnowledgeGainModification_IncreaseSuccess": "Culture knowledge gain increased!",
-    "KGPLL_CultureKnowledgeGainModification_DecreaseSuccess": "Culture knowledge gain decreased!",
-    "KGPLL_CultureKnowledgeGainModification_InvalidGainValueError": "Invalid value for knowledge gain provided, try again!",
-    "KGPLL_CultureKnowledgeGainModification_NoCultureSelectedError": "No culture to change the knowledge gain of here, try again!",
-    "KGPLL_CultureForceConversion_SelectCulture": "Select the culture to force upon the city.",
-    "KGPLL_CultureForceConversion_NoCultureSelectedError": "No culture to force upon city here, try again!",
-    "KGPLL_CultureForceConversion_SelectCity": "Select the city to force the culture upon.",
-    "KGPLL_CultureForceConversion_Success": "Culture forced upon city!",
-    "KGPLL_CultureForceConversion_NoCitySelectedError": "No city to force culture upon here, try again!",
-    "KGPLL_CultureCreation_SelectCity": "Select the city to create a new culture for.",
-    "KGPLL_CultureCreation_Success": "New culture created!",
-    "KGPLL_CultureCreation_NoCitySelected": "No city to create new culture for here, try again!",
-    "KGPLL_CityZoneAddition_SelectCity": "Select the city to add zones to.",
-    "KGPLL_CityZoneAddition_SelectZones": "Select zones to add to the city.",
-    "KGPLL_CityZoneAddition_NoCitySelectedError": "No city to add zone to here, try again!",
-    "KGPLL_CityZoneAddition_ZoneOwnershipConflict": "The zone you're trying to add already belongs to another city, please remove it from that city first!",
-    "KGPLL_CityZoneRemoval_SelectCity": "Select the city to remove zones from.",
-    "KGPLL_CityZoneRemoval_SelectZones": "Select zones to remove.",
-    "KGPLL_CityZoneRemoval_NoCitySelectedError": "No city to remove zone from here, try again!",
-    "KGPLL_CityZoneRemoval_ZoneOwnershipConflict": "The zone you're trying to remove doesn't belong to the city you selected, please select the correct city!",
-    "KGPLL_CultureZoneAddition_SelectCulture": "Select the culture to add zones to.",
-    "KGPLL_CultureZoneAddition_SelectZones": "Select zones to add to the culture.",
-    "KGPLL_CultureZoneAddition_NoCultureSelected": "No culture to add zone to here, try again!",
-    "KGPLL_CultureZoneAddition_ZoneOwnershipConflict": "The zone you're trying to add already belongs to another culture, please remove it from that culture first!",
-    "KGPLL_CultureZoneRemoval_SelectCulture": "Select the culture to remove zones from.",
-    "KGPLL_CultureZoneRemoval_SelectZones": "Select zones to remove.",
-    "KGPLL_CultureZoneRemoval_NoCultureSelected": "No culture to remove zone from here, try again!",
-    "KGPLL_CultureZoneRemoval_ZoneOwnershipConflict": "The zone you're trying to remove doesn't belong to the culture you selected, please select the correct culture!",
-    "KGPLL_ForceCapital_SelectCity": "Select the city to force as the capital city.",
-    "KGPLL_ForceCapital_Success": "City forced as capital city!",
-    "KGPLL_ForceCapital_NoCitySelectedError": "No city to force as capital city here, try again!",
-    "KGPLL_ChangeCityKingdom_SelectCity": "Select the city to force into another kingdom.",
-    "KGPLL_ChangeCityKingdom_SelectKingdom": "Select the kingdom to force the city into.",
-    "KGPLL_ChangeCityKingdom_NoCitySelectedError": "No city to force into other kingdom here, try again!",
-    "KGPLL_ChangeCityKingdom_Success": "City forced into other kingdom!",
-    "KGPLL_ChangeCityKingdom_NoKingdomSelectedError": "The tile you selected isn't owned by any kingdom!",
-    "KGPLL_SetKing_SelectActor": "Select the actor to make king.",
-    "KGPLL_SetKing_Success": "Actor made king!",
-    "KGPLL_SetKing_NoKingdomOnSelectedActorError": "The actor you selected doesn't have a kingdom!",
-    "KGPLL_SetKing_NoActorSelectedError": "No actor to make king here, try again!",
-    "KGPLL_PlaceBuilding_SelectCity": "Select the city to place the building in.",
-    "KGPLL_PlaceBuilding_InvalidTileError": "Can't place building here, try again!",
-    "KGPLL_PlaceBuilding_Success": "Building placed!",
-    "KGPLL_PlaceBuilding_NoBuildingSelected": "No building to place selected, try again!"
+  "Powers": {
+    "AllianceCreation": {
+      "SelectFirstKingdom": "Select the first kingdom to create an alliance with.",
+      "SelectSecondKingdom": "Select the second kingdom to create an alliance with.",
+      "SameKingdomTwiceError": "Selected the same kingdom twice, try again.",
+      "KingdomsAlreadyAlliedError": "The selected kingdoms are already allied, try again.",
+      "CreationSuccess": "The kingdom {0} has successfully entered an alliance with kingdom {1}."
+    },
+    "ChangeCityKingdom": {
+      "SelectCity": "Select the city to force into another kingdom.",
+      "SelectKingdom": "Select the kingdom to force the city into.",
+      "NoCitySelectedError": "No city to force into other kingdom here, try again!",
+      "Success": "City forced into other kingdom!",
+      "NoKingdomSelectedError": "The tile you selected isn't owned by any kingdom!"
+    },
+    "CityZoneAddition": {
+      "SelectCity": "Select the city to add zones to.",
+      "SelectZones": "Select zones to add to the city.",
+      "NoCitySelectedError": "No city to add zone to here, try again!",
+      "ZoneOwnershipConflict": "The zone you're trying to add already belongs to another city, please remove it from that city first!"
+    },
+    "CityZoneRemoval": {
+      "SelectCity": "Select the city to remove zones from.",
+      "SelectZones": "Select zones to remove.",
+      "NoCitySelectedError": "No city to remove zone from here, try again!",
+      "ZoneOwnershipConflict": "The zone you're trying to remove doesn't belong to the city you selected, please select the correct city!"
+    },
+    "CultureCreation": {
+      "SelectCity": "Select the city to create a new culture for.",
+      "Success": "New culture created!",
+      "NoCitySelected": "No city to create new culture for here, try again!"
+    },
+    "CultureDeletion": {
+      "SelectCulture": "Select the culture to delete.",
+      "Success": "Culture deleted!",
+      "NoCultureSelectedError": "No culture to delete here, try again!"
+    },
+    "CultureForceConversion": {
+      "SelectCulture": "Select the culture to force upon the city.",
+      "NoCultureSelectedError": "No culture to force upon city here, try again!",
+      "SelectCity": "Select the city to force the culture upon.",
+      "Success": "Culture forced upon city!",
+      "NoCitySelectedError": "No city to force culture upon here, try again!"
+    },
+    "CultureFullReset": {
+      "SelectCulture": "Select the culture to reset.",
+      "Success": "Culture reset!",
+      "NoCultureSelectedError": "No culture to reset here, try again!"
+    },
+    "ForceCapital": {
+      "SelectCity": "Select the city to force as the capital city.",
+      "Success": "City forced as capital city!",
+      "NoCitySelectedError": "No city to force as capital city here, try again!"
+    },
+    "PlaceBuilding": {
+      "SelectCity": "Select the city to place the building in.",
+      "InvalidTileError": "Can't place building here, try again!",
+      "Success": "Building placed!",
+      "NoBuildingSelected": "No building to place selected, try again!"
+    },
+    "SetKing": {
+      "SelectActor": "Select the actor to make king.",
+      "Success": "Actor made king!",
+      "NoKingdomOnSelectedActorError": "The actor you selected doesn't have a kingdom!",
+      "NoActorSelectedError": "No actor to make king here, try again!"
+    }
   }
 }
