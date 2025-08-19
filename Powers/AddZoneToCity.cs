@@ -13,7 +13,7 @@ namespace KeyGUI.Powers {
 
     protected override bool PowerButtonPress(string _) {
       _cityToAddZoneTo = null;
-      WorldTip.showNow(Locales.KeyGui.Powers.CityZoneAddition.KGPLL_CityZoneAddition_SelectCity, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CityZoneAddition.SelectCity, false, "top");
       return false;
     }
 
@@ -21,17 +21,17 @@ namespace KeyGUI.Powers {
       if (_cityToAddZoneTo == null) {
         _cityToAddZoneTo = pTile.zone.city;
         if (_cityToAddZoneTo != null) {
-          WorldTip.showNow(Locales.KeyGui.Powers.CityZoneAddition.KGPLL_CityZoneAddition_SelectZones, false, "top");
+          WorldTip.showNow(Locales.KeyGui.Powers.CityZoneAddition.SelectZones, false, "top");
           return false;
         }
-        WorldTip.showNow(Locales.KeyGui.Powers.CityZoneAddition.KGPLL_CityZoneAddition_NoCitySelectedError, false, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.CityZoneAddition.NoCitySelectedError, false, "top");
         return false;
       }
       if (pTile.zone.city == null) {
         _cityToAddZoneTo.addZone(pTile.zone);
         return true;
       }
-      WorldTip.showNow(Locales.KeyGui.Powers.CityZoneAddition.KGPLL_CityZoneAddition_ZoneOwnershipConflict, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CityZoneAddition.ZoneOwnershipConflict, false, "top");
       return false;
     }
   }

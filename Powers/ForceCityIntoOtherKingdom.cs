@@ -14,7 +14,7 @@ namespace KeyGUI.Powers {
 
     protected override bool PowerButtonPress(string pPower) {
       _cityToForceIntoOtherKingdom = null;
-      WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.KGPLL_ChangeCityKingdom_SelectCity, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.SelectCity, false, "top");
       return false;
     }
 
@@ -22,10 +22,10 @@ namespace KeyGUI.Powers {
       if (_cityToForceIntoOtherKingdom == null) {
         _cityToForceIntoOtherKingdom = pTile.zone.city;
         if (_cityToForceIntoOtherKingdom != null) {
-          WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.KGPLL_ChangeCityKingdom_SelectKingdom, false, "top");
+          WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.SelectKingdom, false, "top");
           return false;
         }
-        WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.KGPLL_ChangeCityKingdom_NoCitySelectedError, false, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.NoCitySelectedError, false, "top");
         return false;
       }
       if (pTile.zone.city?.kingdom != null) {
@@ -33,10 +33,10 @@ namespace KeyGUI.Powers {
         _cityToForceIntoOtherKingdom.kingdom = pTile.zone.city.kingdom;
         _cityToForceIntoOtherKingdom.kingdom.cities.Add(_cityToForceIntoOtherKingdom);
         _cityToForceIntoOtherKingdom.units.ToList().ForEach(a => a.setKingdom(_cityToForceIntoOtherKingdom.kingdom));
-        WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.KGPLL_ChangeCityKingdom_Success, false, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.Success, false, "top");
         return true;
       }
-      WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.KGPLL_ChangeCityKingdom_NoKingdomSelectedError, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.NoKingdomSelectedError, false, "top");
       return false;
     }
   }

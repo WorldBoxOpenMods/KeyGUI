@@ -13,7 +13,7 @@ namespace KeyGUI.Powers {
 
     protected override bool PowerButtonPress(string pPower) {
       CultureToForceUponCity = null;
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_SelectCulture, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.SelectCulture, false, "top");
       return false;
     }
 
@@ -27,13 +27,13 @@ namespace KeyGUI.Powers {
           return false;
         }
         (GodPower power, PowerButton button) = powerAndButton;
-        WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_SelectCity, false, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.SelectCity, false, "top");
         power.select_button_action(power.id);
         PowerButtonSelector.instance.unselectAll();
         PowerButtonSelector.instance.setPower(button);
         return true;
       }
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_NoCultureSelectedError, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.NoCultureSelectedError, false, "top");
       return false;
     }
   }

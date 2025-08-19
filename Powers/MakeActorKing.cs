@@ -12,7 +12,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow(Locales.KeyGui.Powers.SetKing.KGPLL_SetKing_SelectActor, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.SetKing.SelectActor, false, "top");
       return false;
     }
 
@@ -24,12 +24,12 @@ namespace KeyGUI.Powers {
             actorToMakeKing.kingdom.king.setProfession(UnitProfession.Unit);
           }
           actorToMakeKing.kingdom.setKing(actorToMakeKing);
-          WorldTip.showNow(Locales.KeyGui.Powers.SetKing.KGPLL_SetKing_Success, false, "top");
+          WorldTip.showNow(Locales.KeyGui.Powers.SetKing.Success, false, "top");
           return true;
         }
-        WorldTip.showNow(Locales.KeyGui.Powers.SetKing.KGPLL_SetKing_NoKingdomOnSelectedActorError, false, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.SetKing.NoKingdomOnSelectedActorError, false, "top");
       }
-      WorldTip.showNow(Locales.KeyGui.Powers.SetKing.KGPLL_SetKing_NoActorSelectedError, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.SetKing.NoActorSelectedError, false, "top");
       return false;
     }
 

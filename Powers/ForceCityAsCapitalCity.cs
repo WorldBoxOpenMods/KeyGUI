@@ -11,7 +11,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow(Locales.KeyGui.Powers.ForceCapital.KGPLL_ForceCapital_SelectCity, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.ForceCapital.SelectCity, false, "top");
       return false;
     }
 
@@ -21,10 +21,10 @@ namespace KeyGUI.Powers {
         cityToForceAsCapitalCity.kingdom.capital = cityToForceAsCapitalCity;
         cityToForceAsCapitalCity.kingdom.data.capitalID = cityToForceAsCapitalCity.kingdom.capital.data.id;
         cityToForceAsCapitalCity.kingdom.location = cityToForceAsCapitalCity.kingdom.capital.city_center;
-        WorldTip.showNow(Locales.KeyGui.Powers.ForceCapital.KGPLL_ForceCapital_Success, false, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.ForceCapital.Success, false, "top");
         return true;
       }
-      WorldTip.showNow(Locales.KeyGui.Powers.ForceCapital.KGPLL_ForceCapital_NoCitySelectedError, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.ForceCapital.NoCitySelectedError, false, "top");
       return false;
     }
   }

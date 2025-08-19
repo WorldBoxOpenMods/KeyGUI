@@ -11,7 +11,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string _) {
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureCreation.KGPLL_CultureCreation_SelectCity, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureCreation.SelectCity, false, "top");
       return false;
     }
 
@@ -24,10 +24,10 @@ namespace KeyGUI.Powers {
         } else {
           // TODO: error message
         }
-        WorldTip.showNow(Locales.KeyGui.Powers.CultureCreation.KGPLL_CultureCreation_Success, false, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.CultureCreation.Success, false, "top");
         return true;
       }
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureCreation.KGPLL_CultureCreation_NoCitySelected, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureCreation.NoCitySelected, false, "top");
       return false;
     }
   }

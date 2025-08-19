@@ -11,7 +11,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_SelectCity, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.SelectCity, false, "top");
       return false;
     }
 
@@ -20,13 +20,13 @@ namespace KeyGUI.Powers {
       if (cityToForceCultureUpon != null) {
         if (CultureForceSelectCulture.CultureToForceUponCity != null) {
           ForceCultureOnCity(CultureForceSelectCulture.CultureToForceUponCity, cityToForceCultureUpon);
-          WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_Success, false, "top");
+          WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.Success, false, "top");
           return true;
         }
-        WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_NoCultureSelectedError, false, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.NoCultureSelectedError, false, "top");
         return false;
       }
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_NoCitySelectedError, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.NoCitySelectedError, false, "top");
       return false;
     }
 

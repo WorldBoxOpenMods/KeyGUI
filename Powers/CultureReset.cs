@@ -13,7 +13,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureFullReset.KGPLL_CultureFullReset_SelectCulture, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureFullReset.SelectCulture, false, "top");
       return false;
     }
 
@@ -21,11 +21,11 @@ namespace KeyGUI.Powers {
       Culture cultureToReset = pTile.zone.city?.culture;
       if (cultureToReset != null) {
         ResetCulture(cultureToReset);
-        WorldTip.showNow(Locales.KeyGui.Powers.CultureFullReset.KGPLL_CultureFullReset_Success, false, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.CultureFullReset.Success, false, "top");
         return true;
       }
 
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureFullReset.KGPLL_CultureFullReset_NoCultureSelectedError, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureFullReset.NoCultureSelectedError, false, "top");
       return false;
     }
 

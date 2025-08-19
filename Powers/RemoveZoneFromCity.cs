@@ -13,7 +13,7 @@ namespace KeyGUI.Powers {
 
     protected override bool PowerButtonPress(string pPower) {
       _cityToRemoveZoneFrom = null;
-      WorldTip.showNow(Locales.KeyGui.Powers.CityZoneRemoval.KGPLL_CityZoneRemoval_SelectCity, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CityZoneRemoval.SelectCity, false, "top");
       return false;
     }
 
@@ -21,17 +21,17 @@ namespace KeyGUI.Powers {
       if (_cityToRemoveZoneFrom == null) {
         _cityToRemoveZoneFrom = pTile.zone.city;
         if (_cityToRemoveZoneFrom != null) {
-          WorldTip.showNow(Locales.KeyGui.Powers.CityZoneRemoval.KGPLL_CityZoneRemoval_SelectZones, false, "top");
+          WorldTip.showNow(Locales.KeyGui.Powers.CityZoneRemoval.SelectZones, false, "top");
           return false;
         }
-        WorldTip.showNow(Locales.KeyGui.Powers.CityZoneRemoval.KGPLL_CityZoneRemoval_NoCitySelectedError, false, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.CityZoneRemoval.NoCitySelectedError, false, "top");
         return false;
       }
       if (pTile.zone.city == _cityToRemoveZoneFrom) {
         _cityToRemoveZoneFrom.removeZone(pTile.zone);
         return true;
       }
-      WorldTip.showNow(Locales.KeyGui.Powers.CityZoneRemoval.KGPLL_CityZoneRemoval_ZoneOwnershipConflict, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CityZoneRemoval.ZoneOwnershipConflict, false, "top");
       return false;
     }
   }

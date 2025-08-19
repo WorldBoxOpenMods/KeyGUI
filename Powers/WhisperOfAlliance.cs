@@ -13,7 +13,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.KGPLL_AllianceCreation_SelectFirstKingdom, false, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.SelectFirstKingdom, false, "top");
       Config.whisper_A = null;
       Config.whisper_B = null;
       return false;
@@ -28,12 +28,12 @@ namespace KeyGUI.Powers {
       Kingdom kingdom = city.kingdom;
       if (Config.whisper_A == null) {
         Config.whisper_A = kingdom;
-        WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.KGPLL_AllianceCreation_SelectSecondKingdom, false, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.SelectSecondKingdom, false, "top");
         return false;
       }
 
       if (Config.whisper_B == null && Config.whisper_A == kingdom) {
-        WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.KGPLL_AllianceCreation_SameKingdomTwiceError, false, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.SameKingdomTwiceError, false, "top");
         return false;
       }
 
@@ -43,7 +43,7 @@ namespace KeyGUI.Powers {
 
       if (Config.whisper_B != Config.whisper_A) {
         if (Alliance.isSame(Config.whisper_A.getAlliance(), Config.whisper_B.getAlliance())) {
-          WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.KGPLL_AllianceCreation_KingdomsAlreadyAlliedError, false, "top");
+          WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.KingdomsAlreadyAlliedError, false, "top");
           Config.whisper_B = null;
           return false;
         }
@@ -72,7 +72,7 @@ namespace KeyGUI.Powers {
             ForceIntoAlliance(allianceB, Config.whisper_A);
           }
         }
-        WorldTip.showNow(string.Format(Locales.KeyGui.Powers.AllianceCreation.KGPLL_AllianceCreation_CreationSuccess, Config.whisper_A.name, Config.whisper_B.name), false, "top");
+        WorldTip.showNow(string.Format(Locales.KeyGui.Powers.AllianceCreation.CreationSuccess, Config.whisper_A.name, Config.whisper_B.name), false, "top");
         Config.whisper_A = null;
         Config.whisper_B = null;
       }
