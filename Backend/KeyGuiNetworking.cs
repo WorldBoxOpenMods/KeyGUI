@@ -305,7 +305,7 @@ namespace KeyGUI.Backend {
     internal bool IsUpToDate() {
       string response = SendGetRequest("/current-versions");
       if (response == null) {
-        Debug.LogError("Failed to check if KeyGUI is up to date");
+        Debug.LogError($"Failed to check if {KeyGuiConfig.PluginName} is up to date");
         return true;
       }
       JsonReader reader = new JsonTextReader(new StringReader(response));

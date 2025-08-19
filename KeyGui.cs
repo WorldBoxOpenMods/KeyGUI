@@ -212,11 +212,11 @@ namespace KeyGUI {
       };
       _networkingThread.Start();
 
-      Debug.Log("Loading KeyGUI...");
+      Debug.Log($"Loading {KeyGuiConfig.PluginName}...");
       KeyGuiLocales.EarlyInitialize();
       _rootMenu.InitMenuInfo(Locales.KeyGui.ModName, 10000, null);
       _rootMenu.AddSubMenus();
-      Debug.Log("Loaded KeyGUI!");
+      Debug.Log($"Loaded {KeyGuiConfig.PluginName}!");
     }
     internal void RegisterPatch<T>() where T : KeyGuiPatch, new() {
       if (_patches.OfType<T>().Any()) {
@@ -343,14 +343,14 @@ namespace KeyGUI {
     }
     private void AutoLoad(ConfigOption<bool> autoloadOption, Action loadMethod) {
       if (KeyGuiModConfig.Get(autoloadOption)) {
-        Debug.Log("Automatically loading " + autoloadOption.Section + " from KeyGUI...");
+        Debug.Log($"Automatically loading {autoloadOption.Section} from {KeyGuiConfig.PluginName}...");
         try {
           loadMethod();
         } catch (Exception e) {
-          Debug.LogError("Error loading " + autoloadOption.Section + " from KeyGUI!");
+          Debug.LogError($"Error loading {autoloadOption.Section} from {KeyGuiConfig.PluginName}!");
           Debug.LogError(e);
         }
-        Debug.Log("Finished loading " + autoloadOption.Section + " from KeyGUI!");
+        Debug.Log($"Finished loading {autoloadOption.Section} from {KeyGuiConfig.PluginName}!");
       }
     }
     public void Update() {
@@ -393,9 +393,9 @@ namespace KeyGUI {
       }
 
       if (!_rootMenu.IsInitialized && global::Config.game_loaded) {
-        Debug.Log("Initializing KeyGUI...");
+        Debug.Log($"Initializing {KeyGuiConfig.PluginName}...");
         _rootMenu.Initialize();
-        Debug.Log("Finished initializing KeyGUI!");
+        Debug.Log($"Finished initializing {KeyGuiConfig.PluginName}!");
       }
       _rootMenu.Update();
     }
