@@ -3,7 +3,7 @@ using KeyGUI.Menus.Localizations.Declarations.Traits.Instructions;
 namespace KeyGUI.Menus.Localizations.Declarations.Traits {
   public class KeyGuiTraits : LocalesContainer {
     public readonly KeyGuiTraitsInstructions Instructions = new KeyGuiTraitsInstructions();
-    public readonly LocaleDeclaration InstructionsSubmenuName = new LocaleDeclaration();
+    public readonly LocaleDeclaration InstructionsSubmenuName = new LocaleDeclaration("Trait Instructions");
     public readonly LocaleDeclaration CreateTraitSection = new LocaleDeclaration("Create Trait:");
     public readonly LocaleDeclaration CreateTraitName = new LocaleDeclaration("Trait Name");
     public readonly LocaleDeclaration CreateTraitDescription = new LocaleDeclaration("Trait Description");
