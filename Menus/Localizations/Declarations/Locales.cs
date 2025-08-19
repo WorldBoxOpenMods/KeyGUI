@@ -71,17 +71,6 @@ namespace KeyGUI.Menus.Localizations.Declarations {
     public readonly LocaleDeclaration DismissCriticalModWarningButton = new LocaleDeclaration();
     public readonly LocaleDeclaration DisableCriticalModWarningButton = new LocaleDeclaration();
     private static readonly Dictionary<LocaleDeclaration, string> DefaultLocales = new Dictionary<LocaleDeclaration, string>() {
-      {KeyGui.Alliances.WhisperOfAllianceButton, "Whisper Of Alliance"},
-      {KeyGui.Buildings.BuildingPlacementBuildingSelector.CloseMenuButton, "Cancel"},
-      {KeyGui.Buildings.BuildingPlacementBuildingSelectorSubmenuName, "Building Placement Building Selector"},
-      {KeyGui.Buildings.BuildingPlacementPlaceSelectedBuildingButton, "Place Selected Building"},
-      {KeyGui.Buildings.BuildingPlacementNoBuildingSelectedError, "No building selected to place!"},
-      {KeyGui.Cities.ResourceEditor.NoCitySelectedError, "No city selected!"},
-      {KeyGui.Cities.ResourceEditor.CloseMenuButton, "Cancel"},
-      {KeyGui.Cities.ResourceEditorSubmenuName, "Resource Editor"},
-      {KeyGui.Cities.ForceCityAsCapitalCityButton, "Force City As Capital City"},
-      {KeyGui.Cities.ForceCityIntoOtherKingdomButton, "Force City Into Other Kingdom"},
-      {KeyGui.Cities.SelectCityToEditResourcesOfListHeader, "Select City to edit resources of:"},
       {KeyGui.Clans.TraitSelection.RemoveTraitFromClanButton, "Remove {0} from {1}"},
       {KeyGui.Clans.TraitSelection.AddTraitToClanButton, "Add {0} to {1}"},
       {KeyGui.Clans.TraitSelection.NoClanSelectedError, "No clan selected!"},
