@@ -1,4 +1,5 @@
 using KeyGUI.MenuArchitecture;
+using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class AddZoneToCity : KeyGuiPower {
@@ -12,7 +13,7 @@ namespace KeyGUI.Powers {
 
     protected override bool PowerButtonPress(string _) {
       _cityToAddZoneTo = null;
-      WorldTip.showNow("KGPLL_CityZoneAddition_SelectCity", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CityZoneAddition.KGPLL_CityZoneAddition_SelectCity, false, "top");
       return false;
     }
 
@@ -20,17 +21,17 @@ namespace KeyGUI.Powers {
       if (_cityToAddZoneTo == null) {
         _cityToAddZoneTo = pTile.zone.city;
         if (_cityToAddZoneTo != null) {
-          WorldTip.showNow("KGPLL_CityZoneAddition_SelectZones", true, "top");
+          WorldTip.showNow(Locales.KeyGui.Powers.CityZoneAddition.KGPLL_CityZoneAddition_SelectZones, false, "top");
           return false;
         }
-        WorldTip.showNow("KGPLL_CityZoneAddition_NoCitySelectedError", true, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.CityZoneAddition.KGPLL_CityZoneAddition_NoCitySelectedError, false, "top");
         return false;
       }
       if (pTile.zone.city == null) {
         _cityToAddZoneTo.addZone(pTile.zone);
         return true;
       }
-      WorldTip.showNow("KGPLL_CityZoneAddition_ZoneOwnershipConflict", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CityZoneAddition.KGPLL_CityZoneAddition_ZoneOwnershipConflict, false, "top");
       return false;
     }
   }

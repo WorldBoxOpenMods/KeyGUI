@@ -1,4 +1,5 @@
 using KeyGUI.MenuArchitecture;
+using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class RemoveZoneFromCity : KeyGuiPower {
@@ -12,7 +13,7 @@ namespace KeyGUI.Powers {
 
     protected override bool PowerButtonPress(string pPower) {
       _cityToRemoveZoneFrom = null;
-      WorldTip.showNow("KGPLL_CityZoneRemoval_SelectCity", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CityZoneRemoval.KGPLL_CityZoneRemoval_SelectCity, false, "top");
       return false;
     }
 
@@ -20,17 +21,17 @@ namespace KeyGUI.Powers {
       if (_cityToRemoveZoneFrom == null) {
         _cityToRemoveZoneFrom = pTile.zone.city;
         if (_cityToRemoveZoneFrom != null) {
-          WorldTip.showNow("KGPLL_CityZoneRemoval_SelectZones", true, "top");
+          WorldTip.showNow(Locales.KeyGui.Powers.CityZoneRemoval.KGPLL_CityZoneRemoval_SelectZones, false, "top");
           return false;
         }
-        WorldTip.showNow("KGPLL_CityZoneRemoval_NoCitySelectedError", true, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.CityZoneRemoval.KGPLL_CityZoneRemoval_NoCitySelectedError, false, "top");
         return false;
       }
       if (pTile.zone.city == _cityToRemoveZoneFrom) {
         _cityToRemoveZoneFrom.removeZone(pTile.zone);
         return true;
       }
-      WorldTip.showNow("KGPLL_CityZoneRemoval_ZoneOwnershipConflict", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CityZoneRemoval.KGPLL_CityZoneRemoval_ZoneOwnershipConflict, false, "top");
       return false;
     }
   }

@@ -1,4 +1,5 @@
 using KeyGUI.MenuArchitecture;
+using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class CreateNewCulture : KeyGuiPower {
@@ -10,23 +11,23 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string _) {
-      WorldTip.showNow("KGPLL_CultureCreation_SelectCity", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureCreation.KGPLL_CultureCreation_SelectCity, false, "top");
       return false;
     }
 
     protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       City cityToCreateCultureFor = pTile.zone.city;
       if (cityToCreateCultureFor != null) {
-        Culture newCulture = World.world.cultures.newCulture(cityToCreateCultureFor.leader, true);
+        Culture newCulture = World.world.cultures.newCulture(cityToCreateCultureFor.leader, false);
         if (KeyGui.Instance.TryGetPower(out CultureForceSelectCity power)) {
           power.ForceCultureOnCity(newCulture, cityToCreateCultureFor);
         } else {
           // TODO: error message
         }
-        WorldTip.showNow("KGPLL_CultureCreation_Success", true, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.CultureCreation.KGPLL_CultureCreation_Success, false, "top");
         return true;
       }
-      WorldTip.showNow("KGPLL_CultureCreation_NoCitySelected", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureCreation.KGPLL_CultureCreation_NoCitySelected, false, "top");
       return false;
     }
   }

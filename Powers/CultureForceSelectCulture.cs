@@ -1,5 +1,6 @@
 using UnityEngine;
 using KeyGUI.MenuArchitecture;
+using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class CultureForceSelectCulture : KeyGuiPower {
@@ -12,7 +13,7 @@ namespace KeyGUI.Powers {
 
     protected override bool PowerButtonPress(string pPower) {
       CultureToForceUponCity = null;
-      WorldTip.showNow("KGPLL_CultureForceConversion_SelectCulture", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_SelectCulture, false, "top");
       return false;
     }
 
@@ -26,13 +27,13 @@ namespace KeyGUI.Powers {
           return false;
         }
         (GodPower power, PowerButton button) = powerAndButton;
-        WorldTip.showNow("KGPLL_CultureForceConversion_SelectCity", true, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_SelectCity, false, "top");
         power.select_button_action(power.id);
         PowerButtonSelector.instance.unselectAll();
         PowerButtonSelector.instance.setPower(button);
         return true;
       }
-      WorldTip.showNow("KGPLL_CultureForceConversion_NoCultureSelectedError", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_NoCultureSelectedError, false, "top");
       return false;
     }
   }

@@ -1,5 +1,6 @@
 using System.Linq;
 using KeyGUI.MenuArchitecture;
+using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class ForceCityIntoOtherKingdom : KeyGuiPower {
@@ -13,7 +14,7 @@ namespace KeyGUI.Powers {
 
     protected override bool PowerButtonPress(string pPower) {
       _cityToForceIntoOtherKingdom = null;
-      WorldTip.showNow("KGPLL_ChangeCityKingdom_SelectCity", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.KGPLL_ChangeCityKingdom_SelectCity, false, "top");
       return false;
     }
 
@@ -21,10 +22,10 @@ namespace KeyGUI.Powers {
       if (_cityToForceIntoOtherKingdom == null) {
         _cityToForceIntoOtherKingdom = pTile.zone.city;
         if (_cityToForceIntoOtherKingdom != null) {
-          WorldTip.showNow("KGPLL_ChangeCityKingdom_SelectKingdom", true, "top");
+          WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.KGPLL_ChangeCityKingdom_SelectKingdom, false, "top");
           return false;
         }
-        WorldTip.showNow("KGPLL_ChangeCityKingdom_NoCitySelectedError", true, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.KGPLL_ChangeCityKingdom_NoCitySelectedError, false, "top");
         return false;
       }
       if (pTile.zone.city?.kingdom != null) {
@@ -32,10 +33,10 @@ namespace KeyGUI.Powers {
         _cityToForceIntoOtherKingdom.kingdom = pTile.zone.city.kingdom;
         _cityToForceIntoOtherKingdom.kingdom.cities.Add(_cityToForceIntoOtherKingdom);
         _cityToForceIntoOtherKingdom.units.ToList().ForEach(a => a.setKingdom(_cityToForceIntoOtherKingdom.kingdom));
-        WorldTip.showNow("KGPLL_ChangeCityKingdom_Success", true, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.KGPLL_ChangeCityKingdom_Success, false, "top");
         return true;
       }
-      WorldTip.showNow("KGPLL_ChangeCityKingdom_NoKingdomSelectedError", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.ChangeCityKingdom.KGPLL_ChangeCityKingdom_NoKingdomSelectedError, false, "top");
       return false;
     }
   }

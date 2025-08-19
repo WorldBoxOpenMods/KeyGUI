@@ -1,4 +1,5 @@
 using KeyGUI.MenuArchitecture;
+using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class CultureForceSelectCity : KeyGuiPower {
@@ -10,7 +11,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow("KGPLL_CultureForceConversion_SelectCity", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_SelectCity, false, "top");
       return false;
     }
 
@@ -19,13 +20,13 @@ namespace KeyGUI.Powers {
       if (cityToForceCultureUpon != null) {
         if (CultureForceSelectCulture.CultureToForceUponCity != null) {
           ForceCultureOnCity(CultureForceSelectCulture.CultureToForceUponCity, cityToForceCultureUpon);
-          WorldTip.showNow("KGPLL_CultureForceConversion_Success", true, "top");
+          WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_Success, false, "top");
           return true;
         }
-        WorldTip.showNow("KGPLL_CultureForceConversion_NoCultureSelectedError", true, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_NoCultureSelectedError, false, "top");
         return false;
       }
-      WorldTip.showNow("KGPLL_CultureForceConversion_NoCitySelectedError", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.KGPLL_CultureForceConversion_NoCitySelectedError, false, "top");
       return false;
     }
 

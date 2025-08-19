@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using KeyGUI.MenuArchitecture;
+using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class WhisperOfAlliance : KeyGuiPower {
@@ -12,7 +13,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow("KGPLL_AllianceCreation_SelectFirstKingdom", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.KGPLL_AllianceCreation_SelectFirstKingdom, false, "top");
       Config.whisper_A = null;
       Config.whisper_B = null;
       return false;
@@ -27,12 +28,12 @@ namespace KeyGUI.Powers {
       Kingdom kingdom = city.kingdom;
       if (Config.whisper_A == null) {
         Config.whisper_A = kingdom;
-        WorldTip.showNow("KGPLL_AllianceCreation_SelectSecondKingdom", true, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.KGPLL_AllianceCreation_SelectSecondKingdom, false, "top");
         return false;
       }
 
       if (Config.whisper_B == null && Config.whisper_A == kingdom) {
-        WorldTip.showNow("KGPLL_AllianceCreation_SameKingdomTwiceError", true, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.KGPLL_AllianceCreation_SameKingdomTwiceError, false, "top");
         return false;
       }
 
@@ -42,7 +43,7 @@ namespace KeyGUI.Powers {
 
       if (Config.whisper_B != Config.whisper_A) {
         if (Alliance.isSame(Config.whisper_A.getAlliance(), Config.whisper_B.getAlliance())) {
-          WorldTip.showNow("KGPLL_AllianceCreation_KingdomsAlreadyAlliedError", true, "top");
+          WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.KGPLL_AllianceCreation_KingdomsAlreadyAlliedError, false, "top");
           Config.whisper_B = null;
           return false;
         }
@@ -71,7 +72,7 @@ namespace KeyGUI.Powers {
             ForceIntoAlliance(allianceB, Config.whisper_A);
           }
         }
-        WorldTip.showNow(string.Format(LocalizedTextManager.getText("KGPLL_AllianceCreation_CreationSuccess"), Config.whisper_A.name, Config.whisper_B.name), false, "top");
+        WorldTip.showNow(string.Format(Locales.KeyGui.Powers.AllianceCreation.KGPLL_AllianceCreation_CreationSuccess, Config.whisper_A.name, Config.whisper_B.name), false, "top");
         Config.whisper_A = null;
         Config.whisper_B = null;
       }

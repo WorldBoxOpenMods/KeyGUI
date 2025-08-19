@@ -1,5 +1,6 @@
 using System.Linq;
 using KeyGUI.MenuArchitecture;
+using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class MakeActorKing : KeyGuiPower {
@@ -11,7 +12,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow("KGPLL_SetKing_SelectActor", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.SetKing.KGPLL_SetKing_SelectActor, false, "top");
       return false;
     }
 
@@ -23,12 +24,12 @@ namespace KeyGUI.Powers {
             actorToMakeKing.kingdom.king.setProfession(UnitProfession.Unit);
           }
           actorToMakeKing.kingdom.setKing(actorToMakeKing);
-          WorldTip.showNow("KGPLL_SetKing_Success", true, "top");
+          WorldTip.showNow(Locales.KeyGui.Powers.SetKing.KGPLL_SetKing_Success, false, "top");
           return true;
         }
-        WorldTip.showNow("KGPLL_SetKing_NoKingdomOnSelectedActorError", true, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.SetKing.KGPLL_SetKing_NoKingdomOnSelectedActorError, false, "top");
       }
-      WorldTip.showNow("KGPLL_SetKing_NoActorSelectedError", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.SetKing.KGPLL_SetKing_NoActorSelectedError, false, "top");
       return false;
     }
 

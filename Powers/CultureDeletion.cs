@@ -1,5 +1,6 @@
 using System.Linq;
 using KeyGUI.MenuArchitecture;
+using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class CultureDeletion : KeyGuiPower {
@@ -11,7 +12,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow("KGPLL_CultureDeletion_SelectCulture", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureDeletion.KGPLL_CultureDeletion_SelectCulture, false, "top");
       return false;
     }
 
@@ -19,11 +20,11 @@ namespace KeyGUI.Powers {
       Culture cultureToWipe = pTile.zone.city?.culture;
       if (cultureToWipe != null) {
         DeleteCulture(cultureToWipe);
-        WorldTip.showNow("KGPLL_CultureDeletion_Success", true, "top");
+        WorldTip.showNow(Locales.KeyGui.Powers.CultureDeletion.KGPLL_CultureDeletion_Success, false, "top");
         return true;
       }
 
-      WorldTip.showNow("KGPLL_CultureDeletion_NoCultureSelectedError", true, "top");
+      WorldTip.showNow(Locales.KeyGui.Powers.CultureDeletion.KGPLL_CultureDeletion_NoCultureSelectedError, false, "top");
       return false;
     }
 
