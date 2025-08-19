@@ -131,10 +131,6 @@
         <Compile Include="Menus\Disasters\KeyGuiDisasters.cs"/>
         <Compile Include="Menus\GameSettings\KeyGuiGameSettings.cs"/>
         <Compile Include="Menus\KeyGuiRootMenu.cs"/>
-        <Compile Include="Menus\Localizations\Declarations\Actors\ItemDropper\ItemCreator\KeyGuiActorsItemDropperItemCreator.cs"/>
-        <Compile Include="Menus\Localizations\Declarations\Actors\ItemDropper\KeyGuiActorsItemDropper.cs"/>
-        <Compile Include="Menus\Localizations\Declarations\Actors\KeyGuiActors.cs"/>
-        <Compile Include="Menus\Localizations\Declarations\Actors\TraitRemovalSelection\KeyGuiActorsTraitRemovalSelection.cs"/>
         <Compile Include="Menus\Localizations\Declarations\Alliances\KeyGuiAlliances.cs"/>
         <Compile Include="Menus\Localizations\Declarations\Buildings\BuildingPlacementBuildingSelector\KeyGuiBuildingsBuildingPlacementBuildingSelector.cs"/>
         <Compile Include="Menus\Localizations\Declarations\Buildings\KeyGuiBuildings.cs"/>

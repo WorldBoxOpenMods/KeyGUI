@@ -1,6 +1,5 @@
 using KeyGuiLocalizations = KeyGUI.Menus.Localizations.Declarations.Localizations.KeyGuiLocales;
 using System.Collections.Generic;
-using KeyGUI.Menus.Localizations.Declarations.Actors;
 using KeyGUI.Menus.Localizations.Declarations.Alliances;
 using KeyGUI.Menus.Localizations.Declarations.Buildings;
 using KeyGUI.Menus.Localizations.Declarations.Cities;
@@ -34,7 +33,6 @@ namespace KeyGUI.Menus.Localizations.Declarations {
     public readonly KeyGuiCrabzilla Crabzilla = new KeyGuiCrabzilla();
     public readonly KeyGuiClans Clans = new KeyGuiClans();
     public readonly KeyGuiAlliances Alliances = new KeyGuiAlliances();
-    public readonly KeyGuiActors Actors = new KeyGuiActors();
     public readonly KeyGuiGameSettings GameSettings = new KeyGuiGameSettings();
     public readonly KeyGuiZones Zones = new KeyGuiZones();
     public readonly KeyGuiCities Cities = new KeyGuiCities();
@@ -73,29 +71,6 @@ namespace KeyGUI.Menus.Localizations.Declarations {
     public readonly LocaleDeclaration DismissCriticalModWarningButton = new LocaleDeclaration();
     public readonly LocaleDeclaration DisableCriticalModWarningButton = new LocaleDeclaration();
     private static readonly Dictionary<LocaleDeclaration, string> DefaultLocales = new Dictionary<LocaleDeclaration, string>() {
-      {KeyGui.Actors.TraitRemovalSelectionSubmenuName, "Trait Removal Selection"},
-      {KeyGui.Actors.ItemDropperSubmenuName, "Item Dropper"},
-      {KeyGui.Actors.TraitRemovalRainDropButton, "Trait Removal Rain Drop"},
-      {KeyGui.Actors.MakeActorKingButton, "Make Actor King"},
-      {KeyGui.Actors.TraitRemovalSelection.SelectTraitButton, "Select {0}"},
-      {KeyGui.Actors.TraitRemovalSelection.DeselectTraitButton, "Deselect {0}"},
-      {KeyGui.Actors.TraitRemovalSelection.CloseMenuButton, "Done"},
-      {KeyGui.Actors.ItemDropper.CreatedItemsListHeader, "Created Items:"},
-      {KeyGui.Actors.ItemDropper.LoadItemFromItemCreatorButton, "Load Item From Item Creator"},
-      {KeyGui.Actors.ItemDropper.LoadItemFromItemCreatorButtonNoItemError, "No Item To Load Exists"},
-      {KeyGui.Actors.ItemDropper.AddItemRainButton, "Add Item Rain"},
-      {KeyGui.Actors.ItemDropper.ItemCreatorSubmenuName, "Item Creator"},
-      {KeyGui.Actors.ItemDropper.ItemCreator.ItemTypeSelectHeader, "Item Type:"},
-      {KeyGui.Actors.ItemDropper.ItemCreator.ItemAssetSelectHeader, "Item Asset:"},
-      {KeyGui.Actors.ItemDropper.ItemCreator.ItemMaterialSelectHeader, "Item Material:"},
-      {KeyGui.Actors.ItemDropper.ItemCreator.ItemModifiersSelectHeader, "Item Modifiers:"},
-      {KeyGui.Actors.ItemDropper.ItemCreator.ItemNameSelectHeader, "Item Name:"},
-      {KeyGui.Actors.ItemDropper.ItemCreator.ItemCreateButton, "Create"},
-      {KeyGui.Actors.ItemDropper.ItemCreator.ItemDiscardButton, "Discard"},
-      {KeyGui.Actors.ItemDropper.ItemCreator.NoItemAssetSelectOption, "Nothing"},
-      {KeyGui.Actors.ItemDropper.ItemCreator.NoItemAssetItemName, "Remove {0} From Actor"},
-      {KeyGui.Actors.ItemDropper.ItemCreator.AddItemModifierButton, "Add {0}"},
-      {KeyGui.Actors.ItemDropper.ItemCreator.RemoveItemModifierButton, "Remove {0}"},
       {KeyGui.Alliances.WhisperOfAllianceButton, "Whisper Of Alliance"},
       {KeyGui.Buildings.BuildingPlacementBuildingSelector.CloseMenuButton, "Cancel"},
       {KeyGui.Buildings.BuildingPlacementBuildingSelectorSubmenuName, "Building Placement Building Selector"},
