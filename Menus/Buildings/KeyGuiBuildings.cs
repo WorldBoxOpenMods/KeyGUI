@@ -9,6 +9,9 @@ namespace KeyGUI.Menus.Buildings {
     internal override void AddSubMenus() {
       Load<KeyGuiBuildingsBuildingPlacementBuildingSelector>(Locales.KeyGui.Buildings.BuildingPlacementBuildingSelectorSubmenuName);
     }
+    internal override void RegisterPowers() {
+      KeyGui.Instance.RegisterPower<PlaceBuilding>();
+    }
 
     protected override void LoadGUI(int windowID) {
       LoadSubMenuToggles();

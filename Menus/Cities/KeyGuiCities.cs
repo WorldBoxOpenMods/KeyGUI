@@ -7,6 +7,11 @@ using UnityEngine;
 
 namespace KeyGUI.Menus.Cities {
   public class KeyGuiCities : KeyGuiMenuManager {
+    internal override void RegisterPowers() {
+      KeyGui.Instance.RegisterPower<ForceCityAsCapitalCity>();
+      KeyGui.Instance.RegisterPower<ForceCityIntoOtherKingdom>();
+    }
+    
     protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cities.ForceCityAsCapitalCityButton))) {
         if (!KeyGui.Instance.TryGetPower<ForceCityAsCapitalCity>(out (GodPower, PowerButton) powerAndButton)) {

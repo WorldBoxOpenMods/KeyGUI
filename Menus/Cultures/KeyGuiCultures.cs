@@ -14,6 +14,12 @@ namespace KeyGUI.Menus.Cultures {
     internal override void RegisterPatches() {
       KeyGui.Instance.RegisterPatch<CultureBirthTraitsManagement>();
     }
+    internal override void RegisterPowers() {
+      KeyGui.Instance.RegisterPower<CultureDeletion>();
+      KeyGui.Instance.RegisterPower<CultureReset>();
+      KeyGui.Instance.RegisterPower<CultureForceSelectCulture>();
+      KeyGui.Instance.RegisterPower<CreateNewCulture>();
+    }
 
     protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cultures.DeleteOneCultureButton))) {

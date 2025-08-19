@@ -31,6 +31,7 @@ namespace KeyGUI.MenuArchitecture {
     protected int WindowID { get; private set; }
     
     internal virtual void RegisterPatches() {}
+    internal virtual void RegisterPowers() {}
 
     internal void Initialize() {
       if (IsInitialized) {

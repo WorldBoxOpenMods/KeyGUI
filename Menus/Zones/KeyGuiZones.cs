@@ -5,6 +5,11 @@ using UnityEngine;
 
 namespace KeyGUI.Menus.Zones {
   public class KeyGuiZones : KeyGuiMenu {
+    internal override void RegisterPowers() {
+      KeyGui.Instance.RegisterPower<AddZoneToCity>();
+      KeyGui.Instance.RegisterPower<RemoveZoneFromCity>();
+    }
+    
     protected override void LoadGUI(int windowID) {
       if (GUILayout.Button(Locales.Get(Locales.KeyGui.Zones.AddZoneToCityButton))) {
         if (!KeyGui.Instance.TryGetPower<AddZoneToCity>(out (GodPower, PowerButton) powerAndButton)) {
