@@ -186,6 +186,7 @@ namespace KeyGUI {
 
     private readonly KeyGuiRootMenu _rootMenu = new KeyGuiRootMenu();
     private readonly List<KeyGuiPatch> _patches = new List<KeyGuiPatch>();
+    private readonly List<KeyGuiPower> _powers = new List<KeyGuiPower>();
 
     private bool _traitsLoaded;
     private bool _gameConfigDataSent;
@@ -256,6 +257,38 @@ namespace KeyGUI {
         return false;
       }
       return true;
+    }
+
+    internal void RegisterPower<T>() where T : KeyGuiPower, new() {
+      if (_powers.OfType<T>().Any()) {
+        return;
+      }
+      Debug.Log("Registering power: " + typeof(T).Name);
+      try {
+        _powers.Add(new T());
+        Debug.Log("Successfully registered power: " + typeof(T).Name);
+      } catch (Exception e) {
+        Debug.LogError("Error registering power: " + typeof(T).Name);
+        Debug.LogError(e);
+      }
+    }
+    
+    internal bool TryGetPower<T>(out T power) where T : KeyGuiPower, new() {
+      power = _powers.OfType<T>().FirstOrDefault();
+      if (power == null) {
+        Debug.LogError("Power of type " + typeof(T).Name + " not found!");
+        return false;
+      }
+      return true;
+    }
+    
+    internal bool TryGetPower<T>(out (GodPower power, PowerButton button) power) where T : KeyGuiPower, new() {
+      if (TryGetPower(out T powerComponent)) {
+        power = (powerComponent.Power, powerComponent.Button);
+        return true;
+      }
+      power = default;
+      return false;
     }
     
     private void PerformInitialNetworkingSetup() {

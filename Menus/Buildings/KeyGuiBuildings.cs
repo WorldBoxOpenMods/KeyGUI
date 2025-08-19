@@ -1,6 +1,4 @@
-using KeyGeneralPurposeLibrary;
-using KeyGeneralPurposeLibrary.PowersLib;
-using KeyGeneralPurposeLibrary.PowersLib.Powers;
+using KeyGUI.Powers;
 using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Buildings.BuildingPlacementBuildingSelector;
 using KeyGUI.Menus.Localizations.Declarations;
@@ -16,14 +14,14 @@ namespace KeyGUI.Menus.Buildings {
       LoadSubMenuToggles();
       if (KeyGuiBuildingsBuildingPlacementBuildingSelector.SelectedBuilding != null) {
         if (GUILayout.Button(Locales.Get(Locales.KeyGui.Buildings.BuildingPlacementPlaceSelectedBuildingButton))) {
-          (GodPower power, PowerButton button) = KeyLib.Get<KeyGenLibGodPowerLibrary>().GetPower<PlaceBuilding>();
-          if (button != null) {
+          if (!KeyGui.Instance.TryGetPower<PlaceBuilding>(out (GodPower, PowerButton) powerAndButton)) {
+            Debug.LogError("Something went wrong with the Place Building! Please report this to the mod author!");
+          } else {
+            (GodPower power, PowerButton button) = powerAndButton;
             power.select_button_action(power.id);
             power.drop_id = KeyGuiBuildingsBuildingPlacementBuildingSelector.SelectedBuilding.id;
             PowerButtonSelector.instance.unselectAll();
             PowerButtonSelector.instance.setPower(button);
-          } else {
-            Debug.LogError("Something went wrong with the Place Building! Please report this to the mod author!");
           }
         }
       } else {
