@@ -332,70 +332,62 @@
     }
   },
   "Powers": {
-    "AllianceCreation": {
+    "CultureDeletion": {
+      "SelectCulture": "Select the culture to delete.",
+      "Success": "Culture deleted!",
+      "NoCultureSelectedError": "No culture to delete here, try again!"
+    },
+    "CultureReset": {
+      "SelectCulture": "Select the culture to reset.",
+      "Success": "Culture reset!",
+      "NoCultureSelectedError": "No culture to reset here, try again!"
+    },
+    "CultureForceSelectCulture": {
+      "SelectCulture": "Select the culture to force upon the city.",
+      "NoCultureSelectedError": "No culture to force upon city here, try again!",
+      "SelectCity": "Select the city to force the culture upon."
+    },
+    "CreateNewCulture": {
+      "SelectCity": "Select the city to create a new culture for.",
+      "Success": "New culture created!",
+      "NoCitySelected": "No city to create new culture for here, try again!"
+    },
+    "WhisperOfAlliance": {
       "SelectFirstKingdom": "Select the first kingdom to create an alliance with.",
       "SelectSecondKingdom": "Select the second kingdom to create an alliance with.",
       "SameKingdomTwiceError": "Selected the same kingdom twice, try again.",
       "KingdomsAlreadyAlliedError": "The selected kingdoms are already allied, try again.",
       "CreationSuccess": "The kingdom {0} has successfully entered an alliance with kingdom {1}."
     },
-    "ChangeCityKingdom": {
+    "AddZoneToCity": {
+      "SelectCity": "Select the city to add zones to.",
+      "SelectZones": "Select zones to add to the city.",
+      "NoCitySelectedError": "No city to add zone to here, try again!",
+      "ZoneOwnershipConflict": "The zone you're trying to add already belongs to another city, please remove it from that city first!"
+    },
+    "RemoveZoneFromCity": {
+      "SelectCity": "Select the city to remove zones from.",
+      "SelectZones": "Select zones to remove.",
+      "NoCitySelectedError": "No city to remove zone from here, try again!",
+      "ZoneOwnershipConflict": "The zone you're trying to remove doesn't belong to the city you selected, please select the correct city!"
+    },
+    "ForceCityAsCapitalCity": {
+      "SelectCity": "Select the city to force as the capital city.",
+      "Success": "City forced as capital city!",
+      "NoCitySelectedError": "No city to force as capital city here, try again!"
+    },
+    "ForceCityIntoOtherKingdom": {
       "SelectCity": "Select the city to force into another kingdom.",
       "SelectKingdom": "Select the kingdom to force the city into.",
       "NoCitySelectedError": "No city to force into other kingdom here, try again!",
       "Success": "City forced into other kingdom!",
       "NoKingdomSelectedError": "The tile you selected isn't owned by any kingdom!"
     },
-    "CityZoneAddition": {
-      "SelectCity": "Select the city to add zones to.",
-      "SelectZones": "Select zones to add to the city.",
-      "NoCitySelectedError": "No city to add zone to here, try again!",
-      "ZoneOwnershipConflict": "The zone you're trying to add already belongs to another city, please remove it from that city first!"
-    },
-    "CityZoneRemoval": {
-      "SelectCity": "Select the city to remove zones from.",
-      "SelectZones": "Select zones to remove.",
-      "NoCitySelectedError": "No city to remove zone from here, try again!",
-      "ZoneOwnershipConflict": "The zone you're trying to remove doesn't belong to the city you selected, please select the correct city!"
-    },
-    "CultureCreation": {
-      "SelectCity": "Select the city to create a new culture for.",
-      "Success": "New culture created!",
-      "NoCitySelected": "No city to create new culture for here, try again!"
-    },
-    "CultureDeletion": {
-      "SelectCulture": "Select the culture to delete.",
-      "Success": "Culture deleted!",
-      "NoCultureSelectedError": "No culture to delete here, try again!"
-    },
-    "CultureForceConversion": {
-      "SelectCulture": "Select the culture to force upon the city.",
-      "NoCultureSelectedError": "No culture to force upon city here, try again!",
-      "SelectCity": "Select the city to force the culture upon.",
-      "Success": "Culture forced upon city!",
-      "NoCitySelectedError": "No city to force culture upon here, try again!"
-    },
-    "CultureFullReset": {
-      "SelectCulture": "Select the culture to reset.",
-      "Success": "Culture reset!",
-      "NoCultureSelectedError": "No culture to reset here, try again!"
-    },
-    "ForceCapital": {
-      "SelectCity": "Select the city to force as the capital city.",
-      "Success": "City forced as capital city!",
-      "NoCitySelectedError": "No city to force as capital city here, try again!"
-    },
     "PlaceBuilding": {
       "SelectCity": "Select the city to place the building in.",
       "InvalidTileError": "Can't place building here, try again!",
       "Success": "Building placed!",
       "NoBuildingSelected": "No building to place selected, try again!"
-    },
-    "SetKing": {
-      "SelectActor": "Select the actor to make king.",
-      "Success": "Actor made king!",
-      "NoKingdomOnSelectedActorError": "The actor you selected doesn't have a kingdom!",
-      "NoActorSelectedError": "No actor to make king here, try again!"
     }
   }
 }
