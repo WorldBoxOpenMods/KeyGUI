@@ -267,7 +267,9 @@ namespace KeyGUI {
       }
       Debug.Log("Registering power: " + typeof(T).Name);
       try {
-        _powers.Add(new T());
+        T power = new T();
+        power.InitLocales();
+        _powers.Add(power);
         Debug.Log("Successfully registered power: " + typeof(T).Name);
       } catch (Exception e) {
         Debug.LogError("Error registering power: " + typeof(T).Name);
