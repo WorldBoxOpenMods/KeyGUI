@@ -11,8 +11,6 @@ namespace KeyGUI.Menus.Localizations.Declarations.GameSettings {
     public readonly LocaleDeclaration SetGameSpeedModifierButton = new LocaleDeclaration("Set");
     public readonly LocaleDeclaration CameraMovementLabel = new LocaleDeclaration("Camera Movement");
     public readonly LocaleDeclaration ToggleMouseDragButton = new LocaleDeclaration("Toggle Mouse Drag");
-    public readonly LocaleDeclaration MapGenerationLabel = new LocaleDeclaration("Map Generation");
-    public readonly LocaleDeclaration SetMapSeedButton = new LocaleDeclaration("Set seed");
     public readonly LocaleDeclaration BoatsLabel = new LocaleDeclaration("Boats");
     public readonly LocaleDeclaration EnableBoatsBreakingIceButton = new LocaleDeclaration("Enable Boats Breaking Ice");
     public readonly LocaleDeclaration DisableBoatsBreakingIceButton = new LocaleDeclaration("Disable Boats Breaking Ice");

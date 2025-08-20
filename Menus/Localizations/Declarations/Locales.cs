@@ -10,7 +10,6 @@ using KeyGUI.Menus.Localizations.Declarations.Cultures;
 using KeyGUI.Menus.Localizations.Declarations.Destruction;
 using KeyGUI.Menus.Localizations.Declarations.Disasters;
 using KeyGUI.Menus.Localizations.Declarations.GameSettings;
-using KeyGUI.Menus.Localizations.Declarations.Items;
 using KeyGUI.Menus.Localizations.Declarations.ModConfig;
 using KeyGUI.Menus.Localizations.Declarations.Plots;
 using KeyGUI.Menus.Localizations.Declarations.Powers;
@@ -30,7 +29,6 @@ namespace KeyGUI.Menus.Localizations.Declarations {
     public readonly KeyGuiCultures Cultures = new KeyGuiCultures();
     public readonly KeyGuiPlots Plots = new KeyGuiPlots();
     public readonly KeyGuiTraits Traits = new KeyGuiTraits();
-    public readonly KeyGuiItems Items = new KeyGuiItems();
     public readonly KeyGuiCrabzilla Crabzilla = new KeyGuiCrabzilla();
     public readonly KeyGuiClans Clans = new KeyGuiClans();
     public readonly KeyGuiAlliances Alliances = new KeyGuiAlliances();
@@ -49,11 +47,9 @@ namespace KeyGUI.Menus.Localizations.Declarations {
     public readonly LocaleDeclaration CulturesSubmenuText = new LocaleDeclaration("Cultures");
     public readonly LocaleDeclaration PlotsSubmenuText = new LocaleDeclaration("Plots");
     public readonly LocaleDeclaration TraitsSubmenuText = new LocaleDeclaration("Traits");
-    public readonly LocaleDeclaration ItemsSubmenuText = new LocaleDeclaration("Items");
     public readonly LocaleDeclaration CrabzillaSubmenuText = new LocaleDeclaration("Crabzilla");
     public readonly LocaleDeclaration ClansSubmenuText = new LocaleDeclaration("Clans");
     public readonly LocaleDeclaration AlliancesSubmenuText = new LocaleDeclaration("Alliances");
-    public readonly LocaleDeclaration ActorsSubmenuText = new LocaleDeclaration("Actors");
     public readonly LocaleDeclaration GameSettingsSubmenuText = new LocaleDeclaration("Game Settings");
     public readonly LocaleDeclaration ZonesSubmenuText = new LocaleDeclaration("Zones");
     public readonly LocaleDeclaration CitiesSubmenuText = new LocaleDeclaration("Cities");

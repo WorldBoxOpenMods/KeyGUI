@@ -144,12 +144,10 @@
         <Compile Include="Menus\Localizations\Declarations\Destruction\KeyGuiDestruction.cs"/>
         <Compile Include="Menus\Localizations\Declarations\Disasters\KeyGuiDisasters.cs"/>
         <Compile Include="Menus\Localizations\Declarations\GameSettings\KeyGuiGameSettings.cs"/>
-        <Compile Include="Menus\Localizations\Declarations\Items\KeyGuiItems.cs"/>
         <Compile Include="Menus\Localizations\Declarations\Locales.cs"/>
         <Compile Include="Menus\Localizations\Declarations\Localizations\KeyGuiLocales.cs"/>
         <Compile Include="Menus\Localizations\Declarations\ModConfig\KeyGuiModConfig.cs"/>
         <Compile Include="Menus\Localizations\Declarations\Plots\KeyGuiPlots.cs"/>
-        <Compile Include="Menus\Localizations\Declarations\Plots\PeacePlotTargetSelection\KeyGuiPlotsPeacePlotTargetSelection.cs"/>
         <Compile Include="Menus\Localizations\Declarations\Powers\AllianceCreation\KeyGuiPowersAllianceCreation.cs" />
         <Compile Include="Menus\Localizations\Declarations\Powers\ChangeCityKingdom\KeyGuiPowersChangeCityKingdom.cs" />
         <Compile Include="Menus\Localizations\Declarations\Powers\CityZoneAddition\KeyGuiPowersCityZoneAddition.cs" />
@@ -164,8 +162,6 @@
         <Compile Include="Menus\Localizations\Declarations\Powers\SetKing\KeyGuiPowersSetKing.cs" />
         <Compile Include="Menus\Localizations\Declarations\Saves\KeyGuiSaves.cs" />
         <Compile Include="Menus\Localizations\Declarations\Stats\KeyGuiStats.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Stats\RaceModifier\KeyGuiStatsRaceModifier.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Stats\RaceModifier\StatSelection\KeyGuiStatsRaceModifierStatModifier.cs" />
         <Compile Include="Menus\Localizations\Declarations\Stats\StatBoundEditing\EditStat\KeyGuiStatsStatBoundEditingEditStat.cs" />
         <Compile Include="Menus\Localizations\Declarations\Stats\StatBoundEditing\KeyGuiStatsStatBoundEditing.cs" />
         <Compile Include="Menus\Localizations\Declarations\Traits\Instructions\KeyGuiTraitsInstructions.cs" />
