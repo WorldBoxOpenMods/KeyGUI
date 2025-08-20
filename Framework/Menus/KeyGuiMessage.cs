@@ -1,11 +1,11 @@
-using KeyGUI.Menus.Localizations;
+using KeyGUI.Framework.Locales;
 using UnityEngine;
 
 namespace KeyGUI.Framework.Menus {
   public class KeyGuiMessage : KeyGuiMenu {
     private string Message { get; }
     private bool _firstWindowDisplay = true;
-    public KeyGuiMessage(LocaleDeclaration title, int windowID, string message) {
+    public KeyGuiMessage(KeyGuiLocale title, int windowID, string message) {
       InitMenuInfo(title, windowID, this);
       Message = message;
       OfferVisibilityToggle = false;

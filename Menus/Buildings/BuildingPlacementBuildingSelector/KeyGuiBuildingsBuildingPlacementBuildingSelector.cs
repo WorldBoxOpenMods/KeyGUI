@@ -1,10 +1,12 @@
 using System.Linq;
+using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Menus;
-using KeyGUI.Menus.Localizations.Declarations;
 using UnityEngine;
 
 namespace KeyGUI.Menus.Buildings.BuildingPlacementBuildingSelector {
   public class KeyGuiBuildingsBuildingPlacementBuildingSelector : KeyGuiMenu {
+    public readonly KeyGuiLocale CloseMenuButton = "Cancel";
+
     internal static BuildingAsset SelectedBuilding { get; private set; }
     protected override float MenuMaxHeight => 1500;
     protected override float MenuMinHeight => 900;
@@ -15,7 +17,7 @@ namespace KeyGUI.Menus.Buildings.BuildingPlacementBuildingSelector {
         SelectedBuilding = buildingAsset;
       }
       GUILayout.EndScrollView();
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Buildings.BuildingPlacementBuildingSelector.CloseMenuButton))) {
+      if (GUILayout.Button(CloseMenuButton)) {
         Enabled = false;
       }
     }

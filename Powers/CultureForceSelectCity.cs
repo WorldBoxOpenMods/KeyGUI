@@ -1,8 +1,12 @@
+using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Powers;
-using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class CultureForceSelectCity : KeyGuiPower {
+    public readonly KeyGuiLocale NoCultureSelectedError = "No culture to force upon city here, try again!";
+    public readonly KeyGuiLocale SelectCity = "Select the city to force the culture upon.";
+    public readonly KeyGuiLocale Success = "Culture forced upon city!";
+    public readonly KeyGuiLocale NoCitySelectedError = "No city to force culture upon here, try again!";
     public CultureForceSelectCity() : base(new GodPower() {
       id = "culture_force_select_city_keygui",
       name = "Culture Force Select City",
@@ -11,7 +15,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.SelectCity, false, "top");
+      WorldTip.showNow(SelectCity, false, "top");
       return false;
     }
 
@@ -20,13 +24,13 @@ namespace KeyGUI.Powers {
       if (cityToForceCultureUpon != null) {
         if (CultureForceSelectCulture.CultureToForceUponCity != null) {
           ForceCultureOnCity(CultureForceSelectCulture.CultureToForceUponCity, cityToForceCultureUpon);
-          WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.Success, false, "top");
+          WorldTip.showNow(Success, false, "top");
           return true;
         }
-        WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.NoCultureSelectedError, false, "top");
+        WorldTip.showNow(NoCultureSelectedError, false, "top");
         return false;
       }
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureForceConversion.NoCitySelectedError, false, "top");
+      WorldTip.showNow(NoCitySelectedError, false, "top");
       return false;
     }
 

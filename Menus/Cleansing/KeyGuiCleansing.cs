@@ -1,13 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Menus;
-using KeyGUI.Menus.Localizations.Declarations;
 using strings;
 using UnityEngine;
 
 namespace KeyGUI.Menus.Cleansing {
   public class KeyGuiCleansing : KeyGuiMenu {
+    public readonly KeyGuiLocale GetRidOfMushSporesButton = "Get Rid Of Mush Spores";
+    public readonly KeyGuiLocale CureThePlagueButton = "Cure The Plague";
+    public readonly KeyGuiLocale KillEveryTumorButton = "Kill Every Tumor";
+    public readonly KeyGuiLocale ExterminateZombiesButton = "Exterminate Zombies";
+    public readonly KeyGuiLocale DeleteAllRoadsButton = "Delete All Roads";
+    public readonly KeyGuiLocale LowerAllMountainsButton = "Lower All Mountains";
+    public readonly KeyGuiLocale LowerAllHillsButton = "Lower All Hills";
+    public readonly KeyGuiLocale DestroyAllBrokenBuildingsButton = "Destroy All Broken Buildings";
+    public readonly KeyGuiLocale BiomesCategoryHeader = "Biomes";
+    public readonly KeyGuiLocale BiomeDeletionListHeader = "Biome Deletion:";
+    public readonly KeyGuiLocale GetRidOfBiomeButton = "Get Rid Of {0} Biome";
+    public readonly KeyGuiLocale BiomeRandomizationListHeader = "Biome Randomization:";
+    public readonly KeyGuiLocale RandomizeBiomesButton = "Randomize Biomes";
+    public readonly KeyGuiLocale BiomeRandomizationBiomeEnablingDisablingListHeader = "Biome Enabling/Disabling:";
+    public readonly KeyGuiLocale BiomeRandomizationEnableBiomeButton = "Enable {0} Biome";
+    public readonly KeyGuiLocale BiomeRandomizationDisableBiomeButton = "Disable {0} Biome";
+    
     private static readonly List<(BiomeAsset biome, bool enabled)> BiomeTypes = new List<(BiomeAsset biome, bool enabled)>();
 
     protected override void InitializeMenu() {
@@ -20,7 +37,7 @@ namespace KeyGUI.Menus.Cleansing {
     }
 
     protected override void LoadGUI(int windowID) {
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.GetRidOfMushSporesButton))) {
+      if (GUILayout.Button(GetRidOfMushSporesButton)) {
         foreach (Actor unit in World.world.units) {
           if (unit.hasTrait(S_Trait.mush_spores)) {
             unit.removeTrait(S_Trait.mush_spores);
@@ -31,13 +48,13 @@ namespace KeyGUI.Menus.Cleansing {
         }
       }
 
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.CureThePlagueButton))) {
+      if (GUILayout.Button(CureThePlagueButton)) {
         foreach (Actor unit in World.world.units.Where(unit => unit.hasTrait(S_Trait.plague))) {
           unit.removeTrait(S_Trait.plague);
         }
       }
 
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.KillEveryTumorButton))) {
+      if (GUILayout.Button(KillEveryTumorButton)) {
         foreach (Actor unit in World.world.units) {
           if (unit.hasTrait(S_Trait.tumor_infection)) {
             unit.removeTrait(S_Trait.tumor_infection);
@@ -48,7 +65,7 @@ namespace KeyGUI.Menus.Cleansing {
         }
       }
 
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.ExterminateZombiesButton))) {
+      if (GUILayout.Button(ExterminateZombiesButton)) {
         foreach (Actor unit in World.world.units) {
           if (unit.hasTrait(S_Trait.infected)) {
             unit.removeTrait(S_Trait.infected);
@@ -61,7 +78,7 @@ namespace KeyGUI.Menus.Cleansing {
         }
       }
 
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.DeleteAllRoadsButton))) {
+      if (GUILayout.Button(DeleteAllRoadsButton)) {
         foreach (WorldTile tile in World.world.tiles_list.Where(tile => tile.Type.road)) {
           tile.setTopTileType(TopTileLibrary.grass_high);
           MapAction.removeGreens(tile);
@@ -69,14 +86,14 @@ namespace KeyGUI.Menus.Cleansing {
         World.world.roads_calculator.clear();
       }
 
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.LowerAllMountainsButton))) {
+      if (GUILayout.Button(LowerAllMountainsButton)) {
         foreach (WorldTile tile in World.world.tiles_list.Where(tile => tile.Type.mountains)) {
           tile.setTileType(TileLibrary.hills);
           tile.unfreeze();
         }
       }
 
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.LowerAllHillsButton))) {
+      if (GUILayout.Button(LowerAllHillsButton)) {
         foreach (WorldTile tile in World.world.tiles_list) {
           if (tile.top_type == TopTileLibrary.snow_hills) {
             tile.setTopTileType(TopTileLibrary.grass_high);
@@ -87,16 +104,16 @@ namespace KeyGUI.Menus.Cleansing {
         }
       }
 
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.DestroyAllBrokenBuildingsButton))) {
+      if (GUILayout.Button(DestroyAllBrokenBuildingsButton)) {
         foreach (Building building in World.world.buildings.Where(building => building.data.state == BuildingState.Ruins || building.data.state == BuildingState.CivAbandoned)) {
           building.startRemove();
         }
       }
 
-      GUILayout.Label(Locales.Get(Locales.KeyGui.Cleansing.BiomesCategoryHeader));
+      GUILayout.Label(BiomesCategoryHeader);
 
-      GUILayout.Label(Locales.Get(Locales.KeyGui.Cleansing.BiomeDeletionListHeader));
-      if (GUILayout.Button(string.Format(Locales.Get(Locales.KeyGui.Cleansing.GetRidOfBiomeButton), "Grass"))) {
+      GUILayout.Label(BiomeDeletionListHeader);
+      if (GUILayout.Button(string.Format(GetRidOfBiomeButton, "Grass"))) {
         foreach (WorldTile tile in World.world.tiles_list.Where(tile => tile != null && tile.cur_tile_type.biome_asset.id == ST.biome_grass)) {
           MapAction.removeGreens(tile);
         }
@@ -105,7 +122,7 @@ namespace KeyGUI.Menus.Cleansing {
       for (int i = 0; i < BiomeTypes.Count; ++i) {
         if (BiomeTypes[i].enabled) {
           BiomeAsset biome = BiomeTypes[i].biome;
-          if (GUILayout.Button(string.Format(Locales.Get(Locales.KeyGui.Cleansing.GetRidOfBiomeButton), $"{char.ToUpper(biome.id[0])}{biome.id.Substring(1)}"))) {
+          if (GUILayout.Button(string.Format(GetRidOfBiomeButton, $"{char.ToUpper(biome.id[0])}{biome.id.Substring(1)}"))) {
             foreach (WorldTile tile in World.world.tiles_list.Where(tile => tile != null && tile.cur_tile_type.biome_asset == biome)) {
               MapAction.removeGreens(tile);
             }
@@ -113,9 +130,9 @@ namespace KeyGUI.Menus.Cleansing {
         }
       }
 
-      GUILayout.Label(Locales.Get(Locales.KeyGui.Cleansing.BiomeRandomizationListHeader));
+      GUILayout.Label(BiomeRandomizationListHeader);
 
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.Cleansing.RandomizeBiomesButton))) {
+      if (GUILayout.Button(RandomizeBiomesButton)) {
         for (int i = 0; i < 7; ++i) {
           List<Action<WorldTile, string>> actions = new List<Action<WorldTile, string>>();
           for (int j = 0; j < BiomeTypes.Count; ++j) {
@@ -132,14 +149,14 @@ namespace KeyGUI.Menus.Cleansing {
         }
       }
 
-      GUILayout.Label(Locales.Get(Locales.KeyGui.Cleansing.BiomeRandomizationBiomeEnablingDisablingListHeader));
+      GUILayout.Label(BiomeRandomizationBiomeEnablingDisablingListHeader);
 
       for (int i = 0; i < BiomeTypes.Count; ++i) {
         switch (BiomeTypes[i].enabled) {
-          case true when GUILayout.Button(string.Format(Locales.Get(Locales.KeyGui.Cleansing.BiomeRandomizationDisableBiomeButton), $"{char.ToUpper(BiomeTypes[i].biome.id[0])}{BiomeTypes[i].biome.id.Substring(1)}")):
+          case true when GUILayout.Button(string.Format(BiomeRandomizationDisableBiomeButton, $"{char.ToUpper(BiomeTypes[i].biome.id[0])}{BiomeTypes[i].biome.id.Substring(1)}")):
             BiomeTypes[i] = (BiomeTypes[i].biome, true);
             break;
-          case false when GUILayout.Button(string.Format(Locales.Get(Locales.KeyGui.Cleansing.BiomeRandomizationEnableBiomeButton), $"{char.ToUpper(BiomeTypes[i].biome.id[0])}{BiomeTypes[i].biome.id.Substring(1)}")):
+          case false when GUILayout.Button(string.Format(BiomeRandomizationEnableBiomeButton, $"{char.ToUpper(BiomeTypes[i].biome.id[0])}{BiomeTypes[i].biome.id.Substring(1)}")):
             BiomeTypes[i] = (BiomeTypes[i].biome, false);
             break;
         }

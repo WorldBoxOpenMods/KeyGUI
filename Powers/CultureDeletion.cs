@@ -1,9 +1,13 @@
 using System.Linq;
+using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Powers;
-using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class CultureDeletion : KeyGuiPower {
+    public readonly KeyGuiLocale SelectCulture = "Select the culture to delete.";
+    public readonly KeyGuiLocale Success = "Culture deleted!";
+    public readonly KeyGuiLocale NoCultureSelectedError = "No culture to delete here, try again!";
+    
     public CultureDeletion() : base(new GodPower() {
       id = "culture_wipe_keygui",
       name = "Culture Wipe",
@@ -12,7 +16,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureDeletion.SelectCulture, false, "top");
+      WorldTip.showNow(SelectCulture, false, "top");
       return false;
     }
 
@@ -20,11 +24,11 @@ namespace KeyGUI.Powers {
       Culture cultureToWipe = pTile.zone.city?.culture;
       if (cultureToWipe != null) {
         DeleteCulture(cultureToWipe);
-        WorldTip.showNow(Locales.KeyGui.Powers.CultureDeletion.Success, false, "top");
+        WorldTip.showNow(Success, false, "top");
         return true;
       }
 
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureDeletion.NoCultureSelectedError, false, "top");
+      WorldTip.showNow(NoCultureSelectedError, false, "top");
       return false;
     }
 

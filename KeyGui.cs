@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -9,12 +10,11 @@ using HarmonyLib;
 using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.Assets;
 using KeyGUI.Backend;
+using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Menus;
 using KeyGUI.Framework.Patches;
 using KeyGUI.Framework.Powers;
 using KeyGUI.Menus;
-using KeyGUI.Menus.Localizations;
-using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
 using KeyGUI.Menus.ModConfig.ConfigOptions;
 using KeyGUI.Utils;
@@ -215,8 +215,8 @@ namespace KeyGUI {
       _networkingThread.Start();
 
       Debug.Log($"Loading {KeyGuiConfig.PluginName}...");
-      KeyGuiLocales.EarlyInitialize();
-      _rootMenu.InitMenuInfo(Locales.KeyGui.ModName, 10000, null);
+      InitLocales();
+      _rootMenu.InitMenuInfo(Locales.ModName, 10000, null);
       _rootMenu.AddSubMenus();
       Debug.Log($"Loaded {KeyGuiConfig.PluginName}!");
     }
@@ -293,6 +293,132 @@ namespace KeyGUI {
       return false;
     }
     
+    public static bool SuccessfullyFinishedLoadingLocales { get; private set; }
+    private static readonly string LocalesFolderPath = Assembly.GetExecutingAssembly().Location.Replace("KeyGUI.dll", "Locales");
+    internal static string[] PossibleLocaleLanguages;
+    internal static string ActiveLocale;
+    internal static bool DefaultLocaleSelected;
+    internal static void InitLocales() {
+      Locales.InitLocales();
+      if (Directory.Exists(LocalesFolderPath)) {
+        PossibleLocaleLanguages = GetPossibleLocaleLanguages();
+        ActiveLocale = KeyGuiModConfig.Get(General.ActiveLocale);
+        if (ActiveLocale == "default") {
+          ActiveLocale = "en";
+          DefaultLocaleSelected = true;
+        }
+        if (!PossibleLocaleLanguages.Contains(ActiveLocale)) {
+          Debug.LogWarning($"No locale file found for current set locale \"{ActiveLocale}\". Defaulting to en.");
+          ActiveLocale = "en";
+        }
+        if (PossibleLocaleLanguages.Contains(ActiveLocale)) {
+          SuccessfullyFinishedLoadingLocales = true;
+          LoadLocales(ActiveLocale);
+          return;
+        }
+        Debug.LogError("No English locale file found, falling back to default locales.");
+      }
+      ActiveLocale = "default";
+      DefaultLocaleSelected = true;
+      foreach (KeyValuePair<KeyGuiLocale, string> locale in GetDefaultLocales()) {
+        Locales.SetLocale(locale.Key, locale.Value);
+      }
+      SuccessfullyFinishedLoadingLocales = true;
+    }
+    private static readonly Dictionary<KeyGuiLocale, string> DefaultLocales = new Dictionary<KeyGuiLocale, string>();
+    public static KeyGuiRootMenu Locales => Instance._rootMenu;
+
+    internal static void SyncDefaultLocale(KeyGuiLocale declaration) {
+      if (DefaultLocales.TryGetValue(declaration, out string locale)) {
+        declaration.DefaultValue = locale;
+      } else {
+        DefaultLocales[declaration] = declaration.DefaultValue;
+      }
+    }
+    internal static Dictionary<KeyGuiLocale, string> GetDefaultLocales() {
+      return new Dictionary<KeyGuiLocale, string>(DefaultLocales);
+    }
+    private static readonly List<KeyGuiLocale> DetectedMissingLocales = new List<KeyGuiLocale>();
+    public static string GetLocale(KeyGuiLocale declaration) {
+      string result = Locales.GetLocale(declaration);
+      if (result == null) {
+        foreach (KeyGuiPower power in Instance._powers) {
+          result = power.GetLocale(declaration);
+          if (result != null) {
+            break;
+          }
+        }
+      }
+      if (result == null) {
+        result = DefaultLocales[declaration];
+        if (SuccessfullyFinishedLoadingLocales && !DetectedMissingLocales.Contains(declaration)) {
+          Debug.LogWarning($"Missing locale declaration from loaded JSON: {declaration.LocaleId}");
+          if (result == null) {
+            Debug.LogError($"Missing default locale declaration: {declaration.LocaleId}");
+          }
+          DetectedMissingLocales.Add(declaration);
+        }
+      }
+
+      return result;
+    }
+
+    public static void LoadLocales(string lang) {
+      if (!Directory.Exists(LocalesFolderPath)) {
+        return;
+      }
+      foreach (JObject data in Directory.GetFiles(LocalesFolderPath, "*.json").Where(f => Path.GetFileNameWithoutExtension(f) == lang).Select(filePath => JObject.Parse(File.ReadAllText(filePath)))) {
+        JToken menuData = data.GetValue("Menus");
+        if (menuData != null && menuData.Type == JTokenType.Object) {
+          Locales.LoadLocales((JObject)menuData);
+        } else {
+          Debug.LogWarning($"No valid menu data found in {lang} locale file.");
+        }
+        JToken powersData = data.GetValue("Powers");
+        if (powersData != null && powersData.Type == JTokenType.Object) {
+          foreach (KeyValuePair<string, JToken> powerData in ((JObject)powersData).ToObject<Dictionary<string, JToken>>()) {
+            KeyGuiPower power = Instance._powers.FirstOrDefault(p => p.GetType().Name == powerData.Key);
+            if (power != null) {
+              power.LoadLocales((JObject)powerData.Value);
+            } else {
+              Debug.LogWarning($"No power found for {powerData.Key} in {lang} locale file.");
+            }
+          }
+        } else {
+          Debug.LogWarning($"No valid powers data found in {lang} locale file.");
+        }
+      }
+    }
+
+    public static string[] GetPossibleLocaleLanguages() {
+      return !Directory.Exists(LocalesFolderPath) ? Array.Empty<string>() : Directory.GetFiles(LocalesFolderPath, "*.json").Select(Path.GetFileNameWithoutExtension).ToArray();
+    }
+
+    public void DumpLocalesInto(JObject data) {
+      JObject menuData = new JObject();
+      JObject powersData = new JObject();
+      data.Add("Menus", menuData);
+      data.Add("Powers", powersData);
+      JContainer menuLocales = Locales.SerializeAllLocales();
+      if (menuLocales is JObject localesObject) {
+        foreach (KeyValuePair<string, JToken> locale in localesObject) {
+          menuData.Add(locale.Key, locale.Value);
+        }
+      }
+      foreach (KeyGuiPower power in _powers) {
+        powersData.Add(power.GetType().Name, power.SerializeAllLocales());
+      }
+    }
+
+    public void StoreCurrentLocalesInFile(string langName = "current-locales-dump") {
+      JObject data = new JObject();
+      DumpLocalesInto(data);
+      if (!Directory.Exists(LocalesFolderPath)) {
+        Directory.CreateDirectory(LocalesFolderPath);
+      }
+      File.WriteAllText(Path.Combine(LocalesFolderPath, $"{langName}.json"), data.ToString());
+    }
+    
     private void PerformInitialNetworkingSetup() {
       Logger.LogInfo("Communicating current state with server in the background...");
       if (!KeyGuiNetworking.IsUpToDate()) {
@@ -322,7 +448,7 @@ namespace KeyGUI {
       _lateCommands = lateCommands;
       messages = messages.AddRangeToArray(additionalMessages);
       foreach (string message in messages) {
-        _rootMenu.AddMessage(new KeyGuiMessage(Locales.KeyGui.MessagePopupTitle, 1, message));
+        _rootMenu.AddMessage(new KeyGuiMessage(Locales.MessagePopupTitle, 1, message));
       }
       Logger.LogInfo("Finished immediate server communication!");
     }

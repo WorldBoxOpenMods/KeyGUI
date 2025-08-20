@@ -1,10 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
+using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Powers;
-using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class CultureReset : KeyGuiPower {
+    public readonly KeyGuiLocale SelectCulture = "Select the culture to reset.";
+    public readonly KeyGuiLocale Success = "Culture reset!";
+    public readonly KeyGuiLocale NoCultureSelectedError = "No culture to reset here, try again!";
+    
     public CultureReset() : base(new GodPower() {
       id = "culture_reset_keygui",
       name = "Culture Reset",
@@ -13,7 +17,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureFullReset.SelectCulture, false, "top");
+      WorldTip.showNow(SelectCulture, false, "top");
       return false;
     }
 
@@ -21,11 +25,11 @@ namespace KeyGUI.Powers {
       Culture cultureToReset = pTile.zone.city?.culture;
       if (cultureToReset != null) {
         ResetCulture(cultureToReset);
-        WorldTip.showNow(Locales.KeyGui.Powers.CultureFullReset.Success, false, "top");
+        WorldTip.showNow(Success, false, "top");
         return true;
       }
 
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureFullReset.NoCultureSelectedError, false, "top");
+      WorldTip.showNow(NoCultureSelectedError, false, "top");
       return false;
     }
 

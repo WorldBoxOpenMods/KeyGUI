@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
+using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Menus;
 using KeyGUI.Menus.Alliances;
 using KeyGUI.Menus.Buildings;
@@ -14,7 +15,6 @@ using KeyGUI.Menus.Destruction;
 using KeyGUI.Menus.Disasters;
 using KeyGUI.Menus.GameSettings;
 using KeyGUI.Menus.Localizations;
-using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
 using KeyGUI.Menus.ModConfig.ConfigOptions;
 using KeyGUI.Menus.Plots;
@@ -25,6 +25,35 @@ using UnityEngine;
 
 namespace KeyGUI.Menus {
   public class KeyGuiRootMenu : KeyGuiMenuManager {
+    public readonly KeyGuiLocale ModName = KeyGuiConfig.PluginName;
+    public readonly KeyGuiLocale DisastersSubmenuText = "Disasters";
+    public readonly KeyGuiLocale StatsSubmenuText = "Stats";
+    public readonly KeyGuiLocale DestructionSubmenuText = "Destruction";
+    public readonly KeyGuiLocale CleansingSubmenuText = "Cleansing";
+    public readonly KeyGuiLocale CulturesSubmenuText = "Cultures";
+    public readonly KeyGuiLocale PlotsSubmenuText = "Plots";
+    public readonly KeyGuiLocale TraitsSubmenuText = "Traits";
+    public readonly KeyGuiLocale CrabzillaSubmenuText = "Crabzilla";
+    public readonly KeyGuiLocale ClansSubmenuText = "Clans";
+    public readonly KeyGuiLocale AlliancesSubmenuText = "Alliances";
+    public readonly KeyGuiLocale GameSettingsSubmenuText = "Game Settings";
+    public readonly KeyGuiLocale ZonesSubmenuText = "Zones";
+    public readonly KeyGuiLocale CitiesSubmenuText = "Cities";
+    public readonly KeyGuiLocale BuildingsSubmenuText = "Buildings";
+    public readonly KeyGuiLocale ModConfigSubmenuText = "Mod Config";
+    public readonly KeyGuiLocale LocalesSubmenuText = "Locales";
+    public readonly KeyGuiLocale DebugSubmenuText = "Debug";
+    public readonly KeyGuiLocale TestingSubmenuText = "Testing";
+    public readonly KeyGuiLocale MessagePopupTitle = "Message";
+    public readonly KeyGuiLocale KeyGuiOutdatedWarning = "Your version of KeyGUI is outdated!";
+    public readonly KeyGuiLocale DownloadKeyGuiButton = "Download";
+    public readonly KeyGuiLocale DismissKeyGuiOutdatedWarningButton = "Dismiss";
+    public readonly KeyGuiLocale ProblematicModWarning = "WARNING: It's recommended to not use {0} because {1}!";
+    public readonly KeyGuiLocale DismissProblematicModWarningButton = "Dismiss";
+    public readonly KeyGuiLocale CriticalModWarning = "WARNING: The mod {0} has automatically been disabled by KeyGUI because {1}!";
+    public readonly KeyGuiLocale DismissCriticalModWarningButton = "Dismiss";
+    public readonly KeyGuiLocale DisableCriticalModWarningButton = "Don't disable it the next time";
+    
     private bool _modIsUpToDate = true;
     private (string, string)[] _problematicMods;
     private (string, string)[] _criticalMods;
@@ -48,42 +77,42 @@ namespace KeyGUI.Menus {
     }
 
     internal override void AddSubMenus() {
-      Load<KeyGuiDisasters>(Locales.KeyGui.DisastersSubmenuText);
-      Load<KeyGuiStats>(Locales.KeyGui.StatsSubmenuText);
-      Load<KeyGuiDestruction>(Locales.KeyGui.DestructionSubmenuText);
-      Load<KeyGuiCleansing>(Locales.KeyGui.CleansingSubmenuText);
-      Load<KeyGuiCultures>(Locales.KeyGui.CulturesSubmenuText);
-      Load<KeyGuiPlots>(Locales.KeyGui.PlotsSubmenuText);
-      Load<KeyGuiTraits>(Locales.KeyGui.TraitsSubmenuText);
-      Load<KeyGuiCrabzilla>(Locales.KeyGui.CrabzillaSubmenuText);
-      Load<KeyGuiClans>(Locales.KeyGui.ClansSubmenuText);
-      Load<KeyGuiAlliances>(Locales.KeyGui.AlliancesSubmenuText);
-      Load<KeyGuiGameSettings>(Locales.KeyGui.GameSettingsSubmenuText);
-      Load<KeyGuiZones>(Locales.KeyGui.ZonesSubmenuText);
-      Load<KeyGuiCities>(Locales.KeyGui.CitiesSubmenuText);
-      Load<KeyGuiBuildings>(Locales.KeyGui.BuildingsSubmenuText);
-      Load<KeyGuiLocales>(Locales.KeyGui.LocalesSubmenuText);
-      Load(Locales.KeyGui.ModConfigSubmenuText, KeyGuiModConfig.GetInstance());
+      Load<KeyGuiDisasters>(DisastersSubmenuText);
+      Load<KeyGuiStats>(StatsSubmenuText);
+      Load<KeyGuiDestruction>(DestructionSubmenuText);
+      Load<KeyGuiCleansing>(CleansingSubmenuText);
+      Load<KeyGuiCultures>(CulturesSubmenuText);
+      Load<KeyGuiPlots>(PlotsSubmenuText);
+      Load<KeyGuiTraits>(TraitsSubmenuText);
+      Load<KeyGuiCrabzilla>(CrabzillaSubmenuText);
+      Load<KeyGuiClans>(ClansSubmenuText);
+      Load<KeyGuiAlliances>(AlliancesSubmenuText);
+      Load<KeyGuiGameSettings>(GameSettingsSubmenuText);
+      Load<KeyGuiZones>(ZonesSubmenuText);
+      Load<KeyGuiCities>(CitiesSubmenuText);
+      Load<KeyGuiBuildings>(BuildingsSubmenuText);
+      Load<KeyGuiLocales>(LocalesSubmenuText);
+      Load(ModConfigSubmenuText, KeyGuiModConfig.GetInstance());
       if (KeyGuiConfig.DebugIsLegal) {
-        Load<KeyGuiDebug>(Locales.KeyGui.DebugSubmenuText, 10999_0);
-        Load<KeyGuiTesting>(Locales.KeyGui.TestingSubmenuText, 10999_1);
+        Load<KeyGuiDebug>(DebugSubmenuText, 10999_0);
+        Load<KeyGuiTesting>(TestingSubmenuText, 10999_1);
       }
     }
 
     protected override void LoadGUI(int windowID) {
       if (!_modIsUpToDate) {
-        GUILayout.Label(Locales.Get(Locales.KeyGui.KeyGuiOutdatedWarning), new GUIStyle {
+        GUILayout.Label(KeyGuiOutdatedWarning, new GUIStyle {
           alignment = TextAnchor.MiddleCenter,
           normal = new GUIStyleState {
             textColor = Color.white
           }
         });
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button(Locales.Get(Locales.KeyGui.DownloadKeyGuiButton))) {
+        if (GUILayout.Button(DownloadKeyGuiButton)) {
           Application.OpenURL("https://gamebanana.com/mods/438228");
         }
 
-        if (GUILayout.Button(Locales.Get(Locales.KeyGui.DismissKeyGuiOutdatedWarningButton))) {
+        if (GUILayout.Button(DismissKeyGuiOutdatedWarningButton)) {
           _modIsUpToDate = true;
           MenuRect.height = 0;
           MenuRect.width = 0;
@@ -104,7 +133,7 @@ namespace KeyGUI.Menus {
         List<string> modsThatUserIsFineWithUsing = new List<string>();
         foreach ((string mod, string reason) modAndReason in _problematicMods) {
           GUILayout.Label(
-            string.Format(Locales.Get(Locales.KeyGui.ProblematicModWarning), modAndReason.mod, modAndReason.reason),
+            string.Format(ProblematicModWarning, modAndReason.mod, modAndReason.reason),
             new GUIStyle {
               alignment = TextAnchor.MiddleCenter,
               normal = new GUIStyleState {
@@ -112,7 +141,7 @@ namespace KeyGUI.Menus {
               }
             }
           );
-          if (GUILayout.Button(Locales.Get(Locales.KeyGui.DismissProblematicModWarningButton))) {
+          if (GUILayout.Button(DismissProblematicModWarningButton)) {
             modsThatUserIsFineWithUsing.Add(modAndReason.mod);
             MenuRect.height = 0;
             MenuRect.width = 0;
@@ -140,7 +169,7 @@ namespace KeyGUI.Menus {
         List<string> criticalModWarningsToDismiss = new List<string>();
         foreach ((string mod, string reason) modAndReason in _criticalMods) {
           GUILayout.Label(
-            string.Format(Locales.Get(Locales.KeyGui.CriticalModWarning), modAndReason.mod, modAndReason.reason),
+            string.Format(CriticalModWarning, modAndReason.mod, modAndReason.reason),
             new GUIStyle {
               alignment = TextAnchor.MiddleCenter,
               normal = new GUIStyleState {
@@ -149,13 +178,13 @@ namespace KeyGUI.Menus {
             }
           );
           GUILayout.BeginHorizontal();
-          if (GUILayout.Button(Locales.Get(Locales.KeyGui.DismissCriticalModWarningButton))) {
+          if (GUILayout.Button(DismissCriticalModWarningButton)) {
             criticalModWarningsToDismiss.Add(modAndReason.mod);
             MenuRect.height = 0;
             MenuRect.width = 0;
           }
 
-          if (GUILayout.Button(Locales.Get(Locales.KeyGui.DisableCriticalModWarningButton))) {
+          if (GUILayout.Button(DisableCriticalModWarningButton)) {
             modsThatUserIsFineWithUsing.Add(modAndReason.mod);
             MenuRect.height = 0;
             MenuRect.width = 0;

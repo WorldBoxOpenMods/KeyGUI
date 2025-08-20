@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace KeyGUI.Framework.Powers {
-  public abstract class KeyGuiPower {
+  public abstract class KeyGuiPower : KeyGuiComponent {
     public readonly GodPower Power;
     public readonly PowerButton Button;
     protected KeyGuiPower(GodPower power) {

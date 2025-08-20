@@ -105,6 +105,8 @@
     <ItemGroup>
         <Compile Include="Backend\KeyGuiCommandHandler.cs"/>
         <Compile Include="Backend\KeyGuiNetworking.cs"/>
+        <Compile Include="Framework\KeyGuiComponent.cs" />
+        <Compile Include="Framework\Locales\KeyGuiLocale.cs" />
         <Compile Include="Framework\Menus\InvalidMenuInvocationContextException.cs" />
         <Compile Include="Framework\Menus\KeyGuiMenu.cs" />
         <Compile Include="Framework\Menus\KeyGuiMenuManager.cs" />
@@ -130,47 +132,7 @@
         <Compile Include="Menus\Disasters\KeyGuiDisasters.cs" />
         <Compile Include="Menus\GameSettings\KeyGuiGameSettings.cs" />
         <Compile Include="Menus\KeyGuiRootMenu.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Alliances\KeyGuiAlliances.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Buildings\BuildingPlacementBuildingSelector\KeyGuiBuildingsBuildingPlacementBuildingSelector.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Buildings\KeyGuiBuildings.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Cities\KeyGuiCities.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Cities\ResourceEditor\KeyGuiCitiesResourceEditor.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Clans\KeyGuiClans.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Clans\TraitSelection\KeyGuiClansTraitSelection.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Cleansing\KeyGuiCleansing.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Crabzilla\KeyGuiCrabzilla.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Cultures\KeyGuiCultures.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Cultures\TraitSelection\KeyGuiCulturesTraitSelection.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Destruction\KeyGuiDestruction.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Disasters\KeyGuiDisasters.cs" />
-        <Compile Include="Menus\Localizations\Declarations\GameSettings\KeyGuiGameSettings.cs" />
-        <Compile Include="Menus\Localizations\Declarations\KeyGui.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Locales.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Localizations\KeyGuiLocales.cs" />
-        <Compile Include="Menus\Localizations\Declarations\ModConfig\KeyGuiModConfig.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Plots\KeyGuiPlots.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Powers\AllianceCreation\KeyGuiPowersAllianceCreation.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Powers\ChangeCityKingdom\KeyGuiPowersChangeCityKingdom.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Powers\CityZoneAddition\KeyGuiPowersCityZoneAddition.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Powers\CityZoneRemoval\KeyGuiPowersCityZoneRemoval.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Powers\CultureCreation\KeyGuiPowersCultureCreation.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Powers\CultureDeletion\KeyGuiPowersCultureDeletion.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Powers\CultureForceConversion\KeyGuiPowersCultureForceConversion.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Powers\CultureFullReset\KeyGuiPowersCultureFullReset.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Powers\ForceCapital\KeyGuiPowersForceCapital.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Powers\KeyGuiPowers.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Powers\PlaceBuilding\KeyGuiPowersPlaceBuilding.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Powers\SetKing\KeyGuiPowersSetKing.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Saves\KeyGuiSaves.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Stats\KeyGuiStats.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Stats\StatBoundEditing\EditStat\KeyGuiStatsStatBoundEditingEditStat.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Stats\StatBoundEditing\KeyGuiStatsStatBoundEditing.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Traits\Instructions\KeyGuiTraitsInstructions.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Traits\KeyGuiTraits.cs" />
-        <Compile Include="Menus\Localizations\Declarations\Zones\KeyGuiZones.cs" />
         <Compile Include="Menus\Localizations\KeyGuiLocales.cs" />
-        <Compile Include="Menus\Localizations\LocaleDeclaration.cs" />
-        <Compile Include="Menus\Localizations\LocalesContainer.cs" />
         <Compile Include="Menus\ModConfig\ConfigOptions\ConfigOption.cs" />
         <Compile Include="Menus\ModConfig\ConfigOptions\GameSettings.cs" />
         <Compile Include="Menus\ModConfig\ConfigOptions\General.cs" />
@@ -243,9 +205,6 @@
         <Content Include="BuildAssets\Locales\ch.json" />
         <Content Include="BuildAssets\Locales\cz.json" />
         <Content Include="BuildAssets\Locales\en.json" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Framework\Locales\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

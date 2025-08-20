@@ -8,8 +8,8 @@ using System.Text;
 using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.Assets;
 using KeyGeneralPurposeLibrary.Classes;
+using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Menus;
-using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
 using KeyGUI.Menus.ModConfig.ConfigOptions;
 using KeyGUI.Menus.Traits.Instructions;
@@ -18,6 +18,39 @@ using UnityEngine;
 
 namespace KeyGUI.Menus.Traits {
   public class KeyGuiTraits : KeyGuiMenuManager {
+    public readonly KeyGuiLocale InstructionsSubmenuName = "Trait Instructions";
+    public readonly KeyGuiLocale CreateTraitSection = "Create Trait:";
+    public readonly KeyGuiLocale CreateTraitName = "Trait Name";
+    public readonly KeyGuiLocale CreateTraitDescription = "Trait Description";
+    public readonly KeyGuiLocale CreateTraitBirthChance = "Trait Birth Chance";
+    public readonly KeyGuiLocale CreateTraitInheritChance = "Trait Inherit Chance";
+    public readonly KeyGuiLocale CreateTraitOppositeTraits = "Opposite Traits";
+    public readonly KeyGuiLocale CreateTraitRemoveOppositeTrait = "Remove {0} From Opposite Traits";
+    public readonly KeyGuiLocale CreateTraitAddOppositeTrait = "Add {0} To Opposite Traits";
+    public readonly KeyGuiLocale CreateTraitPartnerTraits = "Partner Traits";
+    public readonly KeyGuiLocale CreateTraitRemovePartnerTrait = "Remove {0} From Partner Traits";
+    public readonly KeyGuiLocale CreateTraitAddPartnerTrait = "Add {0} To Partner Traits";
+    public readonly KeyGuiLocale CreateTraitTraitGroup = "Trait Group";
+    public readonly KeyGuiLocale CreateTraitCurrentTraitGroup = "Current Group: {0}";
+    public readonly KeyGuiLocale CreateTraitSprite = "Sprite";
+    public readonly KeyGuiLocale CreateTraitCurrentSprite = "Current Sprite: {0}";
+    public readonly KeyGuiLocale CreateTraitCreateLabel = "Create!";
+    public readonly KeyGuiLocale CreateTraitCancelEditingButton = "Cancel Editing";
+    public readonly KeyGuiLocale CreateTraitButton = "Create Trait";
+    public readonly KeyGuiLocale CreateTraitInvalidBirthChanceError = "The birth chance entered is invalid!";
+    public readonly KeyGuiLocale CreateTraitInvalidInheritChanceError = "The inherit chance entered is invalid!";
+    public readonly KeyGuiLocale CreateTraitInvalidStatError = "The stat value entered for {0} is invalid!";
+    public readonly KeyGuiLocale CreateTraitSuccess = "Trait Created!";
+    public readonly KeyGuiLocale CreateTraitNoGroupError = "Please select a trait group!";
+    public readonly KeyGuiLocale CreateTraitNoNameError = "Please enter a trait name!";
+    public readonly KeyGuiLocale EditTraitSection = "Edit Trait:";
+    public readonly KeyGuiLocale DeleteTraitSection = "Delete Trait:";
+    public readonly KeyGuiLocale DataControlSection = "Data Control:";
+    public readonly KeyGuiLocale DataControlSaveButton = "Save";
+    public readonly KeyGuiLocale DataControlLoadButton = "Load";
+    public readonly KeyGuiLocale DataControlDisableAutoTraitLoad = "Turn Automatic Trait Loading Off";
+    public readonly KeyGuiLocale DataControlEnableAutoTraitLoad = "Turn Automatic Trait Loading On";
+    
     protected override float MenuMaxWidth => 1200;
     protected override float MenuMinWidth => 600;
     protected override float MenuMinHeight => 800;
@@ -94,58 +127,58 @@ namespace KeyGUI.Menus.Traits {
       }
     }
     internal override void AddSubMenus() {
-      Load<KeyGuiTraitsInstructions>(Locales.KeyGui.Traits.InstructionsSubmenuName);
+      Load<KeyGuiTraitsInstructions>(InstructionsSubmenuName);
     }
 
     protected override void LoadGUI(int windowID) {
       _scrollPos = GUILayout.BeginScrollView(_scrollPos);
-      GUILayout.Label(Locales.KeyGui.Traits.CreateTraitSection.ToString());
+      GUILayout.Label(CreateTraitSection.ToString());
 
-      GUILayout.Label(Locales.KeyGui.Traits.CreateTraitName.ToString());
+      GUILayout.Label(CreateTraitName.ToString());
       _traitID = GUILayout.TextField(_traitID);
-      GUILayout.Label(Locales.KeyGui.Traits.CreateTraitDescription.ToString());
+      GUILayout.Label(CreateTraitDescription.ToString());
       _traitDescription = GUILayout.TextField(_traitDescription);
-      GUILayout.Label(Locales.KeyGui.Traits.CreateTraitBirthChance.ToString());
+      GUILayout.Label(CreateTraitBirthChance.ToString());
       _traitBirth = GUILayout.TextField(_traitBirth);
-      GUILayout.Label(Locales.KeyGui.Traits.CreateTraitInheritChance.ToString());
+      GUILayout.Label(CreateTraitInheritChance.ToString());
       _traitInherit = GUILayout.TextField(_traitInherit);
       foreach (string stat in _traitStats.Keys.ToList()) {
         GUILayout.Label(LocalizedTextManager.stringExists(stat) ? LocalizedTextManager.getText(stat) : stat);
         _traitStats[stat] = GUILayout.TextField(_traitStats[stat]);
       }
-      GUILayout.Label(Locales.KeyGui.Traits.CreateTraitOppositeTraits.ToString());
+      GUILayout.Label(CreateTraitOppositeTraits.ToString());
       foreach (ActorTrait trait in AssetManager.traits.list) {
         if (_oppositeTraits.Contains(trait.id)) {
-          if (GUILayout.Button(string.Format(Locales.KeyGui.Traits.CreateTraitRemoveOppositeTrait.ToString(), trait.id))) {
+          if (GUILayout.Button(string.Format(CreateTraitRemoveOppositeTrait.ToString(), trait.id))) {
             _oppositeTraits.Remove(trait.id);
           }
         } else {
-          if (GUILayout.Button(string.Format(Locales.KeyGui.Traits.CreateTraitAddOppositeTrait.ToString(), trait.id))) {
+          if (GUILayout.Button(string.Format(CreateTraitAddOppositeTrait.ToString(), trait.id))) {
             _oppositeTraits.Add(trait.id);
           }
         }
       }
-      GUILayout.Label(Locales.KeyGui.Traits.CreateTraitPartnerTraits.ToString());
+      GUILayout.Label(CreateTraitPartnerTraits.ToString());
       foreach (ActorTrait trait in AssetManager.traits.list) {
         if (_partnerTraits.Contains(trait.id)) {
-          if (GUILayout.Button(string.Format(Locales.KeyGui.Traits.CreateTraitRemovePartnerTrait.ToString(), trait.id))) {
+          if (GUILayout.Button(string.Format(CreateTraitRemovePartnerTrait.ToString(), trait.id))) {
             _partnerTraits.Remove(trait.id);
           }
         } else {
-          if (GUILayout.Button(string.Format(Locales.KeyGui.Traits.CreateTraitAddPartnerTrait.ToString(), trait.id))) {
+          if (GUILayout.Button(string.Format(CreateTraitAddPartnerTrait.ToString(), trait.id))) {
             _partnerTraits.Add(trait.id);
           }
         }
       }
-      GUILayout.Label(Locales.KeyGui.Traits.CreateTraitTraitGroup.ToString());
-      GUILayout.Label(string.Format(Locales.KeyGui.Traits.CreateTraitCurrentTraitGroup.ToString(), _traitGroup));
+      GUILayout.Label(CreateTraitTraitGroup.ToString());
+      GUILayout.Label(string.Format(CreateTraitCurrentTraitGroup.ToString(), _traitGroup));
 
       foreach (ActorTraitGroupAsset traitGroup in AssetManager.trait_groups.list.Where(traitGroup => GUILayout.Button(traitGroup.id))) {
         _traitGroup = traitGroup;
       }
 
-      GUILayout.Label(Locales.KeyGui.Traits.CreateTraitSprite.ToString());
-      GUILayout.Label(string.Format(Locales.KeyGui.Traits.CreateTraitCurrentSprite.ToString(), _sprite));
+      GUILayout.Label(CreateTraitSprite.ToString());
+      GUILayout.Label(string.Format(CreateTraitCurrentSprite.ToString(), _sprite));
       List<string> availableSprites;
       {
         string[] availableSpritesArray = Directory.GetFiles(Path.GetFullPath($"{Application.dataPath}/KeyLibraryModsData/{KeyGuiConfig.PluginName}/Sprites"));
@@ -173,34 +206,34 @@ namespace KeyGUI.Menus.Traits {
         GUILayout.Button($"No PNGs Found In\nworldbox_Data\n->\nKeyLibraryModsData\n->\n{KeyGuiConfig.PluginName}\n->\nSprites");
       }
 
-      GUILayout.Label(Locales.KeyGui.Traits.CreateTraitCreateLabel.ToString());
+      GUILayout.Label(CreateTraitCreateLabel.ToString());
       GUILayout.Label(_createStatus);
       if (_editing) {
-        if (GUILayout.Button(Locales.KeyGui.Traits.CreateTraitCancelEditingButton.ToString())) {
+        if (GUILayout.Button(CreateTraitCancelEditingButton.ToString())) {
           _editing = false;
           _traitID = "";
         }
       }
 
-      if (GUILayout.Button(Locales.KeyGui.Traits.CreateTraitButton.ToString())) {
+      if (GUILayout.Button(CreateTraitButton.ToString())) {
         if (!string.IsNullOrEmpty(_traitID)) {
           if (_traitGroup != null) {
             bool statsAreValid = true;
             if (float.TryParse(_traitBirth, out _) == false) {
               statsAreValid = false;
-              _createStatus = Locales.KeyGui.Traits.CreateTraitInvalidBirthChanceError;
+              _createStatus = CreateTraitInvalidBirthChanceError;
             }
             if (float.TryParse(_traitInherit, out _) == false) {
               statsAreValid = false;
-              _createStatus = Locales.KeyGui.Traits.CreateTraitInvalidInheritChanceError;
+              _createStatus = CreateTraitInvalidInheritChanceError;
             }
             foreach (string stat in _traitStats.Keys.Where(stat => !float.TryParse(_traitStats[stat].Replace("%", ""), out _))) {
               statsAreValid = false;
-              _createStatus = string.Format(Locales.KeyGui.Traits.CreateTraitInvalidStatError, stat);
+              _createStatus = string.Format(CreateTraitInvalidStatError, stat);
               break;
             }
             if (statsAreValid) {
-              _createStatus = Locales.KeyGui.Traits.CreateTraitSuccess;
+              _createStatus = CreateTraitSuccess;
               if (_traitID == "KeyGUI_Debug_Menu" && _traitDescription == "KeyGUI_Debug_Menu") {
                 _createStatus = "Debug Enabled!";
                 KeyGuiConfig.DebugIsLegal = true;
@@ -229,14 +262,14 @@ namespace KeyGUI.Menus.Traits {
               }
             }
           } else {
-            _createStatus = Locales.KeyGui.Traits.CreateTraitNoGroupError;
+            _createStatus = CreateTraitNoGroupError;
           }
         } else {
-          _createStatus = Locales.KeyGui.Traits.CreateTraitNoNameError;
+          _createStatus = CreateTraitNoNameError;
         }
       }
 
-      GUILayout.Label(Locales.KeyGui.Traits.EditTraitSection);
+      GUILayout.Label(EditTraitSection);
       foreach (ActorTrait t in AssetManager.traits.list) {
         if (t is CustomTrait trait) {
           if (GUILayout.Button(trait.id)) {
@@ -260,7 +293,7 @@ namespace KeyGUI.Menus.Traits {
         }
       }
 
-      GUILayout.Label(Locales.KeyGui.Traits.DeleteTraitSection);
+      GUILayout.Label(DeleteTraitSection);
       for (int i = 0; i < AssetManager.traits.list.Count; i++) {
         if (AssetManager.traits.list[i] is CustomTrait trait) {
           if (trait.Author == "KeyGUI" && GUILayout.Button(trait.id)) {
@@ -270,16 +303,16 @@ namespace KeyGUI.Menus.Traits {
         }
       }
 
-      GUILayout.Label(Locales.KeyGui.Traits.DataControlSection);
-      if (GUILayout.Button(Locales.KeyGui.Traits.DataControlSaveButton)) {
+      GUILayout.Label(DataControlSection);
+      if (GUILayout.Button(DataControlSaveButton)) {
         KeyLib.Get<KeyGenLibCustomTraitManager>().SaveTraitsLocally(KeyGuiConfig.PluginName, _customTraits);
       }
 
-      if (GUILayout.Button(Locales.KeyGui.Traits.DataControlLoadButton)) {
+      if (GUILayout.Button(DataControlLoadButton)) {
         _customTraits = KeyLib.Get<KeyGenLibCustomTraitManager>().LoadTraits(KeyGuiConfig.PluginName);
       }
 
-      if (GUILayout.Button(_autoTraitLoading ? Locales.KeyGui.Traits.DataControlDisableAutoTraitLoad : Locales.KeyGui.Traits.DataControlEnableAutoTraitLoad)) {
+      if (GUILayout.Button(_autoTraitLoading ? DataControlDisableAutoTraitLoad : DataControlEnableAutoTraitLoad)) {
         _autoTraitLoading = !_autoTraitLoading;
         KeyGuiModConfig.Set(TraitsC.AutoloadTraits, _autoTraitLoading);
       }

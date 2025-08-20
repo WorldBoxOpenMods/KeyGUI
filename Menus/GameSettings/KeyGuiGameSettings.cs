@@ -1,13 +1,30 @@
 using GameSettingsC = KeyGUI.Menus.ModConfig.ConfigOptions.GameSettings;
 using System;
+using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Menus;
-using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
 using KeyGUI.Patches;
 using UnityEngine;
 
 namespace KeyGUI.Menus.GameSettings {
   public class KeyGuiGameSettings : KeyGuiMenu {
+    public readonly KeyGuiLocale SavesLabel = "Saves";
+    public readonly KeyGuiLocale EnableAutosavesButton = "Enable autosaves";
+    public readonly KeyGuiLocale DisableAutosavesButton = "Disable autosaves";
+    public readonly KeyGuiLocale UnityFpsLabel = "Unity FPS";
+    public readonly KeyGuiLocale SetUnityFpsButton = "Set";
+    public readonly KeyGuiLocale UnitySpeedModifierLabel = "Unity Speed Modifier (in %)";
+    public readonly KeyGuiLocale SetUnitySpeedModifierButton = "Set";
+    public readonly KeyGuiLocale GameSpeedModifierLabel = "Game Speed Modifier (in %)";
+    public readonly KeyGuiLocale SetGameSpeedModifierButton = "Set";
+    public readonly KeyGuiLocale CameraMovementLabel = "Camera Movement";
+    public readonly KeyGuiLocale ToggleMouseDragButton = "Toggle Mouse Drag";
+    public readonly KeyGuiLocale BoatsLabel = "Boats";
+    public readonly KeyGuiLocale EnableBoatsBreakingIceButton = "Enable Boats Breaking Ice";
+    public readonly KeyGuiLocale DisableBoatsBreakingIceButton = "Disable Boats Breaking Ice";
+    public readonly KeyGuiLocale WorldPropertiesLabel = "World Properties";
+    public readonly KeyGuiLocale SetWorldTimeButton = "Set world time";
+    
     private string _fps = "60";
     private string _unitySpeed = "100";
     private string _gameSpeed = "100";
@@ -27,14 +44,14 @@ namespace KeyGUI.Menus.GameSettings {
     }
 
     protected override void LoadGUI(int windowID) {
-      GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.SavesLabel));
-      if (GUILayout.Button(AutoSaveManager.lowMemory ? Locales.Get(Locales.KeyGui.GameSettings.EnableAutosavesButton) : Locales.Get(Locales.KeyGui.GameSettings.DisableAutosavesButton))) {
+      GUILayout.Label(SavesLabel);
+      if (GUILayout.Button(AutoSaveManager.lowMemory ? EnableAutosavesButton : DisableAutosavesButton)) {
         KeyGuiModConfig.Set(GameSettingsC.DisableAutosaves, AutoSaveManager.lowMemory = !AutoSaveManager.lowMemory);
       }
 
-      GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.UnityFpsLabel));
+      GUILayout.Label(UnityFpsLabel);
       _fps = GUILayout.TextField(_fps);
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.GameSettings.SetUnityFpsButton))) {
+      if (GUILayout.Button(SetUnityFpsButton)) {
         int fps;
         try {
           fps = int.Parse(_fps);
@@ -45,9 +62,9 @@ namespace KeyGUI.Menus.GameSettings {
         TargetFramerateEditor.TargetFramerate = fps;
       }
 
-      GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.UnitySpeedModifierLabel));
+      GUILayout.Label(UnitySpeedModifierLabel);
       _unitySpeed = GUILayout.TextField(_unitySpeed);
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.GameSettings.SetUnitySpeedModifierButton))) {
+      if (GUILayout.Button(SetUnitySpeedModifierButton)) {
         float gameSpeed;
         try {
           gameSpeed = float.Parse(_unitySpeed) / 100;
@@ -58,9 +75,9 @@ namespace KeyGUI.Menus.GameSettings {
         UnitySpeedEditor.DeltaTime = gameSpeed;
       }
 
-      GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.GameSpeedModifierLabel));
+      GUILayout.Label(GameSpeedModifierLabel);
       _gameSpeed = GUILayout.TextField(_gameSpeed);
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.GameSettings.SetGameSpeedModifierButton))) {
+      if (GUILayout.Button(SetGameSpeedModifierButton)) {
         float gameSpeed;
         try {
           gameSpeed = float.Parse(_gameSpeed) / 100;
@@ -75,20 +92,20 @@ namespace KeyGUI.Menus.GameSettings {
         };
       }
 
-      GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.CameraMovementLabel));
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.GameSettings.ToggleMouseDragButton))) {
+      GUILayout.Label(CameraMovementLabel);
+      if (GUILayout.Button(ToggleMouseDragButton)) {
         MouseDragToggler.AllowMouseDrag = !MouseDragToggler.AllowMouseDrag;
       }
 
-      GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.BoatsLabel));
-      if (GUILayout.Button(IceBoatMovementToggler.DisableBoatMovementOnIce ? Locales.Get(Locales.KeyGui.GameSettings.EnableBoatsBreakingIceButton) : Locales.Get(Locales.KeyGui.GameSettings.DisableBoatsBreakingIceButton))) {
+      GUILayout.Label(BoatsLabel);
+      if (GUILayout.Button(IceBoatMovementToggler.DisableBoatMovementOnIce ? EnableBoatsBreakingIceButton : DisableBoatsBreakingIceButton)) {
         KeyGuiModConfig.Set(GameSettingsC.DisableBoatsBreakingIce, !IceBoatMovementToggler.DisableBoatMovementOnIce);
         IceBoatMovementToggler.DisableBoatMovementOnIce = KeyGuiModConfig.Get(GameSettingsC.DisableBoatsBreakingIce);
       }
 
-      GUILayout.Label(Locales.Get(Locales.KeyGui.GameSettings.WorldPropertiesLabel));
+      GUILayout.Label(WorldPropertiesLabel);
       _worldTime = GUILayout.TextField(_worldTime);
-      if (GUILayout.Button(Locales.Get(Locales.KeyGui.GameSettings.SetWorldTimeButton))) {
+      if (GUILayout.Button(SetWorldTimeButton)) {
         try {
           SetWorldTime(double.Parse(_worldTime));
         } catch (OverflowException) { }

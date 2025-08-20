@@ -1,8 +1,12 @@
+using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Powers;
-using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class CreateNewCulture : KeyGuiPower {
+    public readonly KeyGuiLocale SelectCity = "Select the city to create a new culture for.";
+    public readonly KeyGuiLocale Success = "New culture created!";
+    public readonly KeyGuiLocale NoCitySelected = "No city to create new culture for here, try again!";
+    
     public CreateNewCulture() : base(new GodPower() {
       id = "create_new_culture_keygui",
       name = "Create New Culture",
@@ -11,7 +15,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string _) {
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureCreation.SelectCity, false, "top");
+      WorldTip.showNow(SelectCity, false, "top");
       return false;
     }
 
@@ -24,10 +28,10 @@ namespace KeyGUI.Powers {
         } else {
           // TODO: error message
         }
-        WorldTip.showNow(Locales.KeyGui.Powers.CultureCreation.Success, false, "top");
+        WorldTip.showNow(Success, false, "top");
         return true;
       }
-      WorldTip.showNow(Locales.KeyGui.Powers.CultureCreation.NoCitySelected, false, "top");
+      WorldTip.showNow(NoCitySelected, false, "top");
       return false;
     }
   }

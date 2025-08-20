@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using KeyGUI.Menus.Localizations;
-using KeyGUI.Menus.Localizations.Declarations;
+using KeyGUI.Framework.Locales;
 using KeyGUI.Menus.ModConfig;
 using KeyGUI.Menus.ModConfig.ConfigOptions;
 using UnityEngine;
@@ -10,22 +9,23 @@ namespace KeyGUI.Framework.Menus {
   public abstract class KeyGuiMenuManager : KeyGuiMenu {
     private readonly List<KeyGuiMenu> _menus = new List<KeyGuiMenu>();
 
-    internal void Load<T>(LocaleDeclaration title) where T : KeyGuiMenu, new() {
-      Load<T>(title, WindowID * 10 + _menus.Count + 1);
+    internal T Load<T>(KeyGuiLocale title) where T : KeyGuiMenu, new() {
+      return Load<T>(title, WindowID * 10 + _menus.Count + 1);
     }
-    internal void Load<T>(LocaleDeclaration title, int windowID) where T : KeyGuiMenu, new() {
-      Load(title, windowID, new T());
+    internal T Load<T>(KeyGuiLocale title, int windowID) where T : KeyGuiMenu, new() {
+      return Load(title, windowID, new T());
     }
-    internal void Load<T>(LocaleDeclaration title, T instance) where T : KeyGuiMenu {
-      Load(title, WindowID * 10 + _menus.Count + 1, instance);
+    internal T Load<T>(KeyGuiLocale title, T instance) where T : KeyGuiMenu {
+      return Load(title, WindowID * 10 + _menus.Count + 1, instance);
     }
-    internal void Load<T>(LocaleDeclaration title, int windowID, T instance) where T : KeyGuiMenu {
-      Debug.Log("Loading " + Locales.Get(Title) + " " + Locales.Get(title) + "...");
+    internal T Load<T>(KeyGuiLocale title, int windowID, T instance) where T : KeyGuiMenu {
+      Debug.Log($"Loading {Title} {title}...");
       _menus.Add(instance);
       _menus.Last().RegisterPatches();
       _menus.Last().InitMenuInfo(title, windowID, this, MenuRect.x + MenuRect.width);
       if (_menus.Last() is KeyGuiMenuManager manager) manager.AddSubMenus();
-      Debug.Log("Loaded " + Locales.Get(Title) + " " + Locales.Get(title) + "...");
+      Debug.Log($"Loaded {Title} {title}...");
+      return instance;
     }
 
 
@@ -59,7 +59,7 @@ namespace KeyGUI.Framework.Menus {
     protected virtual void LoadGUI() { }
 
     protected void LoadSubMenuToggles() {
-      foreach (KeyGuiMenu menu in _menus.Where(menu => menu.OfferVisibilityToggle).Where(menu => GUILayout.Button(Locales.Get(menu.Title)))) {
+      foreach (KeyGuiMenu menu in _menus.Where(menu => menu.OfferVisibilityToggle).Where(menu => GUILayout.Button(menu.Title))) {
         if (KeyGuiModConfig.Get(General.OnlyAllowOneOpenSubmenu)) DisableAllWindows(menu);
         menu.Enabled = !menu.Enabled;
       }

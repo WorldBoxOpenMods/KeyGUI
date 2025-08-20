@@ -1,10 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Powers;
-using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {
   public class WhisperOfAlliance : KeyGuiPower {
+    public readonly KeyGuiLocale SelectFirstKingdom = "Select the first kingdom to create an alliance with.";
+    public readonly KeyGuiLocale SelectSecondKingdom = "Select the second kingdom to create an alliance with.";
+    public readonly KeyGuiLocale SameKingdomTwiceError = "Selected the same kingdom twice, try again.";
+    public readonly KeyGuiLocale KingdomsAlreadyAlliedError = "The selected kingdoms are already allied, try again.";
+    public readonly KeyGuiLocale CreationSuccess = "The kingdom {0} has successfully entered an alliance with kingdom {1}.";
+    
     public WhisperOfAlliance() : base(new GodPower() {
       id = "create_alliance_keygui",
       name = "Whisper Of Alliance",
@@ -13,7 +19,7 @@ namespace KeyGUI.Powers {
     }
 
     protected override bool PowerButtonPress(string pPower) {
-      WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.SelectFirstKingdom, false, "top");
+      WorldTip.showNow(SelectFirstKingdom, false, "top");
       Config.whisper_A = null;
       Config.whisper_B = null;
       return false;
@@ -28,12 +34,12 @@ namespace KeyGUI.Powers {
       Kingdom kingdom = city.kingdom;
       if (Config.whisper_A == null) {
         Config.whisper_A = kingdom;
-        WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.SelectSecondKingdom, false, "top");
+        WorldTip.showNow(SelectSecondKingdom, false, "top");
         return false;
       }
 
       if (Config.whisper_B == null && Config.whisper_A == kingdom) {
-        WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.SameKingdomTwiceError, false, "top");
+        WorldTip.showNow(SameKingdomTwiceError, false, "top");
         return false;
       }
 
@@ -43,7 +49,7 @@ namespace KeyGUI.Powers {
 
       if (Config.whisper_B != Config.whisper_A) {
         if (Alliance.isSame(Config.whisper_A.getAlliance(), Config.whisper_B.getAlliance())) {
-          WorldTip.showNow(Locales.KeyGui.Powers.AllianceCreation.KingdomsAlreadyAlliedError, false, "top");
+          WorldTip.showNow(KingdomsAlreadyAlliedError, false, "top");
           Config.whisper_B = null;
           return false;
         }
@@ -72,7 +78,7 @@ namespace KeyGUI.Powers {
             ForceIntoAlliance(allianceB, Config.whisper_A);
           }
         }
-        WorldTip.showNow(string.Format(Locales.KeyGui.Powers.AllianceCreation.CreationSuccess, Config.whisper_A.name, Config.whisper_B.name), false, "top");
+        WorldTip.showNow(string.Format(CreationSuccess, Config.whisper_A.name, Config.whisper_B.name), false, "top");
         Config.whisper_A = null;
         Config.whisper_B = null;
       }

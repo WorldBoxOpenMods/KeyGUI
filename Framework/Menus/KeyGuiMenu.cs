@@ -4,19 +4,19 @@ using System.Reflection;
 using BepinexModCompatibilityLayer;
 using HarmonyLib;
 using JetBrains.Annotations;
-using KeyGUI.Menus.Localizations;
+using KeyGUI.Framework.Locales;
 using UnityEngine;
 // ReSharper disable InconsistentNaming
 
 namespace KeyGUI.Framework.Menus {
-  public abstract class KeyGuiMenu {
+  public abstract class KeyGuiMenu : KeyGuiComponent {
     protected Rect MenuRect = new Rect(0, 0, 300, 50);
     protected virtual float MenuMaxWidth => 400;
     protected virtual float MenuMinWidth => 300;
     protected virtual float MenuMinHeight => 50;
     protected virtual float MenuMaxHeight => 500;
 
-    internal LocaleDeclaration Title { get; private set; }
+    internal KeyGuiLocale Title { get; private set; }
     protected string FullName => (ParentMenu?.FullName == null ? "" : ParentMenu.FullName + " ") + Title;
     private string PrettyWindowID => WindowID.ToString().Length >= 6 ? WindowID.ToString().Substring(0, 6) + (WindowID.ToString().Length > 6 ? "_" : "") + WindowID.ToString().Substring(6).Join(delimiter: "_") : WindowID + "0";
 
@@ -112,7 +112,7 @@ namespace KeyGUI.Framework.Menus {
     }
     protected abstract void LoadGUI(int windowID);
 
-    internal void InitMenuInfo(LocaleDeclaration title, int windowID, KeyGuiMenu parentMenu) {
+    internal void InitMenuInfo(KeyGuiLocale title, int windowID, KeyGuiMenu parentMenu) {
       IsMenuInfoInitialized = true;
       Title = title;
       bool windowIdAssigned = false;
@@ -126,7 +126,7 @@ namespace KeyGUI.Framework.Menus {
       } while (!windowIdAssigned);
       ParentMenu = parentMenu;
     }
-    internal void InitMenuInfo(LocaleDeclaration title, int windowID, KeyGuiMenu parentMenu, float menuHorizontalOffset) {
+    internal void InitMenuInfo(KeyGuiLocale title, int windowID, KeyGuiMenu parentMenu, float menuHorizontalOffset) {
       InitMenuInfo(title, windowID, parentMenu);
       MenuRect.x = menuHorizontalOffset;
     }

@@ -6,14 +6,18 @@ using System.Linq;
 using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
+using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Menus;
-using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig.ConfigOptions;
 using Newtonsoft.Json;
 using UnityEngine;
 
 namespace KeyGUI.Menus.ModConfig {
   public class KeyGuiModConfig : KeyGuiMenu {
+    public readonly KeyGuiLocale BoolOptionOn = "ON";
+    public readonly KeyGuiLocale BoolOptionOff = "OFF";
+    public readonly KeyGuiLocale ResetFloatValue = "Reset";
+    
     private static ConfigFile _configFile;
     private static readonly List<ConfigOption> ConfigOptions = new List<ConfigOption>();
     private static volatile KeyGuiModConfig _instance;
@@ -89,7 +93,7 @@ namespace KeyGUI.Menus.ModConfig {
     }
 
     private void ShowBoolOptionToggle(ConfigOption<bool> option) {
-      if (GUILayout.Button(Get(option) ? $"{BeautifyConfigOptionField(option.Field)}: {Locales.KeyGui.ModConfig.BoolOptionOn}" : $"{BeautifyConfigOptionField(option.Field)}: {Locales.KeyGui.ModConfig.BoolOptionOff}")) Set(option, !Get(option));
+      if (GUILayout.Button(Get(option) ? $"{BeautifyConfigOptionField(option.Field)}: {BoolOptionOn}" : $"{BeautifyConfigOptionField(option.Field)}: {BoolOptionOff}")) Set(option, !Get(option));
     }
 
     private void ShowFloatOptionSlider(ConfigOption<float> option) {
@@ -97,7 +101,7 @@ namespace KeyGUI.Menus.ModConfig {
       GUILayout.Label(BeautifyConfigOptionField(option.Field));
       Set(option, Mathf.Round(GUILayout.HorizontalSlider(Get(option), option.Minimum, option.Maximum) * 100f) / 100f);
       GUILayout.Label(Get(option).ToString(CultureInfo.InvariantCulture));
-      if (GUILayout.Button(Locales.KeyGui.ModConfig.ResetFloatValue)) Set(option, option.DefaultValue);
+      if (GUILayout.Button(ResetFloatValue)) Set(option, option.DefaultValue);
       GUILayout.EndHorizontal();
     }
 
