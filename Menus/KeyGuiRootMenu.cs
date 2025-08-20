@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
-using KeyGUI.MenuArchitecture;
+using KeyGUI.Framework.Menus;
 using KeyGUI.Menus.Alliances;
 using KeyGUI.Menus.Buildings;
 using KeyGUI.Menus.Cities;

@@ -1,5 +1,5 @@
+using KeyGUI.Framework.Menus;
 using KeyGUI.Powers;
-using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Buildings.BuildingPlacementBuildingSelector;
 using KeyGUI.Menus.Localizations.Declarations;
 using UnityEngine;

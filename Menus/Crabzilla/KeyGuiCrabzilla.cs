@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Reflection;
-using KeyGUI.MenuArchitecture;
+using KeyGUI.Framework.Menus;
 using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Patches;
 using strings;

@@ -1,6 +1,6 @@
 using System;
 
-namespace KeyGUI.MenuArchitecture {
+namespace KeyGUI.Framework.Menus {
   public class InvalidMenuInvocationContextException : ApplicationException {
     internal InvalidMenuInvocationContextException() {
     }

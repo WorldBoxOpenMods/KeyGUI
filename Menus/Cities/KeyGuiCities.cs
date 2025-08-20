@@ -1,6 +1,6 @@
 using System.Linq;
+using KeyGUI.Framework.Menus;
 using KeyGUI.Powers;
-using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Cities.ResourceEditor;
 using KeyGUI.Menus.Localizations.Declarations;
 using UnityEngine;

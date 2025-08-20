@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
-using KeyGUI.MenuArchitecture;
+using KeyGUI.Framework.Patches;
 
 namespace KeyGUI.Patches {
   public class IceBoatMovementToggler : KeyGuiPatch {

@@ -1,4 +1,4 @@
-﻿using KeyGUI.MenuArchitecture;
+﻿using KeyGUI.Framework.Menus;
 using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.Stats.StatBoundEditing;
 

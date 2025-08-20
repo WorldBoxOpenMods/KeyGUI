@@ -1,5 +1,5 @@
 using System.Linq;
-using KeyGUI.MenuArchitecture;
+using KeyGUI.Framework.Powers;
 using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {

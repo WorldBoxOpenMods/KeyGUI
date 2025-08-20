@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using KeyGUI.MenuArchitecture;
+using KeyGUI.Framework.Menus;
 using strings;
 using UnityEngine;
 

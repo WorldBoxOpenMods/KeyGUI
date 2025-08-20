@@ -8,7 +8,7 @@ using System.Text;
 using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.Assets;
 using KeyGeneralPurposeLibrary.Classes;
-using KeyGUI.MenuArchitecture;
+using KeyGUI.Framework.Menus;
 using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
 using KeyGUI.Menus.ModConfig.ConfigOptions;

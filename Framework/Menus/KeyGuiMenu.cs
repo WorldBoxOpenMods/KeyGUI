@@ -8,7 +8,7 @@ using KeyGUI.Menus.Localizations;
 using UnityEngine;
 // ReSharper disable InconsistentNaming
 
-namespace KeyGUI.MenuArchitecture {
+namespace KeyGUI.Framework.Menus {
   public abstract class KeyGuiMenu {
     protected Rect MenuRect = new Rect(0, 0, 300, 50);
     protected virtual float MenuMaxWidth => 400;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using KeyGUI.Framework.Menus;
 using KeyGUI.Powers;
-using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Cultures.TraitSelection;
 using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Patches;

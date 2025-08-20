@@ -1,7 +1,7 @@
 using KeyGUI.Menus.Localizations;
 using UnityEngine;
 
-namespace KeyGUI.MenuArchitecture {
+namespace KeyGUI.Framework.Menus {
   public class KeyGuiMessage : KeyGuiMenu {
     private string Message { get; }
     private bool _firstWindowDisplay = true;

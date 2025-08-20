@@ -6,7 +6,7 @@ using KeyGUI.Menus.ModConfig;
 using KeyGUI.Menus.ModConfig.ConfigOptions;
 using UnityEngine;
 
-namespace KeyGUI.MenuArchitecture {
+namespace KeyGUI.Framework.Menus {
   public abstract class KeyGuiMenuManager : KeyGuiMenu {
     private readonly List<KeyGuiMenu> _menus = new List<KeyGuiMenu>();
 

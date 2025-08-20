@@ -1,5 +1,5 @@
+using KeyGUI.Framework.Menus;
 using TraitsC = KeyGUI.Menus.ModConfig.ConfigOptions.Traits;
-using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
 using UnityEngine;

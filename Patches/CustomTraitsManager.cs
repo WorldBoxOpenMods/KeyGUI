@@ -4,7 +4,7 @@ using System.Reflection;
 using HarmonyLib;
 using KeyGeneralPurposeLibrary.Assets;
 using KeyGeneralPurposeLibrary.Classes;
-using KeyGUI.MenuArchitecture;
+using KeyGUI.Framework.Patches;
 using UnityEngine;
 
 namespace KeyGUI.Patches {

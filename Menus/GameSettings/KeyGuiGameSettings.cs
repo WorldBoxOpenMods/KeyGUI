@@ -1,6 +1,6 @@
 using GameSettingsC = KeyGUI.Menus.ModConfig.ConfigOptions.GameSettings;
 using System;
-using KeyGUI.MenuArchitecture;
+using KeyGUI.Framework.Menus;
 using KeyGUI.Menus.Localizations.Declarations;
 using KeyGUI.Menus.ModConfig;
 using KeyGUI.Patches;

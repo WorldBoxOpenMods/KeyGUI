@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using HarmonyLib;
-using KeyGUI.MenuArchitecture;
+using KeyGUI.Framework.Patches;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

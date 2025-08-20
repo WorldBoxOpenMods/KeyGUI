@@ -1,11 +1,10 @@
 using System.Linq;
-using KeyGeneralPurposeLibrary;
 using KeyGeneralPurposeLibrary.Assets;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace KeyGUI.MenuArchitecture {
-  public abstract class KeyGuiPower : KLibComponent {
+namespace KeyGUI.Framework.Powers {
+  public abstract class KeyGuiPower {
     public readonly GodPower Power;
     public readonly PowerButton Button;
     protected KeyGuiPower(GodPower power) {

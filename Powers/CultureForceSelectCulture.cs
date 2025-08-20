@@ -1,5 +1,5 @@
+using KeyGUI.Framework.Powers;
 using UnityEngine;
-using KeyGUI.MenuArchitecture;
 using KeyGUI.Menus.Localizations.Declarations;
 
 namespace KeyGUI.Powers {

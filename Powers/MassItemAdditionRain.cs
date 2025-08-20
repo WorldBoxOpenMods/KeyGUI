@@ -1,4 +1,4 @@
-using KeyGUI.MenuArchitecture;
+using KeyGUI.Framework.Powers;
 
 namespace KeyGUI.Powers {
   public class MassItemAdditionRain : KeyGuiPower {

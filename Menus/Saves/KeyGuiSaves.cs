@@ -1,4 +1,4 @@
-using KeyGUI.MenuArchitecture;
+using KeyGUI.Framework.Menus;
 using UnityEngine;
 
 namespace KeyGUI.Menus.Saves {
