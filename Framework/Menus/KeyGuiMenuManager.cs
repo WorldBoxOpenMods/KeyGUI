@@ -20,6 +20,7 @@ namespace KeyGUI.Framework.Menus {
     }
     internal T Load<T>(KeyGuiLocale title, int windowID, T instance) where T : KeyGuiMenu {
       Debug.Log($"Loading {Title} {title}...");
+      AddLocalesContainer(title, instance);
       _menus.Add(instance);
       _menus.Last().RegisterPatches();
       _menus.Last().InitMenuInfo(title, windowID, this, MenuRect.x + MenuRect.width);
