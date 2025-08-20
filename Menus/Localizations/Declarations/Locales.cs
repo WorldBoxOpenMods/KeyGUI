@@ -21,6 +21,7 @@ using UnityEngine;
 
 namespace KeyGUI.Menus.Localizations.Declarations {
   public class Locales : LocalesContainer {
+    private static readonly Dictionary<LocaleDeclaration, string> DefaultLocales = new Dictionary<LocaleDeclaration, string>();
     public static readonly Locales KeyGui = new Locales();
     public readonly KeyGuiDisasters Disasters = new KeyGuiDisasters();
     public readonly KeyGuiStats Stats = new KeyGuiStats();
@@ -70,8 +71,7 @@ namespace KeyGUI.Menus.Localizations.Declarations {
     public readonly LocaleDeclaration CriticalModWarning = new LocaleDeclaration("WARNING: The mod {0} has automatically been disabled by KeyGUI because {1}!");
     public readonly LocaleDeclaration DismissCriticalModWarningButton = new LocaleDeclaration("Dismiss");
     public readonly LocaleDeclaration DisableCriticalModWarningButton = new LocaleDeclaration("Don't disable it the next time");
-    private static readonly Dictionary<LocaleDeclaration, string> DefaultLocales = new Dictionary<LocaleDeclaration, string>() {
-    };
+
     internal static void SyncDefaultLocale(LocaleDeclaration declaration) {
       if (DefaultLocales.TryGetValue(declaration, out string locale)) {
         declaration.DefaultValue = locale;
