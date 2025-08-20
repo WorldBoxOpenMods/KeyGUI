@@ -144,6 +144,7 @@
         <Compile Include="Menus\Localizations\Declarations\Destruction\KeyGuiDestruction.cs"/>
         <Compile Include="Menus\Localizations\Declarations\Disasters\KeyGuiDisasters.cs"/>
         <Compile Include="Menus\Localizations\Declarations\GameSettings\KeyGuiGameSettings.cs"/>
+        <Compile Include="Menus\Localizations\Declarations\KeyGui.cs" />
         <Compile Include="Menus\Localizations\Declarations\Locales.cs"/>
         <Compile Include="Menus\Localizations\Declarations\Localizations\KeyGuiLocales.cs"/>
         <Compile Include="Menus\Localizations\Declarations\ModConfig\KeyGuiModConfig.cs"/>
