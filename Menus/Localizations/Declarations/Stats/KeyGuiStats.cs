@@ -3,7 +3,7 @@
 namespace KeyGUI.Menus.Localizations.Declarations.Stats {
   public class KeyGuiStats : LocalesContainer {
     public readonly KeyGuiStatsStatBoundEditing StatBoundEditing = new KeyGuiStatsStatBoundEditing();
-    public readonly LocaleDeclaration StatBoundEditingSubmenuName = new LocaleDeclaration("Edit stat bounds");
+    public readonly LocaleDeclaration StatBoundEditingSubmenuName = "Edit stat bounds";
     internal KeyGuiStats() { }
   }
 }

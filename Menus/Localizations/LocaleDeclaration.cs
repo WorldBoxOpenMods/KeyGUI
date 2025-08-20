@@ -24,5 +24,9 @@ namespace KeyGUI.Menus.Localizations {
     public static implicit operator string(LocaleDeclaration localeDeclaration) {
       return localeDeclaration.ToString();
     }
+
+    public static implicit operator LocaleDeclaration(string defaultValue) {
+      return new LocaleDeclaration(defaultValue);
+    }
   }
 }
