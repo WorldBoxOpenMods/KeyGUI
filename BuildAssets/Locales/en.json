@@ -1,444 +1,321 @@
 {
-  "ModName": "KeyGUI",
-  "DisastersSubmenuText": "Disasters",
-  "StatsSubmenuText": "Stats",
-  "DestructionSubmenuText": "Destruction",
-  "CleansingSubmenuText": "Cleansing",
-  "CulturesSubmenuText": "Cultures",
-  "PlotsSubmenuText": "Plots",
-  "TraitsSubmenuText": "Traits",
-  "ItemsSubmenuText": "Items",
-  "CrabzillaSubmenuText": "Crabzilla",
-  "ClansSubmenuText": "Clans",
-  "AlliancesSubmenuText": "Alliances",
-  "ActorsSubmenuText": "Actors",
-  "GameSettingsSubmenuText": "Game Settings",
-  "ZonesSubmenuText": "Zones",
-  "CitiesSubmenuText": "Cities",
-  "BuildingsSubmenuText": "Buildings",
-  "ModConfigSubmenuText": "Mod Config",
-  "LocalesSubmenuText": "Locales",
-  "DebugSubmenuText": "Debug",
-  "TestingSubmenuText": "Testing",
-  "MessagePopupTitle": "Message",
-  "KeyGuiOutdatedWarning": "Your version of KeyGUI is outdated!",
-  "DownloadKeyGuiButton": "Download",
-  "DismissKeyGuiOutdatedWarningButton": "Dismiss",
-  "ProblematicModWarning": "WARNING: It's recommended to not use {0} because {1}!",
-  "DismissProblematicModWarningButton": "Dismiss",
-  "CriticalModWarning": "WARNING: The mod {0} has automatically been disabled by KeyGUI because {1}!",
-  "DismissCriticalModWarningButton": "Dismiss",
-  "DisableCriticalModWarningButton": "Don't disable it the next time",
-  "Disasters": {
-    "BoilTogetherHeatwaveButton": "Boil Together Heatwave",
-    "TriggerEarthquakeButton": "Trigger Earthquake",
-    "CauseTornadoButton": "Cause Tornado",
-    "ImplantMadThoughtButton": "Implant Mad Thought",
-    "ImplantModThoughtNoVillageFoundError": "No village found for Mad Thoughts!",
-    "GenerateMeteoriteButton": "Generate Meteorite",
-    "BringForthEvilMageButton": "Bring Forth Evil Mage",
-    "BuildSomeSnowmenButton": "Build Some Snowmen",
-    "StealDemonsFromHellButton": "Steal Demons From Hell",
-    "InvadeWorldWithBanditsButton": "Invade World With Bandits",
-    "GrabFrozenOnesFromNorthPoleButton": "Grab Frozen Ones From North Pole",
-    "UnleashNecromancerButton": "Unleash Necromancer",
-    "AwakenDragonButton": "Awaken Dragon",
-    "UncoverAliensButton": "Uncover Aliens",
-    "DigUpBiomassButton": "Dig Up Biomass",
-    "DigUpBiomassNoVillageFoundError": "No village found for Biomass!",
-    "GiveBirthToTumorButton": "Give Birth To Tumor",
-    "GiveBirthToTumorNoVillageFoundError": "No village found for Tumor!",
-    "GrowGardenSurpriseButton": "Grow Garden Surprise",
-    "GrowGardenSurpriseNoVillageFoundError": "No village found for Garden Surprise!",
-    "GrowGardenSurpriseNoWindmillFoundError": "No windmill found for Garden Surprise!",
-    "SummonGregButton": "Summon Greg",
-    "SummonGregNoVillageFoundError": "No village found for Greg!",
-    "SummonGregNoMineFoundError": "No mine found for Greg!"
-  },
-  "Stats": {
-    "StatBoundEditingSubmenuName": "Edit stat bounds",
-    "RaceModifierSubmenuName": "Mass change stats of a race",
-    "RaceModifier": {
-      "StatModifierSubmenuName": "Race Stat Modifier",
-      "ShowNonCivRacesButton": "Show non civ races too",
-      "HideNonCivRacesButton": "Only show civ races",
-      "ModifyRaceButton": "Modify {0}",
-      "CloseMenuButton": "Close",
-      "StatModifier": {
-        "NoRaceSelectedError": "No race selected!",
-        "ModifyingRaceLabel": "Modifying {0}",
+  "Menus": {
+    "ModName": "KeyGUI",
+    "DisastersSubmenuText": "Disasters",
+    "StatsSubmenuText": "Stats",
+    "DestructionSubmenuText": "Destruction",
+    "CleansingSubmenuText": "Cleansing",
+    "CulturesSubmenuText": "Cultures",
+    "PlotsSubmenuText": "Plots",
+    "TraitsSubmenuText": "Traits",
+    "CrabzillaSubmenuText": "Crabzilla",
+    "ClansSubmenuText": "Clans",
+    "AlliancesSubmenuText": "Alliances",
+    "GameSettingsSubmenuText": "Game Settings",
+    "ZonesSubmenuText": "Zones",
+    "CitiesSubmenuText": "Cities",
+    "BuildingsSubmenuText": "Buildings",
+    "ModConfigSubmenuText": "Mod Config",
+    "LocalesSubmenuText": "Locales",
+    "DebugSubmenuText": "Debug",
+    "TestingSubmenuText": "Testing",
+    "MessagePopupTitle": "Message",
+    "KeyGuiOutdatedWarning": "Your version of KeyGUI is outdated!",
+    "DownloadKeyGuiButton": "Download",
+    "DismissKeyGuiOutdatedWarningButton": "Dismiss",
+    "ProblematicModWarning": "WARNING: It's recommended to not use {0} because {1}!",
+    "DismissProblematicModWarningButton": "Dismiss",
+    "CriticalModWarning": "WARNING: The mod {0} has automatically been disabled by KeyGUI because {1}!",
+    "DismissCriticalModWarningButton": "Dismiss",
+    "DisableCriticalModWarningButton": "Don't disable it the next time",
+    "Disasters": {
+      "BoilTogetherHeatwaveButton": "Boil Together Heatwave",
+      "TriggerEarthquakeButton": "Trigger Earthquake",
+      "CauseTornadoButton": "Cause Tornado",
+      "ImplantMadThoughtButton": "No village found for Mad Thoughts!",
+      "ImplantModThoughtNoVillageFoundError": "Implant Mad Thought",
+      "GenerateMeteoriteButton": "Generate Meteorite",
+      "BringForthEvilMageButton": "Bring Forth Evil Mage",
+      "BuildSomeSnowmenButton": "Build Some Snowmen",
+      "StealDemonsFromHellButton": "Steal Demons From Hell",
+      "InvadeWorldWithBanditsButton": "Invade World With Bandits",
+      "GrabFrozenOnesFromNorthPoleButton": "Grab Frozen Ones From North Pole",
+      "UnleashNecromancerButton": "Unleash Necromancer",
+      "AwakenDragonButton": "Awaken Dragon",
+      "UncoverAliensButton": "Uncover Aliens",
+      "DigUpBiomassButton": "Dig Up Biomass",
+      "DigUpBiomassNoVillageFoundError": "No village found for Biomass!",
+      "GiveBirthToTumorButton": "Give Birth To Tumor",
+      "GiveBirthToTumorNoVillageFoundError": "No village found for Tumor!",
+      "GrowGardenSurpriseButton": "Grow Garden Surprise",
+      "GrowGardenSurpriseNoVillageFoundError": "No village found for Garden Surprise!",
+      "GrowGardenSurpriseNoWindmillFoundError": "No windmill found for Garden Surprise!",
+      "SummonGregButton": "Summon Greg",
+      "SummonGregNoVillageFoundError": "No village found for Greg!",
+      "SummonGregNoMineFoundError": "No mine found for Greg!"
+    },
+    "Stats": {
+      "StatBoundEditingSubmenuName": "Edit stat bounds",
+      "Edit stat bounds": {
+        "EditStatSubmenuName": "Edit Stat",
         "ModifyStatButton": "Modify {0}",
-        "InvalidStatNumberValueEnteredError": "Please enter a valid number.",
+        "CloseMenuButton": "Close",
+        "Edit Stat": {
+          "NoStatSelectedError": "No stat selected!",
+          "ModifyingStatLabel": "Modifying {0}",
+          "DisableStatBoundsButton": "Disable stat bounds",
+          "EnableStatBoundsButton": "Enable stat bounds",
+          "HideStatButton": "Hide stat",
+          "ShowStatButton": "Show stat",
+          "CurrentMinAndMaxLabel": "Current Min: {0}, Current Max: {1}",
+          "MinLabel": "Min:",
+          "SetMinButton": "Set",
+          "InvalidMinNumberEnteredError": "Please enter a valid number.",
+          "MaxLabel": "Max:",
+          "SetMaxButton": "Set",
+          "InvalidMaxNumberEnteredError": "Please enter a valid number.",
+          "CloseMenuButton": "Close"
+        }
+      }
+    },
+    "Destruction": {
+      "MakeEverythingGoMadButton": "Make Everything Go Mad",
+      "CauseAMassBombingButton": "Cause A Mass Bombing",
+      "MassInfectEverythingWithMushSporesButton": "Mass Infect Everything With Mush Spores",
+      "ChangeEveryBiomeToTheSwampBiomeButton": "Change Every Biome To The Swamp Biome",
+      "ChangeEveryBiomeToTheCorruptedBiomeButton": "Change Every Biome To The Corrupted Biome"
+    },
+    "Cleansing": {
+      "GetRidOfMushSporesButton": "Get Rid Of Mush Spores",
+      "CureThePlagueButton": "Cure The Plague",
+      "KillEveryTumorButton": "Kill Every Tumor",
+      "ExterminateZombiesButton": "Exterminate Zombies",
+      "DeleteAllRoadsButton": "Delete All Roads",
+      "LowerAllMountainsButton": "Lower All Mountains",
+      "LowerAllHillsButton": "Lower All Hills",
+      "DestroyAllBrokenBuildingsButton": "Destroy All Broken Buildings",
+      "BiomesCategoryHeader": "Biomes",
+      "BiomeDeletionListHeader": "Biome Deletion:",
+      "GetRidOfBiomeButton": "Get Rid Of {0} Biome",
+      "BiomeRandomizationListHeader": "Biome Randomization:",
+      "RandomizeBiomesButton": "Randomize Biomes",
+      "BiomeRandomizationBiomeEnablingDisablingListHeader": "Biome Enabling/Disabling:",
+      "BiomeRandomizationEnableBiomeButton": "Enable {0} Biome",
+      "BiomeRandomizationDisableBiomeButton": "Disable {0} Biome"
+    },
+    "Cultures": {
+      "TraitSelectionSubmenuName": "Culture Trait Selection",
+      "DeleteOneCultureButton": "Delete One Culture",
+      "DeleteEveryCultureButton": "Delete Every Culture",
+      "ResetOneCultureButton": "Reset One Culture",
+      "ResetEveryCultureButton": "Reset Every Culture",
+      "ForceExistingCultureUponSpecificCityButton": "Force Existing Culture Upon Specific City",
+      "CreateNewCultureAtSpecificCityButton": "Create New Culture At Specific City",
+      "SelectCultureListHeader": "Select Culture:",
+      "Culture Trait Selection": {
+        "NoCultureSelectedError": "No culture selected!",
+        "CloseMenuButton": "Close",
+        "SelectTraitsForCultureHeader": "Select Traits for {0}",
+        "RemoveTraitFromCultureButton": "Remove {0} from {1}",
+        "AddTraitToCultureButton": "Add {0} to {1}"
+      }
+    },
+    "Plots": {
+      "CancelPlotCategoryHeader": "Cancel a plot",
+      "TogglePlotsCategoryHeader": "Toggle plots",
+      "AllowWarsButton": "Allow Wars",
+      "DisallowWarsButton": "Disallow Wars",
+      "AllowRebellionsButton": "Allow Rebellions",
+      "DisallowRebellionsButton": "Disallow Rebellions",
+      "AllowAllianceCreationButton": "Allow Alliance Creation",
+      "DisallowAllianceCreationButton": "Disallow Alliance Creation",
+      "AllowAllianceJoiningButton": "Allow Alliance Joining",
+      "DisallowAllianceJoiningButton": "Disallow Alliance Joining",
+      "AllowAllianceBreakingButton": "Allow Alliance Breaking",
+      "DisallowAllianceBreakingButton": "Disallow Alliance Breaking",
+      "AllowWarStoppingButton": "Allow War Stopping",
+      "DisallowWarStoppingButton": "Disallow War Stopping",
+      "AllowTotalWarsButton": "Allow Total Wars",
+      "DisallowTotalWarsButton": "Disallow Total Wars"
+    },
+    "Traits": {
+      "InstructionsSubmenuName": "Trait Instructions",
+      "CreateTraitSection": "Create Trait:",
+      "CreateTraitName": "Trait Name",
+      "CreateTraitDescription": "Trait Description",
+      "CreateTraitBirthChance": "Trait Birth Chance",
+      "CreateTraitInheritChance": "Trait Inherit Chance",
+      "CreateTraitOppositeTraits": "Opposite Traits",
+      "CreateTraitRemoveOppositeTrait": "Remove {0} From Opposite Traits",
+      "CreateTraitAddOppositeTrait": "Add {0} To Opposite Traits",
+      "CreateTraitPartnerTraits": "Partner Traits",
+      "CreateTraitRemovePartnerTrait": "Remove {0} From Partner Traits",
+      "CreateTraitAddPartnerTrait": "Add {0} To Partner Traits",
+      "CreateTraitTraitGroup": "Trait Group",
+      "CreateTraitCurrentTraitGroup": "Current Group: {0}",
+      "CreateTraitSprite": "Sprite",
+      "CreateTraitCurrentSprite": "Current Sprite: {0}",
+      "CreateTraitCreateLabel": "Create!",
+      "CreateTraitCancelEditingButton": "Cancel Editing",
+      "CreateTraitButton": "Create Trait",
+      "CreateTraitInvalidBirthChanceError": "The birth chance entered is invalid!",
+      "CreateTraitInvalidInheritChanceError": "The inherit chance entered is invalid!",
+      "CreateTraitInvalidStatError": "The stat value entered for {0} is invalid!",
+      "CreateTraitSuccess": "Trait Created!",
+      "CreateTraitNoGroupError": "Please select a trait group!",
+      "CreateTraitNoNameError": "Please enter a trait name!",
+      "EditTraitSection": "Edit Trait:",
+      "DeleteTraitSection": "Delete Trait:",
+      "DataControlSection": "Data Control:",
+      "DataControlSaveButton": "Save",
+      "DataControlLoadButton": "Load",
+      "DataControlDisableAutoTraitLoad": "Turn Automatic Trait Loading Off",
+      "DataControlEnableAutoTraitLoad": "Turn Automatic Trait Loading On",
+      "Trait Instructions": {
+        "NecessaryTraitValues": "Necessary Trait Values:\nTrait Name\nTrait Description\nTrait Group",
+        "Tips": "Tips:\nIt's recommended to keep trait sprites 28x28 or smaller. Any size works, but larger ones can experience issues.\nKeyGUI includes a feature called \"Partner Traits\". Any traits that you select as partner traits for your trait will automatically be added to any unit that has your trait.\nThis is useful for combining special trait effects like immortality with your custom trait.",
         "CloseMenuButton": "Close"
       }
     },
-    "StatBoundEditing": {
-      "EditStatSubmenuName": "Edit Stat",
-      "ModifyStatButton": "Modify {0}",
-      "CloseMenuButton": "Close",
-      "EditStat": {
-        "NoStatSelectedError": "No stat selected!",
-        "ModifyingStatLabel": "Modifying {0}",
-        "DisableStatBoundsButton": "Disable stat bounds",
-        "EnableStatBoundsButton": "Enable stat bounds",
-        "HideStatButton": "Hide stat",
-        "ShowStatButton": "Show stat",
-        "CurrentMinAndMaxLabel": "Current Min: {0}, Current Max: {1}",
-        "MinLabel": "Min:",
-        "SetMinButton": "Set",
-        "InvalidMinNumberEnteredError": "Please enter a valid number.",
-        "MaxLabel": "Max:",
-        "SetMaxButton": "Set",
-        "InvalidMaxNumberEnteredError": "Please enter a valid number.",
-        "CloseMenuButton": "Close"
-      }
-    }
-  },
-  "Destruction": {
-    "MakeEverythingGoMadButton": "Make Everything Go Mad",
-    "CauseAMassBombingButton": "Cause A Mass Bombing",
-    "MassInfectEverythingWithMushSporesButton": "Mass Infect Everything With Mush Spores",
-    "CauseEveryDisasterButton": "Cause Every Disaster",
-    "CauseAWorldWarButton": "Cause A World War",
-    "ChangeEveryBiomeToTheSwampBiomeButton": "Change Every Biome To The Swamp Biome",
-    "ChangeEveryBiomeToTheCorruptedBiomeButton": "Change Every Biome To The Corrupted Biome"
-  },
-  "Cleansing": {
-    "GetRidOfMushSporesButton": "Get Rid Of Mush Spores",
-    "CureThePlagueButton": "Cure The Plague",
-    "KillEveryTumorButton": "Kill Every Tumor",
-    "ExterminateZombiesButton": "Exterminate Zombies",
-    "DeleteAllRoadsButton": "Delete All Roads",
-    "LowerAllMountainsButton": "Lower All Mountains",
-    "LowerAllHillsButton": "Lower All Hills",
-    "DestroyAllBrokenBuildingsButton": "Destroy All Broken Buildings",
-    "BiomesCategoryHeader": "Biomes",
-    "BiomeDeletionListHeader": "Biome Deletion:",
-    "GetRidOfBiomeButton": "Get Rid Of {0} Biome",
-    "BiomeRandomizationListHeader": "Biome Randomization:",
-    "RandomizeBiomesButton": "Randomize Biomes",
-    "BiomeRandomizationBiomeEnablingDisablingListHeader": "Biome Enabling/Disabling:",
-    "BiomeRandomizationEnableBiomeButton": "Enable {0} Biome",
-    "BiomeRandomizationDisableBiomeButton": "Disable {0} Biome"
-  },
-  "Cultures": {
-    "TraitSelectionSubmenuName": "Culture Trait Selection",
-    "DeleteOneCultureButton": "Delete One Culture",
-    "DeleteEveryCultureButton": "Delete Every Culture",
-    "ResetOneCultureButton": "Reset One Culture",
-    "ResetEveryCultureButton": "Reset Every Culture",
-    "ResetTechOfOneCultureButton": "Reset Tech Of One Culture",
-    "ResetTechOfEveryCultureButton": "Reset Tech Of Every Culture",
-    "KnowledgeGainIncreaseDecreaseAmountLabel": "Knowledge Gain Increase/Decrease Amount:",
-    "InvalidKnowledgeGainIncreaseDecreaseAmountEnteredError": "Invalid value entered!",
-    "IncreaseKnowledgeGainOfOneCultureButton": "Increase Knowledge Gain Of One Culture",
-    "IncreaseKnowledgeGainOfEveryCultureButton": "Increase Knowledge Gain Of Every Culture",
-    "DecreaseKnowledgeGainOfOneCultureButton": "Decrease Knowledge Gain Of One Culture",
-    "DecreaseKnowledgeGainOfEveryCultureButton": "Decrease Knowledge Gain Of Every Culture",
-    "ForceExistingCultureUponSpecificCityButton": "Force Existing Culture Upon Specific City",
-    "CreateNewCultureAtSpecificCityButton": "Create New Culture At Specific City",
-    "SelectCultureListHeader": "Select Culture:",
-    "TraitSelection": {
-      "NoCultureSelectedError": "No culture selected!",
-      "CloseMenuButton": "Close",
-      "SelectTraitsForCultureHeader": "Select Traits for {0}",
-      "RemoveTraitFromCultureButton": "Remove {0} from {1}",
-      "AddTraitToCultureButton": "Add {0} to {1}"
-    }
-  },
-  "Plots": {
-    "PeacePlotTargetSelectionSubmenuName": "Stop War",
-    "WarSelectorInitiatorKingdomLabel": "Initiator Kingdom",
-    "WarSelectorTargetKingdomLabel": "Target Kingdom",
-    "RebellionSelectorInitiatorCityLabel": "Initiator City",
-    "AllianceCreationSelectorInitiatorKingdomLabel": "Initiator Kingdom",
-    "AllianceCreationSelectorTargetKingdomLabel": "Target Kingdom",
-    "AllianceJoinSelectorInitiatorKingdomLabel": "Initiator Kingdom",
-    "AllianceJoinSelectorTargetAllianceLabel": "Target Alliance",
-    "AllianceBreakSelectorInitiatorKingdomLabel": "Initiator Kingdom",
-    "AllianceBreakSelectorTargetAllianceLabel": "Target Alliance",
-    "TotalWarSelectorInitiatorKingdomLabel": "Initiator Kingdom",
-    "CreatePlotCategoryHeader": "Create a plot",
-    "CreateWarPlotButton": "War",
-    "CreateRebellionPlotButton": "Rebellion",
-    "CreateAllianceCreationPlotButton": "Alliance Creation",
-    "CreateAllianceJoinPlotButton": "Alliance Join",
-    "CreateAllianceBreakPlotButton": "Alliance Break",
-    "CreateTotalWarPlotButton": "World War",
-    "CancelPlotCategoryHeader": "Cancel a plot",
-    "TogglePlotsCategoryHeader": "Toggle plots",
-    "AllowWarsButton": "Allow Wars",
-    "DisallowWarsButton": "Disallow Wars",
-    "AllowRebellionsButton": "Allow Rebellions",
-    "DisallowRebellionsButton": "Disallow Rebellions",
-    "AllowAllianceCreationButton": "Allow Alliance Creation",
-    "DisallowAllianceCreationButton": "Disallow Alliance Creation",
-    "AllowAllianceJoiningButton": "Allow Alliance Joining",
-    "DisallowAllianceJoiningButton": "Disallow Alliance Joining",
-    "AllowAllianceBreakingButton": "Allow Alliance Breaking",
-    "DisallowAllianceBreakingButton": "Disallow Alliance Breaking",
-    "AllowWarStoppingButton": "Allow War Stopping",
-    "DisallowWarStoppingButton": "Disallow War Stopping",
-    "AllowTotalWarsButton": "Allow Total Wars",
-    "DisallowTotalWarsButton": "Disallow Total Wars",
-    "PeacePlotTargetSelection": {
-      "CloseMenuButton": "Cancel"
-    }
-  },
-  "Traits": {
-    "InstructionsSubmenuName": "Trait Instructions",
-    "CreateTraitSection": "Create Trait:",
-    "CreateTraitName": "Trait Name",
-    "CreateTraitDescription": "Trait Description",
-    "CreateTraitBirthChance": "Trait Birth Chance",
-    "CreateTraitInheritChance": "Trait Inherit Chance",
-    "CreateTraitOppositeTraits": "Opposite Traits",
-    "CreateTraitRemoveOppositeTrait": "Remove {0} From Opposite Traits",
-    "CreateTraitAddOppositeTrait": "Add {0} To Opposite Traits",
-    "CreateTraitPartnerTraits": "Partner Traits",
-    "CreateTraitRemovePartnerTrait": "Remove {0} From Partner Traits",
-    "CreateTraitAddPartnerTrait": "Add {0} To Partner Traits",
-    "CreateTraitTraitGroup": "Trait Group",
-    "CreateTraitCurrentTraitGroup": "Current Group: {0}",
-    "CreateTraitSprite": "Sprite",
-    "CreateTraitCurrentSprite": "Current Sprite: {0}",
-    "CreateTraitCreateLabel": "Create!",
-    "CreateTraitCancelEditingButton": "Cancel Editing",
-    "CreateTraitButton": "Create Trait",
-    "CreateTraitInvalidBirthChanceError": "The birth chance entered is invalid!",
-    "CreateTraitInvalidInheritChanceError": "The inherit chance entered is invalid!",
-    "CreateTraitInvalidStatError": "The stat value entered for {0} is invalid!",
-    "CreateTraitSuccess": "Trait Created!",
-    "CreateTraitNoGroupError": "Please select a trait group!",
-    "CreateTraitNoNameError": "Please enter a trait name!",
-    "EditTraitSection": "Edit Trait:",
-    "DeleteTraitSection": "Delete Trait:",
-    "DataControlSection": "Data Control:",
-    "DataControlSaveButton": "Save",
-    "DataControlLoadButton": "Load",
-    "DataControlDisableAutoTraitLoad": "Turn Automatic Trait Loading Off",
-    "DataControlEnableAutoTraitLoad": "Turn Automatic Trait Loading On",
-    "Instructions": {
-      "NecessaryTraitValues": "Necessary Trait Values:\nTrait Name\nTrait Description\nTrait Group",
-      "Tips": "Tips:\nIt's recommended to keep trait sprites 28x28 or smaller. Any size works, but larger ones can experience issues.\nKeyGUI includes a feature called \"Partner Traits\". Any traits that you select as partner traits for your trait will automatically be added to any unit that has your trait.\nThis is useful for combining special trait effects like immortality with your custom trait.",
-      "CloseMenuButton": "Close"
-    }
-  },
-  "Items": {
-    "CreateItemSection": "Create Item:",
-    "GeneralInfoLabel": "General Info:",
-    "ItemNameLabel": "Item Name",
-    "SpriteLabel": "Sprite",
-    "CurrentSpriteLabel": "Current Sprite: {0}",
-    "EquipmentTypeLabel": "Equipment Type:",
-    "CurrentEquipmentTypeLabel": "Current Equipment Type: {0}",
-    "WeaponButton": "Weapon",
-    "AmuletButton": "Amulet",
-    "HelmetButton": "Helmet",
-    "ArmorButton": "Armor",
-    "BootsButton": "Boots",
-    "RingButton": "Ring",
-    "MaterialLabel": "Material:",
-    "CurrentMaterialLabel": "Current Material: {0}",
-    "MetallicButton": "Make metallic",
-    "NonMetallicButton": "Make non-metallic",
-    "WeaponTypeLabel": "Weapon Type",
-    "CurrentWeaponTypeLabel": "Current Weapon Type: {0}",
-    "MeleeButton": "Melee",
-    "RangedButton": "Ranged",
-    "StatsLabel": "Stats:",
-    "ModifiersLabel": "Modifiers:",
-    "RemoveModifierButton": "Remove {0}",
-    "AddModifierButton": "Add {0}",
-    "CreateButtonLabel": "Create!",
-    "CreateItemButton": "Create Item",
-    "CreateItemInvalidStatError": "The stat value entered for {0} is invalid!",
-    "CreateItemSuccess": "Item Created!",
-    "CreateItemNoNameError": "Please enter an item name!",
-    "DeleteItemsLabel": "Delete items",
-    "DataControlLabel": "Data Control",
-    "SaveButton": "Save",
-    "LoadButton": "Load",
-    "DisableAutoItemLoadButton": "Turn Automatic Item Loading Off",
-    "EnableAutoItemLoadButton": "Turn Automatic Item Loading On"
-  },
-  "Crabzilla": {
-    "CrabzillaNotSpawnedError": "Some buttons are disabled because Crabzilla is not spawned.",
-    "LiveCrabzillaChangesSectionTitle": "Live Crabzilla Changes:",
-    "InspectCrabzillaButton": "Inspect Crabzilla",
-    "FullyHealCrabzillaButton": "Fully Heal Crabzilla",
-    "CrabzillaStatChangesSectionTitle": "Crabzilla Stat Changes:",
-    "AttackStatLabel": "Attack",
-    "SetAttackButton": "Set Attack",
-    "ExplosionStrengthStatLabel": "Explosion Strength",
-    "SetExplosionStrengthButton": "Set Explosion Strength",
-    "ExplosionRadiusStatLabel": "Explosion Radius",
-    "SetExplosionRadiusButton": "Set Explosion Radius",
-    "CrabzillaBoolFlagChangesSectionTitle": "Crabzilla Bool Flag Changes:",
-    "SetTheFlagToBoolButton": "Set the {0} flag to {1}",
-    "CrabzillaDoesntExistError": "Crabzilla somehow doesn't exist in your game Ig."
-  },
-  "Clans": {
-    "TraitSelectionSubmenuName": "Clan Trait Selection",
-    "SelectClanListHeader": "Select Clan:",
-    "TraitSelection": {
-      "NoClanSelectedError": "No clan selected!",
-      "CloseMenuButton": "Close",
-      "SelectTraitsForClanHeader": "Select Traits for {0}",
-      "RemoveTraitFromClanButton": "Remove {0} from {1}",
-      "AddTraitToClanButton": "Add {0} to {1}"
-    }
-  },
-  "Alliances": {
-    "WhisperOfAllianceButton": "Whisper Of Alliance"
-  },
-  "Actors": {
-    "TraitRemovalSelectionSubmenuName": "Trait Removal Selection",
-    "ItemDropperSubmenuName": "Item Dropper",
-    "TraitRemovalRainDropButton": "Trait Removal Rain Drop",
-    "MakeActorKingButton": "Make Actor King",
-    "ItemDropper": {
-      "CreatedItemsListHeader": "Created Items:",
-      "LoadItemFromItemCreatorButton": "Load Item From Item Creator",
-      "LoadItemFromItemCreatorButtonNoItemError": "No Item To Load Exists",
-      "AddItemRainButton": "Add Item Rain",
-      "ItemCreatorSubmenuName": "Item Creator",
-      "ItemCreator": {
-        "ItemTypeSelectHeader": "Item Type:",
-        "ItemAssetSelectHeader": "Item Asset:",
-        "NoItemAssetSelectOption": "Nothing",
-        "NoItemAssetItemName": "Remove {0} From Actor",
-        "ItemMaterialSelectHeader": "Item Material:",
-        "ItemModifiersSelectHeader": "Item Modifiers:",
-        "AddItemModifierButton": "Add {0}",
-        "RemoveItemModifierButton": "Remove {0}",
-        "ItemNameSelectHeader": "Item Name:",
-        "ItemCreateButton": "Create",
-        "ItemDiscardButton": "Discard"
+    "Crabzilla": {
+      "CrabzillaNotSpawnedError": "Some buttons are disabled because Crabzilla is not spawned.",
+      "LiveCrabzillaChangesSectionTitle": "Live Crabzilla Changes:",
+      "InspectCrabzillaButton": "Inspect Crabzilla",
+      "FullyHealCrabzillaButton": "Fully Heal Crabzilla",
+      "CrabzillaStatChangesSectionTitle": "Crabzilla Stat Changes:",
+      "AttackStatLabel": "Attack",
+      "SetAttackButton": "Set Attack",
+      "ExplosionStrengthStatLabel": "Explosion Strength",
+      "SetExplosionStrengthButton": "Set Explosion Strength",
+      "ExplosionRadiusStatLabel": "Explosion Radius",
+      "SetExplosionRadiusButton": "Set Explosion Radius",
+      "CrabzillaBoolFlagChangesSectionTitle": "Crabzilla Bool Flag Changes:",
+      "SetTheFlagToBoolButton": "Set the {0} flag to {1}",
+      "CrabzillaDoesntExistError": "Crabzilla somehow doesn't exist in your game Ig."
+    },
+    "Clans": {
+      "TraitSelectionSubmenuName": "Clan Trait Selection",
+      "SelectClanListHeader": "Select Clan:",
+      "Clan Trait Selection": {
+        "NoClanSelectedError": "No clan selected!",
+        "CloseMenuButton": "Close",
+        "SelectTraitsForClanHeader": "Select Traits for {0}",
+        "RemoveTraitFromClanButton": "Remove {0} from {1}",
+        "AddTraitToClanButton": "Add {0} to {1}"
       }
     },
-    "TraitRemovalSelection": {
-      "DeselectTraitButton": "Deselect {0}",
-      "SelectTraitButton": "Select {0}",
-      "CloseMenuButton": "Done"
+    "Alliances": {
+      "WhisperOfAllianceButton": "Whisper Of Alliance"
+    },
+    "Game Settings": {
+      "SavesLabel": "Saves",
+      "EnableAutosavesButton": "Enable autosaves",
+      "DisableAutosavesButton": "Disable autosaves",
+      "UnityFpsLabel": "Unity FPS",
+      "SetUnityFpsButton": "Set",
+      "UnitySpeedModifierLabel": "Unity Speed Modifier (in %)",
+      "SetUnitySpeedModifierButton": "Set",
+      "GameSpeedModifierLabel": "Game Speed Modifier (in %)",
+      "SetGameSpeedModifierButton": "Set",
+      "CameraMovementLabel": "Camera Movement",
+      "ToggleMouseDragButton": "Toggle Mouse Drag",
+      "BoatsLabel": "Boats",
+      "EnableBoatsBreakingIceButton": "Enable Boats Breaking Ice",
+      "DisableBoatsBreakingIceButton": "Disable Boats Breaking Ice",
+      "WorldPropertiesLabel": "World Properties",
+      "SetWorldTimeButton": "Set world time"
+    },
+    "Zones": {
+      "AddZoneToCityButton": "Add Zone To City",
+      "RemoveZoneFromCityButton": "Remove Zone From City"
+    },
+    "Cities": {
+      "ResourceEditorSubmenuName": "Resource Editor",
+      "ForceCityAsCapitalCityButton": "Force City As Capital City",
+      "ForceCityIntoOtherKingdomButton": "Force City Into Other Kingdom",
+      "SelectCityToEditResourcesOfListHeader": "Select City to edit resources of:",
+      "Resource Editor": {
+        "NoCitySelectedError": "No city selected!",
+        "CloseMenuButton": "Cancel"
+      }
+    },
+    "Buildings": {
+      "BuildingPlacementBuildingSelectorSubmenuName": "Building Placement Building Selector",
+      "BuildingPlacementPlaceSelectedBuildingButton": "Place Selected Building",
+      "BuildingPlacementNoBuildingSelectedError": "No building selected to place!",
+      "Building Placement Building Selector": {
+        "CloseMenuButton": "Cancel"
+      }
+    },
+    "Locales": {
+      "DumpLocalesButton": "Dump Locales",
+      "CurrentLocaleText": "Current locale: ",
+      "ChangeLocalesSectionHeader": "Change Locales",
+      "LoadAndStoreAllLocalesButton": "Load and store all locales"
+    },
+    "Mod Config": {
+      "BoolOptionOn": "ON",
+      "BoolOptionOff": "OFF",
+      "ResetFloatValue": "Reset"
     }
-  },
-  "GameSettings": {
-    "SavesLabel": "Saves",
-    "EnableAutosavesButton": "Enable autosaves",
-    "DisableAutosavesButton": "Disable autosaves",
-    "UnityFpsLabel": "Unity FPS",
-    "SetUnityFpsButton": "Set",
-    "UnitySpeedModifierLabel": "Unity Speed Modifier (in %)",
-    "SetUnitySpeedModifierButton": "Set",
-    "GameSpeedModifierLabel": "Game Speed Modifier (in %)",
-    "SetGameSpeedModifierButton": "Set",
-    "CameraMovementLabel": "Camera Movement",
-    "ToggleMouseDragButton": "Toggle Mouse Drag",
-    "MapGenerationLabel": "Map Generation",
-    "SetMapSeedButton": "Set seed",
-    "BoatsLabel": "Boats",
-    "EnableBoatsBreakingIceButton": "Enable Boats Breaking Ice",
-    "DisableBoatsBreakingIceButton": "Disable Boats Breaking Ice",
-    "WorldPropertiesLabel": "World Properties",
-    "SetWorldTimeButton": "Set world time"
-  },
-  "Zones": {
-    "AddZoneToCityButton": "Add Zone To City",
-    "RemoveZoneFromCityButton": "Remove Zone From City",
-    "AddZoneToCultureButton": "Add Zone To Culture",
-    "RemoveZoneFromCultureButton": "Remove Zone From Culture"
-  },
-  "Cities": {
-    "ResourceEditorSubmenuName": "Resource Editor",
-    "ForceCityAsCapitalCityButton": "Force City As Capital City",
-    "ForceCityIntoOtherKingdomButton": "Force City Into Other Kingdom",
-    "SelectCityToEditResourcesOfListHeader": "Select City to edit resources of:",
-    "ResourceEditor": {
-      "NoCitySelectedError": "No city selected!",
-      "CloseMenuButton": "Cancel"
-    }
-  },
-  "Buildings": {
-    "BuildingPlacementBuildingSelectorSubmenuName": "Building Placement Building Selector",
-    "BuildingPlacementPlaceSelectedBuildingButton": "Place Selected Building",
-    "BuildingPlacementNoBuildingSelectedError": "No building selected to place!",
-    "BuildingPlacementBuildingSelector": {
-      "CloseMenuButton": "Cancel"
-    }
-  },
-  "ModConfig": {},
-  "Localizations": {
-    "DumpLocalesButton": "Dump Locales",
-    "CurrentLocaleText": "Current locale: ",
-    "ChangeLocalesSectionHeader": "Change Locales",
-    "LoadAndStoreAllLocalesButton": "Load and store all locales"
   },
   "Powers": {
-    "AllianceCreation": {
+    "CultureDeletion": {
+      "SelectCulture": "Select the culture to delete.",
+      "Success": "Culture deleted!",
+      "NoCultureSelectedError": "No culture to delete here, try again!"
+    },
+    "CultureReset": {
+      "SelectCulture": "Select the culture to reset.",
+      "Success": "Culture reset!",
+      "NoCultureSelectedError": "No culture to reset here, try again!"
+    },
+    "CultureForceSelectCulture": {
+      "SelectCulture": "Select the culture to force upon the city.",
+      "NoCultureSelectedError": "No culture to force upon city here, try again!",
+      "SelectCity": "Select the city to force the culture upon."
+    },
+    "CreateNewCulture": {
+      "SelectCity": "Select the city to create a new culture for.",
+      "Success": "New culture created!",
+      "NoCitySelected": "No city to create new culture for here, try again!"
+    },
+    "WhisperOfAlliance": {
       "SelectFirstKingdom": "Select the first kingdom to create an alliance with.",
       "SelectSecondKingdom": "Select the second kingdom to create an alliance with.",
       "SameKingdomTwiceError": "Selected the same kingdom twice, try again.",
       "KingdomsAlreadyAlliedError": "The selected kingdoms are already allied, try again.",
       "CreationSuccess": "The kingdom {0} has successfully entered an alliance with kingdom {1}."
     },
-    "ChangeCityKingdom": {
+    "AddZoneToCity": {
+      "SelectCity": "Select the city to add zones to.",
+      "SelectZones": "Select zones to add to the city.",
+      "NoCitySelectedError": "No city to add zone to here, try again!",
+      "ZoneOwnershipConflict": "The zone you're trying to add already belongs to another city, please remove it from that city first!"
+    },
+    "RemoveZoneFromCity": {
+      "SelectCity": "Select the city to remove zones from.",
+      "SelectZones": "Select zones to remove.",
+      "NoCitySelectedError": "No city to remove zone from here, try again!",
+      "ZoneOwnershipConflict": "The zone you're trying to remove doesn't belong to the city you selected, please select the correct city!"
+    },
+    "ForceCityAsCapitalCity": {
+      "SelectCity": "Select the city to force as the capital city.",
+      "Success": "City forced as capital city!",
+      "NoCitySelectedError": "No city to force as capital city here, try again!"
+    },
+    "ForceCityIntoOtherKingdom": {
       "SelectCity": "Select the city to force into another kingdom.",
       "SelectKingdom": "Select the kingdom to force the city into.",
       "NoCitySelectedError": "No city to force into other kingdom here, try again!",
       "Success": "City forced into other kingdom!",
       "NoKingdomSelectedError": "The tile you selected isn't owned by any kingdom!"
     },
-    "CityZoneAddition": {
-      "SelectCity": "Select the city to add zones to.",
-      "SelectZones": "Select zones to add to the city.",
-      "NoCitySelectedError": "No city to add zone to here, try again!",
-      "ZoneOwnershipConflict": "The zone you're trying to add already belongs to another city, please remove it from that city first!"
-    },
-    "CityZoneRemoval": {
-      "SelectCity": "Select the city to remove zones from.",
-      "SelectZones": "Select zones to remove.",
-      "NoCitySelectedError": "No city to remove zone from here, try again!",
-      "ZoneOwnershipConflict": "The zone you're trying to remove doesn't belong to the city you selected, please select the correct city!"
-    },
-    "CultureCreation": {
-      "SelectCity": "Select the city to create a new culture for.",
-      "Success": "New culture created!",
-      "NoCitySelected": "No city to create new culture for here, try again!"
-    },
-    "CultureDeletion": {
-      "SelectCulture": "Select the culture to delete.",
-      "Success": "Culture deleted!",
-      "NoCultureSelectedError": "No culture to delete here, try again!"
-    },
-    "CultureForceConversion": {
-      "SelectCulture": "Select the culture to force upon the city.",
-      "NoCultureSelectedError": "No culture to force upon city here, try again!",
-      "SelectCity": "Select the city to force the culture upon.",
-      "Success": "Culture forced upon city!",
-      "NoCitySelectedError": "No city to force culture upon here, try again!"
-    },
-    "CultureFullReset": {
-      "SelectCulture": "Select the culture to reset.",
-      "Success": "Culture reset!",
-      "NoCultureSelectedError": "No culture to reset here, try again!"
-    },
-    "ForceCapital": {
-      "SelectCity": "Select the city to force as the capital city.",
-      "Success": "City forced as capital city!",
-      "NoCitySelectedError": "No city to force as capital city here, try again!"
-    },
     "PlaceBuilding": {
       "SelectCity": "Select the city to place the building in.",
       "InvalidTileError": "Can't place building here, try again!",
       "Success": "Building placed!",
       "NoBuildingSelected": "No building to place selected, try again!"
-    },
-    "SetKing": {
-      "SelectActor": "Select the actor to make king.",
-      "Success": "Actor made king!",
-      "NoKingdomOnSelectedActorError": "The actor you selected doesn't have a kingdom!",
-      "NoActorSelectedError": "No actor to make king here, try again!"
     }
   }
 }
