@@ -80,7 +80,7 @@ namespace KeyGUI.Framework.Menus {
       if (!IsMenuInfoInitialized) {
         throw new InvalidMenuInvocationContextException("MenuInfo not initialized!");
       }
-      MenuRect = GUILayout.Window(ModCompatibilityLayer.WindowIdSeparator.GetValidWindowId(WindowID, LoadGUI_Internal), MenuRect, LoadGUI_Internal, Title.Value, GUILayout.MaxWidth(MenuMaxWidth), GUILayout.MinWidth(MenuMinWidth), GUILayout.MinHeight(MenuMinHeight), GUILayout.MaxHeight(MenuMaxHeight));
+      MenuRect = GUILayout.Window(ModCompatibilityLayer.WindowIdSeparator.GetValidWindowId(WindowID, LoadGUI_Internal), MenuRect, LoadGUI_Internal, Title, GUILayout.MaxWidth(MenuMaxWidth), GUILayout.MinWidth(MenuMinWidth), GUILayout.MinHeight(MenuMinHeight), GUILayout.MaxHeight(MenuMaxHeight));
     }
     internal virtual void ForceLoadMenu() {
       LoadMenu();

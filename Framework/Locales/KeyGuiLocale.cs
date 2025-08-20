@@ -6,7 +6,6 @@ namespace KeyGUI.Framework.Locales {
     public string LocaleId { get; private set; }
     internal string DefaultValue { get; set; }
     internal bool BelongsToGameLocalesSystem { get; }
-    public string Value => Parent.GetLocale(this);
     internal KeyGuiLocale(bool belongsToGameLocalesSystem, string defaultValue) : this(defaultValue, belongsToGameLocalesSystem) { }
     internal KeyGuiLocale(string defaultValue, bool belongsToGameLocalesSystem = false) {
       DefaultValue = defaultValue;
