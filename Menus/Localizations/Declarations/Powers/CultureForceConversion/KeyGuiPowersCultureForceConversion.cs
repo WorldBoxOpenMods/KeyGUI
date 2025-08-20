@@ -5,5 +5,6 @@ namespace KeyGUI.Menus.Localizations.Declarations.Powers.CultureForceConversion 
     public readonly LocaleDeclaration SelectCity = new LocaleDeclaration("Select the city to force the culture upon.");
     public readonly LocaleDeclaration Success = new LocaleDeclaration("Culture forced upon city!");
     public readonly LocaleDeclaration NoCitySelectedError = new LocaleDeclaration("No city to force culture upon here, try again!");
+    internal KeyGuiPowersCultureForceConversion() { }
   }
 }

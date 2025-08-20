@@ -5,5 +5,6 @@ namespace KeyGUI.Menus.Localizations.Declarations.Powers.AllianceCreation {
     public readonly LocaleDeclaration SameKingdomTwiceError = new LocaleDeclaration("Selected the same kingdom twice, try again.");
     public readonly LocaleDeclaration KingdomsAlreadyAlliedError = new LocaleDeclaration("The selected kingdoms are already allied, try again.");
     public readonly LocaleDeclaration CreationSuccess = new LocaleDeclaration("The kingdom {0} has successfully entered an alliance with kingdom {1}.");
+    internal KeyGuiPowersAllianceCreation() { }
   }
 }

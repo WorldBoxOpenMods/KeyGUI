@@ -4,5 +4,6 @@ namespace KeyGUI.Menus.Localizations.Declarations.Powers.PlaceBuilding {
     public readonly LocaleDeclaration InvalidTileError = new LocaleDeclaration("Can't place building here, try again!");
     public readonly LocaleDeclaration Success = new LocaleDeclaration("Building placed!");
     public readonly LocaleDeclaration NoBuildingSelected = new LocaleDeclaration("No building to place selected, try again!");
+    internal KeyGuiPowersPlaceBuilding() { }
   }
 }

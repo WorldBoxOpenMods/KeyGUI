@@ -23,5 +23,6 @@ namespace KeyGUI.Menus.Localizations.Declarations.Powers {
     public readonly KeyGuiPowersForceCapital ForceCapital = new KeyGuiPowersForceCapital();
     public readonly KeyGuiPowersPlaceBuilding PlaceBuilding = new KeyGuiPowersPlaceBuilding();
     public readonly KeyGuiPowersSetKing SetKing = new KeyGuiPowersSetKing();
+    internal KeyGuiPowers() { }
   }
 }

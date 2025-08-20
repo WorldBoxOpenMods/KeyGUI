@@ -5,5 +5,6 @@ namespace KeyGUI.Menus.Localizations.Declarations.Powers.ChangeCityKingdom {
     public readonly LocaleDeclaration NoCitySelectedError = new LocaleDeclaration("No city to force into other kingdom here, try again!");
     public readonly LocaleDeclaration Success = new LocaleDeclaration("City forced into other kingdom!");
     public readonly LocaleDeclaration NoKingdomSelectedError = new LocaleDeclaration("The tile you selected isn't owned by any kingdom!");
+    internal KeyGuiPowersChangeCityKingdom() { }
   }
 }

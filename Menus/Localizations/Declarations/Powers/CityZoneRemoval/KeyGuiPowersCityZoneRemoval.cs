@@ -4,5 +4,6 @@ namespace KeyGUI.Menus.Localizations.Declarations.Powers.CityZoneRemoval {
     public readonly LocaleDeclaration SelectZones = new LocaleDeclaration("Select zones to remove.");
     public readonly LocaleDeclaration NoCitySelectedError = new LocaleDeclaration("No city to remove zone from here, try again!");
     public readonly LocaleDeclaration ZoneOwnershipConflict = new LocaleDeclaration("The zone you're trying to remove doesn't belong to the city you selected, please select the correct city!");
+    internal KeyGuiPowersCityZoneRemoval() { }
   }
 }
