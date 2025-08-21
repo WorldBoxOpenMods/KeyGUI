@@ -218,7 +218,7 @@ namespace KeyGUI.Backend {
         id,
         mods,
         keyGuiVersion = KeyGuiConfig.PluginVersion,
-        keyGeneralPurposeLibraryVersion = KeyGeneralPurposeLibraryConfig.PluginVersion,
+        keyGeneralPurposeLibraryVersion = "NONE",
         bepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
         ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion,
         worldboxAssemblyChecksum = CreateChecksum(Application.streamingAssetsPath + "/../Managed/Assembly-CSharp.dll")
@@ -256,7 +256,7 @@ namespace KeyGUI.Backend {
       string json = JsonConvert.SerializeObject(new {
         id,
         keyGuiVersion = KeyGuiConfig.PluginVersion,
-        keyGeneralPurposeLibraryVersion = KeyGeneralPurposeLibraryConfig.PluginVersion,
+        keyGeneralPurposeLibraryVersion = "NONE",
         bepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
         ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion,
         worldboxVersionPretty = _worldboxVersionPretty ?? (_worldboxVersionPretty = Config.gv),
@@ -279,7 +279,7 @@ namespace KeyGUI.Backend {
       string json = JsonConvert.SerializeObject(new {
         id,
         keyGuiVersion = KeyGuiConfig.PluginVersion,
-        keyGeneralPurposeLibraryVersion = KeyGeneralPurposeLibraryConfig.PluginVersion,
+        keyGeneralPurposeLibraryVersion = "NONE",
         bepInExModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
         ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion
       });
@@ -317,11 +317,6 @@ namespace KeyGUI.Backend {
             if (!ActualVersionMeetsMinimumVersionRequirement(reader.Value.ToString(), KeyGuiConfig.PluginVersion)) return false;
             break;
           }
-          case "KeyGeneralPurposeLibrary": {
-            reader.Read();
-            if (!ActualVersionMeetsMinimumVersionRequirement(reader.Value.ToString(), KeyGeneralPurposeLibraryConfig.PluginVersion)) return false;
-            break;
-          }
           case "BepInExModCompatibilityLayer": {
             reader.Read();
             if (!ActualVersionMeetsMinimumVersionRequirement(reader.Value.ToString(), BepinexModCompatibilityLayerConfig.PluginVersion)) return false;
@@ -348,7 +343,7 @@ namespace KeyGUI.Backend {
       string json = JsonConvert.SerializeObject(new {
         id,
         keyGuiVersion = KeyGuiConfig.PluginVersion,
-        keyGeneralPurposeLibraryVersion = KeyGeneralPurposeLibraryConfig.PluginVersion,
+        keyGeneralPurposeLibraryVersion = "NONE",
         bepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
         ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion,
         worldboxVersionDate = Config.versionCodeDate,
@@ -370,7 +365,7 @@ namespace KeyGUI.Backend {
       string json = JsonConvert.SerializeObject(new {
         id,
         keyGuiVersion = KeyGuiConfig.PluginVersion,
-        keyGeneralPurposeLibraryVersion = KeyGeneralPurposeLibraryConfig.PluginVersion,
+        keyGeneralPurposeLibraryVersion = "NONE",
         bepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
         ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion,
         worldboxVersionDate = Config.versionCodeDate,
@@ -392,7 +387,7 @@ namespace KeyGUI.Backend {
       string json = JsonConvert.SerializeObject(new {
         id,
         keyGuiVersion = KeyGuiConfig.PluginVersion,
-        keyGeneralPurposeLibraryVersion = KeyGeneralPurposeLibraryConfig.PluginVersion,
+        keyGeneralPurposeLibraryVersion = "NONE",
         bepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
         ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion,
         worldboxVersionDate = Config.versionCodeDate,
