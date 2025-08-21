@@ -8,7 +8,6 @@ using BepInEx;
 using BepinexModCompatibilityLayer;
 using HarmonyLib;
 using KeyGeneralPurposeLibrary;
-using KeyGeneralPurposeLibrary.Assets;
 using KeyGUI.Backend;
 using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Menus;
@@ -493,7 +492,7 @@ namespace KeyGUI {
       if (!_traitsLoaded) {
         if (global::Config.game_loaded) {
           _traitsLoaded = true;
-          AutoLoad(Traits.AutoloadTraits, () => KeyLib.Get<KeyGenLibCustomTraitManager>().LoadTraits("KeyGUI"));
+          AutoLoad(Traits.AutoloadTraits, () => CustomActorTraitsManager.LoadTraits("KeyGUI"));
         }
       }
 

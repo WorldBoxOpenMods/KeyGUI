@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using HarmonyLib;
-using KeyGeneralPurposeLibrary.Assets;
-using KeyGeneralPurposeLibrary.Classes;
 using KeyGUI.Framework.Patches;
+using KeyGUI.Utils;
 using UnityEngine;
 
 namespace KeyGUI.Patches {
@@ -18,16 +17,16 @@ namespace KeyGUI.Patches {
   };
     
     private static void GetCustomSpriteForCustomTrait(ActorTrait __instance) {
-      if (__instance is CustomTrait customTrait) {
+      if (__instance is CustomActorTrait customTrait) {
         if (customTrait.cached_sprite == null) {
-          Sprite sprite = KeyGenLibFileAssetManager.CreateSprite(customTrait.Author, customTrait.Sprite);
+          Sprite sprite = FileAssetManager.CreateSprite(customTrait.Author, customTrait.Sprite);
           customTrait.cached_sprite = sprite;
         }
       }
     }
     
     private static void AddPartnerTraitsOfTrait(Actor __instance, ActorTrait pTrait) {
-      if (pTrait is CustomTrait customTrait) {
+      if (pTrait is CustomActorTrait customTrait) {
         foreach (ActorTrait partnerTrait in from partnerTraitId in customTrait.PartnerTraits let partnerTrait = AssetManager.traits.get(partnerTraitId) where partnerTrait != null where !__instance.hasTrait(partnerTraitId) select partnerTrait) {
           __instance.removeOppositeTraits(partnerTrait);
           __instance.traits.Add(partnerTrait);
@@ -41,7 +40,7 @@ namespace KeyGUI.Patches {
     }
 
     private static void RemovePartnerTraitsOfTrait(Actor __instance, ActorTrait pTrait) {
-      if (pTrait is CustomTrait customTrait) {
+      if (pTrait is CustomActorTrait customTrait) {
         if (customTrait.PartnerTraitCache.ContainsKey(__instance.data)) {
           foreach (string partnerTraitId in customTrait.PartnerTraitCache[__instance.data]) {
             __instance.removeTrait(partnerTraitId);
@@ -58,7 +57,7 @@ namespace KeyGUI.Patches {
     }
 
     private static void RemoveActorFromPartnerTraitsCache(Actor __instance) {
-      foreach (CustomTrait trait in __instance.traits.Where(trait => trait.GetType() == typeof(CustomTrait)).Cast<CustomTrait>().Where(trait => trait.PartnerTraitCache.ContainsKey(__instance.data))) {
+      foreach (CustomActorTrait trait in __instance.traits.Where(trait => trait.GetType() == typeof(CustomActorTrait)).Cast<CustomActorTrait>().Where(trait => trait.PartnerTraitCache.ContainsKey(__instance.data))) {
         trait.PartnerTraitCache.Remove(__instance.data);
       }
     }

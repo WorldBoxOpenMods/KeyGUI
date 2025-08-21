@@ -1,5 +1,5 @@
 using System.Linq;
-using KeyGeneralPurposeLibrary.Assets;
+using KeyGUI.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +11,8 @@ namespace KeyGUI.Framework.Powers {
       Power = power;
       Power.click_special_action = ClickWithPower;
       Power.select_button_action = PowerButtonPress;
-      Sprite buttonParentSprite = KeyGenLibFileAssetManager.CreateSprite("KeyGeneralPurposeLibrary", "DefaultSprite");
-      Sprite buttonSprite = KeyGenLibFileAssetManager.CreateSprite("KeyGeneralPurposeLibrary", "DefaultSprite");
+      Sprite buttonParentSprite = FileAssetManager.CreateSprite("KeyGeneralPurposeLibrary", "DefaultSprite");
+      Sprite buttonSprite = FileAssetManager.CreateSprite("KeyGeneralPurposeLibrary", "DefaultSprite");
       GameObject buttonParent = null;
       {
         GameObject[] objectsOfTypeAll = Resources.FindObjectsOfTypeAll<GameObject>();
