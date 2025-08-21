@@ -57,7 +57,7 @@ namespace KeyGUI.Menus.Traits {
     public KeyGuiTraits() {
       MenuRect.width = 600;
       if (KeyGuiModConfig.Get(General.InitializeAssetFoldersEveryStartup)) {
-        FileAssetManager.InitializeLocalFolders(KeyGuiConfig.PluginName);
+        FileAssetManager.InitializeLocalFolders();
       }
       SetDefaultStatValues();
       _autoTraitLoading = KeyGuiModConfig.Get(TraitsC.AutoloadTraits);
@@ -304,11 +304,11 @@ namespace KeyGUI.Menus.Traits {
 
       GUILayout.Label(DataControlSection);
       if (GUILayout.Button(DataControlSaveButton)) {
-        CustomActorTraitsManager.SaveTraitsLocally(KeyGuiConfig.PluginName, _customTraits);
+        CustomActorTraitsManager.SaveTraitsLocally(_customTraits);
       }
 
       if (GUILayout.Button(DataControlLoadButton)) {
-        _customTraits = CustomActorTraitsManager.LoadTraits(KeyGuiConfig.PluginName);
+        _customTraits = CustomActorTraitsManager.LoadTraits();
       }
 
       if (GUILayout.Button(_autoTraitLoading ? DataControlDisableAutoTraitLoad : DataControlEnableAutoTraitLoad)) {

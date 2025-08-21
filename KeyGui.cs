@@ -492,7 +492,7 @@ namespace KeyGUI {
       if (!_traitsLoaded) {
         if (global::Config.game_loaded) {
           _traitsLoaded = true;
-          AutoLoad(Traits.AutoloadTraits, () => CustomActorTraitsManager.LoadTraits("KeyGUI"));
+          AutoLoad(Traits.AutoloadTraits, () => CustomActorTraitsManager.LoadTraits());
         }
       }
 

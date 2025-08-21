@@ -406,7 +406,7 @@ namespace KeyGUI.Utils {
       opposite_list = OppositeTraits.ToList();
 
       AddTraitToTraitLibraryWithoutSideEffects(this);
-      cached_sprite = FileAssetManager.CreateSprite("KeyGUI", Sprite);
+      cached_sprite = FileAssetManager.CreateSprite(Author, Sprite);
       CustomActorTraitsManager.AddTraitToLocalizedLibrary(id, Description);
     }
 

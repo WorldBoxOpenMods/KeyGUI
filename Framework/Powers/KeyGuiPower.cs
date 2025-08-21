@@ -11,8 +11,8 @@ namespace KeyGUI.Framework.Powers {
       Power = power;
       Power.click_special_action = ClickWithPower;
       Power.select_button_action = PowerButtonPress;
-      Sprite buttonParentSprite = FileAssetManager.CreateSprite("KeyGeneralPurposeLibrary", "DefaultSprite");
-      Sprite buttonSprite = FileAssetManager.CreateSprite("KeyGeneralPurposeLibrary", "DefaultSprite");
+      Sprite buttonParentSprite = FileAssetManager.CreateSprite("DefaultSprite");
+      Sprite buttonSprite = FileAssetManager.CreateSprite("DefaultSprite");
       GameObject buttonParent = null;
       {
         GameObject[] objectsOfTypeAll = Resources.FindObjectsOfTypeAll<GameObject>();
