@@ -17,7 +17,7 @@ namespace KeyGUI.Framework {
         _locales.Add(declaration, null);
       });
     }
-    internal void AddLocalesContainer(KeyGuiLocale name, KeyGuiComponent container) {
+    internal void InitLocalesContainer(KeyGuiLocale name, KeyGuiComponent container) {
       _containers[name.DefaultValue] = container;
       container.InitLocales();
     }
