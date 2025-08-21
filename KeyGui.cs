@@ -221,16 +221,16 @@ namespace KeyGUI {
       if (_patches.OfType<T>().Any()) {
         return;
       }
-      Debug.Log("Registering patch: " + typeof(T).Name);
+      Debug.Log($"Registering patch: {typeof(T).Name}");
       try {
         KeyGuiPatch patch = new T();
         foreach ((MethodInfo method, (HarmonyMethod prefix, HarmonyMethod postfix, HarmonyMethod transpiler, HarmonyMethod finalizer, HarmonyMethod ilManipulator)) in patch.Patches.ToList().Select(kvp => (kvp.Key, kvp.Value))) {
           if (method == null) {
-            Debug.LogError("Patch method is null for " + typeof(T).Name + "!");
+            Debug.LogError($"Patch method is null for {typeof(T).Name}!");
             continue;
           }
           if (prefix == null && postfix == null && transpiler == null && finalizer == null && ilManipulator == null) {
-            Debug.LogError("No Harmony methods defined for " + typeof(T).Name + "!");
+            Debug.LogError($"No Harmony methods defined for {typeof(T).Name}!");
             continue;
           }
           Harmony.Patch(
@@ -243,16 +243,16 @@ namespace KeyGUI {
           );
         }
         _patches.Add(patch);
-        Debug.Log("Successfully registered patch: " + typeof(T).Name);
+        Debug.Log($"Successfully registered patch: {typeof(T).Name}");
       } catch (Exception e) {
-        Debug.LogError("Error registering patch: " + typeof(T).Name);
+        Debug.LogError($"Error registering patch: {typeof(T).Name}");
         Debug.LogError(e);
       }
     }
     internal bool TryGetPatch<T>(out T patch) where T : KeyGuiPatch {
       patch = _patches.OfType<T>().FirstOrDefault();
       if (patch == null) {
-        Debug.LogError("Patch of type " + typeof(T).Name + " not found!");
+        Debug.LogError($"Patch of type {typeof(T).Name} not found!");
         return false;
       }
       return true;
@@ -262,14 +262,14 @@ namespace KeyGUI {
       if (_powers.OfType<T>().Any()) {
         return;
       }
-      Debug.Log("Registering power: " + typeof(T).Name);
+      Debug.Log($"Registering power: {typeof(T).Name}");
       try {
         T power = new T();
         power.InitLocales();
         _powers.Add(power);
-        Debug.Log("Successfully registered power: " + typeof(T).Name);
+        Debug.Log($"Successfully registered power: {typeof(T).Name}");
       } catch (Exception e) {
-        Debug.LogError("Error registering power: " + typeof(T).Name);
+        Debug.LogError($"Error registering power: {typeof(T).Name}");
         Debug.LogError(e);
       }
     }
@@ -277,7 +277,7 @@ namespace KeyGUI {
     internal bool TryGetPower<T>(out T power) where T : KeyGuiPower, new() {
       power = _powers.OfType<T>().FirstOrDefault();
       if (power == null) {
-        Debug.LogError("Power of type " + typeof(T).Name + " not found!");
+        Debug.LogError($"Power of type {typeof(T).Name} not found!");
         return false;
       }
       return true;
