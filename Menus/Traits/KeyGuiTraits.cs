@@ -2,7 +2,6 @@ using TraitsC = KeyGUI.Menus.ModConfig.ConfigOptions.Traits;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Text;
 using KeyGUI.Framework.Locales;
@@ -177,31 +176,15 @@ namespace KeyGUI.Menus.Traits {
 
       GUILayout.Label(CreateTraitSprite.ToString());
       GUILayout.Label(string.Format(CreateTraitCurrentSprite.ToString(), _sprite));
-      List<string> availableSprites;
-      {
-        string[] availableSpritesArray = Directory.GetFiles(Path.GetFullPath($"{Application.dataPath}/KeyLibraryModsData/{KeyGuiConfig.PluginName}/Sprites"));
-        availableSprites = availableSpritesArray.ToList();
-      }
-      for (int i = 0; i < availableSprites.Count; ++i) {
-        if (!availableSprites[i].Contains(".png")) {
-          availableSprites.RemoveAt(i);
-          --i;
-        }
-      }
 
-      for (int i = 0; i < availableSprites.Count; ++i) {
-        availableSprites[i] = Path.GetFullPath(availableSprites[i]);
-        availableSprites[i] = availableSprites[i].Replace(Path.GetFullPath($"{Application.dataPath}/KeyLibraryModsData/{KeyGuiConfig.PluginName}/Sprites"), "");
-        availableSprites[i] = availableSprites[i].Replace(".png", "");
-        availableSprites[i] = availableSprites[i].Substring(1);
-      }
+      string[] availableSprites = FileAssetManager.GetSpriteNames(KeyGuiConfig.PluginName);
 
       foreach (string t in availableSprites.Where(t => GUILayout.Button(t))) {
         _sprite = t;
       }
 
-      if (availableSprites.Count == 0) {
-        GUILayout.Button($"No PNGs Found In\nworldbox_Data\n->\nKeyLibraryModsData\n->\n{KeyGuiConfig.PluginName}\n->\nSprites");
+      if (availableSprites.Length == 0) {
+        GUILayout.Button($"No PNGs Found In\nworldbox_Data\n->\nKeyGuiAssets\n->\nSprites");
       }
 
       GUILayout.Label(CreateTraitCreateLabel.ToString());

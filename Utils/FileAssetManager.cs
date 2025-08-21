@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -48,6 +49,18 @@ namespace KeyGUI.Utils {
 
       Sprite sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0.5f, 0.5f));
       return sprite;
+    }
+
+    public static string[] GetSpriteNames(string authorName = "DefaultAssets") {
+      if (Directory.Exists(Path.GetFullPath($"{Application.dataPath}/KeyLibraryModsData"))) {
+        Directory.Move(Path.GetFullPath($"{Application.dataPath}/KeyLibraryModsData"), Path.GetFullPath($"{Application.dataPath}/KeyGuiAssets"));
+      }
+      if (!Directory.Exists(Path.GetFullPath($"{Application.dataPath}/KeyGuiAssets/{authorName}/Sprites"))) {
+        return Array.Empty<string>();
+      }
+
+      string path = Path.GetFullPath($"{Application.dataPath}/KeyGuiAssets/{authorName}/Sprites");
+      return Directory.GetFiles(path, "*.png").Select(Path.GetFileNameWithoutExtension).ToArray();
     }
 
     public static void InitializeLocalFolders() {
