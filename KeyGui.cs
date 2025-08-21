@@ -181,7 +181,7 @@ namespace KeyGUI {
   public class KeyGui : BaseUnityPlugin {
     public static KeyGui Instance;
     internal static readonly Harmony Harmony = new Harmony(KeyGuiConfig.PluginGuid);
-    internal static readonly KeyGuiNetworking KeyGuiNetworking = new KeyGuiNetworking();
+    internal static readonly KeyGuiNetworking Networking = new KeyGuiNetworking();
 
     private readonly KeyGuiRootMenu _rootMenu = new KeyGuiRootMenu();
     private readonly List<KeyGuiPatch> _patches = new List<KeyGuiPatch>();
@@ -425,7 +425,7 @@ namespace KeyGUI {
     
     private void PerformInitialNetworkingSetup() {
       Logger.LogInfo("Communicating current state with server in the background...");
-      if (!KeyGuiNetworking.IsUpToDate()) {
+      if (!Networking.IsUpToDate()) {
         _rootMenu.MarkModVersionAsOutdated();
       }
       string id = GetId();
@@ -435,7 +435,7 @@ namespace KeyGUI {
       Logger.LogInfo("Other mods: " + string.Join(", ", allOtherMods.Select(m => m.Item1)));
       JArray problematicMods;
       JArray criticalMods;
-      (problematicMods, criticalMods) = KeyGuiNetworking.SendModData(id, (allOtherMods, allNcmsMods));
+      (problematicMods, criticalMods) = Networking.SendModData(id, (allOtherMods, allNcmsMods));
       (string, string)[] criticalModsArray = KeyGuiNetworkingResponseParsingHelper.ParseModsResponse(criticalMods);
       KeyGuiNetworkingResponseParsingHelper.RemoveWhitelistedCriticalModsFromListOfModsToDelete(criticalModsArray);
       if (KeyGuiModConfig.Get(General.IgnoreCriticalMods)) {
@@ -445,7 +445,7 @@ namespace KeyGUI {
       _rootMenu.SetProblematicMods(KeyGuiNetworkingResponseParsingHelper.ParseModsResponse(problematicMods));
       _rootMenu.SetCriticalMods(criticalModsArray);
 
-      string[] messages = KeyGuiNetworking.CheckForMessages(id);
+      string[] messages = Networking.CheckForMessages(id);
       Logger.LogInfo("Messages: " + string.Join(", ", messages));
       foreach (string message in messages) {
         _rootMenu.AddMessage(new KeyGuiMessage(Locales.MessagePopupTitle, 1, message));
@@ -458,7 +458,7 @@ namespace KeyGUI {
       if (id == "UNABLE_TO_DETERMINE") {
         do {
           id = ((int)Math.Floor(Random.value * 10000000)).ToString();
-        } while (KeyGuiNetworking.IsIdTaken(id));
+        } while (Networking.IsIdTaken(id));
         KeyGuiModConfig.Set(Internal.Id, id);
       }
       return id;
@@ -496,7 +496,7 @@ namespace KeyGUI {
           string id = GetId();
           _networkingThread = new Thread(() => {
             try {
-              _gameConfigDataSent = id == "-1" || KeyGuiNetworking.SendGameVersionData(id);
+              _gameConfigDataSent = id == "-1" || Networking.SendGameVersionData(id);
               if (_gameConfigDataSent) {
                 Debug.Log("Finished sending game version to server!");
               }
