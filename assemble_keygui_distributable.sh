@@ -27,7 +27,6 @@ mkdir "./KeyGUI/Plugin-Dependencies"
 # Copy built files into distributable folder
 cd "$KEYGUI_BIN_PATH" || exit
 mv "./KeyGUI.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI.dll"
-mv "./KeyGeneralPurposeLibrary.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/Plugin-Dependencies/KeyGeneralPurposeLibrary.dll"
 mv "./BepInExModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/Plugin-Dependencies/BepInExModCompatibilityLayer.dll"
 
 # Copy build assets into distributable folder
@@ -42,5 +41,4 @@ zip -r "./KeyGUI.zip" "./KeyGUI"
 # Copy PDB files into distributable folder
 cd "$KEYGUI_BIN_PATH" || exit
 mv "./KeyGUI.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/KeyGUI.pdb"
-mv "./KeyGeneralPurposeLibrary.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/Plugin-Dependencies/KeyGeneralPurposeLibrary.pdb"
 mv "./BepInExModCompatibilityLayer.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/Plugin-Dependencies/BepInExModCompatibilityLayer.pdb"

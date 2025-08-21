@@ -7,7 +7,6 @@ using System.Threading;
 using BepInEx;
 using BepinexModCompatibilityLayer;
 using HarmonyLib;
-using KeyGeneralPurposeLibrary;
 using KeyGUI.Backend;
 using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Menus;
@@ -174,7 +173,6 @@ using Random = UnityEngine.Random;
 
 namespace KeyGUI {
   [BepInPlugin(KeyGuiConfig.PluginGuid, KeyGuiConfig.PluginName, KeyGuiConfig.PluginVersion)]
-  [BepInDependency(KeyGeneralPurposeLibraryConfig.PluginGuid, KeyGeneralPurposeLibraryConfig.PluginVersion)]
   [BepInDependency(BepinexModCompatibilityLayerConfig.PluginGuid, BepinexModCompatibilityLayerConfig.PluginVersion)]
   public class KeyGui : BaseUnityPlugin {
     public static KeyGui Instance;

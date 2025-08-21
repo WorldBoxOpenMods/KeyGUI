@@ -154,10 +154,6 @@
             <Project>{0476621e-89cd-4844-b646-66e09ebf5dd7}</Project>
             <Name>BepInExModCompatibilityLayer</Name>
         </ProjectReference>
-        <ProjectReference Include="..\KeyGeneralPurposeLibrary\KeyGeneralPurposeLibrary.csproj">
-            <Project>{b962f27e-55ab-4aef-9040-3bb59e5bb745}</Project>
-            <Name>KeyGeneralPurposeLibrary</Name>
-        </ProjectReference>
     </ItemGroup>
     <ItemGroup>
         <Content Include=".editorconfig" />

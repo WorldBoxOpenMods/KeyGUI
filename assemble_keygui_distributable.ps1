@@ -68,7 +68,6 @@ New-Item -ItemType Directory -Path "$MOD_NAME\Plugin-Dependencies" | Out-Null
 
 # Copy built files into distributable folder
 Copy-Item "$KEYGUI_BIN_PATH\KeyGUI.dll" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\KeyGUI.dll"
-Copy-Item "$KEYGUI_BIN_PATH\KeyGeneralPurposeLibrary.dll" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\Plugin-Dependencies\KeyGeneralPurposeLibrary.dll"
 Copy-Item "$KEYGUI_BIN_PATH\BepInExModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\Plugin-Dependencies\BepInExModCompatibilityLayer.dll"
 
 # Copy build assets into distributable folder
@@ -84,5 +83,4 @@ Write-Host "Archive created at $DISTRIBUTABLE_ARCHIVE_PATH"
 
 # Copy PDB files into distributable folder
 Copy-Item "$KEYGUI_BIN_PATH\KeyGUI.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\KeyGUI.pdb"
-Copy-Item "$KEYGUI_BIN_PATH\KeyGeneralPurposeLibrary.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\Plugin-Dependencies\KeyGeneralPurposeLibrary.pdb"
 Copy-Item "$KEYGUI_BIN_PATH\BepInExModCompatibilityLayer.pdb" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\Plugin-Dependencies\BepInExModCompatibilityLayer.pdb"
