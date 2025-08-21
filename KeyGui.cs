@@ -17,7 +17,6 @@ using KeyGUI.Menus;
 using KeyGUI.Menus.ModConfig;
 using KeyGUI.Menus.ModConfig.ConfigOptions;
 using KeyGUI.Utils;
-using NcmsModCompatibilityLayer;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using ModCompatibilityLayer = BepinexModCompatibilityLayer.ModCompatibilityLayer;
@@ -177,7 +176,6 @@ namespace KeyGUI {
   [BepInPlugin(KeyGuiConfig.PluginGuid, KeyGuiConfig.PluginName, KeyGuiConfig.PluginVersion)]
   [BepInDependency(KeyGeneralPurposeLibraryConfig.PluginGuid, KeyGeneralPurposeLibraryConfig.PluginVersion)]
   [BepInDependency(BepinexModCompatibilityLayerConfig.PluginGuid, BepinexModCompatibilityLayerConfig.PluginVersion)]
-  [BepInDependency(NcmsModCompatibilityLayerConfig.PluginGuid, NcmsModCompatibilityLayerConfig.PluginVersion)]
   public class KeyGui : BaseUnityPlugin {
     public static KeyGui Instance;
     internal static readonly Harmony Harmony = new Harmony(KeyGuiConfig.PluginGuid);

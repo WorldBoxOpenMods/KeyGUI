@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 using System.Text;
 using BepinexModCompatibilityLayer;
 using JetBrains.Annotations;
-using NcmsModCompatibilityLayer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -16,9 +15,6 @@ namespace KeyGUI.Backend {
   internal class KeyGuiNetworking {
     private static readonly HttpClient Client = new HttpClient();
     private const string BaseUrl = "https://www.keymasterer.uk/keygui/api";
-    //private const string BaseUrl = "http://localhost:3000/keygui/api";
-    private const string FallbackUrl = "https://keymasterer.uk/keygui/api";
-    //private const string FallbackUrl = "http://localhost:3000/keygui/api";
 
     [CanBeNull]
     private static string SendGetRequest(string apiPath) {
@@ -26,17 +22,7 @@ namespace KeyGUI.Backend {
       try {
         response = Client.GetAsync(BaseUrl + apiPath).Result;
       } catch (Exception e) {
-        Debug.LogWarning("Failed to send GET request to " + BaseUrl + apiPath + ": " + e.Message);
-      }
-      if (response != null && response.IsSuccessStatusCode) {
-        HttpContent responseContent = response.Content;
-        return responseContent.ReadAsStringAsync().Result;
-      }
-
-      try {
-        response = Client.GetAsync(FallbackUrl + apiPath).Result;
-      } catch (Exception e) {
-        Debug.LogError("Also failed to send GET request to fallback " + BaseUrl + apiPath + ": " + e.Message);
+        Debug.LogWarning($"Failed to send GET request to {BaseUrl + apiPath}: {e.Message}");
       }
       if (response != null && response.IsSuccessStatusCode) {
         HttpContent responseContent = response.Content;
@@ -52,17 +38,7 @@ namespace KeyGUI.Backend {
       try {
         response = Client.PostAsync(BaseUrl + apiPath, new StringContent(json, Encoding.UTF8, "application/json")).Result;
       } catch (Exception e) {
-        Debug.LogWarning("Failed to send POST request to " + BaseUrl + apiPath + ": " + e.Message);
-      }
-      if (response != null && response.IsSuccessStatusCode) {
-        HttpContent responseContent = response.Content;
-        return responseContent.ReadAsStringAsync().Result;
-      }
-
-      try {
-        response = Client.PostAsync(FallbackUrl + apiPath, new StringContent(json, Encoding.UTF8, "application/json")).Result;
-      } catch (Exception e) {
-        Debug.LogError("Also failed to send POST request to fallback " + BaseUrl + apiPath + ": " + e.Message);
+        Debug.LogWarning($"Failed to send POST request to {BaseUrl + apiPath}: {e.Message}");
       }
       if (response != null && response.IsSuccessStatusCode) {
         HttpContent responseContent = response.Content;
@@ -91,7 +67,7 @@ namespace KeyGUI.Backend {
       for (int i = modsInUse.nonNcmsMods.Length; i < mods.Length; ++i) {
         string dateFoundByOs = "-";
         string lastDateChanged = "-";
-        if (File.Exists((modsInUse.ncmsMods[i - modsInUse.nonNcmsMods.Length]["path"] ?? new JValue("fkjdhgdfghkshgdfhgdfjghdfkgdfgfdkghkj.NOPE THIS FILE DEFINITELY WON'T EXIST I'M SURE OF THAT")).Value<string>())) {
+        if (File.Exists((modsInUse.ncmsMods[i - modsInUse.nonNcmsMods.Length]["path"] ?? new JValue("fkjdhgdfghkshgdfhgdfjghäskdfgäldfkgdfgfdkghkj.%ß°w°#-NOPE THIS FILE DEFINITELY WON'T EXIST I'M SURE OF THAT")).Value<string>())) {
           FileInfo fileInfo = new FileInfo((modsInUse.ncmsMods[i - modsInUse.nonNcmsMods.Length]["path"] ?? throw new InvalidOperationException()).Value<string>());
           dateFoundByOs = fileInfo.CreationTime.ToString("yy/MM/dd");
           lastDateChanged = fileInfo.LastWriteTime.ToString("yy/MM/dd");
@@ -116,7 +92,7 @@ namespace KeyGUI.Backend {
         keyGuiVersion = KeyGuiConfig.PluginVersion,
         keyGeneralPurposeLibraryVersion = "NONE",
         bepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
-        ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion,
+        ncmsModCompatibilityLayerVersion = "NML_INSTALL",
         worldboxAssemblyChecksum = CreateChecksum(Application.streamingAssetsPath + "/../Managed/Assembly-CSharp.dll")
       });
       string response = SendPostRequest("/send-mod-data", json);
@@ -154,7 +130,7 @@ namespace KeyGUI.Backend {
         keyGuiVersion = KeyGuiConfig.PluginVersion,
         keyGeneralPurposeLibraryVersion = "NONE",
         bepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
-        ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion,
+        ncmsModCompatibilityLayerVersion = "NML_INSTALL",
         worldboxVersionPretty = _worldboxVersionPretty ?? (_worldboxVersionPretty = Config.gv),
         worldboxVersionText = _worldboxVersionText ?? (_worldboxVersionText = Config.versionCodeText),
         playerSteamId = _steamId ?? (_steamId = Config.steam_id),
@@ -177,7 +153,7 @@ namespace KeyGUI.Backend {
         keyGuiVersion = KeyGuiConfig.PluginVersion,
         keyGeneralPurposeLibraryVersion = "NONE",
         bepInExModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
-        ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion
+        ncmsModCompatibilityLayerVersion = "NML_INSTALL"
       });
       string response = SendPostRequest("/is-id-taken", json);
       if (response == null) {
@@ -241,7 +217,7 @@ namespace KeyGUI.Backend {
         keyGuiVersion = KeyGuiConfig.PluginVersion,
         keyGeneralPurposeLibraryVersion = "NONE",
         bepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
-        ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion,
+        ncmsModCompatibilityLayerVersion = "NML_INSTALL",
         worldboxVersionDate = Config.versionCodeDate,
         worldboxVersionText = Config.versionCodeText
       });

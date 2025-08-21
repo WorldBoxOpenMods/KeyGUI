@@ -188,10 +188,6 @@
             <Project>{b962f27e-55ab-4aef-9040-3bb59e5bb745}</Project>
             <Name>KeyGeneralPurposeLibrary</Name>
         </ProjectReference>
-        <ProjectReference Include="..\NcmsModCompatibilityLayer\NcmsModCompatibilityLayer.csproj">
-            <Project>{74dd0eee-640c-47ff-ba78-0e9907108857}</Project>
-            <Name>NcmsModCompatibilityLayer</Name>
-        </ProjectReference>
     </ItemGroup>
     <ItemGroup>
         <Content Include=".editorconfig" />
