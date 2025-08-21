@@ -23,6 +23,7 @@ namespace KeyGUI.Framework.Menus {
       AddLocalesContainer(title, instance);
       _menus.Add(instance);
       _menus.Last().RegisterPatches();
+      _menus.Last().InitLocales();
       _menus.Last().InitMenuInfo(title, windowID, this, MenuRect.x + MenuRect.width);
       if (_menus.Last() is KeyGuiMenuManager manager) manager.AddSubMenus();
       Debug.Log($"Loaded {Title} {title}...");

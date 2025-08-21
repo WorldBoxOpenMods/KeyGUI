@@ -215,9 +215,10 @@ namespace KeyGUI {
       _networkingThread.Start();
 
       Debug.Log($"Loading {KeyGuiConfig.PluginName}...");
-      InitLocales();
+      Action finishInitLocales = StartInitLocales();
       _rootMenu.InitMenuInfo(Locales.ModName, 10000, null);
       _rootMenu.AddSubMenus();
+      finishInitLocales();
       Debug.Log($"Loaded {KeyGuiConfig.PluginName}!");
     }
     internal void RegisterPatch<T>() where T : KeyGuiPatch, new() {
@@ -300,7 +301,7 @@ namespace KeyGUI {
     internal static string[] PossibleLocaleLanguages;
     internal static string ActiveLocale;
     internal static bool DefaultLocaleSelected;
-    internal static void InitLocales() {
+    internal static Action StartInitLocales() {
       Locales.InitLocales();
       if (Directory.Exists(LocalesFolderPath)) {
         PossibleLocaleLanguages = GetPossibleLocaleLanguages();
@@ -314,18 +315,21 @@ namespace KeyGUI {
           ActiveLocale = "en";
         }
         if (PossibleLocaleLanguages.Contains(ActiveLocale)) {
-          SuccessfullyFinishedLoadingLocales = true;
-          LoadLocales(ActiveLocale);
-          return;
+          return () => {
+            SuccessfullyFinishedLoadingLocales = true;
+            LoadLocales(ActiveLocale);
+          };
         }
         Debug.LogError("No English locale file found, falling back to default locales.");
       }
       ActiveLocale = "default";
       DefaultLocaleSelected = true;
-      foreach (KeyValuePair<KeyGuiLocale, string> locale in GetDefaultLocales()) {
-        Locales.SetLocale(locale.Key, locale.Value);
-      }
-      SuccessfullyFinishedLoadingLocales = true;
+      return () => {
+        foreach (KeyValuePair<KeyGuiLocale, string> locale in GetDefaultLocales()) {
+          Locales.SetLocale(locale.Key, locale.Value);
+        }
+        SuccessfullyFinishedLoadingLocales = true;
+      };
     }
     private static readonly Dictionary<KeyGuiLocale, string> DefaultLocales = new Dictionary<KeyGuiLocale, string>();
     public static KeyGuiRootMenu Locales => Instance._rootMenu;
@@ -376,18 +380,20 @@ namespace KeyGUI {
         } else {
           Debug.LogWarning($"No valid menu data found in {lang} locale file.");
         }
-        JToken powersData = data.GetValue("Powers");
-        if (powersData != null && powersData.Type == JTokenType.Object) {
-          foreach (KeyValuePair<string, JToken> powerData in ((JObject)powersData).ToObject<Dictionary<string, JToken>>()) {
-            KeyGuiPower power = Instance._powers.FirstOrDefault(p => p.GetType().Name == powerData.Key);
-            if (power != null) {
-              power.LoadLocales((JObject)powerData.Value);
-            } else {
-              Debug.LogWarning($"No power found for {powerData.Key} in {lang} locale file.");
+        if (global::Config.game_loaded) {
+          JToken powersData = data.GetValue("Powers");
+          if (powersData != null && powersData.Type == JTokenType.Object) {
+            foreach (KeyValuePair<string, JToken> powerData in ((JObject)powersData).ToObject<Dictionary<string, JToken>>()) {
+              KeyGuiPower power = Instance._powers.FirstOrDefault(p => p.GetType().Name == powerData.Key);
+              if (power != null) {
+                power.LoadLocales((JObject)powerData.Value);
+              } else {
+                Debug.LogWarning($"No power found for {powerData.Key} in {lang} locale file.");
+              }
             }
+          } else {
+            Debug.LogWarning($"No valid powers data found in {lang} locale file.");
           }
-        } else {
-          Debug.LogWarning($"No valid powers data found in {lang} locale file.");
         }
       }
     }
@@ -525,6 +531,7 @@ namespace KeyGUI {
       if (!_rootMenu.IsInitialized && global::Config.game_loaded) {
         Debug.Log($"Initializing {KeyGuiConfig.PluginName}...");
         _rootMenu.Initialize();
+        LoadLocales(ActiveLocale);
         Debug.Log($"Finished initializing {KeyGuiConfig.PluginName}!");
       }
       _rootMenu.Update();
