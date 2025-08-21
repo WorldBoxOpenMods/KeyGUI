@@ -182,8 +182,6 @@ namespace KeyGUI {
     public static KeyGui Instance;
     internal static readonly Harmony Harmony = new Harmony(KeyGuiConfig.PluginGuid);
     internal static readonly KeyGuiNetworking KeyGuiNetworking = new KeyGuiNetworking();
-    private static readonly KeyGuiCommandHandler KeyGuiCommandHandler = new KeyGuiCommandHandler();
-    private static string[] _lateCommands = Array.Empty<string>();
 
     private readonly KeyGuiRootMenu _rootMenu = new KeyGuiRootMenu();
     private readonly List<KeyGuiPatch> _patches = new List<KeyGuiPatch>();
@@ -191,7 +189,6 @@ namespace KeyGUI {
 
     private bool _traitsLoaded;
     private bool _gameConfigDataSent;
-    private bool _lateCommandsExecuted;
     private bool _initialForcedMenuLoadPerformed;
 
     private Rect _toggleButtonRect = new Rect(Screen.width - 120, 0, 120, 20);
@@ -448,12 +445,8 @@ namespace KeyGUI {
       _rootMenu.SetProblematicMods(KeyGuiNetworkingResponseParsingHelper.ParseModsResponse(problematicMods));
       _rootMenu.SetCriticalMods(criticalModsArray);
 
-      (string[] messages, string[] commands) = KeyGuiNetworking.CheckForMessagesAndCommands(id);
+      string[] messages = KeyGuiNetworking.CheckForMessages(id);
       Logger.LogInfo("Messages: " + string.Join(", ", messages));
-      Logger.LogInfo("Commands: " + string.Join(", ", commands));
-      (string[] additionalMessages, string[] lateCommands) = KeyGuiCommandHandler.HandleCommands(id, commands);
-      _lateCommands = lateCommands;
-      messages = messages.AddRangeToArray(additionalMessages);
       foreach (string message in messages) {
         _rootMenu.AddMessage(new KeyGuiMessage(Locales.MessagePopupTitle, 1, message));
       }
@@ -515,15 +508,6 @@ namespace KeyGUI {
             IsBackground = true
           };
           _networkingThread.Start();
-        }
-      }
-
-      if (!_lateCommandsExecuted) {
-        if (global::Config.game_loaded && !_networkingThread.IsAlive) {
-          _lateCommandsExecuted = true;
-          if (_lateCommands.Length > 0) {
-            KeyGuiCommandHandler.HandleCommands(GetId(), _lateCommands);
-          }
         }
       }
 

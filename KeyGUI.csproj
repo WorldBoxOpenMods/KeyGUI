@@ -106,7 +106,6 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Backend\KeyGuiCommandHandler.cs"/>
         <Compile Include="Backend\KeyGuiNetworking.cs"/>
         <Compile Include="Framework\KeyGuiComponent.cs" />
         <Compile Include="Framework\Locales\KeyGuiLocale.cs" />

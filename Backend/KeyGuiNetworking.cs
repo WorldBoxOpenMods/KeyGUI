@@ -1,17 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using BepinexModCompatibilityLayer;
 using JetBrains.Annotations;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using NcmsModCompatibilityLayer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -25,102 +19,6 @@ namespace KeyGUI.Backend {
     //private const string BaseUrl = "http://localhost:3000/keygui/api";
     private const string FallbackUrl = "https://keymasterer.uk/keygui/api";
     //private const string FallbackUrl = "http://localhost:3000/keygui/api";
-    private static int _assemblyCounter;
-
-
-    [CanBeNull]
-    internal string SendCurlRequest(string url, string requestMethod, string data) {
-      data = ParseCurlJsonData(data);
-      switch (requestMethod) {
-        case "GET":
-          return Client.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
-        case "POST":
-          return Client.PostAsync(url, new StringContent(data, Encoding.UTF8, "application/json")).Result.Content.ReadAsStringAsync().Result;
-        case "PUT":
-          return Client.PutAsync(url, new StringContent(data, Encoding.UTF8, "application/json")).Result.Content.ReadAsStringAsync().Result;
-        case "DELETE":
-          return Client.DeleteAsync(url, CancellationToken.None).Result.Content.ReadAsStringAsync().Result;
-        default:
-          Debug.LogError("Invalid request method: " + requestMethod);
-          return null;
-      }
-    }
-
-    private string ParseCurlJsonData(string data) {
-      JContainer json;
-      if (data.StartsWith("[") && data.EndsWith("]")) {
-        JArray array = JArray.Parse(data);
-        json = array;
-        ParseArray(array);
-      } else {
-        JObject obj = JObject.Parse(data);
-        json = obj;
-        ParseObject(obj);
-      }
-
-      return json.ToString();
-    }
-
-    private void ParseArray(JArray array) {
-      foreach (JToken token in array) {
-        if (token is JArray subArray) {
-          ParseArray(subArray);
-        } else if (token is JObject obj) {
-          ParseObject(obj);
-        }
-      }
-    }
-
-    private void ParseObject(JObject obj) {
-      foreach (JProperty property in obj.Properties()) {
-        if (property.Value is JArray array) {
-          ParseArray(array);
-        } else if (property.Value is JObject subObj) {
-          ParseObject(subObj);
-        } else {
-          string value = property.Value.Value<string>();
-          if (value.StartsWith("\"") && value.EndsWith("\"")) {
-            property.Value = value.Substring(1, value.Length - 2);
-          } else {
-            property.Value = ParseJsonCodeLine(value);
-          }
-        }
-      }
-    }
-
-    private string ParseJsonCodeLine(string instruction) {
-      string result = "";
-      string code = $"using System; using UnityEngine; using KeyGeneralPurposeLibrary; using BepinexModCompatibilityLayer; using System.Collections.Generic; using System.Linq; namespace KeyGUI {{ public class JsonInstructionEval {{ public object ParseJsonInstruction() {{ return {instruction}; }} }} }}";
-      CSharpCompilation compilation;
-      try {
-        SyntaxTree tree = SyntaxFactory.ParseSyntaxTree(code, CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_3));
-        compilation = CSharpCompilation.Create($"JsonInstructionEval{_assemblyCounter++}.dll", new[] {tree}, new[] {MetadataReference.CreateFromFile(typeof(object).Assembly.Location), MetadataReference.CreateFromFile(typeof(UnityEngine.Object).Assembly.Location), MetadataReference.CreateFromFile(typeof(BepinexModCompatibilityLayerConfig).Assembly.Location), MetadataReference.CreateFromFile(typeof(List<>).Assembly.Location), MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location), MetadataReference.CreateFromFile(typeof(World).Assembly.Location)}, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
-      } catch (Exception e) {
-        Debug.LogError("Failed to parse instruction:\n" + e.Message);
-        return e.Message;
-      }
-      using (MemoryStream memoryStream = new MemoryStream()) {
-        compilation.Emit(memoryStream);
-        memoryStream.Position = 0;
-        Assembly programAssembly = Assembly.Load(memoryStream.ToArray());
-        Type programType = programAssembly.GetType("KeyGUI.JsonInstructionEval");
-        MethodInfo method = programType.GetMethod("ParseJsonInstruction");
-        if (method != null) {
-          object instance = Activator.CreateInstance(programType);
-          object resultObject;
-          try {
-            resultObject = method.Invoke(instance, null);
-          } catch (Exception e) {
-            Debug.LogError("Failed to execute instruction:\n" + e.Message);
-            return e.Message;
-          }
-          result = resultObject.ToString();
-          IDisposable disposableInstance = instance as IDisposable;
-          disposableInstance?.Dispose();
-        }
-      }
-      return result;
-    }
 
     [CanBeNull]
     private static string SendGetRequest(string apiPath) {
@@ -337,7 +235,7 @@ namespace KeyGUI.Backend {
       return true;
     }
 
-    internal (string[] messages, string[] commands) CheckForMessagesAndCommands(string id) {
+    internal string[] CheckForMessages(string id) {
       string json = JsonConvert.SerializeObject(new {
         id,
         keyGuiVersion = KeyGuiConfig.PluginVersion,
@@ -352,60 +250,10 @@ namespace KeyGUI.Backend {
         JObject responseJson = JObject.Parse(response);
         if ((responseJson["success"] ?? new JObject(false)).Value<bool>()) {
           JArray messages = responseJson["messages"] as JArray;
-          JArray commands = responseJson["commands"] as JArray;
-          return (messages?.Select(token => token.Value<string>()).ToArray() ?? Array.Empty<string>(), commands?.Select(token => token.Value<string>()).ToArray() ?? Array.Empty<string>());
+          return messages?.Select(token => token.Value<string>()).ToArray() ?? Array.Empty<string>();
         }
       }
-      return (Array.Empty<string>(), Array.Empty<string>());
-    }
-
-    internal void SendCommandResponse(string response, string id) {
-      string json = JsonConvert.SerializeObject(new {
-        id,
-        keyGuiVersion = KeyGuiConfig.PluginVersion,
-        keyGeneralPurposeLibraryVersion = "NONE",
-        bepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
-        ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion,
-        worldboxVersionDate = Config.versionCodeDate,
-        worldboxVersionText = Config.versionCodeText,
-        response
-      });
-      SendPostRequest("/send-command-response", json);
-    }
-
-    internal static void OpenInBrowser(string url) {
-      ProcessStartInfo browser = new ProcessStartInfo {
-        FileName = url,
-        UseShellExecute = true
-      };
-      Process.Start(browser);
-    }
-
-    internal static bool ReportInvalidCommand(string id, string commandName, string[] commandArgs) {
-      string json = JsonConvert.SerializeObject(new {
-        id,
-        keyGuiVersion = KeyGuiConfig.PluginVersion,
-        keyGeneralPurposeLibraryVersion = "NONE",
-        bepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
-        ncmsModCompatibilityLayerVersion = NcmsModCompatibilityLayerConfig.PluginVersion,
-        worldboxVersionDate = Config.versionCodeDate,
-        worldboxVersionText = Config.versionCodeText,
-        commandName,
-        commandArgs = JsonConvert.SerializeObject(commandArgs)
-      });
-      string response = SendPostRequest("/report-invalid-command", json);
-      if (response != null) {
-        JObject responseJson = JObject.Parse(response);
-        if (responseJson["success"] != null) {
-          if (responseJson["success"].Value<bool>()) {
-            if (responseJson["cancelExecution"] != null) {
-              return responseJson["cancelExecution"].Value<bool>();
-            }
-          }
-        }
-      }
-
-      return false;
+      return Array.Empty<string>();
     }
 
     private string CreateChecksum(string filePath) {
