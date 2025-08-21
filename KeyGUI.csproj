@@ -44,12 +44,6 @@
         <Reference Include="BepInEx">
             <HintPath>..\Libraries\BepInEx.dll</HintPath>
         </Reference>
-        <Reference Include="Microsoft.CodeAnalysis">
-            <HintPath>..\Libraries\Microsoft.CodeAnalysis.dll</HintPath>
-        </Reference>
-        <Reference Include="Microsoft.CodeAnalysis.CSharp">
-            <HintPath>..\Libraries\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
-        </Reference>
         <Reference Include="mscorlib"/>
         <Reference Include="Newtonsoft.Json">
             <HintPath>..\Libraries\Newtonsoft.Json.dll</HintPath>
@@ -58,34 +52,10 @@
           <HintPath>..\Libraries\strings.dll</HintPath>
         </Reference>
         <Reference Include="System"/>
-        <Reference Include="System.Collections.Immutable">
-            <HintPath>..\Libraries\System.Collections.Immutable.dll</HintPath>
-        </Reference>
-        <Reference Include="System.ComponentModel.Composition"/>
         <Reference Include="System.Core"/>
         <Reference Include="System.Data"/>
         <Reference Include="System.IO.Compression.FileSystem"/>
-        <Reference Include="System.Memory">
-            <HintPath>..\Libraries\System.Memory.dll</HintPath>
-        </Reference>
         <Reference Include="System.Net.Http"/>
-        <Reference Include="System.Numerics"/>
-        <Reference Include="System.Numerics.Vectors">
-            <HintPath>..\Libraries\System.Numerics.Vectors.dll</HintPath>
-        </Reference>
-        <Reference Include="System.Reflection.Metadata">
-            <HintPath>..\Libraries\System.Reflection.Metadata.dll</HintPath>
-        </Reference>
-        <Reference Include="System.Runtime.CompilerServices.Unsafe">
-            <HintPath>..\Libraries\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-        </Reference>
-        <Reference Include="System.Text.Encoding.CodePages">
-            <HintPath>..\Libraries\System.Text.Encoding.CodePages.dll</HintPath>
-        </Reference>
-        <Reference Include="System.Threading.Tasks.Extensions">
-            <HintPath>..\Libraries\System.Threading.Tasks.Extensions.dll</HintPath>
-        </Reference>
-        <Reference Include="System.Xml"/>
         <Reference Include="UnityEngine">
             <HintPath>..\Libraries\UnityEngine.dll</HintPath>
         </Reference>
