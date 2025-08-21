@@ -72,7 +72,6 @@ Copy-Item "$KEYGUI_BIN_PATH\KeyGeneralPurposeLibrary.dll" "$BEPINEX_PLUGINS_FOLD
 Copy-Item "$KEYGUI_BIN_PATH\BepInExModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\Plugin-Dependencies\BepInExModCompatibilityLayer.dll"
 
 # Copy build assets into distributable folder
-Copy-Item "$KEYGUI_BUILD_ASSETS_PATH\DLL-Dependencies" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\" -Recurse
 Copy-Item "$KEYGUI_BUILD_ASSETS_PATH\DefaultAssets" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\" -Recurse
 Copy-Item "$KEYGUI_BUILD_ASSETS_PATH\Locales" "$BEPINEX_PLUGINS_FOLDER_PATH\$MOD_NAME\" -Recurse
 

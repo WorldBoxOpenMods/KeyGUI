@@ -32,7 +32,6 @@ mv "./BepInExModCompatibilityLayer.dll" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/Plu
 
 # Copy build assets into distributable folder
 cd "$KEYGUI_BUILD_ASSETS_PATH" || exit
-cp -R "./DLL-Dependencies" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/"
 cp -R "./DefaultAssets" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/"
 cp -R "./Locales" "$BEPINEX_PLUGINS_FOLDER_PATH/KeyGUI/"
 
