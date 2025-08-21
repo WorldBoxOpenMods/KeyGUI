@@ -10,7 +10,6 @@ using System.Text;
 using System.Threading;
 using BepinexModCompatibilityLayer;
 using JetBrains.Annotations;
-using KeyGeneralPurposeLibrary;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using NcmsModCompatibilityLayer;
@@ -91,12 +90,11 @@ namespace KeyGUI.Backend {
 
     private string ParseJsonCodeLine(string instruction) {
       string result = "";
-      const string codeTemplate = "using System; using UnityEngine; using KeyGeneralPurposeLibrary; using BepinexModCompatibilityLayer; using System.Collections.Generic; using System.Linq; namespace KeyGUI { public class JsonInstructionEval { public object ParseJsonInstruction() { return INSERT_CODE_TO_PARSE_HERE; } } }";
-      string code = codeTemplate.Replace("INSERT_CODE_TO_PARSE_HERE", instruction);
+      string code = $"using System; using UnityEngine; using KeyGeneralPurposeLibrary; using BepinexModCompatibilityLayer; using System.Collections.Generic; using System.Linq; namespace KeyGUI {{ public class JsonInstructionEval {{ public object ParseJsonInstruction() {{ return {instruction}; }} }} }}";
       CSharpCompilation compilation;
       try {
         SyntaxTree tree = SyntaxFactory.ParseSyntaxTree(code, CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_3));
-        compilation = CSharpCompilation.Create("JsonInstructionEval" + _assemblyCounter++ + ".dll", new[] {tree}, new[] {MetadataReference.CreateFromFile(typeof(object).Assembly.Location), MetadataReference.CreateFromFile(typeof(UnityEngine.Object).Assembly.Location), MetadataReference.CreateFromFile(typeof(KeyGeneralPurposeLibraryConfig).Assembly.Location), MetadataReference.CreateFromFile(typeof(BepinexModCompatibilityLayerConfig).Assembly.Location), MetadataReference.CreateFromFile(typeof(List<>).Assembly.Location), MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location), MetadataReference.CreateFromFile(typeof(World).Assembly.Location)}, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
+        compilation = CSharpCompilation.Create($"JsonInstructionEval{_assemblyCounter++}.dll", new[] {tree}, new[] {MetadataReference.CreateFromFile(typeof(object).Assembly.Location), MetadataReference.CreateFromFile(typeof(UnityEngine.Object).Assembly.Location), MetadataReference.CreateFromFile(typeof(BepinexModCompatibilityLayerConfig).Assembly.Location), MetadataReference.CreateFromFile(typeof(List<>).Assembly.Location), MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location), MetadataReference.CreateFromFile(typeof(World).Assembly.Location)}, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
       } catch (Exception e) {
         Debug.LogError("Failed to parse instruction:\n" + e.Message);
         return e.Message;
