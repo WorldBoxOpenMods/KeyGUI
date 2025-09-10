@@ -11,6 +11,7 @@ using KeyGUI.Menus.ModConfig;
 using KeyGUI.Menus.ModConfig.ConfigOptions;
 using KeyGUI.Utils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using UnityEngine;
 
 namespace KeyGUI.Backend {
@@ -33,6 +34,11 @@ namespace KeyGUI.Backend {
       public List<ModIssueInfo> CriticalMods;
     }
     // ReSharper restore ClassNeverInstantiated.Global, UnassignedField.Global, CollectionNeverUpdated.Global, MemberCanBePrivate.Global
+    private static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings {
+      ContractResolver = new DefaultContractResolver {
+        NamingStrategy = new SnakeCaseNamingStrategy()
+      }
+    };
     private static readonly HttpClient Client = new HttpClient();
     private const string BaseUrl = "https://keygui.keymasterer.uk/api";
 
@@ -46,7 +52,7 @@ namespace KeyGUI.Backend {
       if (response != null && response.IsSuccessStatusCode) {
         HttpContent responseContent = response.Content;
         try {
-          return JsonConvert.DeserializeObject<TResponse>(await responseContent.ReadAsStringAsync());
+          return JsonConvert.DeserializeObject<TResponse>(await responseContent.ReadAsStringAsync(), JsonSerializerSettings);
         } catch (Exception e) {
           Debug.LogWarning($"Failed to deserialize response from {BaseUrl + apiPath}: {e.Message}");
         }
@@ -55,17 +61,18 @@ namespace KeyGUI.Backend {
       return null;
     }
 
-    private static async Task<TResponse> SendPostRequest<TResponse>(string apiPath, string json) where TResponse : class {
+    private static async Task<TResponse> SendPostRequest<TResponse>(string apiPath, object json) where TResponse : class {
+      string jsonString = json as string ?? JsonConvert.SerializeObject(json, JsonSerializerSettings);
       HttpResponseMessage response = null;
       try {
-        response = await Client.PostAsync(BaseUrl + apiPath, new StringContent(json, Encoding.UTF8, "application/json"));
+        response = await Client.PostAsync(BaseUrl + apiPath, new StringContent(jsonString, Encoding.UTF8, "application/json"));
       } catch (Exception e) {
         Debug.LogWarning($"Failed to send POST request to {BaseUrl + apiPath}: {e.Message}");
       }
       if (response != null && response.IsSuccessStatusCode) {
         HttpContent responseContent = response.Content;
         try {
-          return JsonConvert.DeserializeObject<TResponse>(await responseContent.ReadAsStringAsync());
+          return JsonConvert.DeserializeObject<TResponse>(await responseContent.ReadAsStringAsync(), JsonSerializerSettings);
         } catch (Exception e) {
           Debug.LogWarning($"Failed to deserialize response from {BaseUrl + apiPath}: {e.Message}");
         }
@@ -89,13 +96,13 @@ namespace KeyGUI.Backend {
           for (int i = 0; i < 15; ++i) {
             await Task.Delay(TimeSpan.FromSeconds(1));
             try {
-              await SendPostRequest<object>($"/users/{id}/accounts", JsonConvert.SerializeObject(new {
+              await SendPostRequest<object>($"/users/{id}/accounts", new {
                 Secret = secret,
                 SteamId = Config.steam_id,
                 SteamName = Config.steam_name,
                 DiscordId = Config.discordId,
                 DiscordName = Config.discordName
-              }));
+              });
             } catch (Exception) {
               // ignored
             }
@@ -103,13 +110,13 @@ namespace KeyGUI.Backend {
         }
       }
     }
-    
+
     private async Task PerformInitialNetworkingSetup(string id, string secret) {
       Debug.Log("Communicating current state with server in the background...");
       if (!await IsUpToDate()) {
         KeyGui.Instance.MarkModVersionAsOutdated();
       }
-      (KeyGuiModManager.NativeModInfo[] nativeMods, KeyGuiModManager.BepinexModInfo[] bepinexMods, KeyGuiModManager.NmlModInfo[] nmlMods)  = KeyGuiModManager.FindMods();
+      (KeyGuiModManager.NativeModInfo[] nativeMods, KeyGuiModManager.BepinexModInfo[] bepinexMods, KeyGuiModManager.NmlModInfo[] nmlMods) = KeyGuiModManager.FindMods();
       Debug.Log($"Found {nmlMods.Length} NML mods, {bepinexMods.Length} BepInEx mods, and {nativeMods.Length} native mods!");
       Debug.Log($"NML mods: {string.Join(", ", nmlMods.Select(m => m.Name))}");
       Debug.Log($"BepInEx mods: {string.Join(", ", bepinexMods.Select(m => m.Name))}");
@@ -133,7 +140,7 @@ namespace KeyGUI.Backend {
       }
       Debug.Log("Finished immediate server communication!");
     }
-    
+
     private async Task<bool> IsUpToDate() {
       ModVersionResponse modVersionResponse = await SendGetRequest<ModVersionResponse>("/mods/current-versions");
       if (modVersionResponse == null) {
@@ -149,7 +156,7 @@ namespace KeyGUI.Backend {
 
       for (int i = 0; i < minimumVersion.Length; i++) {
         int actualPart = i < actualVersion.Length ? actualVersion[i] : 0;
-        int minimumPart =  i < minimumVersion.Length ? minimumVersion[i] : 0;
+        int minimumPart = i < minimumVersion.Length ? minimumVersion[i] : 0;
         if (actualPart < minimumPart) return false;
         if (actualPart > minimumPart) return true;
       }
@@ -161,7 +168,7 @@ namespace KeyGUI.Backend {
         case "Optout":
           return (null, null);
         case "None": {
-          RegistrationResponse registrationResponse = await SendPostRequest<RegistrationResponse>("/users/register", "{}");
+          RegistrationResponse registrationResponse = await SendPostRequest<RegistrationResponse>("/users/register", new { });
           if (registrationResponse == null) {
             Debug.LogError("Failed to register user");
             return (null, null);
@@ -173,9 +180,9 @@ namespace KeyGUI.Backend {
       }
       return (KeyGuiModConfig.Get(Internal.InstallId), KeyGuiModConfig.Get(Internal.Secret));
     }
-    
+
     private async Task<GameDataResponse> SendGameData(string id, string secret, KeyGuiModManager.NativeModInfo[] nativeMods, KeyGuiModManager.BepinexModInfo[] bepinexMods, KeyGuiModManager.NmlModInfo[] nmlMods) {
-      var request = new {
+      GameDataResponse response = await SendPostRequest<GameDataResponse>($"/users/{id}/mods", new {
         Secret = secret,
         KeyGuiVersion = KeyGuiConfig.PluginVersion,
         BepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
@@ -183,12 +190,12 @@ namespace KeyGUI.Backend {
         WorldboxAssemblyChecksum = CreateChecksum($"{Application.streamingAssetsPath}/../Managed/Assembly-CSharp.dll"),
         WorldboxVersion = Config.gv,
         WorldboxVersionBuildNumber = Config.versionCodeText,
-        InstalledMods = new List<object>()
-      };
-      request.InstalledMods.AddRange(nmlMods);
-      request.InstalledMods.AddRange(bepinexMods);
-      request.InstalledMods.AddRange(nativeMods);
-      GameDataResponse response = await SendPostRequest<GameDataResponse>($"/users/{id}/mods", JsonConvert.SerializeObject(request));
+        InstalledMods = new List<IEnumerable<object>> {
+          nmlMods,
+          bepinexMods,
+          nativeMods
+        }.SelectMany(m => m).ToList()
+      });
       if (response == null) {
         Debug.LogWarning("Failed to send game data");
         return new GameDataResponse {
