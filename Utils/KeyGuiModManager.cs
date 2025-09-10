@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,24 @@ using UnityEngine;
 
 namespace KeyGUI.Utils {
   public static class KeyGuiModManager {
+    public class ModInfo {
+      public string Name { get; set; }
+      public string DateAdded { get; set; }
+      public string DateFoundByMod { get; set; }
+      public string DateRemoved { get; set; }
+      public string DateLastChanged { get; set; }
+    }
+    public class NmlModInfo : ModInfo {
+      public string Json { get; set; }
+      public bool IsWorkshopLoaded { get; set; }
+    }
+    public class BepinexModInfo : ModInfo {
+      public bool IsNmlCompliantFormat { get; set; }
+      public bool IsWorkshopLoaded { get; set; }
+    }
+    public class NativeModInfo : ModInfo {
+      public bool IsMemoryLoaded { get; set; }
+    }
     internal static void TryToRemoveModFromPluginsFolder(string modToRemove) {
       string pluginsFolderPath = Paths.PluginPath;
       string parentFolderPath = Directory.GetParent(pluginsFolderPath)?.FullName;
@@ -50,29 +69,21 @@ namespace KeyGUI.Utils {
       }
     }
 
-    internal static ((string, string)[] nonNcmsMods, JArray ncmsMods) FindMods() {
-      JArray ncmsMods = new JArray();
-      List<(string, string)> nonNcmsMods = new List<(string, string)>();
-      string ncmsModsFolderPath;
+    internal static (NativeModInfo[] nativeMods, BepinexModInfo[] bepinexMods, NmlModInfo[] nmlMods) FindMods() {
+      List<NativeModInfo> nativeModsList = new List<NativeModInfo>();
+      List<BepinexModInfo> bepinexModsList = new List<BepinexModInfo>();
+      List<NmlModInfo> nmlModsList = new List<NmlModInfo>();
+      string nmlModsFolderPath;
       switch (Application.platform) {
         case RuntimePlatform.LinuxPlayer:
-          ncmsModsFolderPath = Paths.PluginPath + "/../../../Mods";
+          nmlModsFolderPath = $"{Paths.PluginPath}/../../../Mods";
           break;
         default:
-          ncmsModsFolderPath = Paths.PluginPath + "/../../Mods";
+          nmlModsFolderPath = $"{Paths.PluginPath}/../../Mods";
           break;
       }
-      if (Directory.Exists(ncmsModsFolderPath)) {
-        foreach (string mod in Directory.GetDirectories(ncmsModsFolderPath)) {
-          if (Directory.Exists(mod)) {
-            foreach (FileInfo file in new DirectoryInfo(mod).GetFiles().Where(file => file.Name == "mod.json")) {
-              ncmsMods.Add(JObject.Parse(File.ReadAllText(file.FullName)));
-              ncmsMods[ncmsMods.Count - 1]["path"] = mod;
-            }
-          }
-        }
-
-        foreach (string path in Directory.GetFiles(ncmsModsFolderPath)) {
+      if (Directory.Exists(nmlModsFolderPath)) {
+        foreach (string path in Directory.GetFiles(nmlModsFolderPath)) {
           if (path.Split('.').Last().Equals("zip")) {
             string newPath = "";
             for (int i = 0; i < path.Split('.').Length - 1; ++i) {
@@ -88,13 +99,48 @@ namespace KeyGUI.Utils {
               continue;
             }
 
-            foreach (FileInfo file in new DirectoryInfo(newPath).GetFiles().Where(file => file.Name == "mod.json")) {
-              ncmsMods.Add(JObject.Parse(File.ReadAllText(file.FullName)));
-              ncmsMods[ncmsMods.Count - 1]["path"] = path;
-            }
-
             if (Directory.Exists(newPath)) {
               Directory.Delete(newPath, true);
+            }
+          }
+        }
+        foreach (string mod in Directory.GetDirectories(nmlModsFolderPath).Where(Directory.Exists)) {
+          nmlModsList.AddRange(new DirectoryInfo(mod).GetFiles().
+            Where(file => file.Name == "mod.json").
+            Select(file => new NmlModInfo {
+              Name = JObject.Parse(File.ReadAllText(file.FullName))["name"]?.ToString() ?? "Unknown",
+              Json = File.ReadAllText(file.FullName),
+              DateAdded = File.GetCreationTimeUtc(file.FullName).ToString("yy/MM/dd"),
+              DateFoundByMod = File.GetLastAccessTimeUtc(file.FullName).ToString("yy/MM/dd"),
+              DateRemoved = null,
+              DateLastChanged = File.GetLastWriteTimeUtc(file.FullName).ToString("yy/MM/dd"),
+              IsWorkshopLoaded = false
+            }));
+        }
+        string workshopFolderPath = Paths.PluginPath + "/../../../../workshop/content/1206560";
+        if (Directory.Exists(workshopFolderPath)) {
+          foreach (string mod in Directory.GetDirectories(workshopFolderPath).Where(Directory.Exists)) {
+            FileInfo file = new DirectoryInfo(mod).GetFiles().FirstOrDefault(f => f.Name == "mod.json");
+            if (file != null) {
+              nmlModsList.Add(new NmlModInfo {
+                Name = JObject.Parse(File.ReadAllText(file.FullName))["name"]?.ToString() ?? "Unknown",
+                Json = File.ReadAllText(file.FullName),
+                DateAdded = File.GetCreationTimeUtc(file.FullName).ToString("yy/MM/dd"),
+                DateFoundByMod = File.GetLastAccessTimeUtc(file.FullName).ToString("yy/MM/dd"),
+                DateRemoved = null,
+                DateLastChanged = File.GetLastWriteTimeUtc(file.FullName).ToString("yy/MM/dd"),
+                IsWorkshopLoaded = true
+              });
+            } else {
+              bepinexModsList.Add(new BepinexModInfo {
+                Name = new DirectoryInfo(mod).Name,
+                DateAdded = Directory.GetCreationTimeUtc(mod).ToString("yy/MM/dd"),
+                DateFoundByMod = Directory.GetLastAccessTimeUtc(mod).ToString("yy/MM/dd"),
+                DateRemoved = null,
+                DateLastChanged = Directory.GetLastWriteTimeUtc(mod).ToString("yy/MM/dd"),
+                IsNmlCompliantFormat = true,
+                IsWorkshopLoaded = true
+              });
             }
           }
         }
@@ -102,28 +148,57 @@ namespace KeyGUI.Utils {
 
       string bepInExModsFolderPath = Paths.PluginPath;
       if (Directory.Exists(bepInExModsFolderPath)) {
-        nonNcmsMods.AddRange(Directory.GetFiles(bepInExModsFolderPath).Select(mod => Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next)).Select((modName, i) => (modName, Directory.GetFiles(bepInExModsFolderPath)[i])));
+        bepinexModsList.AddRange(Directory.GetFiles(bepInExModsFolderPath).
+          Where(mod => Path.GetFileName(mod).Contains(".dll")).
+          Select(mod => new BepinexModInfo {
+            Name = Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next),
+            DateAdded = File.GetCreationTimeUtc(mod).ToString("yy/MM/dd"),
+            DateFoundByMod = File.GetLastAccessTimeUtc(mod).ToString("yy/MM/dd"),
+            DateRemoved = null,
+            DateLastChanged = File.GetLastWriteTimeUtc(mod).ToString("yy/MM/dd"),
+            IsNmlCompliantFormat = false,
+            IsWorkshopLoaded = false
+          })
+        );
+
+        void CheckForBepinexModules(string directory) {
+          foreach (string dir in Directory.GetDirectories(directory)) {
+            CheckForBepinexModules(dir);
+          }
+          if (Directory.GetFiles(directory).Count(file => Path.GetFileName(file).Contains(".dll")) == 1) {
+            string mod = Directory.GetFiles(directory).First(file => Path.GetFileName(file).Contains(".dll"));
+            bepinexModsList.Add(new BepinexModInfo {
+              Name = new DirectoryInfo(directory).Name,
+              DateAdded = File.GetCreationTimeUtc(mod).ToString("yy/MM/dd"),
+              DateFoundByMod = DateTime.UtcNow.ToString("yy/MM/dd"),
+              DateRemoved = null,
+              DateLastChanged = File.GetLastWriteTimeUtc(mod).ToString("yy/MM/dd"),
+              IsNmlCompliantFormat = true,
+              IsWorkshopLoaded = false
+            });
+          }
+        }
+        foreach (string dir in Directory.GetDirectories(bepInExModsFolderPath)) {
+          CheckForBepinexModules(dir);
+        }
       }
 
       string nativeModsFolderPath = Application.streamingAssetsPath + "/Mods";
       if (Directory.Exists(nativeModsFolderPath)) {
-        nonNcmsMods.AddRange(Directory.GetFiles(nativeModsFolderPath).Where(mod => Path.GetFileName(mod).Contains(".dll")).Select(mod => Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next)).Select((modName, i) => (modName, Directory.GetFiles(nativeModsFolderPath)[i])));
+        nativeModsList.AddRange(Directory.GetFiles(nativeModsFolderPath).
+          Where(mod => Path.GetFileName(mod).Contains(".dll")).
+          Select(mod => new NativeModInfo {
+            Name = Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next).Replace("_memload", ""),
+            DateAdded = File.GetCreationTimeUtc(mod).ToString("yy/MM/dd"),
+            DateFoundByMod = File.GetLastAccessTimeUtc(mod).ToString("yy/MM/dd"),
+            DateRemoved = null,
+            DateLastChanged = File.GetLastWriteTimeUtc(mod).ToString("yy/MM/dd"),
+            IsMemoryLoaded = mod.Contains("_memload")
+          })
+        );
       }
 
-      string workshopFolderPath = Paths.PluginPath + "/../../../../workshop/content/1206560";
-      if (Directory.Exists(workshopFolderPath)) {
-        foreach (string mod in Directory.GetDirectories(workshopFolderPath).Where(Directory.Exists)) {
-          FileInfo file;
-          if ((file = new DirectoryInfo(mod).GetFiles().FirstOrDefault(f => f.Name == "mod.json")) != null) {
-            ncmsMods.Add(JObject.Parse(File.ReadAllText(file.FullName)));
-            ncmsMods[ncmsMods.Count - 1]["path"] = mod;
-          } else {
-            nonNcmsMods.AddRange(Directory.GetFiles(nativeModsFolderPath).Where(f => Path.GetFileName(f).Contains(".dll")).Select(f => Path.GetFileName(f).Split('.').Where((_, index) => index != Path.GetFileName(f).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next)).Select((modName, i) => (modName, Directory.GetFiles(nativeModsFolderPath)[i])));
-          }
-        }
-      }
-
-      return (nonNcmsMods.Distinct().ToArray(), ncmsMods);
+      return (nativeModsList.ToArray(), bepinexModsList.ToArray(), nmlModsList.ToArray());
     }
 
     internal static void RemoveMod(string modToRemove) {

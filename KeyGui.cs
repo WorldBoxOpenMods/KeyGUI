@@ -19,7 +19,6 @@ using KeyGUI.Utils;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using ModCompatibilityLayer = BepinexModCompatibilityLayer.ModCompatibilityLayer;
-using Random = UnityEngine.Random;
 
 /*
  * Gurin#2922
@@ -177,22 +176,18 @@ namespace KeyGUI {
   public class KeyGui : BaseUnityPlugin {
     public static KeyGui Instance;
     internal static readonly Harmony Harmony = new Harmony(KeyGuiConfig.PluginGuid);
-    internal static readonly KeyGuiNetworking Networking = new KeyGuiNetworking();
 
     private readonly KeyGuiRootMenu _rootMenu = new KeyGuiRootMenu();
     private readonly List<KeyGuiPatch> _patches = new List<KeyGuiPatch>();
     private readonly List<KeyGuiPower> _powers = new List<KeyGuiPower>();
 
     private bool _traitsLoaded;
-    private bool _gameConfigDataSent;
     private bool _initialForcedMenuLoadPerformed;
 
     private Rect _toggleButtonRect = new Rect(Screen.width - 120, 0, 120, 20);
     private int _buttonId;
 
     private Thread _networkingThread;
-    private byte _counter;
-    private byte _attempts;
 
     public void Awake() {
       Instance = this;
@@ -201,7 +196,7 @@ namespace KeyGUI {
       KeyGuiModConfig.SetUpConfig();
       Debug.Log("Finished initializing Config!");
 
-      _networkingThread = new Thread(PerformInitialNetworkingSetup) {
+      _networkingThread = new Thread(() => new NetworkScheduler().RunAsync().RunSynchronously()) {
         IsBackground = true
       };
       _networkingThread.Start();
@@ -212,6 +207,18 @@ namespace KeyGUI {
       _rootMenu.AddSubMenus();
       finishInitLocales();
       Debug.Log($"Loaded {KeyGuiConfig.PluginName}!");
+    }
+    internal void MarkModVersionAsOutdated() {
+      _rootMenu.MarkModVersionAsOutdated();
+    }
+    internal void SetProblematicMods((string, string)[] problematicMods) {
+      _rootMenu.SetProblematicMods(problematicMods);
+    }
+    internal void SetCriticalMods((string, string)[] criticalMods) {
+      _rootMenu.SetCriticalMods(criticalMods);
+    }
+    internal void AddMessage(string message) {
+      _rootMenu.AddMessage(new KeyGuiMessage(Locales.MessagePopupTitle, 1, message));
     }
     internal void RegisterPatch<T>() where T : KeyGuiPatch, new() {
       if (_patches.OfType<T>().Any()) {
@@ -418,53 +425,7 @@ namespace KeyGUI {
       }
       File.WriteAllText(Path.Combine(LocalesFolderPath, $"{langName}.json"), data.ToString());
     }
-    
-    private void PerformInitialNetworkingSetup() {
-      Logger.LogInfo("Communicating current state with server in the background...");
-      if (!Networking.IsUpToDate()) {
-        _rootMenu.MarkModVersionAsOutdated();
-      }
-      string id = GetId();
-      ((string, string)[] allOtherMods, JArray allNcmsMods) = KeyGuiModManager.FindMods();
-      Logger.LogInfo("Found " + allNcmsMods.Count + " NCMS/NML mods and " + allOtherMods.Length + " other mods!");
-      Logger.LogInfo("NCMS/NML mods: " + string.Join(", ", allNcmsMods.Select(m => m["name"].ToString())));
-      Logger.LogInfo("Other mods: " + string.Join(", ", allOtherMods.Select(m => m.Item1)));
-      JArray problematicMods;
-      JArray criticalMods;
-      (problematicMods, criticalMods) = Networking.SendModData(id, (allOtherMods, allNcmsMods));
-      (string, string)[] criticalModsArray = KeyGuiNetworkingResponseParsingHelper.ParseModsResponse(criticalMods);
-      KeyGuiNetworkingResponseParsingHelper.RemoveWhitelistedCriticalModsFromListOfModsToDelete(criticalModsArray);
-      if (KeyGuiModConfig.Get(General.IgnoreCriticalMods)) {
-        criticalModsArray = Array.Empty<(string, string)>();
-      }
-      RemoveCriticalMods(criticalModsArray);
-      _rootMenu.SetProblematicMods(KeyGuiNetworkingResponseParsingHelper.ParseModsResponse(problematicMods));
-      _rootMenu.SetCriticalMods(criticalModsArray);
 
-      string[] messages = Networking.CheckForMessages(id);
-      Logger.LogInfo("Messages: " + string.Join(", ", messages));
-      foreach (string message in messages) {
-        _rootMenu.AddMessage(new KeyGuiMessage(Locales.MessagePopupTitle, 1, message));
-      }
-      Logger.LogInfo("Finished immediate server communication!");
-    }
-
-    private static string GetId() {
-      string id = KeyGuiModConfig.Get(Internal.Id);
-      if (id == "UNABLE_TO_DETERMINE") {
-        do {
-          id = ((int)Math.Floor(Random.value * 10000000)).ToString();
-        } while (Networking.IsIdTaken(id));
-        KeyGuiModConfig.Set(Internal.Id, id);
-      }
-      return id;
-    }
-
-    private static void RemoveCriticalMods(IEnumerable<(string, string)> criticalMods) {
-      foreach (string modName in criticalMods.Select(tuple => tuple.Item1)) {
-        KeyGuiModManager.RemoveMod(modName);
-      }
-    }
     private void AutoLoad(ConfigOption<bool> autoloadOption, Action loadMethod) {
       if (KeyGuiModConfig.Get(autoloadOption)) {
         Debug.Log($"Automatically loading {autoloadOption.Section} from {KeyGuiConfig.PluginName}...");
@@ -482,28 +443,6 @@ namespace KeyGUI {
         if (global::Config.game_loaded) {
           _traitsLoaded = true;
           AutoLoad(Traits.AutoloadTraits, () => CustomActorTraitsManager.LoadTraits());
-        }
-      }
-
-      if (!_gameConfigDataSent && !_networkingThread.IsAlive && _counter++ == 0) {
-        if (global::Config.game_loaded) {
-          if (_attempts++ > 30) _gameConfigDataSent = true;
-          if (_attempts == 1) Debug.Log("Sending game version to server...");
-          string id = GetId();
-          _networkingThread = new Thread(() => {
-            try {
-              _gameConfigDataSent = id == "-1" || Networking.SendGameVersionData(id);
-              if (_gameConfigDataSent) {
-                Debug.Log("Finished sending game version to server!");
-              }
-            } catch (Exception e) {
-              Debug.LogError("Error sending game version to server, trying again soon!");
-              Debug.LogError(e);
-            }
-          }) {
-            IsBackground = true
-          };
-          _networkingThread.Start();
         }
       }
 
