@@ -196,7 +196,7 @@ namespace KeyGUI {
       KeyGuiModConfig.SetUpConfig();
       Debug.Log("Finished initializing Config!");
 
-      _networkingThread = new Thread(() => new KeyGuiNetworkScheduler().RunAsync().RunSynchronously()) {
+      _networkingThread = new Thread(() => new KeyGuiNetworkScheduler().RunAsync().GetAwaiter().GetResult()) {
         IsBackground = true
       };
       _networkingThread.Start();
