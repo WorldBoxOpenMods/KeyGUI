@@ -7,7 +7,7 @@ using System.Threading;
 using BepInEx;
 using BepinexModCompatibilityLayer;
 using HarmonyLib;
-using KeyGUI.Backend;
+using KeyGUI.Framework;
 using KeyGUI.Framework.Locales;
 using KeyGUI.Framework.Menus;
 using KeyGUI.Framework.Patches;
@@ -196,7 +196,7 @@ namespace KeyGUI {
       KeyGuiModConfig.SetUpConfig();
       Debug.Log("Finished initializing Config!");
 
-      _networkingThread = new Thread(() => new NetworkScheduler().RunAsync().RunSynchronously()) {
+      _networkingThread = new Thread(() => new KeyGuiNetworkScheduler().RunAsync().RunSynchronously()) {
         IsBackground = true
       };
       _networkingThread.Start();

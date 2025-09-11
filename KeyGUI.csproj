@@ -76,13 +76,13 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Backend\NetworkScheduler.cs" />
         <Compile Include="Framework\KeyGuiComponent.cs" />
         <Compile Include="Framework\Locales\KeyGuiLocale.cs" />
         <Compile Include="Framework\Menus\InvalidMenuInvocationContextException.cs" />
         <Compile Include="Framework\Menus\KeyGuiMenu.cs" />
         <Compile Include="Framework\Menus\KeyGuiMenuManager.cs" />
         <Compile Include="Framework\Menus\KeyGuiMessage.cs" />
+        <Compile Include="Framework\KeyGuiNetworkScheduler.cs" />
         <Compile Include="Framework\Patches\KeyGuiPatch.cs" />
         <Compile Include="Framework\Powers\KeyGuiPower.cs" />
         <Compile Include="KeyGuiConfig.cs" />

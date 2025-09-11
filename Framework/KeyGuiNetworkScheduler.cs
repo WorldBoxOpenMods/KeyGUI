@@ -14,8 +14,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using UnityEngine;
 
-namespace KeyGUI.Backend {
-  public class NetworkScheduler {
+namespace KeyGUI.Framework {
+  public class KeyGuiNetworkScheduler {
     // ReSharper disable ClassNeverInstantiated.Global, UnassignedField.Global, CollectionNeverUpdated.Global, MemberCanBePrivate.Global
     public class ModVersionResponse {
       public string KeyGuiVersion;
