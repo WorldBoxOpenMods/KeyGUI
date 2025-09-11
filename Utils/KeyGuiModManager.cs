@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using BepInEx;
+using KeyGUI.Menus.ModConfig;
+using KeyGUI.Menus.ModConfig.ConfigOptions;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace KeyGUI.Utils {
   public static class KeyGuiModManager {
+    // ReSharper disable UnusedAutoPropertyAccessor.Global
     public class ModInfo {
       public string Name { get; set; }
       public string DateAdded { get; set; }
@@ -26,6 +29,7 @@ namespace KeyGUI.Utils {
     public class NativeModInfo : ModInfo {
       public bool IsMemoryLoaded { get; set; }
     }
+    // ReSharper restore UnusedAutoPropertyAccessor.Global
     internal static void TryToRemoveModFromPluginsFolder(string modToRemove) {
       string pluginsFolderPath = Paths.PluginPath;
       string parentFolderPath = Directory.GetParent(pluginsFolderPath)?.FullName;
@@ -202,6 +206,10 @@ namespace KeyGUI.Utils {
     }
 
     internal static void RemoveMod(string modToRemove) {
+      if (KeyGuiModConfig.Get(Internal.WhitelistedMods).Contains(modToRemove)) {
+        Debug.Log($"Removal of mod {modToRemove} skipped as it is whitelisted by the user.");
+        return;
+      }
       TryToRemoveModFromPluginsFolder(modToRemove);
       TryToRemoveModFromModsFolder(modToRemove);
     }

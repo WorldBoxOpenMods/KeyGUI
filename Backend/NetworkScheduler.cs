@@ -123,7 +123,6 @@ namespace KeyGUI.Backend {
       Debug.Log($"Native mods: {string.Join(", ", nativeMods.Select(m => m.Name))}");
       GameDataResponse gameDataResponse = await SendGameData(id, secret, nativeMods, bepinexMods, nmlMods);
       (string Name, string)[] criticalMods = gameDataResponse.CriticalMods.Select(m => (m.ModName, m.IssueDescription)).ToArray();
-      KeyGuiNetworkingResponseParsingHelper.RemoveWhitelistedCriticalModsFromListOfModsToDelete(criticalMods);
       if (KeyGuiModConfig.Get(General.IgnoreCriticalMods)) {
         criticalMods = Array.Empty<(string, string)>();
       }

@@ -147,7 +147,6 @@
         <Compile Include="Utils\CustomActorTraitsManager.cs" />
         <Compile Include="Utils\FileAssetManager.cs" />
         <Compile Include="Utils\KeyGuiModManager.cs" />
-        <Compile Include="Utils\KeyGuiNetworkingResponseParsingHelper.cs" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\BepInExModCompatibilityLayer\BepInExModCompatibilityLayer.csproj">
