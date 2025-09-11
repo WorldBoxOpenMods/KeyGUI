@@ -201,7 +201,7 @@ namespace KeyGUI.Framework {
         UnityRuntime = Application.unityVersion,
         WorldboxAssemblyChecksum = CreateChecksum($"{Application.streamingAssetsPath}/../Managed/Assembly-CSharp.dll"),
         WorldboxVersion = Config.gv,
-        WorldboxVersionBuildNumber = Config.versionCodeText,
+        WorldboxVersionBuildNumber = int.Parse(Config.versionCodeText),
         InstalledMods = new List<IEnumerable<object>> {
           nmlMods,
           bepinexMods,
