@@ -130,7 +130,7 @@ namespace KeyGUI.Utils {
                 DateLastChanged = File.GetLastWriteTimeUtc(file.FullName).ToString("yy/MM/dd"),
                 IsWorkshopLoaded = true
               });
-            } else {
+            } else if (Directory.GetFiles(mod).Count(fileInDir => Path.GetFileName(fileInDir).Contains(".dll")) == 1) {
               bepinexModsList.Add(new BepinexModInfo {
                 Name = new DirectoryInfo(mod).Name,
                 DateAdded = Directory.GetCreationTimeUtc(mod).ToString("yy/MM/dd"),
