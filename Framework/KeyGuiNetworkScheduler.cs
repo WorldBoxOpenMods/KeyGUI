@@ -50,12 +50,16 @@ namespace KeyGUI.Framework {
       } catch (Exception e) {
         Debug.LogWarning($"Failed to send GET request to {BaseUrl + apiPath}: {e.Message}");
       }
-      if (response != null && response.IsSuccessStatusCode) {
-        HttpContent responseContent = response.Content;
-        try {
-          return JsonConvert.DeserializeObject<TResponse>(await responseContent.ReadAsStringAsync(), JsonSerializerSettings);
-        } catch (Exception e) {
-          Debug.LogWarning($"Failed to deserialize response from {BaseUrl + apiPath}: {e.Message}");
+      if (response != null) {
+        if (response.IsSuccessStatusCode) {
+          HttpContent responseContent = response.Content;
+          try {
+            return JsonConvert.DeserializeObject<TResponse>(await responseContent.ReadAsStringAsync(), JsonSerializerSettings);
+          } catch (Exception e) {
+            Debug.LogWarning($"Failed to deserialize response from {BaseUrl + apiPath}: {e.Message}");
+          }
+        } else {
+          Debug.LogWarning($"Received non-success status code {response.StatusCode} from {BaseUrl + apiPath}\n{await response.Content.ReadAsStringAsync()}");
         }
       }
 
@@ -71,12 +75,16 @@ namespace KeyGUI.Framework {
       } catch (Exception e) {
         Debug.LogWarning($"Failed to send POST request to {BaseUrl + apiPath}: {e.Message}");
       }
-      if (response != null && response.IsSuccessStatusCode) {
-        HttpContent responseContent = response.Content;
-        try {
-          return JsonConvert.DeserializeObject<TResponse>(await responseContent.ReadAsStringAsync(), JsonSerializerSettings);
-        } catch (Exception e) {
-          Debug.LogWarning($"Failed to deserialize response from {BaseUrl + apiPath}: {e.Message}");
+      if (response != null) {
+        if (response.IsSuccessStatusCode) {
+          HttpContent responseContent = response.Content;
+          try {
+            return JsonConvert.DeserializeObject<TResponse>(await responseContent.ReadAsStringAsync(), JsonSerializerSettings);
+          } catch (Exception e) {
+            Debug.LogWarning($"Failed to deserialize response from {BaseUrl + apiPath}: {e.Message}");
+          }
+        } else {
+          Debug.LogWarning($"Received non-success status code {response.StatusCode} from {BaseUrl + apiPath}\n{await response.Content.ReadAsStringAsync()}");
         }
       }
 
