@@ -30,10 +30,24 @@ namespace KeyGUI.Utils {
       public bool IsMemoryLoaded { get; set; }
     }
     // ReSharper restore UnusedAutoPropertyAccessor.Global
+
+    private static string NmlModsFolderPath {
+      get {
+        switch (Application.platform) {
+          case RuntimePlatform.LinuxPlayer:
+            return $"{Paths.PluginPath}/../../../Mods";
+          default:
+            return $"{Paths.PluginPath}/../../Mods";
+        }
+      }
+    }
+    private static string BepinexModsFolderPath => Paths.PluginPath;
+    private static string NativeModsFolderPath => $"{Application.streamingAssetsPath}/Mods";
+    private static string WorkshopFolderPath => $"{Paths.PluginPath}/../../../../workshop/content/1206560";
+
     internal static void TryToRemoveModFromPluginsFolder(string modToRemove) {
-      string pluginsFolderPath = Paths.PluginPath;
-      string parentFolderPath = Directory.GetParent(pluginsFolderPath)?.FullName;
-      foreach (string modPath in Directory.GetFiles(pluginsFolderPath)) {
+      string parentFolderPath = Directory.GetParent(BepinexModsFolderPath)?.FullName;
+      foreach (string modPath in Directory.GetFiles(BepinexModsFolderPath)) {
         string mod = Path.GetFileName(modPath);
         if (mod.ToLowerInvariant().Split(".".ToCharArray())[0].Trim().Equals(modToRemove.ToLowerInvariant().Trim())) {
           if (parentFolderPath != null) {
@@ -46,17 +60,8 @@ namespace KeyGUI.Utils {
     }
 
     internal static void TryToRemoveModFromModsFolder(string modToRemove) {
-      string modsFolderPath;
-      switch (Application.platform) {
-        case RuntimePlatform.LinuxPlayer:
-          modsFolderPath = Paths.PluginPath + "/../../../Mods";
-          break;
-        default:
-          modsFolderPath = Paths.PluginPath + "/../../Mods";
-          break;
-      }
       string parentFolderPath = Paths.PluginPath + "/../..";
-      foreach (string modPath in Directory.GetFiles(modsFolderPath)) {
+      foreach (string modPath in Directory.GetFiles(NmlModsFolderPath)) {
         string mod = Path.GetFileName(modPath);
         if (mod.EndsWith(".zip") || mod.EndsWith(".mod")) {
           if (mod.ToLowerInvariant().Split(".".ToCharArray())[0].Split("_".ToCharArray())[0].Trim().Equals(modToRemove.ToLowerInvariant().Trim())) {
@@ -65,7 +70,7 @@ namespace KeyGUI.Utils {
         }
       }
 
-      foreach (string modPath in Directory.GetDirectories(modsFolderPath)) {
+      foreach (string modPath in Directory.GetDirectories(NmlModsFolderPath)) {
         string mod = new DirectoryInfo(modPath).Name;
         if (mod.ToLowerInvariant().Split("_".ToCharArray())[0].Trim().Equals(modToRemove.ToLowerInvariant().Trim())) {
           new DirectoryInfo(modPath).MoveTo(parentFolderPath + "/" + mod);
@@ -77,17 +82,8 @@ namespace KeyGUI.Utils {
       List<NativeModInfo> nativeModsList = new List<NativeModInfo>();
       List<BepinexModInfo> bepinexModsList = new List<BepinexModInfo>();
       List<NmlModInfo> nmlModsList = new List<NmlModInfo>();
-      string nmlModsFolderPath;
-      switch (Application.platform) {
-        case RuntimePlatform.LinuxPlayer:
-          nmlModsFolderPath = $"{Paths.PluginPath}/../../../Mods";
-          break;
-        default:
-          nmlModsFolderPath = $"{Paths.PluginPath}/../../Mods";
-          break;
-      }
-      if (Directory.Exists(nmlModsFolderPath)) {
-        foreach (string path in Directory.GetFiles(nmlModsFolderPath)) {
+      if (Directory.Exists(NmlModsFolderPath)) {
+        foreach (string path in Directory.GetFiles(NmlModsFolderPath)) {
           if (path.Split('.').Last().Equals("zip")) {
             string newPath = "";
             for (int i = 0; i < path.Split('.').Length - 1; ++i) {
@@ -108,7 +104,7 @@ namespace KeyGUI.Utils {
             }
           }
         }
-        foreach (string mod in Directory.GetDirectories(nmlModsFolderPath).Where(Directory.Exists)) {
+        foreach (string mod in Directory.GetDirectories(NmlModsFolderPath).Where(Directory.Exists)) {
           nmlModsList.AddRange(new DirectoryInfo(mod).GetFiles().
             Where(file => file.Name == "mod.json").
             Select(file => new NmlModInfo {
@@ -121,9 +117,8 @@ namespace KeyGUI.Utils {
               IsWorkshopLoaded = false
             }));
         }
-        string workshopFolderPath = Paths.PluginPath + "/../../../../workshop/content/1206560";
-        if (Directory.Exists(workshopFolderPath)) {
-          foreach (string mod in Directory.GetDirectories(workshopFolderPath).Where(Directory.Exists)) {
+        if (Directory.Exists(WorkshopFolderPath)) {
+          foreach (string mod in Directory.GetDirectories(WorkshopFolderPath).Where(Directory.Exists)) {
             FileInfo file = new DirectoryInfo(mod).GetFiles().FirstOrDefault(f => f.Name == "mod.json");
             if (file != null) {
               nmlModsList.Add(new NmlModInfo {
@@ -150,9 +145,8 @@ namespace KeyGUI.Utils {
         }
       }
 
-      string bepInExModsFolderPath = Paths.PluginPath;
-      if (Directory.Exists(bepInExModsFolderPath)) {
-        bepinexModsList.AddRange(Directory.GetFiles(bepInExModsFolderPath).
+      if (Directory.Exists(BepinexModsFolderPath)) {
+        bepinexModsList.AddRange(Directory.GetFiles(BepinexModsFolderPath).
           Where(mod => Path.GetFileName(mod).Contains(".dll")).
           Select(mod => new BepinexModInfo {
             Name = Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next),
@@ -182,14 +176,14 @@ namespace KeyGUI.Utils {
             });
           }
         }
-        foreach (string dir in Directory.GetDirectories(bepInExModsFolderPath)) {
+
+        foreach (string dir in Directory.GetDirectories(BepinexModsFolderPath)) {
           CheckForBepinexModules(dir);
         }
       }
 
-      string nativeModsFolderPath = Application.streamingAssetsPath + "/Mods";
-      if (Directory.Exists(nativeModsFolderPath)) {
-        nativeModsList.AddRange(Directory.GetFiles(nativeModsFolderPath).
+      if (Directory.Exists(NativeModsFolderPath)) {
+        nativeModsList.AddRange(Directory.GetFiles(NativeModsFolderPath).
           Where(mod => Path.GetFileName(mod).Contains(".dll")).
           Select(mod => new NativeModInfo {
             Name = Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next).Replace("_memload", ""),
