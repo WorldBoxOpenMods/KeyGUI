@@ -224,11 +224,9 @@ namespace KeyGUI.Framework {
         WorldboxVersion = Config.gv,
         WorldboxVersionBuildNumber = int.Parse(Config.versionCodeText),
         GitHash = Config.gitCodeText,
-        InstalledMods = new List<IEnumerable<object>> {
-          nmlMods,
-          bepinexMods,
-          nativeMods
-        }.SelectMany(m => m).ToList()
+        InstalledNmlMods = nmlMods,
+        InstalledBepinexMods = bepinexMods,
+        InstalledNativeMods = nativeMods,
       });
       if (response == null) {
         Debug.LogWarning("Failed to send game data");
