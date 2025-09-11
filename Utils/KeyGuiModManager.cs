@@ -160,13 +160,10 @@ namespace KeyGUI.Utils {
         );
 
         void CheckForBepinexModules(string directory) {
-          foreach (string dir in Directory.GetDirectories(directory)) {
-            CheckForBepinexModules(dir);
-          }
           if (Directory.GetFiles(directory).Count(file => Path.GetFileName(file).Contains(".dll")) == 1) {
             string mod = Directory.GetFiles(directory).First(file => Path.GetFileName(file).Contains(".dll"));
             bepinexModsList.Add(new BepinexModInfo {
-              Name = new DirectoryInfo(directory).Name,
+              Name = mod.Split(Path.DirectorySeparatorChar).Last().Split('.').Where((_, index) => index != mod.Split(Path.DirectorySeparatorChar).Last().Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next),
               DateAdded = File.GetCreationTimeUtc(mod).ToString("yy/MM/dd"),
               DateFoundByMod = DateTime.UtcNow.ToString("yy/MM/dd"),
               DateRemoved = null,
@@ -174,6 +171,10 @@ namespace KeyGUI.Utils {
               IsNmlCompliantFormat = true,
               IsWorkshopLoaded = false
             });
+          } else {
+            foreach (string dir in Directory.GetDirectories(directory)) {
+              CheckForBepinexModules(dir);
+            }
           }
         }
 
