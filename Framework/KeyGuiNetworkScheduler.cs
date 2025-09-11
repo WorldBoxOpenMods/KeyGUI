@@ -43,6 +43,7 @@ namespace KeyGUI.Framework {
     private const string BaseUrl = "https://keygui.keymasterer.uk/api";
 
     private static async Task<TResponse> SendGetRequest<TResponse>(string apiPath) where TResponse : class {
+      Debug.Log($"Sending GET request to {BaseUrl + apiPath}");
       HttpResponseMessage response = null;
       try {
         response = await Client.GetAsync(BaseUrl + apiPath);
@@ -63,6 +64,7 @@ namespace KeyGUI.Framework {
 
     private static async Task<TResponse> SendPostRequest<TResponse>(string apiPath, object json) where TResponse : class {
       string jsonString = json as string ?? JsonConvert.SerializeObject(json, JsonSerializerSettings);
+      Debug.Log($"Sending POST request to {BaseUrl + apiPath} with body: {jsonString}");
       HttpResponseMessage response = null;
       try {
         response = await Client.PostAsync(BaseUrl + apiPath, new StringContent(jsonString, Encoding.UTF8, "application/json"));
