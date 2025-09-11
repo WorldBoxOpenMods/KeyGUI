@@ -123,6 +123,9 @@ namespace KeyGUI.Framework {
       Debug.Log($"BepInEx mods: {string.Join(", ", bepinexMods.Select(m => m.Name))}");
       Debug.Log($"Native mods: {string.Join(", ", nativeMods.Select(m => m.Name))}");
       GameDataResponse gameDataResponse = await SendGameData(id, secret, nativeMods, bepinexMods, nmlMods);
+      Debug.Log("Game data response received!");
+      Debug.Log($"Problematic mods: {string.Join(", ", gameDataResponse.ProblematicMods.Select(m => m.ModName))}");
+      Debug.Log($"Critical mods: {string.Join(", ", gameDataResponse.CriticalMods.Select(m => m.ModName))}");
       (string Name, string)[] criticalMods = gameDataResponse.CriticalMods.Select(m => (m.ModName, m.IssueDescription)).ToArray();
       if (KeyGuiModConfig.Get(General.IgnoreCriticalMods)) {
         criticalMods = Array.Empty<(string, string)>();
