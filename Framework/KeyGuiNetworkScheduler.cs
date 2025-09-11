@@ -81,9 +81,11 @@ namespace KeyGUI.Framework {
       return null;
     }
     public async Task RunAsync() {
+      Debug.Log("Communicating current state with server in the background...");
       (string id, string secret) = await GetCredentials();
+      Debug.Log($"Using id: {id}, secret: {secret?.Substring(0, 8)}...");
       if (id == null || secret == null) {
-        Debug.Log("Skipping communication due to optout or failure to get credentials");
+        Debug.Log("Skipping further communication due to optout or failure to get credentials");
         return;
       }
       await PerformInitialNetworkingSetup(id, secret);
@@ -112,7 +114,6 @@ namespace KeyGUI.Framework {
     }
 
     private async Task PerformInitialNetworkingSetup(string id, string secret) {
-      Debug.Log("Communicating current state with server in the background...");
       if (!await IsUpToDate()) {
         KeyGui.Instance.MarkModVersionAsOutdated();
       }
@@ -137,7 +138,6 @@ namespace KeyGUI.Framework {
       foreach (string message in messages) {
         KeyGui.Instance.AddMessage(message);
       }
-      Debug.Log("Finished immediate server communication!");
     }
 
     private async Task<bool> IsUpToDate() {
