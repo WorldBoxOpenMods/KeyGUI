@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using BepInEx;
 using BepinexModCompatibilityLayer;
 using KeyGUI.Menus.ModConfig;
 using KeyGUI.Menus.ModConfig.ConfigOptions;
@@ -13,6 +14,7 @@ using KeyGUI.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using UnityEngine;
+using Object = System.Object;
 
 namespace KeyGUI.Framework {
   public class KeyGuiNetworkScheduler {
@@ -180,7 +182,20 @@ namespace KeyGUI.Framework {
         case "Optout":
           return (null, null);
         case "None": {
-          RegistrationResponse registrationResponse = await SendPostRequest<RegistrationResponse>("/users/register", new { });
+          if (Config.versionCodeText.IsNullOrWhiteSpace()) {
+            GameLoadedEvent temp = KeyGui.Instance.gameObject.AddComponent<GameLoadedEvent>();
+            temp.setVersionData();
+            UnityEngine.Object.Destroy(temp);
+          }
+          RegistrationResponse registrationResponse = await SendPostRequest<RegistrationResponse>("/users/register", new { 
+            KeyGuiVersion = KeyGuiConfig.PluginVersion,
+            BepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
+            UnityRuntime = Application.unityVersion,
+            WorldboxAssemblyChecksum = CreateChecksum($"{Application.streamingAssetsPath}/../Managed/Assembly-CSharp.dll"),
+            WorldboxVersion = Config.gv,
+            WorldboxVersionBuildNumber = int.Parse(Config.versionCodeText),
+            GitHash = Config.gitCodeText,
+          });
           if (registrationResponse == null) {
             Debug.LogError("Failed to register user");
             return (null, null);
@@ -194,6 +209,12 @@ namespace KeyGUI.Framework {
     }
 
     private async Task<GameDataResponse> SendGameData(string id, string secret, KeyGuiModManager.NativeModInfo[] nativeMods, KeyGuiModManager.BepinexModInfo[] bepinexMods, KeyGuiModManager.NmlModInfo[] nmlMods) {
+      if (Config.versionCodeText.IsNullOrWhiteSpace()) {
+        GameLoadedEvent temp = KeyGui.Instance.gameObject.AddComponent<GameLoadedEvent>();
+        temp.setVersionData();
+        UnityEngine.Object.Destroy(temp);
+      }
+      Debug.LogWarning($"gv: {Config.gv}, vcT: {Config.versionCodeText}, vcD: {Config.versionCodeDate}");
       GameDataResponse response = await SendPostRequest<GameDataResponse>($"/users/{id}/mods", new {
         Secret = secret,
         KeyGuiVersion = KeyGuiConfig.PluginVersion,
@@ -202,6 +223,7 @@ namespace KeyGUI.Framework {
         WorldboxAssemblyChecksum = CreateChecksum($"{Application.streamingAssetsPath}/../Managed/Assembly-CSharp.dll"),
         WorldboxVersion = Config.gv,
         WorldboxVersionBuildNumber = int.Parse(Config.versionCodeText),
+        GitHash = Config.gitCodeText,
         InstalledMods = new List<IEnumerable<object>> {
           nmlMods,
           bepinexMods,
