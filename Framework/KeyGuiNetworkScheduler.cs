@@ -185,18 +185,14 @@ namespace KeyGUI.Framework {
         case "Optout":
           return (null, null);
         case "None": {
-          if (Config.versionCodeText.IsNullOrWhiteSpace()) {
-            GameLoadedEvent temp = KeyGui.Instance.gameObject.AddComponent<GameLoadedEvent>();
-            temp.setVersionData();
-            UnityEngine.Object.Destroy(temp);
-          }
+          TryEnsureGameInfoIsSet();
           RegistrationResponse registrationResponse = await SendPostRequest<RegistrationResponse>("/users/register", new { 
             KeyGuiVersion = KeyGuiConfig.PluginVersion,
             BepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
             UnityRuntime = Application.unityVersion,
             WorldboxAssemblyChecksum = CreateChecksum($"{Application.streamingAssetsPath}/../Managed/Assembly-CSharp.dll"),
             WorldboxVersion = Config.gv,
-            WorldboxVersionBuildNumber = int.Parse(Config.versionCodeText),
+            WorldboxVersionBuildNumber = int.TryParse(Config.versionCodeText, out int buildNumber) ? buildNumber : -1,
             GitHash = Config.gitCodeText,
           });
           if (registrationResponse == null) {
@@ -212,11 +208,7 @@ namespace KeyGUI.Framework {
     }
 
     private async Task<GameDataResponse> SendGameData(string id, string secret, KeyGuiModManager.NativeModInfo[] nativeMods, KeyGuiModManager.BepinexModInfo[] bepinexMods, KeyGuiModManager.NmlModInfo[] nmlMods) {
-      if (Config.versionCodeText.IsNullOrWhiteSpace()) {
-        GameLoadedEvent temp = KeyGui.Instance.gameObject.AddComponent<GameLoadedEvent>();
-        temp.setVersionData();
-        UnityEngine.Object.Destroy(temp);
-      }
+      TryEnsureGameInfoIsSet();
       GameDataResponse response = await SendPostRequest<GameDataResponse>($"/users/{id}/mods", new {
         Secret = secret,
         KeyGuiVersion = KeyGuiConfig.PluginVersion,
@@ -224,7 +216,7 @@ namespace KeyGUI.Framework {
         UnityRuntime = Application.unityVersion,
         WorldboxAssemblyChecksum = CreateChecksum($"{Application.streamingAssetsPath}/../Managed/Assembly-CSharp.dll"),
         WorldboxVersion = Config.gv,
-        WorldboxVersionBuildNumber = int.Parse(Config.versionCodeText),
+        WorldboxVersionBuildNumber = int.TryParse(Config.versionCodeText, out int buildNumber) ? buildNumber : -1,
         GitHash = Config.gitCodeText,
         InstalledNmlMods = nmlMods,
         InstalledBepinexMods = bepinexMods,
@@ -243,6 +235,19 @@ namespace KeyGUI.Framework {
     private static string CreateChecksum(string filePath) {
       using (SHA256 sha256 = SHA256.Create()) {
         using (FileStream fileStream = File.OpenRead(filePath)) return BitConverter.ToString(sha256.ComputeHash(fileStream)).Replace("-", "").ToLowerInvariant();
+      }
+    }
+
+    private static bool TryEnsureGameInfoIsSet() {
+      if (!Config.versionCodeText.IsNullOrWhiteSpace()) return true;
+      try {
+        GameLoadedEvent temp = KeyGui.Instance.gameObject.AddComponent<GameLoadedEvent>();
+        temp.setVersionData();
+        UnityEngine.Object.Destroy(temp);
+        return !Config.versionCodeText.IsNullOrWhiteSpace();
+      } catch (Exception e) {
+        Debug.LogWarning($"Failed to load in game info: {e.Message}");
+        return false;
       }
     }
   }
