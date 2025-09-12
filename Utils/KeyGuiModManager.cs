@@ -41,6 +41,7 @@ namespace KeyGUI.Utils {
         }
       }
     }
+
     private static string BepinexModsFolderPath => Paths.PluginPath;
     private static string NativeModsFolderPath => $"{Application.streamingAssetsPath}/Mods";
     private static string WorkshopFolderPath => $"{Paths.PluginPath}/../../../../workshop/content/1206560";
@@ -82,8 +83,18 @@ namespace KeyGUI.Utils {
       List<NativeModInfo> nativeModsList = new List<NativeModInfo>();
       List<BepinexModInfo> bepinexModsList = new List<BepinexModInfo>();
       List<NmlModInfo> nmlModsList = new List<NmlModInfo>();
+#if DEBUG
+      Debug.Log($"Looking for mods in {NmlModsFolderPath}, {BepinexModsFolderPath} and {NativeModsFolderPath}.");
+      Debug.Log($"NML Mods Folder Exists: {Directory.Exists(NmlModsFolderPath)}");
+#endif
       if (Directory.Exists(NmlModsFolderPath)) {
+#if DEBUG
+        Debug.Log("NML Mods Folder Found, looking for mods...");
+#endif
         foreach (string path in Directory.GetFiles(NmlModsFolderPath)) {
+#if DEBUG
+          Debug.Log($"Found file {path} in NML Mods Folder.");
+#endif
           if (path.Split('.').Last().Equals("zip")) {
             string newPath = "";
             for (int i = 0; i < path.Split('.').Length - 1; ++i) {
@@ -92,6 +103,9 @@ namespace KeyGUI.Utils {
                 newPath += ".";
               }
             }
+#if DEBUG
+            Debug.Log($"Extracting zip mod {path} to {newPath}.");
+#endif
 
             try {
               System.IO.Compression.ZipFile.ExtractToDirectory(path, newPath);
@@ -99,12 +113,19 @@ namespace KeyGUI.Utils {
               continue;
             }
 
-            if (Directory.Exists(newPath)) {
-              Directory.Delete(newPath, true);
+            if (File.Exists(path)) {
+              File.Delete(path);
             }
           }
         }
+#if DEBUG
+        Debug.Log(string.Join(", ", Directory.GetDirectories(NmlModsFolderPath)));
+        Debug.Log(string.Join(", ", Directory.GetDirectories(NmlModsFolderPath).Where(Directory.Exists)));
+#endif
         foreach (string mod in Directory.GetDirectories(NmlModsFolderPath).Where(Directory.Exists)) {
+#if DEBUG
+          Debug.Log($"Checking for mod.json in {mod}");
+#endif
           nmlModsList.AddRange(new DirectoryInfo(mod).GetFiles().
             Where(file => file.Name == "mod.json").
             Select(file => new NmlModInfo {
