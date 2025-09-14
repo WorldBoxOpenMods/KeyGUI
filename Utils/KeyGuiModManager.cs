@@ -13,10 +13,10 @@ namespace KeyGUI.Utils {
     // ReSharper disable UnusedAutoPropertyAccessor.Global
     public class ModInfo {
       public string Name { get; set; }
-      public string DateAdded { get; set; }
-      public string DateFoundByMod { get; set; }
-      public string DateRemoved { get; set; }
-      public string DateLastChanged { get; set; }
+      public DateTime DateAdded { get; set; }
+      public DateTime DateFoundByMod { get; set; }
+      public DateTime? DateRemoved { get; set; }
+      public DateTime DateLastChanged { get; set; }
     }
     public class NmlModInfo : ModInfo {
       public string Json { get; set; }
@@ -131,10 +131,10 @@ namespace KeyGUI.Utils {
             Select(file => new NmlModInfo {
               Name = JObject.Parse(File.ReadAllText(file.FullName))["name"]?.ToString() ?? "Unknown",
               Json = File.ReadAllText(file.FullName),
-              DateAdded = File.GetCreationTimeUtc(file.FullName).ToString("yy/MM/dd"),
-              DateFoundByMod = File.GetLastAccessTimeUtc(file.FullName).ToString("yy/MM/dd"),
+              DateAdded = File.GetCreationTimeUtc(file.FullName),
+              DateFoundByMod = DateTime.UtcNow,
               DateRemoved = null,
-              DateLastChanged = File.GetLastWriteTimeUtc(file.FullName).ToString("yy/MM/dd"),
+              DateLastChanged = File.GetLastWriteTimeUtc(file.FullName),
               IsWorkshopLoaded = false
             }));
         }
@@ -145,19 +145,19 @@ namespace KeyGUI.Utils {
               nmlModsList.Add(new NmlModInfo {
                 Name = JObject.Parse(File.ReadAllText(file.FullName))["name"]?.ToString() ?? "Unknown",
                 Json = File.ReadAllText(file.FullName),
-                DateAdded = File.GetCreationTimeUtc(file.FullName).ToString("yy/MM/dd"),
-                DateFoundByMod = File.GetLastAccessTimeUtc(file.FullName).ToString("yy/MM/dd"),
+                DateAdded = File.GetCreationTimeUtc(file.FullName),
+                DateFoundByMod = DateTime.UtcNow,
                 DateRemoved = null,
-                DateLastChanged = File.GetLastWriteTimeUtc(file.FullName).ToString("yy/MM/dd"),
+                DateLastChanged = File.GetLastWriteTimeUtc(file.FullName),
                 IsWorkshopLoaded = true
               });
             } else if (Directory.GetFiles(mod).Count(fileInDir => Path.GetFileName(fileInDir).Contains(".dll")) == 1) {
               bepinexModsList.Add(new BepinexModInfo {
                 Name = new DirectoryInfo(mod).Name,
-                DateAdded = Directory.GetCreationTimeUtc(mod).ToString("yy/MM/dd"),
-                DateFoundByMod = Directory.GetLastAccessTimeUtc(mod).ToString("yy/MM/dd"),
+                DateAdded = Directory.GetCreationTimeUtc(mod),
+                DateFoundByMod = Directory.GetLastAccessTimeUtc(mod),
                 DateRemoved = null,
-                DateLastChanged = Directory.GetLastWriteTimeUtc(mod).ToString("yy/MM/dd"),
+                DateLastChanged = Directory.GetLastWriteTimeUtc(mod),
                 IsNmlCompliantFormat = true,
                 IsWorkshopLoaded = true
               });
@@ -171,10 +171,10 @@ namespace KeyGUI.Utils {
           Where(mod => Path.GetFileName(mod).Contains(".dll")).
           Select(mod => new BepinexModInfo {
             Name = Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next),
-            DateAdded = File.GetCreationTimeUtc(mod).ToString("yy/MM/dd"),
-            DateFoundByMod = File.GetLastAccessTimeUtc(mod).ToString("yy/MM/dd"),
+            DateAdded = File.GetCreationTimeUtc(mod),
+            DateFoundByMod = DateTime.UtcNow,
             DateRemoved = null,
-            DateLastChanged = File.GetLastWriteTimeUtc(mod).ToString("yy/MM/dd"),
+            DateLastChanged = File.GetLastWriteTimeUtc(mod),
             IsNmlCompliantFormat = false,
             IsWorkshopLoaded = false
           })
@@ -185,10 +185,10 @@ namespace KeyGUI.Utils {
             string mod = Directory.GetFiles(directory).First(file => Path.GetFileName(file).Contains(".dll"));
             bepinexModsList.Add(new BepinexModInfo {
               Name = mod.Split(Path.DirectorySeparatorChar).Last().Split('.').Where((_, index) => index != mod.Split(Path.DirectorySeparatorChar).Last().Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next),
-              DateAdded = File.GetCreationTimeUtc(mod).ToString("yy/MM/dd"),
-              DateFoundByMod = DateTime.UtcNow.ToString("yy/MM/dd"),
+              DateAdded = File.GetCreationTimeUtc(mod),
+              DateFoundByMod = DateTime.UtcNow,
               DateRemoved = null,
-              DateLastChanged = File.GetLastWriteTimeUtc(mod).ToString("yy/MM/dd"),
+              DateLastChanged = File.GetLastWriteTimeUtc(mod),
               IsNmlCompliantFormat = true,
               IsWorkshopLoaded = false
             });
@@ -209,10 +209,10 @@ namespace KeyGUI.Utils {
           Where(mod => Path.GetFileName(mod).Contains(".dll")).
           Select(mod => new NativeModInfo {
             Name = Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next).Replace("_memload", ""),
-            DateAdded = File.GetCreationTimeUtc(mod).ToString("yy/MM/dd"),
-            DateFoundByMod = File.GetLastAccessTimeUtc(mod).ToString("yy/MM/dd"),
+            DateAdded = File.GetCreationTimeUtc(mod),
+            DateFoundByMod = DateTime.UtcNow,
             DateRemoved = null,
-            DateLastChanged = File.GetLastWriteTimeUtc(mod).ToString("yy/MM/dd"),
+            DateLastChanged = File.GetLastWriteTimeUtc(mod),
             IsMemoryLoaded = mod.Contains("_memload")
           })
         );
