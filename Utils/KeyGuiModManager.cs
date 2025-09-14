@@ -13,6 +13,7 @@ namespace KeyGUI.Utils {
     // ReSharper disable UnusedAutoPropertyAccessor.Global
     public class ModInfo {
       public string Name { get; set; }
+      public string Path { get; set; }
       public DateTime DateAdded { get; set; }
       public DateTime DateFoundByMod { get; set; }
       public DateTime? DateRemoved { get; set; }
@@ -130,6 +131,7 @@ namespace KeyGUI.Utils {
             Where(file => file.Name == "mod.json").
             Select(file => new NmlModInfo {
               Name = JObject.Parse(File.ReadAllText(file.FullName))["name"]?.ToString() ?? "Unknown",
+              Path = file.FullName,
               Json = File.ReadAllText(file.FullName),
               DateAdded = File.GetCreationTimeUtc(file.FullName),
               DateFoundByMod = DateTime.UtcNow,
@@ -144,6 +146,7 @@ namespace KeyGUI.Utils {
             if (file != null) {
               nmlModsList.Add(new NmlModInfo {
                 Name = JObject.Parse(File.ReadAllText(file.FullName))["name"]?.ToString() ?? "Unknown",
+                Path = file.FullName,
                 Json = File.ReadAllText(file.FullName),
                 DateAdded = File.GetCreationTimeUtc(file.FullName),
                 DateFoundByMod = DateTime.UtcNow,
@@ -154,6 +157,7 @@ namespace KeyGUI.Utils {
             } else if (Directory.GetFiles(mod).Count(fileInDir => Path.GetFileName(fileInDir).Contains(".dll")) == 1) {
               bepinexModsList.Add(new BepinexModInfo {
                 Name = new DirectoryInfo(mod).Name,
+                Path = mod,
                 DateAdded = Directory.GetCreationTimeUtc(mod),
                 DateFoundByMod = Directory.GetLastAccessTimeUtc(mod),
                 DateRemoved = null,
@@ -171,6 +175,7 @@ namespace KeyGUI.Utils {
           Where(mod => Path.GetFileName(mod).Contains(".dll")).
           Select(mod => new BepinexModInfo {
             Name = Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next),
+            Path = mod,
             DateAdded = File.GetCreationTimeUtc(mod),
             DateFoundByMod = DateTime.UtcNow,
             DateRemoved = null,
@@ -185,6 +190,7 @@ namespace KeyGUI.Utils {
             string mod = Directory.GetFiles(directory).First(file => Path.GetFileName(file).Contains(".dll"));
             bepinexModsList.Add(new BepinexModInfo {
               Name = mod.Split(Path.DirectorySeparatorChar).Last().Split('.').Where((_, index) => index != mod.Split(Path.DirectorySeparatorChar).Last().Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next),
+              Path = mod,
               DateAdded = File.GetCreationTimeUtc(mod),
               DateFoundByMod = DateTime.UtcNow,
               DateRemoved = null,
@@ -209,6 +215,7 @@ namespace KeyGUI.Utils {
           Where(mod => Path.GetFileName(mod).Contains(".dll")).
           Select(mod => new NativeModInfo {
             Name = Path.GetFileName(mod).Split('.').Where((_, index) => index != Path.GetFileName(mod).Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next).Replace("_memload", ""),
+            Path = mod,
             DateAdded = File.GetCreationTimeUtc(mod),
             DateFoundByMod = DateTime.UtcNow,
             DateRemoved = null,
