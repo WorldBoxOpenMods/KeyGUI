@@ -152,9 +152,11 @@ namespace KeyGUI.Framework {
       KeyGui.Instance.SetCriticalMods(criticalMods);
 
       string[] messages = await SendGetRequest<string[]>($"/users/{id}/messages");
-      Debug.Log($"Messages: {string.Join(", ", messages)}");
-      foreach (string message in messages) {
-        KeyGui.Instance.AddMessage(message);
+      if (messages != null) {
+        Debug.Log($"Messages: {string.Join(", ", messages)}");
+        foreach (string message in messages) {
+          KeyGui.Instance.AddMessage(message);
+        }
       }
     }
 
