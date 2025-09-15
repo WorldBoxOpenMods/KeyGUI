@@ -104,6 +104,9 @@ namespace KeyGUI.Utils {
                 newPath += ".";
               }
             }
+            if (Directory.Exists(newPath)) {
+              continue;
+            }
 #if DEBUG
             Debug.Log($"Extracting zip mod {path} to {newPath}.");
 #endif
