@@ -26,6 +26,10 @@ namespace KeyGUI.Framework {
       public string Id;
       public string Secret;
     }
+    public class AuthResponse {
+      public bool FoundUser;
+      public bool SecretMatched;
+    }
     public class ModIssueInfo {
       public string ModName;
       public string IssueDescription;
@@ -189,6 +193,9 @@ namespace KeyGUI.Framework {
         case "None": {
           TryEnsureGameInfoIsSet();
           RegistrationResponse registrationResponse = await SendPostRequest<RegistrationResponse>("/users/register", new { 
+            OldApiId = KeyGuiModConfig.Get(Internal.Id) == "None" ? null : KeyGuiModConfig.Get(Internal.Id),
+            PreviousUserId = false ? "" : null, // the ternary is needed so that a type can be inferred by the anonymous object, removing it causes a compile error
+            PreviousSecret = false ? "" : null, // the ternary is needed so that a type can be inferred by the anonymous object, removing it causes a compile error
             KeyGuiVersion = KeyGuiConfig.PluginVersion,
             BepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
             UnityRuntime = Application.unityVersion,
@@ -204,6 +211,38 @@ namespace KeyGUI.Framework {
           }
           KeyGuiModConfig.Set(Internal.InstallId, registrationResponse.Id);
           KeyGuiModConfig.Set(Internal.Secret, registrationResponse.Secret);
+          break;
+        }
+        default: {
+          AuthResponse authResponse = await SendPostRequest<AuthResponse>($"/users/{KeyGuiModConfig.Get(Internal.InstallId)}/auth", new {
+            Secret = KeyGuiModConfig.Get(Internal.Secret)
+          });
+          if (authResponse == null) {
+            break;
+          }
+          if (!authResponse.FoundUser || !authResponse.SecretMatched) {
+            Debug.LogWarning("Stored credentials are invalid, resetting");
+            TryEnsureGameInfoIsSet();
+            RegistrationResponse registrationResponse = await SendPostRequest<RegistrationResponse>("/users/register", new { 
+              OldApiId = false ? "" : null, // the ternary is needed so that a type can be inferred by the anonymous object, removing it causes a compile error
+              PreviousUserId = KeyGuiModConfig.Get(Internal.InstallId),
+              PreviousSecret = KeyGuiModConfig.Get(Internal.Secret),
+              KeyGuiVersion = KeyGuiConfig.PluginVersion,
+              BepinexModCompatibilityLayerVersion = BepinexModCompatibilityLayerConfig.PluginVersion,
+              UnityRuntime = Application.unityVersion,
+              UnityPlayerType = Application.platform.ToString(),
+              WorldboxAssemblyChecksum = CreateChecksum($"{Application.streamingAssetsPath}/../Managed/Assembly-CSharp.dll"),
+              WorldboxVersion = Config.gv,
+              WorldboxVersionBuildNumber = int.TryParse(Config.versionCodeText, out int buildNumber) ? buildNumber : -1,
+              GitHash = Config.gitCodeText,
+            });
+            if (registrationResponse == null) {
+              Debug.LogError("Failed to register user");
+              return (null, null);
+            }
+            KeyGuiModConfig.Set(Internal.InstallId, registrationResponse.Id);
+            KeyGuiModConfig.Set(Internal.Secret, registrationResponse.Secret);
+          }
           break;
         }
       }
