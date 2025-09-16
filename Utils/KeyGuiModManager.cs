@@ -144,7 +144,7 @@ namespace KeyGUI.Utils {
             }));
         }
         if (Directory.Exists(WorkshopFolderPath)) {
-          foreach (string mod in Directory.GetDirectories(WorkshopFolderPath).Where(Directory.Exists)) {
+          foreach (string mod in Directory.GetDirectories(WorkshopFolderPath).Where(Directory.Exists).Where(m => !m.Contains("3080294469" /* Workshop ID of NML autoupdate system */))) {
             FileInfo file = new DirectoryInfo(mod).GetFiles().FirstOrDefault(f => f.Name == "mod.json");
             if (file != null) {
               nmlModsList.Add(new NmlModInfo {
