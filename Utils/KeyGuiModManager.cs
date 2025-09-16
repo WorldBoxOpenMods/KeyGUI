@@ -159,7 +159,7 @@ namespace KeyGUI.Utils {
               });
             } else if (Directory.GetFiles(mod).Count(fileInDir => Path.GetFileName(fileInDir).Contains(".dll")) == 1) {
               bepinexModsList.Add(new BepinexModInfo {
-                Name = new DirectoryInfo(mod).Name,
+                Name = Directory.GetFiles(mod).First(fileInDir => Path.GetFileName(fileInDir).Contains(".dll")).Split(Path.DirectorySeparatorChar).Last().Split('.').Where((_, index) => index != Directory.GetFiles(mod).First(fileInDir => Path.GetFileName(fileInDir).Contains(".dll")).Split(Path.DirectorySeparatorChar).Last().Split('.').Length - 1 || index == 0).Append("").Aggregate((current, next) => current + (next != "" ? "." : "") + next),
                 Path = mod,
                 DateAdded = Directory.GetCreationTimeUtc(mod),
                 DateFoundByMod = Directory.GetLastAccessTimeUtc(mod),
