@@ -5,7 +5,7 @@
     "StatsSubmenuText": "种族属性",
     "DestructionSubmenuText": "毁灭工具",
     "CleansingSubmenuText": "清除污秽",
-    "CulturesSubmenuText": "文明功能",
+    "CulturesSubmenuText": "文化功能",
     "PlotsSubmenuText": "计划列表",
     "TraitsSubmenuText": "创建特质",
     "ItemsSubmenuText": "编辑装备",
@@ -108,28 +108,28 @@
       "BiomeRandomizationDisableBiomeButton": "禁用 {0} 群系"
     },
     "Cultures": {
-      "TraitSelectionSubmenuName": "Culture Trait Selection",
-      "DeleteOneCultureButton": "清除一个文明",
-      "DeleteEveryCultureButton": "清除所有文明",
-      "ResetOneCultureButton": "重置一个文明",
-      "ResetEveryCultureButton": "重置所有文明",
-      "ResetTechOfOneCultureButton": "重置一个文明的知识",
-      "ResetTechOfEveryCultureButton": "重置所有文明的知识",
+      "TraitSelectionSubmenuName": "文化特质选择",
+      "DeleteOneCultureButton": "清除一个文化",
+      "DeleteEveryCultureButton": "清除所有文化",
+      "ResetOneCultureButton": "重置一个文化",
+      "ResetEveryCultureButton": "重置所有文化",
+      "ResetTechOfOneCultureButton": "重置一个文化的知识",
+      "ResetTechOfEveryCultureButton": "重置所有文化的知识",
       "KnowledgeGainIncreaseDecreaseAmountLabel": "知识获取速度:",
       "InvalidKnowledgeGainIncreaseDecreaseAmountEnteredError": "请输入有效数值!",
-      "IncreaseKnowledgeGainOfOneCultureButton": "加快一个文明的知识获取速度",
-      "IncreaseKnowledgeGainOfEveryCultureButton": "加快所有文明的知识获取速度",
-      "DecreaseKnowledgeGainOfOneCultureButton": "减缓一个文明的知识获取速度",
-      "DecreaseKnowledgeGainOfEveryCultureButton": "减缓所有文明的知识获取速度",
-      "ForceExistingCultureUponSpecificCityButton": "将文明强加于选定城市",
-      "CreateNewCultureAtSpecificCityButton": "让选定城市创建新文明",
-      "SelectCultureListHeader": "Select Culture:",
+      "IncreaseKnowledgeGainOfOneCultureButton": "加快一个文化的知识获取速度",
+      "IncreaseKnowledgeGainOfEveryCultureButton": "加快所有文化的知识获取速度",
+      "DecreaseKnowledgeGainOfOneCultureButton": "减缓一个文化的知识获取速度",
+      "DecreaseKnowledgeGainOfEveryCultureButton": "减缓所有文化的知识获取速度",
+      "ForceExistingCultureUponSpecificCityButton": "将文化强加于选定城市",
+      "CreateNewCultureAtSpecificCityButton": "让选定城市创建新文化",
+      "SelectCultureListHeader": "选择文化:",
       "Culture Trait Selection": {
-        "NoCultureSelectedError": "No culture selected!",
-        "CloseMenuButton": "Close",
-        "SelectTraitsForCultureHeader": "Select Traits for {0}",
-        "RemoveTraitFromCultureButton": "Remove {0} from {1}",
-        "AddTraitToCultureButton": "Add {0} to {1}"
+        "NoCultureSelectedError": "未选择文化!",
+        "CloseMenuButton": "关闭",
+        "SelectTraitsForCultureHeader": "为 {0} 选择文化",
+        "RemoveTraitFromCultureButton": "为 {1} 移除 {0}",
+        "AddTraitToCultureButton": "给 {1} 添加 {0}"
       }
     },
     "Plots": {
@@ -298,8 +298,8 @@
     "Zones": {
       "AddZoneToCityButton": "添加城市区块",
       "RemoveZoneFromCityButton": "移除城市区块",
-      "AddZoneToCultureButton": "添加文明区块",
-      "RemoveZoneFromCultureButton": "移除文明区块"
+      "AddZoneToCultureButton": "添加文化区块",
+      "RemoveZoneFromCultureButton": "移除文化区块"
     },
     "Cities": {
       "ResourceEditorSubmenuName": "资源编辑",
@@ -323,71 +323,71 @@
       "DumpLocalesButton": "取消本地化",
       "CurrentLocaleText": "当前语言: ",
       "ChangeLocalesSectionHeader": "更换语言",
-      "LoadAndStoreAllLocalesButton": "Load and store all locales"
+      "LoadAndStoreAllLocalesButton": "加载和保存所有"
     },
     "Mod Config": {
-      "BoolOptionOn": "ON",
-      "BoolOptionOff": "OFF",
-      "ResetFloatValue": "Reset"
+      "BoolOptionOn": "开",
+      "BoolOptionOff": "关",
+      "ResetFloatValue": "重置"
     }
   },
   "Powers": {
     "CultureDeletion": {
-      "SelectCulture": "Select the culture to delete.",
-      "Success": "Culture deleted!",
-      "NoCultureSelectedError": "No culture to delete here, try again!"
+      "SelectCulture": "选择需要清除的文化",
+      "Success": "文化已清除!",
+      "NoCultureSelectedError": "这里没有可清理的文化，请重试!"
     },
     "CultureReset": {
-      "SelectCulture": "Select the culture to reset.",
-      "Success": "Culture reset!",
-      "NoCultureSelectedError": "No culture to reset here, try again!"
+      "SelectCulture": "选择需要重置的文化",
+      "Success": "文化已重置!",
+      "NoCultureSelectedError": "这里没有可重置的文化，请重试!"
     },
     "CultureForceSelectCulture": {
-      "SelectCulture": "Select the culture to force upon the city.",
-      "NoCultureSelectedError": "No culture to force upon city here, try again!",
-      "SelectCity": "Select the city to force the culture upon."
+      "SelectCulture": "修改城市的文化",
+      "NoCultureSelectedError": "这里没有能够添加城市的文化，请重试!",
+      "SelectCity": "选择城市来修改文化"
     },
     "CreateNewCulture": {
-      "SelectCity": "Select the city to create a new culture for.",
-      "Success": "New culture created!",
-      "NoCitySelected": "No city to create new culture for here, try again!"
+      "SelectCity": "选择需要创建新文化的城市",
+      "Success": "新文化已创建!",
+      "NoCitySelected": "这里没有能够创建新文化的城市，请重试!"
     },
     "WhisperOfAlliance": {
-      "SelectFirstKingdom": "Select the first kingdom to create an alliance with.",
-      "SelectSecondKingdom": "Select the second kingdom to create an alliance with.",
-      "SameKingdomTwiceError": "Selected the same kingdom twice, try again.",
-      "KingdomsAlreadyAlliedError": "The selected kingdoms are already allied, try again.",
-      "CreationSuccess": "The kingdom {0} has successfully entered an alliance with kingdom {1}."
+      "SelectFirstKingdom": "选择需要结盟的其中一员",
+      "SelectSecondKingdom": "选择需要结盟的另一员",
+      "SameKingdomTwiceError": "同一个国家无法结盟，请重试.",
+      "KingdomsAlreadyAlliedError": "这两个国家已经结盟了，请重试",
+      "CreationSuccess": "{0} 与 {1} 成功结为联盟"
     },
     "AddZoneToCity": {
-      "SelectCity": "Select the city to add zones to.",
-      "SelectZones": "Select zones to add to the city.",
-      "NoCitySelectedError": "No city to add zone to here, try again!",
-      "ZoneOwnershipConflict": "The zone you're trying to add already belongs to another city, please remove it from that city first!"
+      "SelectCity": "选择需要添加领土的城市",
+      "SelectZones": "为城市选择新增领土",
+      "NoCitySelectedError": "这里没有能够添加领土的城市，请重试!",
+      "ZoneOwnershipConflict": "所选区域已属于其他城市，请确保无主后再试!"
     },
     "RemoveZoneFromCity": {
-      "SelectCity": "Select the city to remove zones from.",
-      "SelectZones": "Select zones to remove.",
-      "NoCitySelectedError": "No city to remove zone from here, try again!",
-      "ZoneOwnershipConflict": "The zone you're trying to remove doesn't belong to the city you selected, please select the correct city!"
+      "SelectCity": "选择需要移除领土的城市",
+      "SelectZones": "选择城市需要去除的领土",
+      "NoCitySelectedError": "这里没有能够移除领土的城市，请重试!",
+      "ZoneOwnershipConflict": "所选区域属于其他城市，请确保归属后再试!"
     },
     "ForceCityAsCapitalCity": {
-      "SelectCity": "Select the city to force as the capital city.",
-      "Success": "City forced as capital city!",
-      "NoCitySelectedError": "No city to force as capital city here, try again!"
+      "SelectCity": "选择需要成为首都的城市",
+      "Success": "该城市已成为新首都!",
+      "NoCitySelectedError": "这里没有能够成为首都的城市!"
     },
     "ForceCityIntoOtherKingdom": {
-      "SelectCity": "Select the city to force into another kingdom.",
-      "SelectKingdom": "Select the kingdom to force the city into.",
-      "NoCitySelectedError": "No city to force into other kingdom here, try again!",
-      "Success": "City forced into other kingdom!",
-      "NoKingdomSelectedError": "The tile you selected isn't owned by any kingdom!"
+      "SelectCity": "选择需要移交给他国的城市",
+      "SelectKingdom": "选择城市此次的归属国家",
+      "NoCitySelectedError": "这里没有能够移交主权的城市，请重试!",
+      "Success": "城市移交成功!",
+      "NoKingdomSelectedError": "选择的地方没有任何国家!"
     },
     "PlaceBuilding": {
-      "SelectCity": "Select the city to place the building in.",
-      "InvalidTileError": "Can't place building here, try again!",
-      "Success": "Building placed!",
-      "NoBuildingSelected": "No building to place selected, try again!"
+      "SelectCity": "选择需要放置建筑的城市",
+      "InvalidTileError": "这里无法放置建筑，请重试!",
+      "Success": "建筑放置成功!",
+      "NoBuildingSelected": "没有选择建筑物，请重试!"
     }
   }
 }
