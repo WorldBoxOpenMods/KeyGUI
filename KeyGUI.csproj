@@ -109,7 +109,6 @@
         <Compile Include="Menus\ModConfig\ConfigOptions\GameSettings.cs" />
         <Compile Include="Menus\ModConfig\ConfigOptions\General.cs" />
         <Compile Include="Menus\ModConfig\ConfigOptions\Internal.cs" />
-        <Compile Include="Menus\ModConfig\ConfigOptions\Items.cs" />
         <Compile Include="Menus\ModConfig\ConfigOptions\Traits.cs" />
         <Compile Include="Menus\ModConfig\KeyGuiModConfig.cs" />
         <Compile Include="Menus\Plots\KeyGuiPlots.cs" />
