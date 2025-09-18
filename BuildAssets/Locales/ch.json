@@ -4,7 +4,7 @@
     "DisastersSubmenuText": "災難列表",
     "StatsSubmenuText": "種族屬性",
     "DestructionSubmenuText": "毀滅工具",
-    "CleansingSubmenuText": "清除汙穢",
+    "CleansingSubmenuText": "清除污穢",
     "CulturesSubmenuText": "文化功能",
     "PlotsSubmenuText": "計劃列表",
     "TraitsSubmenuText": "創建特質",
@@ -31,7 +31,7 @@
     "DismissCriticalModWarningButton": "取消",
     "DisableCriticalModWarningButton": "下次不要禁用",
     "Disasters": {
-      "BoilTogetherHeatwaveButton": "熱浪席卷",
+      "BoilTogetherHeatwaveButton": "熱浪席捲",
       "TriggerEarthquakeButton": "地動山搖",
       "CauseTornadoButton": "龍 卷 風",
       "ImplantMadThoughtButton": "潘多拉魔盒",
@@ -45,10 +45,10 @@
       "UnleashNecromancerButton": "亡靈入侵",
       "AwakenDragonButton": "遠方的龍",
       "UncoverAliensButton": "外星來客",
-      "DigUpBiomassButton": "生物質泛濫",
-      "DigUpBiomassNoVillageFoundError": "生物質泛濫((所需城市不足，不能觸發))!",
-      "GiveBirthToTumorButton": "腫瘤泛濫",
-      "GiveBirthToTumorNoVillageFoundError": "腫瘤泛濫(所需城市不足，不能觸發)!",
+      "DigUpBiomassButton": "生物質氾濫",
+      "DigUpBiomassNoVillageFoundError": "生物質氾濫((所需城市不足，不能觸發))!",
+      "GiveBirthToTumorButton": "腫瘤氾濫",
+      "GiveBirthToTumorNoVillageFoundError": "腫瘤氾濫(所需城市不足，不能觸發)!",
       "GrowGardenSurpriseButton": "南瓜豐收",
       "GrowGardenSurpriseNoVillageFoundError": "南瓜豐收(所需城市不足，不能觸發)!",
       "GrowGardenSurpriseNoWindmillFoundError": "南瓜豐收(未發現風車，不能觸發)!",
@@ -66,7 +66,7 @@
           "NoStatSelectedError": "請選擇好屬性再試!",
           "ModifyingStatLabel": "編輯 {0}",
           "DisableStatBoundsButton": "禁用屬性上限",
-          "EnableStatBoundsButton": "啟用屬性上限",
+          "EnableStatBoundsButton": "啓用屬性上限",
           "HideStatButton": "隱藏屬性",
           "ShowStatButton": "顯示屬性",
           "CurrentMinAndMaxLabel": "當前最小值: {0}, 當前最大值: {1}",
@@ -93,22 +93,22 @@
       "GetRidOfMushSporesButton": "清除孢子",
       "CureThePlagueButton": "清除瘟疫病毒",
       "KillEveryTumorButton": "消滅所有腫瘤",
-      "ExterminateZombiesButton": "凈化喪屍病毒",
+      "ExterminateZombiesButton": "淨化喪屍病毒",
       "DeleteAllRoadsButton": "拆除所有道路",
       "LowerAllMountainsButton": "降低高山高度",
       "LowerAllHillsButton": "降低丘陵高度",
       "DestroyAllBrokenBuildingsButton": "去除所有廢墟",
-      "BiomesCategoryHeader": "群系",
-      "BiomeDeletionListHeader": "刪除群系:",
-      "GetRidOfBiomeButton": "去除 {0} 群系",
-      "BiomeRandomizationListHeader": "群系盲盒:",
-      "RandomizeBiomesButton": "隨機群系",
-      "BiomeRandomizationBiomeEnablingDisablingListHeader": "群系啟用/禁用:",
-      "BiomeRandomizationEnableBiomeButton": "啟用 {0} 群系",
-      "BiomeRandomizationDisableBiomeButton": "禁用 {0} 群系"
+      "BiomesCategoryHeader": "羣系",
+      "BiomeDeletionListHeader": "刪除羣系:",
+      "GetRidOfBiomeButton": "去除 {0} 羣系",
+      "BiomeRandomizationListHeader": "羣系盲盒:",
+      "RandomizeBiomesButton": "隨機羣系",
+      "BiomeRandomizationBiomeEnablingDisablingListHeader": "羣系啓用/禁用:",
+      "BiomeRandomizationEnableBiomeButton": "啓用 {0} 羣系",
+      "BiomeRandomizationDisableBiomeButton": "禁用 {0} 羣系"
     },
     "Cultures": {
-      "TraitSelectionSubmenuName": "Culture Trait Selection",
+      "TraitSelectionSubmenuName": "文化特質選擇",
       "DeleteOneCultureButton": "清除一個文化",
       "DeleteEveryCultureButton": "清除所有文化",
       "ResetOneCultureButton": "重置一個文化",
@@ -123,13 +123,13 @@
       "DecreaseKnowledgeGainOfEveryCultureButton": "減緩所有文化的知識獲取速度",
       "ForceExistingCultureUponSpecificCityButton": "將文化強加於選定城市",
       "CreateNewCultureAtSpecificCityButton": "讓選定城市創建新文化",
-      "SelectCultureListHeader": "Select Culture:",
+      "SelectCultureListHeader": "選擇文化:",
       "Culture Trait Selection": {
-        "NoCultureSelectedError": "No culture selected!",
-        "CloseMenuButton": "Close",
-        "SelectTraitsForCultureHeader": "Select Traits for {0}",
-        "RemoveTraitFromCultureButton": "Remove {0} from {1}",
-        "AddTraitToCultureButton": "Add {0} to {1}"
+        "NoCultureSelectedError": "未選擇文化!",
+        "CloseMenuButton": "關閉",
+        "SelectTraitsForCultureHeader": "為 {0} 選擇文化",
+        "RemoveTraitFromCultureButton": "為 {1} 移除 {0}",
+        "AddTraitToCultureButton": "給 {1} 添加 {0}"
       }
     },
     "Plots": {
@@ -152,7 +152,7 @@
       "CreateAllianceBreakPlotButton": "解散聯盟",
       "CreateTotalWarPlotButton": "宣戰世界",
       "CancelPlotCategoryHeader": "取消計劃",
-      "TogglePlotsCategoryHeader": "計劃啟用/禁用",
+      "TogglePlotsCategoryHeader": "計劃啓用/禁用",
       "AllowWarsButton": "允許發起戰爭",
       "DisallowWarsButton": "禁止發起戰爭",
       "AllowRebellionsButton": "允許發起獨立",
@@ -190,7 +190,7 @@
       "CreateTraitButton": "創建特質",
       "CreateTraitInvalidBirthChanceError": "請輸入有效的誕生率!",
       "CreateTraitInvalidInheritChanceError": "請輸入有效的遺傳率!",
-      "CreateTraitInvalidStatError": "請輸入有效的{0}數據!",
+      "CreateTraitInvalidStatError": "請輸入有效的 {0} 數據!",
       "CreateTraitSuccess": "創建成功!",
       "CreateTraitNoGroupError": "請設置好特質組!",
       "CreateTraitNoNameError": "請輸入特質名!",
@@ -200,10 +200,10 @@
       "DataControlSaveButton": "保存",
       "DataControlLoadButton": "加載",
       "DataControlDisableAutoTraitLoad": "自動加載新特質：已禁用",
-      "DataControlEnableAutoTraitLoad": "自動加載新特質：已啟用",
+      "DataControlEnableAutoTraitLoad": "自動加載新特質：已啓用",
       "Trait Instructions": {
         "NecessaryTraitValues": "必要的特質屬性有:\n特質名\n特質介紹\n特質組",
-        "Tips": "註意:\n建議保持特質貼圖大小寫≤28×28。雖然任何尺寸都可以，但太大可能會遇到問題.\nKeyGUI 新增了一個 \"夥伴特質\"的機製. 當單位獲得特質後會自動獲得該特質的夥伴特質.\n這方便你通過自定義特質實現更多效果.",
+        "Tips": "注意:\n建議保持特質貼圖大小寫≤28×28。雖然任何尺寸都可以，但太大可能會遇到問題.\nKeyGUI 新增了一個 \"夥伴特質\"的機制. 當單位獲得特質後會自動獲得該特質的夥伴特質.\n這方便你通過自定義特質實現更多效果.",
         "CloseMenuButton": "關閉"
       }
     },
@@ -216,7 +216,7 @@
       "EquipmentTypeLabel": "裝備類型:",
       "CurrentEquipmentTypeLabel": "當前類型: {0}",
       "WeaponButton": "武器",
-      "AmuletButton": "項鏈",
+      "AmuletButton": "項鍊",
       "HelmetButton": "頭盔",
       "ArmorButton": "護甲",
       "BootsButton": "靴子",
@@ -235,7 +235,7 @@
       "AddModifierButton": "添加 {0}",
       "CreateButtonLabel": "創建!",
       "CreateItemButton": "創建裝備",
-      "CreateItemInvalidStatError": "請輸入有效的{0}數據!",
+      "CreateItemInvalidStatError": "請輸入有效的 {0} 數據!",
       "CreateItemSuccess": "裝備創建成功!",
       "CreateItemNoNameError": "請輸入裝備名!",
       "DeleteItemsLabel": "刪除裝備",
@@ -243,7 +243,7 @@
       "SaveButton": "保存",
       "LoadButton": "加載",
       "DisableAutoItemLoadButton": "自動加載新裝備：已禁用",
-      "EnableAutoItemLoadButton": "自動加載新裝備：已啟用"
+      "EnableAutoItemLoadButton": "自動加載新裝備：已啓用"
     },
     "Crabzilla": {
       "CrabzillaNotSpawnedError": "蟹斯拉還沒有生成，一些功能可能不生效",
@@ -277,7 +277,7 @@
     },
     "GameSettings": {
       "SavesLabel": "存檔",
-      "EnableAutosavesButton": "啟用自動存檔",
+      "EnableAutosavesButton": "啓用自動存檔",
       "DisableAutosavesButton": "禁用自動存檔",
       "UnityFpsLabel": "設置幀數(FPS)",
       "SetUnityFpsButton": "確定",
@@ -286,12 +286,12 @@
       "GameSpeedModifierLabel": "時間流速(%)",
       "SetGameSpeedModifierButton": "確定",
       "CameraMovementLabel": "窗口移動",
-      "ToggleMouseDragButton": "禁用/啟用鼠標拖拽",
+      "ToggleMouseDragButton": "禁用/啓用鼠標拖拽",
       "MapGenerationLabel": "地圖生成",
       "SetMapSeedButton": "設置種子",
       "BoatsLabel": "船",
-      "EnableBoatsBreakingIceButton": "啟用船只破冰",
-      "DisableBoatsBreakingIceButton": "禁用船只破冰",
+      "EnableBoatsBreakingIceButton": "啓用船隻破冰",
+      "DisableBoatsBreakingIceButton": "禁用船隻破冰",
       "WorldPropertiesLabel": "地圖時間(60為一年)",
       "SetWorldTimeButton": "確定"
     },
@@ -323,71 +323,71 @@
       "DumpLocalesButton": "取消本地化",
       "CurrentLocaleText": "當前語言: ",
       "ChangeLocalesSectionHeader": "更換語言",
-      "LoadAndStoreAllLocalesButton": "Load and store all locales"
+      "LoadAndStoreAllLocalesButton": "加載和保存所有"
     },
     "Mod Config": {
-      "BoolOptionOn": "ON",
-      "BoolOptionOff": "OFF",
-      "ResetFloatValue": "Reset"
+      "BoolOptionOn": "開",
+      "BoolOptionOff": "關",
+      "ResetFloatValue": "重置"
     }
   },
   "Powers": {
     "CultureDeletion": {
-      "SelectCulture": "Select the culture to delete.",
-      "Success": "Culture deleted!",
-      "NoCultureSelectedError": "No culture to delete here, try again!"
+      "SelectCulture": "選擇需要清除的文化",
+      "Success": "文化已清除!",
+      "NoCultureSelectedError": "這裏沒有可清理的文化，請重試!"
     },
     "CultureReset": {
-      "SelectCulture": "Select the culture to reset.",
-      "Success": "Culture reset!",
-      "NoCultureSelectedError": "No culture to reset here, try again!"
+      "SelectCulture": "選擇需要重置的文化",
+      "Success": "文化已重置!",
+      "NoCultureSelectedError": "這裏沒有可重置的文化，請重試!"
     },
     "CultureForceSelectCulture": {
-      "SelectCulture": "Select the culture to force upon the city.",
-      "NoCultureSelectedError": "No culture to force upon city here, try again!",
-      "SelectCity": "Select the city to force the culture upon."
+      "SelectCulture": "修改城市的文化",
+      "NoCultureSelectedError": "這裏沒有能夠添加城市的文化，請重試!",
+      "SelectCity": "選擇城市來修改文化"
     },
     "CreateNewCulture": {
-      "SelectCity": "Select the city to create a new culture for.",
-      "Success": "New culture created!",
-      "NoCitySelected": "No city to create new culture for here, try again!"
+      "SelectCity": "選擇需要創建新文化的城市",
+      "Success": "新文化已創建!",
+      "NoCitySelected": "這裏沒有能夠創建新文化的城市，請重試!"
     },
     "WhisperOfAlliance": {
-      "SelectFirstKingdom": "Select the first kingdom to create an alliance with.",
-      "SelectSecondKingdom": "Select the second kingdom to create an alliance with.",
-      "SameKingdomTwiceError": "Selected the same kingdom twice, try again.",
-      "KingdomsAlreadyAlliedError": "The selected kingdoms are already allied, try again.",
-      "CreationSuccess": "The kingdom {0} has successfully entered an alliance with kingdom {1}."
+      "SelectFirstKingdom": "選擇需要結盟的其中一員",
+      "SelectSecondKingdom": "選擇需要結盟的另一員",
+      "SameKingdomTwiceError": "同一個國家無法結盟，請重試.",
+      "KingdomsAlreadyAlliedError": "這兩個國家已經結盟了，請重試",
+      "CreationSuccess": "{0} 與 {1} 成功結為聯盟"
     },
     "AddZoneToCity": {
-      "SelectCity": "Select the city to add zones to.",
-      "SelectZones": "Select zones to add to the city.",
-      "NoCitySelectedError": "No city to add zone to here, try again!",
-      "ZoneOwnershipConflict": "The zone you're trying to add already belongs to another city, please remove it from that city first!"
+      "SelectCity": "選擇需要添加領土的城市",
+      "SelectZones": "為城市選擇新增領土",
+      "NoCitySelectedError": "這裏沒有能夠添加領土的城市，請重試!",
+      "ZoneOwnershipConflict": "所選區域已屬於其他城市，請確保無主後再試!"
     },
     "RemoveZoneFromCity": {
-      "SelectCity": "Select the city to remove zones from.",
-      "SelectZones": "Select zones to remove.",
-      "NoCitySelectedError": "No city to remove zone from here, try again!",
-      "ZoneOwnershipConflict": "The zone you're trying to remove doesn't belong to the city you selected, please select the correct city!"
+      "SelectCity": "選擇需要移除領土的城市",
+      "SelectZones": "選擇城市需要去除的領土",
+      "NoCitySelectedError": "這裏沒有能夠移除領土的城市，請重試!",
+      "ZoneOwnershipConflict": "所選區域屬於其他城市，請確保歸屬後再試!"
     },
     "ForceCityAsCapitalCity": {
-      "SelectCity": "Select the city to force as the capital city.",
-      "Success": "City forced as capital city!",
-      "NoCitySelectedError": "No city to force as capital city here, try again!"
+      "SelectCity": "選擇需要成為首都的城市",
+      "Success": "該城市已成為新首都!",
+      "NoCitySelectedError": "這裏沒有能夠成為首都的城市!"
     },
     "ForceCityIntoOtherKingdom": {
-      "SelectCity": "Select the city to force into another kingdom.",
-      "SelectKingdom": "Select the kingdom to force the city into.",
-      "NoCitySelectedError": "No city to force into other kingdom here, try again!",
-      "Success": "City forced into other kingdom!",
-      "NoKingdomSelectedError": "The tile you selected isn't owned by any kingdom!"
+      "SelectCity": "選擇需要移交給他國的城市",
+      "SelectKingdom": "選擇城市此次的歸屬國家",
+      "NoCitySelectedError": "這裏沒有能夠移交主權的城市，請重試!",
+      "Success": "城市移交成功!",
+      "NoKingdomSelectedError": "選擇的地方沒有任何國家!"
     },
     "PlaceBuilding": {
-      "SelectCity": "Select the city to place the building in.",
-      "InvalidTileError": "Can't place building here, try again!",
-      "Success": "Building placed!",
-      "NoBuildingSelected": "No building to place selected, try again!"
+      "SelectCity": "選擇需要放置建築的城市",
+      "InvalidTileError": "這裏無法放置建築，請重試!",
+      "Success": "建築放置成功!",
+      "NoBuildingSelected": "沒有選擇建築物，請重試!"
     }
   }
 }
